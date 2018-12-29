@@ -14,12 +14,12 @@ class FirestoreDatabase implements Database {
 
         const serviceAccountKey:object = getServiceAccountKey(environment);
 
-        const fireBase = admin.initializeApp({
+        const firebase = admin.initializeApp({
             credential: admin.credential.cert(serviceAccountKey),
             databaseURL: getDatabaseUrl(environment)
         });
 
-        this.db = fireBase.firestore();
+        this.db = firebase.firestore();
         this.db.settings(firestoreSettings);
     };
 
