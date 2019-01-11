@@ -2,9 +2,17 @@
 
 # Environmental variables
 ```
-NODE_ENV
-<NODE_ENV>_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME
-<NODE_ENV>_DATABASE_URL
+NODE_ENV = Eviroment name ("DEVELOPMENT", "", "")
+
+DEVELOPMENT_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the development database
+DEVELOPMENT_DATABASE_URL = Database URL for development enviroment
+
+TESTING_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the testing database
+TESTING_DATABASE_URL = Database URL for testing enviroment
+
+PRODUCTION_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the production database
+PRODUCTION_DATABASE_URL = Database URL for production enviroment
+
 ```
 
 # Setup
