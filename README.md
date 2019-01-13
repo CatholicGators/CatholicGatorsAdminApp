@@ -2,7 +2,7 @@
 
 # Environmental variables
 ```
-NODE_ENV = Eviroment name ("DEVELOPMENT", "TESTING", "PRODUCTION")
+NODE_ENV = Eviroment name ("development", "testing", "production")
 
 DEVELOPMENT_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the development database
 DEVELOPMENT_DATABASE_URL = Database URL for development enviroment
