@@ -21,6 +21,6 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production dist/index.js"
+    "start": "cross-env NODE_ENV=production node dist/index.js"
   }
 }
