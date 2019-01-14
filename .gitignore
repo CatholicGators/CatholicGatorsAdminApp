@@ -125,6 +125,3 @@ catholic-gators-*.json
 
 # direnv config
 .envrc
-
-# script files for env vars
-scripts
