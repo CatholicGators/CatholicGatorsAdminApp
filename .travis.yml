@@ -1,0 +1,5 @@
+env:
+  - DOCKER_COMPOSE_VERSION=3.7
+
+script:
+  - docker build .
