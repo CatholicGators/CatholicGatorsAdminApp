@@ -2,4 +2,4 @@ env:
   - DOCKER_COMPOSE_VERSION=3.7
 
 script:
-  - docker-compose up
+  - docker build .
