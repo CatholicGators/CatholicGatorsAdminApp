@@ -8,7 +8,6 @@ These are set in the `enviroment/dev.env` file. These must be set before you can
 NODE_ENV = Eviroment name ("development", "testing", "production")
 
 SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the database
-DATABASE_URL = Database URL for enviroment
 
 ```
 
