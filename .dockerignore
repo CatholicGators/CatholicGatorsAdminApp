@@ -1,7 +1,6 @@
 .next
 dist
 node_modules
-.gitignore
 LISCENSE
 README.md
 .DS_Store
