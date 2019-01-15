@@ -121,8 +121,7 @@ tags
 dist
 
 # firebase private key
-catholic-gators-firebase-adminsdk-*.json
-catholic-gators-dev-firebase-adminsdk-*.json
+catholic-gators-*.json
 
 # direnv config
 .envrc

@@ -3,12 +3,16 @@ FROM node:alpine
 # Create app directory
 RUN mkdir -p /usr/src/app/pages
 WORKDIR /usr/src/app
-COPY package.json .
-COPY package-lock.json .
+
+# Install app dependencies
+COPY package.json /usr/src/app/
 RUN npm install
 
 # Bundle app source
 COPY . /usr/src/app
-RUN npm run build
 EXPOSE 3000
-CMD [ "npm", "start" ]
+
+# Run the app
+COPY run.sh run.sh
+RUN chmod u+x run.sh
+CMD ./run.sh
