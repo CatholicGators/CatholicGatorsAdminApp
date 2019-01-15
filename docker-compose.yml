@@ -7,7 +7,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=$NODE_ENV
-      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME=$SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME
-      - DATABASE_URL=$DATABASE_URL
+    env_file: 
+      - ./environment/dev.env

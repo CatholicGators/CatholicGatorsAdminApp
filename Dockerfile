@@ -1,9 +1,8 @@
 FROM node:alpine
 
 # Create app directory
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/pages
 WORKDIR /usr/src/app
-RUN mkdir /usr/src/app/pages
 
 # Install app dependencies
 COPY package.json /usr/src/app/

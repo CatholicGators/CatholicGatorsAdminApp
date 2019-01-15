@@ -1,17 +1,14 @@
 # Catholic Gators Admin Web App
 
 # Environmental variables
+
+These are set in the `enviroment/dev.env` file. These must be set before you can run the app
+
 ```
 NODE_ENV = Eviroment name ("development", "testing", "production")
 
-DEVELOPMENT_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the development database
-DEVELOPMENT_DATABASE_URL = Database URL for development enviroment
-
-TESTING_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the testing database
-TESTING_DATABASE_URL = Database URL for testing enviroment
-
-PRODUCTION_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the production database
-PRODUCTION_DATABASE_URL = Database URL for production enviroment
+SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the database
+DATABASE_URL = Database URL for enviroment
 
 ```
 

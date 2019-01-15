@@ -7,7 +7,7 @@ const app:next.Server = next({ dev });
 const handle:Function = app.getRequestHandler();
 
 if(!process.env.NODE_ENV) {
-    throw new Error('ERROR: NODE_ENV is not set!');
+    throw new Error('ERROR: NODE_ENV is set to ' + process.env.NODE_ENV);
 }
 
 app.prepare()
