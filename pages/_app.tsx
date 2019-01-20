@@ -1,12 +1,15 @@
 import React from 'react';
+import JssProvider from 'react-jss/lib/JssProvider';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
+
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import JssProvider from 'react-jss/lib/JssProvider';
-import getPageContext from '../server/getPageContext';
 
-export default class MyApp extends App {
+import Header from "../components/Header";
+import getPageContext from '../src/getPageContext';
+
+export default class CatholicGatorsAdminApp extends App {
   public pageContext;
 
   constructor(props) {
@@ -27,7 +30,7 @@ export default class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>My page</title>
+          <title>CG Admin</title>
         </Head>
         {/* Wrap every page in Jss and Theme providers */}
         <JssProvider
@@ -42,6 +45,7 @@ export default class MyApp extends App {
           >
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+            <Header></Header>
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
             <Component pageContext={this.pageContext} {...pageProps} />
