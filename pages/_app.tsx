@@ -1,4 +1,6 @@
 import React from 'react';
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import JssProvider from 'react-jss/lib/JssProvider';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
@@ -7,7 +9,11 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Header from "../components/Header";
-import getPageContext from '../src/getPageContext';
+import getPageContext from '../lib/getPageContext';
+
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 export default class CatholicGatorsAdminApp extends App {
   public pageContext;
@@ -31,6 +37,34 @@ export default class CatholicGatorsAdminApp extends App {
       <Container>
         <Head>
           <title>CG Admin</title>
+          <style>{`
+            * {
+              box-sizing: border-box;
+            }
+
+            html, body {
+              height: 100%;
+              width: 100%;
+            }
+
+            /* Make clicks pass-through */
+            #nprogress {
+              pointer-events: none;
+            }
+
+            /* color and other parameter */
+            #nprogress .bar {
+              background: #1976D2;
+
+              position: fixed;
+              z-index: 1000;
+              top: 0;
+              left: 0;
+
+              width: 100%;
+              height: 2px;
+            }
+          `}</style>
         </Head>
         {/* Wrap every page in Jss and Theme providers */}
         <JssProvider

@@ -1,8 +1,9 @@
 import React from 'react';
 
 import Link from "next/link";
+import withAuth from '../lib/withAuth';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     render() {
         return (
             <div>
@@ -12,3 +13,5 @@ export default class Login extends React.Component {
         )
     }
 }
+
+export default withAuth(Login, { logoutRequired: true });
