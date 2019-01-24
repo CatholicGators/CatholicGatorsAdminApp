@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import JssProvider from 'react-jss/lib/JssProvider';
 import Document, { Head, Main, NextScript } from 'next/document';
-import flush from 'styled-jsx/server';
+import getPageContext, { PageContext } from '../lib/getPageContext';
 
 export default class CatholicGatorsAdminDocument extends Document {
   static async getInitialProps(ctx) {
@@ -28,25 +28,15 @@ export default class CatholicGatorsAdminDocument extends Document {
     // 4. page.render
   
     // Render app and page and get the context of the page with collected side effects.
-    let pageContext;
-    const page = ctx.renderPage(Component => {
-      const WrappedComponent = props => {
-        pageContext = props.pageContext;
-        return <Component {...props} />;
-      };
-  
-      WrappedComponent.propTypes = {
-        pageContext: PropTypes.object.isRequired,
-      };
-  
-      return WrappedComponent;
-    });
-  
-    let css;
-    // It might be undefined, e.g. after an error.
-    if (pageContext) {
-      css = pageContext.sheetsRegistry.toString();
-    }
+    const pageContext = getPageContext();
+    const page = ctx.renderPage(Component => props => (
+      <JssProvider
+        registry={pageContext.sheetsRegistry}
+        generateClassName={pageContext.generateClassName}
+      >
+        <Component pageContext={pageContext} {...props} />
+      </JssProvider>
+    ));
   
     return {
       ...page,
@@ -57,16 +47,17 @@ export default class CatholicGatorsAdminDocument extends Document {
           <style
             id="jss-server-side"
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: css }}
+            dangerouslySetInnerHTML={{
+              __html: pageContext.sheetsRegistry.toString(),
+            }}
           />
-          {flush() || null}
         </React.Fragment>
       ),
     };
   };
 
   render() {
-    const pageContext = this.props["pageContext"];
+    const pageContext = this.props["pageContext"] as PageContext;
 
     return (
       <html lang="en" dir="ltr">

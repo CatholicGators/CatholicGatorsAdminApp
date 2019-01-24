@@ -7,12 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import { User } from 'lib/withAuth';
 
 const styles = createStyles({
     root: {
@@ -27,19 +25,19 @@ const styles = createStyles({
     },
 });
 
+interface HeaderProps {
+    user: User;
+    classes: any;
+}
+
 class Header extends React.Component {
     state = {
-        auth: true,
         anchorEl: null,
     };
 
-    constructor(public props: any) {
+    constructor(public props: HeaderProps) {
         super(props);
     }
-
-    handleChange(event) {
-        this.setState({ auth: event.target.checked });
-    };
 
     handleMenu(event) {
         this.setState({ anchorEl: event.currentTarget });
@@ -50,20 +48,11 @@ class Header extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-        const { auth, anchorEl } = this.state;
-        const open = Boolean(anchorEl);
+        const { user, classes } = this.props;
+        const { anchorEl } = this.state;
 
         return (
             <div className={classes.root}>
-                <FormGroup>
-                    <FormControlLabel
-                        control={
-                            <Switch checked={auth} onChange={this.handleChange.bind(this)} aria-label="LoginSwitch" />
-                        }
-                        label={auth ? 'Logout' : 'Login'}
-                    />
-                </FormGroup>
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -72,10 +61,10 @@ class Header extends React.Component {
                         <Typography variant="h6" color="inherit" className={classes.grow}>
                             Catholic Gators Admin
                         </Typography>
-                        {auth ? (
+                        {user ? (
                             <div>
                                 <IconButton
-                                    aria-owns={open ? 'menu-appbar' : undefined}
+                                    aria-owns={anchorEl ? 'menu-appbar' : undefined}
                                     aria-haspopup="true"
                                     onClick={this.handleMenu.bind(this)}
                                     color="inherit"
@@ -93,15 +82,16 @@ class Header extends React.Component {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     }}
-                                    open={open}
+                                    open={anchorEl}
                                     onClose={this.handleClose.bind(this)}
                                 >
                                     <MenuItem onClick={this.handleClose.bind(this)}>Profile</MenuItem>
                                     <MenuItem onClick={this.handleClose.bind(this)}>My account</MenuItem>
                                 </Menu>
                             </div>
-                        ) : 
-                        <Button color="inherit">Login</Button>}
+                        ) : (
+                            <Button color="inherit">Login</Button>
+                        )}
                     </Toolbar>
                 </AppBar>
             </div>

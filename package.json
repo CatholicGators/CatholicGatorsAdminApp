@@ -9,6 +9,7 @@
     "firebase-admin": "^6.4.0",
     "jss": "^9.8.7",
     "next": "^7.0.2",
+    "nprogress": "^0.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-jss": "^8.6.1"
