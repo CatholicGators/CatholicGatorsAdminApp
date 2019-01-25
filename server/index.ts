@@ -1,10 +1,13 @@
 import * as express from 'express';
 import * as next from 'next';
+import * as dotenv from 'dotenv';
 
-const port:number = parseInt(process.env.PORT, 10) || 3000;
-const dev:boolean = process.env.NODE_ENV !== 'production';
-const app:next.Server = next({ dev });
-const handle:Function = app.getRequestHandler();
+dotenv.config();
+
+const port: number = parseInt(process.env.PORT, 10) || 3000;
+const dev: boolean = process.env.NODE_ENV !== 'production';
+const app: next.Server = next({ dev });
+const handle: Function = app.getRequestHandler();
 
 if(!process.env.NODE_ENV) {
     throw new Error('ERROR: NODE_ENV is set to ' + process.env.NODE_ENV);
