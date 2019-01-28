@@ -1,5 +1,7 @@
 env:
   - DOCKER_COMPOSE_VERSION=3.7
-
+branches:
+  except:
+   - master
 script:
   - docker build .
