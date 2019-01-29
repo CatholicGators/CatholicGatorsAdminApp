@@ -32,7 +32,7 @@ app.prepare()
             session({
                 secret: 'geheimnis',
                 saveUninitialized: true,
-                store: new FileStore({ path: '/tmp/sessions', secret: 'geheimnis' }),
+                store: new FileStore({ secret: 'geheimnis' }),
                 resave: false,
                 rolling: true,
                 httpOnly: true,
