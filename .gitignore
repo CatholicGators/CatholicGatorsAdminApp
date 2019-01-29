@@ -122,7 +122,7 @@ dist
 
 # firebase private keys
 catholic-gators-*.json
-credentials/
+credentials
 
 # direnv config
 .envrc
