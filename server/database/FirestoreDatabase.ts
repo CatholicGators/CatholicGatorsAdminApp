@@ -49,7 +49,6 @@ class FirestoreDatabase implements Database {
                     querySnapshot.forEach((doc) => {
                         collection[doc.id] = doc.data();
                     })
-                    console.log(collection);
                     resolve(collection);
                 })
                 .catch((err) => {

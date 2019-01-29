@@ -24,6 +24,7 @@ describe('FirestoreDatabase', () => {
         return db.getCollection('collection').should.eventually.be.an('object');
     });
 
+    // IMPROVEMENT: make this update the same doc that the 'add' test makes
     it('should update a doc', () => {
         return db.update('collection', 'updateTestEntity', {}).should.be.fulfilled;
     });
