@@ -5,9 +5,10 @@
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
     "@zeit/next-typescript": "^1.1.1",
-    "dotenv": "^6.2.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "firebase-admin": "^6.4.0",
+    "express-session": "^1.15.6",
+    "firebase-admin": "^6.5.1",
     "jss": "^9.8.7",
     "next": "^7.0.2",
     "nprogress": "^0.2.0",
@@ -15,7 +16,8 @@
     "passport-google-oauth": "^1.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-jss": "^8.6.1"
+    "react-jss": "^8.6.1",
+    "session-file-store": "^1.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
@@ -27,7 +29,7 @@
   },
   "scripts": {
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cp ./env/dev.env ./.env && nodemon",
-    "start:prod": "cp ./env/prod.env ./.env && npm run build && node dist/index.js"
+    "start": "nodemon",
+    "start:prod": "npm run build && node dist/index.js"
   }
 }
