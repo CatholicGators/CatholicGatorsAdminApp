@@ -8,6 +8,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "firebase": "^5.8.1",
     "firebase-admin": "^6.5.1",
     "jss": "^9.8.7",
     "next": "^7.0.2",
