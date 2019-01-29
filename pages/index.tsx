@@ -1,14 +1,13 @@
 import React from "react";
 
-import Link from "next/link";
-
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'isomorphic-unfetch'
-import clientCredentials from '../credentials/client'
+import clientCreds from '../credentials/client'
 
 export default class Index extends React.Component {
+  public state: any;
   static async getInitialProps ({ req }) {
     const user = req && req.session ? req.session.decodedToken : null
     // don't fetch anything from firebase if the user is not found
@@ -18,7 +17,7 @@ export default class Index extends React.Component {
     return { user, messages }
   }
 
-  constructor (props: any) {
+  constructor (public props: any) {
     super(props)
     this.state = {
       user: this.props.user,
@@ -33,7 +32,8 @@ export default class Index extends React.Component {
   }
 
   componentDidMount () {
-    firebase.initializeApp(clientCredentials)
+    console.log(clientCreds["development"]);
+    firebase.initializeApp(clientCreds["development"])
 
     if (this.state.user) this.addDbListener()
 
@@ -122,10 +122,33 @@ export default class Index extends React.Component {
   }
 
   render() {
+    const { user, value, messages } = this.state
+
     return (
       <div>
-        <h1>Home Page!</h1>
-        <Link href='/login'><a>Login</a></Link>
+        {user ? (
+          <button onClick={this.handleLogout}>Logout</button>
+        ) : (
+          <button onClick={this.handleLogin}>Login</button>
+        )}
+        {user && (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type={'text'}
+                onChange={this.handleChange}
+                placeholder={'add message...'}
+                value={value}
+              />
+            </form>
+            <ul>
+              {messages &&
+                Object.keys(messages).map(key => (
+                  <li key={key}>{messages[key].text}</li>
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }
