@@ -120,8 +120,9 @@ tags
 # typescript build output
 dist
 
-# firebase private key
+# firebase private keys
 catholic-gators-*.json
+credentials/
 
 # direnv config
 .envrc
