@@ -126,6 +126,3 @@ credentials
 
 # direnv config
 .envrc
-
-# sessions
-sessions
