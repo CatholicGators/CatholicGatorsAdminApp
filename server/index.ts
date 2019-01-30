@@ -2,7 +2,6 @@ import * as express from 'express';
 import * as next from 'next';
 import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
-import * as sessionFileStore from 'session-file-store';
 import * as admin from 'firebase-admin';
 import serverCreds from '../credentials/server';
 
@@ -10,7 +9,6 @@ const port: number = parseInt(process.env.PORT, 10) || 3000;
 const dev: boolean = process.env.NODE_ENV !== 'production';
 const app: next.Server = next({ dev });
 const handle: Function = app.getRequestHandler();
-const FileStore = sessionFileStore(session);
 
 if(!process.env.NODE_ENV) {
     throw new Error('ERROR: NODE_ENV is set to ' + process.env.NODE_ENV);
@@ -32,7 +30,6 @@ app.prepare()
             session({
                 secret: 'geheimnis',
                 saveUninitialized: true,
-                store: new FileStore({ secret: 'geheimnis' }),
                 resave: false,
                 rolling: true,
                 httpOnly: true,
