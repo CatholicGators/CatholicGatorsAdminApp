@@ -2,12 +2,16 @@
   "name": "catholicgatorsadminapp",
   "version": "0.0.1",
   "dependencies": {
+    "@material-ui/core": "^3.9.0",
+    "@material-ui/icons": "^3.0.2",
     "@zeit/next-typescript": "^1.1.1",
     "express": "^4.16.4",
     "firebase-admin": "^6.4.0",
+    "jss": "^9.8.7",
     "next": "^7.0.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-jss": "^8.6.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.25",
@@ -27,9 +31,9 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start": "nodemon",
+    "start:prod": "npm run build && node dist/index.js",
     "test": "cross-env NODE_ENV=testing ts-mocha --project tsconfig.server.json tests/**/*.test.ts"
   }
 }
