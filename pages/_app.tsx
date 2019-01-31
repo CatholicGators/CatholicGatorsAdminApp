@@ -8,8 +8,8 @@ import Head from 'next/head';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Header from "../components/Header";
-import getPageContext from '../lib/getPageContext';
+import Header from "../src/components/Layout/Header";
+import getPageContext from '../src/material/getPageContext';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
