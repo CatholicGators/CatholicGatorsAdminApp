@@ -19,6 +19,8 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-jss": "^8.6.1",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
     "session-file-store": "^1.2.0"
   },
   "devDependencies": {

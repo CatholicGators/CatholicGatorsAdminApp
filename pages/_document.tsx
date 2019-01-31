@@ -1,7 +1,7 @@
 import React from 'react';
 import JssProvider from 'react-jss/lib/JssProvider';
 import Document, { Head, Main, NextScript } from 'next/document';
-import getPageContext, { PageContext } from '../lib/getPageContext';
+import getPageContext, { PageContext } from '../src/material/getPageContext';
 
 export default class CatholicGatorsAdminDocument extends Document {
   static async getInitialProps(ctx) {
