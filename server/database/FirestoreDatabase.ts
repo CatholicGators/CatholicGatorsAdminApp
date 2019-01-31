@@ -1,33 +1,26 @@
 import * as admin from 'firebase-admin';
 import * as Promise from 'bluebird';
 
+import { FirebaseAdmin } from '../firebase/FirebaseAdmin';
 import { Database } from './Database';
 
 interface Collection {
-    [id:string] : object;
+    [id: string] : object;
 }
 
 class FirestoreDatabase implements Database {
-    private db:admin.firestore.Firestore;
+    private db: admin.firestore.Firestore;
 
     constructor() {
-        const environment:string = process.env.NODE_ENV;
-
-        const firestoreSettings:object = {
-            timestampsInSnapshots:true // suppresses Firebase warning about change in timestamp behavior
+        const firestoreSettings: object = {
+            timestampsInSnapshots: true // suppresses Firebase warning about change in timestamp behavior
         }
 
-        const serviceAccountKey:object = getServiceAccountKey(environment);
-
-        const firebase = admin.initializeApp({
-            credential: admin.credential.cert(serviceAccountKey),
-        });
-
-        this.db = firebase.firestore();
+        this.db = FirebaseAdmin.getInstance().firestore();
         this.db.settings(firestoreSettings);
     };
 
-    add(collection:string, entity:admin.firestore.DocumentData):Promise<admin.firestore.DocumentReference> {
+    add(collection: string, entity: admin.firestore.DocumentData): Promise<admin.firestore.DocumentReference> {
         return new Promise((resolve, reject) => {
             this.db.collection(collection).add(entity)
             .then((ref) => {
@@ -41,11 +34,11 @@ class FirestoreDatabase implements Database {
         });
     }
 
-    getCollection(collection:string):Promise<object> {
+    getCollection(collection: string): Promise<object> {
         return new Promise((resolve, reject) => {
             this.db.collection(collection).get()
-                .then((querySnapshot:admin.firestore.QuerySnapshot) => {
-                    const collection:Collection = {};
+                .then((querySnapshot: admin.firestore.QuerySnapshot) => {
+                    const collection: Collection = {};
                     querySnapshot.forEach((doc) => {
                         collection[doc.id] = doc.data();
                     })
@@ -57,7 +50,7 @@ class FirestoreDatabase implements Database {
         });
     }
 
-    update(collection:string, docId:string, entity:admin.firestore.DocumentData):Promise<admin.firestore.WriteResult> {
+    update(collection: string, docId: string, entity: admin.firestore.DocumentData): Promise<admin.firestore.WriteResult> {
         return new Promise((resolve, reject) => {
             this.db.collection(collection).doc(docId).set(entity)
             .then((result) => {
@@ -73,25 +66,3 @@ class FirestoreDatabase implements Database {
 }
 
 export { FirestoreDatabase };
-
-/**
- * Get the service account key. Requires that NODE_ENV is set
- *
- * @return An object containing the contents of the private key
- */
-function getServiceAccountKey(environment:string):object {
-    checkIfKeyEnvVarIsSet(environment);
-
-    const serviceAccountPrivateKeyName:String = process.env[`${process.env.NODE_ENV.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME`];
-
-    const serviceAccountKeyPath:string = `../../${serviceAccountPrivateKeyName}`;
-    return require(serviceAccountKeyPath);
-}
-
-/**
- * Throws an error if enviromental variable for Firebase private server is not set
- */
-function checkIfKeyEnvVarIsSet(environment:string):void {
-    if(!process.env[`${environment.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME`])
-        throw new Error(`ERROR: ${environment.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME environmental variable not set`);
-}

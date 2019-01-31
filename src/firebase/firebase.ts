@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
+// TODO: get these configs from somewhere else (env vars or config file)
 const prodConfig = {
   apiKey: "AIzaSyAy_mXfE3IRoX_G3NpHazneLc8AXYI_aCI",
   authDomain: "catholic-gators.firebaseapp.com",

@@ -9,26 +9,26 @@ export default class AuthService {
 
     constructor() {
         firebase.initializeApp(clientCreds["development"]);
-    
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.user = user;
                 return user
                     .getIdToken()
                     .then(token => {
-                        return fetch('/api/login', {
+                        return fetch('/auth/login', {
                             method: 'POST',
                             headers: new Headers({ 'Content-Type': 'application/json' }),
                             credentials: 'same-origin',
                             body: JSON.stringify({ token })
-                        })
-                    })
+                        });
+                    });
             } else {
                 this.user = null;
-                fetch('/api/logout', {
+                fetch('/auth/logout', {
                     method: 'POST',
                     credentials: 'same-origin'
-                })
+                });
             }
         });
 
@@ -36,15 +36,15 @@ export default class AuthService {
         this.logout = this.logout.bind(this);
         this.getUser = this.getUser.bind(this);
     }
-  
+
     login() {
         firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
-  
+
     logout(){
         firebase.auth().signOut();
     }
-  
+
     getUser(){
         return this.user;
     }
