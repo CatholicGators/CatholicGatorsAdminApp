@@ -64,7 +64,6 @@ class Header extends React.Component {
                         label={auth ? 'Logout' : 'Login'}
                     />
                 </FormGroup>
-
                 <AppBar position="static">
                     <Toolbar>
                         <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
