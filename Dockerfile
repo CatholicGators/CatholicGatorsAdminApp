@@ -15,4 +15,4 @@ EXPOSE 3000
 # Run the app
 COPY scripts/run.sh run.sh
 RUN chmod u+x run.sh
-CMD run.sh
+CMD ./run.sh
