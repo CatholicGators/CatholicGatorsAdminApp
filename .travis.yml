@@ -13,5 +13,6 @@ deploy:
   provider: script
   script: scripts/deploy.sh
   on:
-    - master
-    - Firbase-Test
+    branch:
+      - master
+      - Firbase-Test
