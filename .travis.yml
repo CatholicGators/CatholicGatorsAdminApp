@@ -14,3 +14,4 @@ deploy:
   script: scripts/deploy.sh
   on:
     - master
+    - Firbase-Test
