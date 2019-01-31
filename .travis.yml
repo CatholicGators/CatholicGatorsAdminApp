@@ -17,4 +17,3 @@ deploy:
   on:
     branch:
     - master
-    - Deployment-Planning
