@@ -6,4 +6,4 @@ set -xe
 # setup ssh agent, git config and remote
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/travis_rsa
-ssh travis@157.230.182.92 "cd /var/www/CatholicGatorsAdminApp && git pull && docker-compose up -f docker-compose-testing.yml --build"
+ssh travis@157.230.182.92 "cd /var/www/CatholicGatorsAdminApp && git pull && docker-compose -f docker-compose-production.yml up --build"

@@ -22,6 +22,6 @@
   "scripts": {
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "nodemon",
-    "start:prod": "npm run build && node dist/index.js"
+    "start-prod": "next build && npm run build && node dist/index.js"
   }
 }
