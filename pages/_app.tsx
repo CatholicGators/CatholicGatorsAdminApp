@@ -1,24 +1,28 @@
 import React from 'react';
-import Router from 'next/router';
-import NProgress from 'nprogress';
+import { Provider } from "react-redux";
 import JssProvider from 'react-jss/lib/JssProvider';
+
+import Router from 'next/router';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
+import withRedux from "next-redux-wrapper";
+import NProgress from 'nprogress';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Header from "../src/components/Layout/Header";
 import getPageContext from '../src/material/getPageContext';
+import initStore from "../src/store";
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-export default class CatholicGatorsAdminApp extends App {
+class CatholicGatorsAdminApp extends App {
   public pageContext;
 
-  constructor(props) {
+  constructor(public props: any) {
     super(props);
     this.pageContext = getPageContext();
   }
@@ -32,7 +36,7 @@ export default class CatholicGatorsAdminApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
     return (
       <Container>
         <Head>
@@ -79,13 +83,19 @@ export default class CatholicGatorsAdminApp extends App {
           >
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Header></Header>
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server-side. */}
-            <Component pageContext={this.pageContext} {...pageProps} />
+                
+            <Provider store={store}>
+              <Header>
+                <Component pageContext={this.pageContext} {...pageProps}/>
+              </Header>
+            </Provider>
           </MuiThemeProvider>
         </JssProvider>
       </Container>
     );
   }
 }
+
+export default withRedux(initStore)(CatholicGatorsAdminApp);
