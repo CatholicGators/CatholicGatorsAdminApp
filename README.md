@@ -16,4 +16,3 @@ This repo currently is only supported on Linux. To set it up, pull the repo, `np
 
 # Docker Setup
 The easiest way to get it built and running is simply useing the command `docker-compose up --build`.
-
