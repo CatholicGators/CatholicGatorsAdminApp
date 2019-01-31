@@ -9,10 +9,11 @@ before_install:
   -in travis_rsa.enc -out ~/.ssh/travis_rsa -d
 - rvm install 2.2.2
 - chmod 600 ~/.ssh/travis_rsa
+- chmod +x ./scripts/deploy.sh
 deploy:
   skip_cleanup: true
   provider: script
-  script: "./scripts/deploy.sh"
+  script: ./scripts/deploy.sh
   on:
     branch:
     - master
