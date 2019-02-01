@@ -1,5 +1,7 @@
 # Catholic Gators Admin Web App
 
+[![Build Status](https://travis-ci.com/CatholicGators/CatholicGatorsAdminApp.svg?branch=master)](https://travis-ci.com/CatholicGators/CatholicGatorsAdminApp)
+
 # Environmental variables
 
 These are set in the your enviromental variables. These must be set before you can run the app
@@ -7,7 +9,7 @@ These are set in the your enviromental variables. These must be set before you c
 ```
 NODE_ENV = Eviroment name ("development", "testing", "production")
 
-SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File location/name containing the private key to the database
+SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File name containing the private key to the database
 
 ```
 
