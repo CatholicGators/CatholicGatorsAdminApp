@@ -1,5 +1,7 @@
 # Catholic Gators Admin Web App
 
+[![Build Status](https://travis-ci.com/CatholicGators/CatholicGatorsAdminApp.svg?branch=master)](https://travis-ci.com/CatholicGators/CatholicGatorsAdminApp)
+
 # Environmental variables
 
 These are set in the `enviroment/dev.env` file. These must be set before you can run the app
