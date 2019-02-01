@@ -33,7 +33,7 @@
   "scripts": {
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "nodemon",
-    "start:prod": "npm run build && node dist/index.js",
+    "start-prod": "next build && npm run build && node dist/index.js",
     "test": "cross-env NODE_ENV=testing ts-mocha --project tsconfig.server.json tests/**/*.test.ts"
   }
 }
