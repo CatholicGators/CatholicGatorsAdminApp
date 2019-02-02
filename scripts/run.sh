@@ -1,5 +1,5 @@
 if [ "$NODE_ENV" = "production" ]; then 
-    npm start:prod
+    npm run start-prod
 elif [ "$NODE_ENV" = "testing" ]; then
     npm test
 else
