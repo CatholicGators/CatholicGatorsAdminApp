@@ -4,17 +4,20 @@ import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
 import * as admin from 'firebase-admin';
 
-const serverCreds: admin.ServiceAccount = {
-    projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
-    privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL
-}
+const FirestoreStore = require( 'firestore-store' )(session);
+
+const serverCreds = require(`../${process.env.SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME}`);
 const port: number = parseInt(process.env.PORT, 10) || 3000;
 const dev: boolean = process.env.NODE_ENV !== 'production';
 const app: next.Server = next({ dev });
 const handle: Function = app.getRequestHandler();
 const firebase = admin.initializeApp({
     credential: admin.credential.cert(serverCreds)
+});
+
+const firestore = firebase.firestore();
+firestore.settings({
+    timestampsInSnapshots: true
 });
 
 app.prepare()
@@ -24,6 +27,9 @@ app.prepare()
         server.use(bodyParser.json());
         server.use(
             session({
+                store: new FirestoreStore({
+                    database: firestore
+                }),
                 secret: 'geheimnis',
                 saveUninitialized: true,
                 resave: false,

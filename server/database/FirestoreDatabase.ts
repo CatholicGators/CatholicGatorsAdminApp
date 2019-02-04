@@ -11,13 +11,11 @@ class FirestoreDatabase implements Database {
     private db:admin.firestore.Firestore;
 
     constructor() {
-        const environment:string = process.env.NODE_ENV;
-
         const firestoreSettings:object = {
             timestampsInSnapshots:true // suppresses Firebase warning about change in timestamp behavior
         }
 
-        const serviceAccountKey:object = getServiceAccountKey(environment);
+        const serviceAccountKey:object = getServiceAccountKey();
 
         const firebase = admin.initializeApp({
             credential: admin.credential.cert(serviceAccountKey),
@@ -79,10 +77,10 @@ export { FirestoreDatabase };
  *
  * @return An object containing the contents of the private key
  */
-function getServiceAccountKey(environment:string):object {
-    checkIfKeyEnvVarIsSet(environment);
+function getServiceAccountKey():object {
+    checkIfKeyEnvVarIsSet();
 
-    const serviceAccountPrivateKeyName:String = process.env[`${process.env.NODE_ENV.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME`];
+    const serviceAccountPrivateKeyName:String = process.env.SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME;
 
     const serviceAccountKeyPath:string = `../../${serviceAccountPrivateKeyName}`;
     return require(serviceAccountKeyPath);
@@ -91,7 +89,7 @@ function getServiceAccountKey(environment:string):object {
 /**
  * Throws an error if enviromental variable for Firebase private server is not set
  */
-function checkIfKeyEnvVarIsSet(environment:string):void {
-    if(!process.env[`${environment.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME`])
-        throw new Error(`ERROR: ${environment.toUpperCase()}_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME environmental variable not set`);
+function checkIfKeyEnvVarIsSet():void {
+    if(!process.env.SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME)
+        throw new Error(`ERROR: SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME environmental variable not set`);
 }

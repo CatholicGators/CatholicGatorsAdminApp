@@ -10,6 +10,7 @@
     "express-session": "^1.15.6",
     "firebase": "^5.8.1",
     "firebase-admin": "^6.5.1",
+    "firestore-store": "^1.0.0",
     "jss": "^9.8.7",
     "next": "^7.0.2",
     "next-redux-wrapper": "^3.0.0-alpha.0",
@@ -30,7 +31,6 @@
     "@types/react": "^16.7.18",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.9",
     "ts-mocha": "^2.0.0",
@@ -40,7 +40,7 @@
   "scripts": {
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "nodemon",
-    "start-prod": "next build && npm run build && node dist/index.js",
-    "test": "cross-env NODE_ENV=testing ts-mocha --project tsconfig.server.json tests/**/*.test.ts"
+    "start-prod": "npm run build && node dist/index.js",
+    "test": "ts-mocha --project tsconfig.server.json tests/**/*.test.ts"
   }
 }
