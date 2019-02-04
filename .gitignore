@@ -120,8 +120,14 @@ tags
 # typescript build output
 dist
 
-# firebase private key
+# firebase private keys
 catholic-gators-*.json
+client-config.json
 
 # direnv config
 .envrc
+
+# helper files to export env vars before starting app
+scripts/dev.sh
+scripts/test.sh
+scripts/prod.sh
