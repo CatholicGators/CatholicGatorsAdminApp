@@ -126,3 +126,6 @@ credentials
 
 # direnv config
 .envrc
+
+# helper files to export env vars before starting app
+./scripts/dev.sh

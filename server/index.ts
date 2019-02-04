@@ -3,23 +3,19 @@ import * as next from 'next';
 import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
 import * as admin from 'firebase-admin';
-import serverCreds from '../credentials/server';
 
+const serverCreds: admin.ServiceAccount = {
+    projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
+    privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL
+}
 const port: number = parseInt(process.env.PORT, 10) || 3000;
 const dev: boolean = process.env.NODE_ENV !== 'production';
 const app: next.Server = next({ dev });
 const handle: Function = app.getRequestHandler();
-
-if(!process.env.NODE_ENV) {
-    throw new Error('ERROR: NODE_ENV is set to ' + process.env.NODE_ENV);
-}
-const firebase = admin.initializeApp(
-    {
-        credential: admin.credential.cert(serverCreds[process.env.NODE_ENV]),
-        databaseURL: '' // TODO database URL goes here
-    },
-    'server'
-)
+const firebase = admin.initializeApp({
+    credential: admin.credential.cert(serverCreds)
+});
 
 app.prepare()
     .then(() => {
