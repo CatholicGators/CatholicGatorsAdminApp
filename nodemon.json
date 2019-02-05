@@ -1,4 +1,6 @@
 {
-  "watch": ["*"],
+  "verbose": true,
+  "ignore": ["node_modules", ".next"],
+  "watch": ["**/*"],
   "exec": "ts-node --project tsconfig.server.json server/index.ts"
 }

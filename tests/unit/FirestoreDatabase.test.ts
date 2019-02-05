@@ -1,6 +1,3 @@
-// const chai = require('chai').use(require('chai-as-promised'));
-// chai.should();
-
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
