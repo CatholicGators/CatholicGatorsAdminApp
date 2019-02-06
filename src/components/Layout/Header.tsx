@@ -12,7 +12,6 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 
 import withAuthentication from '../Auth/withAuthentication';
-import { auth } from "../../../src/firebase";
 
 const styles = createStyles({
     root: {
@@ -45,11 +44,11 @@ class Header extends React.Component {
     }
 
     handleLogin() {
-        auth.doSignInWithGoogleAccount();
+        this.props.googleSignIn();
     }
 
     handleLogout() {
-        auth.doSignOut();
+        this.props.signOut();
         this.handleClose();
     }
 
