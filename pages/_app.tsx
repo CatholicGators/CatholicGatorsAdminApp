@@ -13,7 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Header from "../src/components/Layout/Header";
 import getPageContext from '../src/material/getPageContext';
-import initStore from "../src/store";
+import initStore from "../src/redux/store";
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();

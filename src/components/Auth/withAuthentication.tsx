@@ -1,8 +1,8 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { firebase } from '../../firebase';
-import actions from '../../reducers/actions';
+import * as authActionCreators from '../../redux/actions/auth/authActionCreators';
 
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
@@ -11,13 +11,8 @@ const withAuthentication = (Component) => {
     }
 
     componentDidMount() {
-      const { onSetUser } = this.props;
-
-      firebase.auth.onAuthStateChanged(user => {
-        user
-          ? onSetUser(user)
-          : onSetUser(null);
-      });
+      const { listenForUser } = this.props;
+      listenForUser();
     }
 
     render() {
@@ -28,12 +23,10 @@ const withAuthentication = (Component) => {
   }
 
   const mapStateToProps = state => ({
-    user: state.sessionState.user
+    user: state.authState.user
   });
 
-  const mapDispatchToProps = (dispatch) => ({
-    onSetUser: (user) => dispatch({ type: actions.AUTH_USER_SET, user }),
-  });
+  const mapDispatchToProps = dispatch => bindActionCreators(authActionCreators, dispatch)
 
   return connect(mapStateToProps, mapDispatchToProps)(WithAuthentication);
 }

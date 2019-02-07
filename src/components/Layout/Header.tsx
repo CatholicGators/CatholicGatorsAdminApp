@@ -6,13 +6,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 
 import withAuthentication from '../Auth/withAuthentication';
-import { auth } from "../../../src/firebase";
 
 const styles = createStyles({
     root: {
@@ -45,11 +44,11 @@ class Header extends React.Component {
     }
 
     handleLogin() {
-        auth.doSignInWithGoogleAccount();
+        this.props.googleSignIn();
     }
 
     handleLogout() {
-        auth.doSignOut();
+        this.props.signOut();
         this.handleClose();
     }
 
@@ -75,7 +74,7 @@ class Header extends React.Component {
                                     onClick={this.handleMenu.bind(this)}
                                     color="inherit"
                                 >
-                                    <AccountCircle />
+                                    <Avatar src={user.photoURL} />
                                 </IconButton>
                                 <Menu
                                     id="menu-appbar"
