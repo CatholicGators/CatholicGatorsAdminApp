@@ -10,7 +10,7 @@ interface Collection {
     [id:string] : object;
 }
 
-class FirestoreDatabase implements Database {
+export default class FirestoreDatabase implements Database {
     private app: firebase.app.App;
     private db: firebase.firestore.Firestore;
     public auth: firebase.auth.Auth;
@@ -30,11 +30,27 @@ class FirestoreDatabase implements Database {
     }
 
     googleSignIn() {
-        this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        return Observable.create(observer => {
+            this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+                .then(() => {
+                    observer.next();
+                })
+                .catch((err) => {
+                    observer.throw(err);
+                });
+        });
     }
 
     signOut() {
-        this.auth.signOut();
+        return Observable.create(observer => {
+            this.auth.signOut()
+                .then(() => {
+                    observer.next();
+                })
+                .catch((err) => {
+                    observer.throw(err);
+                });
+        });
     }
 
     add(collection, entity) {

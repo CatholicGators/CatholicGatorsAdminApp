@@ -2,11 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {
-  loadFirebase,
-  googleSignIn,
-  signOut
-} from '../../redux/actions/authActions';
+import * as authActionCreators from '../../redux/actions/auth/authActionCreators';
 
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
@@ -15,8 +11,8 @@ const withAuthentication = (Component) => {
     }
 
     componentDidMount() {
-      const { loadFirebase } = this.props;
-      loadFirebase();
+      const { listenForUser } = this.props;
+      listenForUser();
     }
 
     render() {
@@ -27,14 +23,10 @@ const withAuthentication = (Component) => {
   }
 
   const mapStateToProps = state => ({
-    user: state.sessionState.user
+    user: state.authState.user
   });
 
-  const mapDispatchToProps = dispatch => ({
-    loadFirebase: () => dispatch(loadFirebase()),
-    googleSignIn: () => dispatch(googleSignIn()),
-    signOut: () => dispatch(signOut())
-  })
+  const mapDispatchToProps = dispatch => bindActionCreators(authActionCreators, dispatch)
 
   return connect(mapStateToProps, mapDispatchToProps)(WithAuthentication);
 }

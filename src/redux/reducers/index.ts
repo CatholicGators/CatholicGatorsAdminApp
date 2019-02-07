@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import sessionReducer from './session';
+import authReducer from './auth/authReducer';
 
-export const rootReducer = combineReducers({
-  sessionState: sessionReducer
+export default combineReducers({
+  authState: authReducer
 });

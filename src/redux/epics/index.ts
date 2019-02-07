@@ -1,12 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import {
-  loadFirebaseEpic,
-  googleSignInEpic,
-  googleSignOutEpic
-} from './authEpics';
+import authEpics from './auth/authEpics';
 
-export const rootEpic = combineEpics(
-  loadFirebaseEpic,
-  googleSignInEpic,
-  googleSignOutEpic
+export default combineEpics(
+  authEpics
 );

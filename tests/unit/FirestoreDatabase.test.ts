@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
-import { FirestoreDatabase } from '../../src/database/FirestoreDatabase';
+import FirestoreDatabase from '../../src/database/FirestoreDatabase';
 
 chai.use(chaiAsPromised).should();
 
