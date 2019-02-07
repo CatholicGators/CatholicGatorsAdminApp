@@ -31,9 +31,10 @@ export default class FirestoreDatabase implements Database {
 
     googleSignIn() {
         return Observable.create(observer => {
-            this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
                 .then(() => {
                     observer.next();
+                    observer.complete();
                 })
                 .catch((err) => {
                     observer.throw(err);
@@ -46,6 +47,7 @@ export default class FirestoreDatabase implements Database {
             this.auth.signOut()
                 .then(() => {
                     observer.next();
+                    observer.complete();
                 })
                 .catch((err) => {
                     observer.throw(err);
