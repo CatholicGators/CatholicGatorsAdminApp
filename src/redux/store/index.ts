@@ -3,9 +3,12 @@ import { createEpicMiddleware } from 'redux-observable';
 
 import rootReducer from '../reducers';
 import rootEpic from '../epics';
+import Firestore from '../../database/firestore';
 
 const initStore = () => {
-  const epicMiddleware = createEpicMiddleware();
+  const epicMiddleware = createEpicMiddleware({
+    dependencies: { firestore: new Firestore() }
+  });
 
   const store = createStore(
     rootReducer,

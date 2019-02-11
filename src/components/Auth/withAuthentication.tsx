@@ -23,7 +23,7 @@ const withAuthentication = (Component) => {
   }
 
   const mapStateToProps = state => ({
-    user: state.authState.user
+    user: state.auth.user
   });
 
   const mapDispatchToProps = dispatch => bindActionCreators(authActionCreators, dispatch)

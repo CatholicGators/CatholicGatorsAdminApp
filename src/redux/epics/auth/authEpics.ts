@@ -8,10 +8,8 @@ import {
     signedOut,
     googleSignedIn
 } from '../../actions/auth/authActionCreators';
-import { firestore } from '../../../database/FirestoreDatabase';
 
-
-export const listenForUserEpic = (action$) => {
+export const listenForUserEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(authActions.LISTEN_FOR_USER),
         mergeMap(() =>
@@ -22,7 +20,7 @@ export const listenForUserEpic = (action$) => {
     );
 };
 
-export const googleSignInEpic = (action$) => {
+export const googleSignInEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(authActions.GOOGLE_SIGN_IN),
         mergeMap(() => 
@@ -33,7 +31,7 @@ export const googleSignInEpic = (action$) => {
     );
 }
 
-export const googleSignOutEpic = (action$) => {
+export const googleSignOutEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(authActions.SIGN_OUT),
         mergeMap(() => 
