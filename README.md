@@ -7,7 +7,7 @@
 These are set in the your enviromental variables. These must be set before you can run the app
 
 ```
-NODE_ENV = Eviroment name ("development", "testing", "production")
+NODE_ENV = Eviroment name ("development", "test", "production")
 
 SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME = File name containing the private key to the database
 
