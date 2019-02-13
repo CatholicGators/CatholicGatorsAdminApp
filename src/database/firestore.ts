@@ -15,7 +15,10 @@ export default class Firestore {
                         this.firebase.app();
         this.auth = this.app.auth();
         this.user = Observable.create(observer =>
-            this.auth.onAuthStateChanged(user => observer.next(user))
+            this.auth.onAuthStateChanged(
+                user => observer.next(user),
+                err => observer.throw(err)
+            )
         );
     };
 

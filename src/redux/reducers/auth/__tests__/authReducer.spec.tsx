@@ -1,4 +1,4 @@
-import { setUser } from '../../../actions/auth/authActionCreators';
+import { setUser } from '../../../actions/auth/authActions';
 import authReducer, { INITIAL_AUTH_STATE } from '../authReducer';
 
 describe('authReducer', () => {
