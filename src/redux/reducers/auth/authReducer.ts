@@ -1,4 +1,4 @@
-import authActions from '../../actions/auth/authActions';
+import { authActions } from '../../actions/auth/authActions';
 
 const INITIAL_STATE = {
     user: null,

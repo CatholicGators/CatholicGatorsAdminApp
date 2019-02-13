@@ -17,7 +17,10 @@ export default class Firestore {
 
     listenForUser() {
         return Observable.create(observer =>
-            this.auth.onAuthStateChanged(user => observer.next(user))
+            this.auth.onAuthStateChanged(
+                user => observer.next(user),
+                err => observer.throw(err)
+            )
         );
     }
 
