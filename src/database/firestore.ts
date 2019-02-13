@@ -1,32 +1,31 @@
-import * as firebase from 'firebase/app';
+import { app, auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
 import { Observable } from 'rxjs/internal/Observable';
 
 export default class Firestore {
-    private app: firebase.app.App;
-    public auth: firebase.auth.Auth;
+    private app: app.App;
+    private auth: auth.Auth;
+    private user: Observable<firebase.User>
 
-    constructor() {
-        const clientConfig = require(`../../${process.env.FIREBASE_CLIENT_CONFIG}`);
-
-        this.app = !firebase.apps.length ? firebase.initializeApp(clientConfig) : firebase.app();
+    constructor(private firebase, private clientConfig) {
+        this.app = !this.firebase.apps.length ? 
+                        this.firebase.initializeApp(this.clientConfig) : 
+                        this.firebase.app();
         this.auth = this.app.auth();
+        this.user = Observable.create(observer =>
+            this.auth.onAuthStateChanged(user => observer.next(user))
+        );
     };
 
     listenForUser() {
-        return Observable.create(observer =>
-            this.auth.onAuthStateChanged(
-                user => observer.next(user),
-                err => observer.throw(err)
-            )
-        );
+        return this.user;
     }
 
     googleSignIn() {
         return Observable.create(observer => {
-            this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+            this.auth.signInWithRedirect(new auth.GoogleAuthProvider())
                 .then(() => {
                     observer.next();
                     observer.complete();
