@@ -10,6 +10,13 @@ describe('authReducer', () => {
         };
     });
 
+    it('returns the state unmutated by default', () => {
+        const action = { type: 'foo' };
+        const state = { user: 'bar' };
+
+        expect(authReducer(state, action)).toEqual(state);
+    });
+
     it('applies user on SET_USER', () => {
         const action = setUser(user);
 

@@ -1,5 +1,10 @@
+import { of } from 'rxjs';
+import { toArray, take, catchError, tap } from 'rxjs/operators';
+
+import { auth as firebaseAuth } from 'firebase/app';
+import 'firebase/auth';
+
 import Firestore from '../firestore';
-import { toArray } from 'rxjs/operators';
 
 describe('firestore', () => {
     let clientConfig,
@@ -7,14 +12,17 @@ describe('firestore', () => {
         app,
         auth,
         authCallBack,
+        authErrCallBack,
         firestore;
 
     beforeEach(() => {
         clientConfig = "test";
         auth = {
-            onAuthStateChanged: jest.fn(cb => {
+            onAuthStateChanged: jest.fn((cb, errcb) => {
                 authCallBack = cb;
-            })
+                authErrCallBack = errcb;
+            }),
+            signInWithRedirect: jest.fn()
         }
         app = {
             auth: jest.fn(() => {
@@ -55,7 +63,7 @@ describe('firestore', () => {
     });
 
     describe('listenForUser()', () => {
-        it('calls auth.onAuthStateChanged(...) every time and returns the user', () => {
+        it('emits user every time auth.onAuthStateChanged(...) calls its callback', async () => {
             const users = [
                 {
                     name: "Ryan",
@@ -66,18 +74,53 @@ describe('firestore', () => {
                 }
             ];
 
-            const $user = firestore.listenForUser()
-                .pipe(toArray());
-            
+            const $result = firestore.listenForUser()
+                .pipe(
+                    take(users.length),
+                    toArray()
+                )
+            $result.subscribe();
+
             users.forEach(user => {
                 authCallBack(user);
             });
-            
-            return $user
-                .toPromise()
-                .then(result => {
-                    expect(result).toEqual(users);
-                });
+
+            await expect($result.toPromise()).resolves.toEqual(users);
+        });
+
+        it('passes the auth.onAuthStateChanged(...) error to the observable', () => {
+            const err = 'test';
+
+            const result$ = firestore.listenForUser().pipe(
+                tap(result => {
+                    throw 'The error was not tripped';
+                }),
+                catchError(result => {
+                    expect(result).toBe(err)
+                    return of();
+                })
+            ).subscribe(() => {});
+
+            authCallBack(err);
+        });
+    });
+
+    describe('googleSignIn()', () => {
+        it('calls auth.SignInWithRedirect(...) then completes the observable', () => {
+            auth.signInWithRedirect.mockReturnValue(Promise.reject());
+            const mockSub = jest.fn(result => {
+                expect(result).toEqual([]);
+            });
+            const mockComplete = jest.fn();
+
+            firestore.googleSignIn().pipe(catchError(err => {
+                console.log("we rejected")
+                return of();
+            })).subscribe(mockSub, undefined, mockComplete);
+
+            expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+            expect(mockSub).toHaveBeenCalled();
+            expect(mockComplete).toHaveBeenCalled();
         });
     });
 });

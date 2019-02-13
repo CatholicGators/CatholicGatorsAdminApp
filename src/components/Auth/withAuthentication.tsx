@@ -1,8 +1,11 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as authActionCreators from '../../redux/actions/auth/authActionCreators';
+import {
+  listenForUser,
+  googleSignIn,
+  signOut
+} from '../../redux/actions/auth/authActions';
 
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
@@ -26,7 +29,11 @@ const withAuthentication = (Component) => {
     user: state.auth.user
   });
 
-  const mapDispatchToProps = dispatch => bindActionCreators(authActionCreators, dispatch)
+  const mapDispatchToProps = dispatch => ({
+    listenForUser: () => dispatch(listenForUser()),
+    googleSignIn: () => dispatch(googleSignIn()),
+    signOut: () => dispatch(signOut())
+  });
 
   return connect(mapStateToProps, mapDispatchToProps)(WithAuthentication);
 }
