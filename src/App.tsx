@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { listenForUser, googleSignIn, signOut } from './redux/actions/auth/authActions';
+import { connect } from 'react-redux';
 
-class App extends Component {
+type Props = {
+  user: any;
+  listenForUser: () => any;
+}
+
+class App extends Component<Props> {
+  componentDidMount() {
+    this.props.listenForUser();
+  }
   render() {
     return (
       <div className="App">
@@ -25,4 +35,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  listenForUser: () => dispatch(listenForUser()),
+  googleSignIn: () => dispatch(googleSignIn()),
+  signOut: () => dispatch(signOut())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
