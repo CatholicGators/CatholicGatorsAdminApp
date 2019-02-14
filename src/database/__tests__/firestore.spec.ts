@@ -3,7 +3,7 @@ import { toArray, take } from 'rxjs/operators';
 import { auth as firebaseAuth } from 'firebase/app';
 import 'firebase/auth';
 
-import Firestore from './firestore';
+import Firestore from '../firestore';
 
 describe('firestore', () => {
     let clientConfig,

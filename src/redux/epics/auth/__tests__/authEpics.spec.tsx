@@ -6,7 +6,7 @@ import {
     listenForUserEpic,
     googleSignInEpic,
     signOutEpic
-} from './authEpics';
+} from '../authEpics';
 
 import {
     listenForUser,
@@ -18,7 +18,7 @@ import {
     listenForUserErr,
     googleSignInErr,
     signOutErr
-} from "../../actions/auth/authActions";
+} from "../../../actions/auth/authActions";
 
 describe('authEpics', () => {
     let dependencies, firestore, user;
