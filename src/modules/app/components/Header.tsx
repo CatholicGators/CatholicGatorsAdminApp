@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStyles, withStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +12,19 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 
 import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
-import './Header.css';
+
+const styles = createStyles({
+    root: {
+        flexGrow: 1
+    },
+    grow: {
+        flexGrow: 1
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20
+    }
+});
 
 type Props = {
     user: any,
@@ -105,4 +118,4 @@ const mapDispatchToProps = dispatch => ({
   signOut: () => dispatch(signOut())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
