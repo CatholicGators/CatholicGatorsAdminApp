@@ -1,25 +1,35 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
+<<<<<<< HEAD
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "baseUrl": "./",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+=======
+    "target": "es5",
     "lib": [
       "dom",
-      "es2015",
-      "es2016"
-    ]
-  }
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+>>>>>>> ssr-csr
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "strictNullChecks": false
+  },
+  "include": [
+    "src"
+  ]
 }

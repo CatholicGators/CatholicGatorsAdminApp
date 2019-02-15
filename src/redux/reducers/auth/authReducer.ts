@@ -1,6 +1,6 @@
-import authActions from '../../actions/auth/authActions';
+import { authActions } from '../../actions/auth/authActions';
 
-const INITIAL_STATE = {
+export const INITIAL_AUTH_STATE = {
     user: null,
 };
 
@@ -9,7 +9,7 @@ const applySetUser = (state, action) => ({
     user: action.user
 });
 
-function authReducer(state = INITIAL_STATE, action) {
+function authReducer(state = INITIAL_AUTH_STATE, action) {
     switch(action.type) {
         case authActions.SET_USER : {
             return applySetUser(state, action);

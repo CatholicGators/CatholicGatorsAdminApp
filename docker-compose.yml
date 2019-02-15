@@ -6,9 +6,4 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    environment: 
-      - NODE_ENV=development
-      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME=${SERVICE_ACCOUNT_PRIVATE_KEY_FILE_NAME}
-      - FIREBASE_CLIENT_CONFIG=${FIREBASE_CLIENT_CONFIG}
-
+      - "80:3000"
