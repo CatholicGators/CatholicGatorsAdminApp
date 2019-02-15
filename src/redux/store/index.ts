@@ -7,24 +7,26 @@ import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import Firestore from '../../database/firestore';
 
-
-const clientConfig = require(`../../../${process.env.FIREBASE_CLIENT_CONFIG}`);
-
-const initStore = () => {
-  const epicMiddleware = createEpicMiddleware({
-    dependencies: {
-      firestore: new Firestore(firebase, clientConfig)
-    }
-  });
-
-  const store = createStore(
-    rootReducer,
-    applyMiddleware(epicMiddleware)
-  );
-
-  epicMiddleware.run(rootEpic);
-
-  return store;
+const clientConfig = {
+  apiKey: "AIzaSyDCDeYDMBWkNDv6vYHvliK75FZIYeui8go",
+  authDomain: "catholic-gators-dev.firebaseapp.com",
+  databaseURL: "https://catholic-gators-dev.firebaseio.com",
+  projectId: "catholic-gators-dev",
+  storageBucket: "catholic-gators-dev.appspot.com",
+  messagingSenderId: "1019003476611"
 };
 
-export default initStore;
+const epicMiddleware = createEpicMiddleware({
+  dependencies: {
+    firestore: new Firestore(firebase, clientConfig)
+  }
+});
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(epicMiddleware)
+);
+
+epicMiddleware.run(rootEpic);
+
+export default store;

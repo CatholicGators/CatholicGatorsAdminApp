@@ -7,6 +7,7 @@ import {
     googleSignInEpic,
     signOutEpic
 } from '../authEpics';
+
 import {
     listenForUser,
     setUser,

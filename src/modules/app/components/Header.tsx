@@ -1,6 +1,6 @@
 import React from 'react';
-
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { createStyles, withStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,27 +11,33 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 
-import withAuthentication from '../Auth/withAuthentication';
+import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
 
 const styles = createStyles({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     grow: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     menuButton: {
         marginLeft: -12,
-        marginRight: 20,
-    },
+        marginRight: 20
+    }
 });
 
-class Header extends React.Component {
+type Props = {
+    user: any,
+    signOut: () => any,
+    googleSignIn: () => any
+}
+
+class Header extends React.Component<Props> {
     state = {
         anchorEl: null,
     };
 
-    constructor(public props: any) {
+    constructor(public props) {
         super(props);
     }
 
@@ -53,7 +59,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { user, classes, children } = this.props;
+        const { user, classes } = this.props;
         const { anchorEl } = this.state;
 
         return (
@@ -98,10 +104,18 @@ class Header extends React.Component {
                         )}
                     </Toolbar>
                 </AppBar>
-                {children}
             </div>
         );
     }
 }
 
-export default withAuthentication(withStyles(styles)(Header));
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  googleSignIn: () => dispatch(googleSignIn()),
+  signOut: () => dispatch(signOut())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));

@@ -1,5 +1,4 @@
-import { of } from 'rxjs';
-import { toArray, take, catchError, tap } from 'rxjs/operators';
+import { toArray, take } from 'rxjs/operators';
 
 import { auth as firebaseAuth } from 'firebase/app';
 import 'firebase/auth';
