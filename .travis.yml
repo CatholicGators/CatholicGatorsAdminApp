@@ -3,8 +3,9 @@ env:
 addons:
   ssh_known_hosts: 157.230.182.92
 script:
-- docker build .
-- npm test
+- docker build -t test-cg-admin-app .
+- docker run -e CI=true -d --name test test-cg-admin-app
+- docker exec test npm test
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_d82f9d7a2831_key -iv $encrypted_d82f9d7a2831_iv
   -in travis_rsa.enc -out ~/.ssh/travis_rsa -d
