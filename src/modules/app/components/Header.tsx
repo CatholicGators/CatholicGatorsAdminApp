@@ -100,7 +100,7 @@ class Header extends React.Component<Props> {
                                 </Menu>
                             </div>
                         ) : (
-                            <Button color="inherit" onClick={this.handleLogin.bind(this)}>Login</Button>
+                            <Button id="login-btn" color="inherit" onClick={this.handleLogin.bind(this)}>Login</Button>
                         )}
                     </Toolbar>
                 </AppBar>
