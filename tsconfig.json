@@ -1,11 +1,5 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "preserve",
-    "moduleResolution": "node",
-=======
     "target": "es5",
     "lib": [
       "dom",
@@ -15,7 +9,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
->>>>>>> ssr-csr
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
