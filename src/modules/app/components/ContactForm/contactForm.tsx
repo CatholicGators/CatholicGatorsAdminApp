@@ -1,11 +1,18 @@
-import React from 'react';
-import MaskedInput from 'react-text-mask';
+import React from 'react'
+import { 
+  PhoneNumberTextMask, 
+  ZipCodeTextMask, 
+  YearTextMask 
+} from './customTextMasks' 
 
 import {  
   MenuItem, 
   TextField, 
   withStyles,
-  createStyles
+  createStyles,
+  FormControl,
+  InputLabel,
+  OutlinedInput
 } from '@material-ui/core';
 
 const styles = createStyles({
@@ -22,7 +29,7 @@ const styles = createStyles({
     },
     menu: {
       width: 200,
-    },
+    }
 });
 
 const genders = [
@@ -47,7 +54,24 @@ const schools = [
   },
 ];
 
+const semester = [
+  {
+    value: 'Spring',
+    label: 'Spring',
+  },
+  {
+    value: 'Summer',
+    label: 'Summer',
+  },
+  {
+    value: 'Fall',
+    label: 'Fall',
+  },
+];
+
 class ContactForm extends React.Component {
+  private inputLabelRef: React.RefObject<HTMLDivElement>
+
   state = {
     firstName: '',
     lastName: '',
@@ -61,18 +85,26 @@ class ContactForm extends React.Component {
     state: '',
     zipCode: '',
     housingComplex: '',
-    parent: {
-      name: '',
-      phone: '',
-      email: ''
-    }
+    parentName: '',
+    parentPhone: '',
+    parentEmail: '',
+    labelWidth: 0,
   };
 
   constructor(public props: any) {
     super(props)
+    this.inputLabelRef = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
   }
 
-  handleChange = name => event => {
+  focusTextInput() {
+    console.log(this.inputLabelRef.current.offsetWidth)
+    this.setState({
+      labelWidth: this.inputLabelRef.current.offsetWidth
+    });
+  }
+
+  handleChange = (name: string) => event => {
     this.setState({
       [name]: event.target.value,
     });
@@ -93,6 +125,7 @@ class ContactForm extends React.Component {
           label="First Name" 
           className={classes.textField}
           value={this.state.firstName}
+          onChange={this.handleChange('firstName')}
           margin="normal"
           variant="outlined"
           required
@@ -103,6 +136,7 @@ class ContactForm extends React.Component {
           label="Last Name" 
           className={classes.textField}
           value={this.state.lastName}
+          onChange={this.handleChange('lastName')}
           margin="normal"
           variant="outlined"
           required
@@ -114,7 +148,7 @@ class ContactForm extends React.Component {
           label="Gender"
           className={classes.textField}
           value={this.state.gender}
-          onChange={(this.handleChange('gender'))}
+          onChange={this.handleChange('gender')}
           margin="normal"
           variant="outlined"
           required
@@ -126,32 +160,83 @@ class ContactForm extends React.Component {
           ))}
         </TextField>
 
-        <TextField
+        <FormControl
           id="phone-number"
-          label="Phone number"
-          className={classes.textField}
-          value={this.state.phoneNumber}
-          onChange={this.handleChange('phoneNumber')}
+          className={classes.formControl} 
+          variant="outlined" 
           margin="normal"
-          variant="outlined"
           required
-          >
-            <MaskedInput mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} />
-          </TextField>
+        >
+          <div ref={this.inputLabelRef}>
+            <InputLabel 
+              htmlFor="phone-number"
+            >Phone number</InputLabel>
+          </div>
+          <OutlinedInput
+            id="phone-number"
+            value={this.state.phoneNumber}
+            onChange={this.handleChange('phoneNumber')}
+            inputComponent={PhoneNumberTextMask as any}
+            labelWidth={this.state.labelWidth}
+            onClick={this.focusTextInput}
+            required
+          />
+        </FormControl>
 
-          /** Here lies Graduation year ans semester */
+        {/** Here lies Graduation year ans semester */}
 
-          <TextField
-          id="school"
+        <FormControl
+          id="graduation-year"
+          className={classes.formControl} 
+          variant="outlined" 
+          margin="normal"
+          required
+        >
+          <div ref={this.inputLabelRef}>
+            <InputLabel
+              htmlFor="graduation-year"
+            >Graduation Year</InputLabel>
+          </div>
+          <OutlinedInput
+            id="graduation-year"
+            value={this.state.graduationYear}
+            onChange={this.handleChange('graduationYear')}
+            inputComponent={YearTextMask as any}
+            labelWidth={this.state.labelWidth}
+            onClick={this.focusTextInput}
+            required
+          />
+        </FormControl>
+
+        <TextField
+          id="graduation-semester"
           select
-          label="School"
+          label="Graduation Semester"
           className={classes.textField}
-          value={this.state.gender}
-          onChange={(this.handleChange('school'))}
+          value={this.state.graduationSemester}
+          onChange={this.handleChange('graduationSemester')}
           margin="normal"
           variant="outlined"
           required
           >
+          {semester.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+        id="school"
+        select
+        label="School"
+        className={classes.textField}
+        value={this.state.school}
+        onChange={this.handleChange('school')}
+        margin="normal"
+        variant="outlined"
+        required
+        >
           {schools.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -164,6 +249,7 @@ class ContactForm extends React.Component {
           label="Permanent Address" 
           className={classes.textField}
           value={this.state.permanentAddress}
+          onChange={this.handleChange('permanentAddress')}
           margin="normal"
           variant="outlined"
           required
@@ -174,6 +260,7 @@ class ContactForm extends React.Component {
           label="City" 
           className={classes.textField}
           value={this.state.city}
+          onChange={this.handleChange('city')}
           margin="normal"
           variant="outlined"
           required
@@ -184,48 +271,72 @@ class ContactForm extends React.Component {
           label="State" 
           className={classes.textField}
           value={this.state.state}
+          onChange={this.handleChange('state')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
 
-        <TextField 
+        <FormControl
           id="zip-code"
-          label="Zip Code" 
-          className={classes.textField}
-          value={this.state.zipCode}
+          className={classes.formControl} 
+          variant="outlined" 
           margin="normal"
-          variant="outlined"
           required
         >
-          <MaskedInput mask={[ /\d/, /\d/, /\d/, /\d/, /\d/]} />
-        </TextField>
+          <div ref={this.inputLabelRef}>
+            <InputLabel
+              htmlFor="zip-code"
+            >Zip Code</InputLabel>
+          </div>
+          <OutlinedInput
+            id="zip-code"
+            value={this.state.zipCode}
+            onChange={this.handleChange('zipCode')}
+            inputComponent={ZipCodeTextMask as any}
+            labelWidth={this.state.labelWidth}
+            onClick={this.focusTextInput}
+            required
+          />
+        </FormControl>
 
         <TextField 
           id="parent-name"
           label="Parent's Name" 
           className={classes.textField}
-          value={this.state.parent.name}
+          value={this.state.parentName}
+          onChange={this.handleChange('parentName')}
           margin="normal"
           variant="outlined"
         ></TextField>
 
-        <TextField 
-          id="parent-phone"
-          label="Parent's Phone" 
-          className={classes.textField}
-          value={this.state.parent.phone}
+        <FormControl
+          id="parent-phone-number"
+          className={classes.formControl} 
+          variant="outlined" 
           margin="normal"
-          variant="outlined"
         >
-          <MaskedInput mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} />
-        </TextField>
+          <div ref={this.inputLabelRef}>
+            <InputLabel
+              htmlFor="parent-phone-number"
+            >Parent's phone number</InputLabel>
+          </div>
+          <OutlinedInput
+            id="parent-phone-number"
+            value={this.state.parentPhone}
+            onChange={this.handleChange('parentPhone')}
+            inputComponent={PhoneNumberTextMask as any}
+            labelWidth={this.state.labelWidth}
+            onClick={this.focusTextInput}
+          />
+        </FormControl>
 
         <TextField 
           id="parent-email"
           label="Parent's Email" 
           className={classes.textField}
-          value={this.state.parent.email}
+          value={this.state.parentEmail}
+          onChange={this.handleChange('parent.email')}
           margin="normal"
           variant="outlined"
         ></TextField>
@@ -235,6 +346,7 @@ class ContactForm extends React.Component {
           label="Name of Dorm/Complex you live in" 
           className={classes.textField}
           value={this.state.housingComplex}
+          onChange={this.handleChange('housingComplex')}
           margin="normal"
           variant="outlined"
         ></TextField>
