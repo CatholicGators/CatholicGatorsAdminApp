@@ -336,7 +336,7 @@ class ContactForm extends React.Component {
           label="Parent's Email" 
           className={classes.textField}
           value={this.state.parentEmail}
-          onChange={this.handleChange('parent.email')}
+          onChange={this.handleChange('parentEmail')}
           margin="normal"
           variant="outlined"
         ></TextField>
