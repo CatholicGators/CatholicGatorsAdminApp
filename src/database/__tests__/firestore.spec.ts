@@ -157,16 +157,21 @@ describe('firestore', () => {
     });
 
     describe('addDoc()', () => {
-        it('successfully adds a document', () => {
-            firestore.addDoc('collection', {})
-                .subscribe();
+        it('successfully adds a document', done => {
+            reference.add.mockReturnValue(Promise.resolve());
 
-            expect(reference.add).toHaveBeenCalled();
+            firestore.addDoc('collection', {})
+                .subscribe(
+                    _ => {
+                        expect(reference.add).toHaveBeenCalled();
+                        done();
+                    }
+                );
         });
 
         it('passes document reference to the observable', done => {
-            const docRef = {docId: 'id'}
-            reference.add.mockReturnValue(Promise.resolve(docRef))
+            const docRef = {docId: 'id'};
+            reference.add.mockReturnValue(Promise.resolve(docRef));
 
             firestore.addDoc('collection', {})
                 .subscribe(
@@ -195,11 +200,16 @@ describe('firestore', () => {
     });
 
     describe('updateDoc()', () => {
-        it('successfully updates a document', () => {
+        it('successfully updates a document', done => {
+            reference.update.mockReturnValue(Promise.resolve())
             firestore.updateDoc('collection', 'docId', {})
-                .subscribe();
+                .subscribe(
+                    () => {
+                        expect(reference.update).toHaveBeenCalled();
+                        done();
+                    }
+                );
 
-            expect(reference.update).toHaveBeenCalled();
         });
 
         it('passes the addDoc() error to the observable', done => {
@@ -220,11 +230,22 @@ describe('firestore', () => {
     });
 
     describe('getDoc()', () => {
-        it('successfully gets a document', () => {
-            firestore.getDoc('collection', 'docId')
-                .subscribe();
+        it('successfully gets a document', done => {
+            const data = { mockData: 'data' }
+            const documentSnapshot = {
+                exists: true,
+                data: () => data
+            }
+            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
 
-            expect(reference.get).toHaveBeenCalled();
+            firestore.getDoc('collection', 'docId')
+                .subscribe(
+                    ()  => {
+                        expect(reference.get).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
         });
 
         it('passes only the data to the observable', done => {
@@ -284,11 +305,16 @@ describe('firestore', () => {
     });
 
     describe('deleteDoc()', () => {
-        it('successfully deletes a document', () => {
+        it('successfully deletes a document', done => {
+            reference.delete.mockReturnValue(Promise.resolve());
             firestore.deleteDoc('collection', 'docId')
-                .subscribe();
+                .subscribe(
+                    () => {
+                        expect(reference.delete).toHaveBeenCalled();
+                        done();
+                    }
+                );
 
-            expect(reference.delete).toHaveBeenCalled();
         });
 
         it('passes the getDoc() error to the observable', done => {
