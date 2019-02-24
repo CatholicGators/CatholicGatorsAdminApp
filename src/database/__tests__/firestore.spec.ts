@@ -333,4 +333,8 @@ describe('firestore', () => {
                 );
         });
     });
+
+    afterAll(() => {
+        firestore.closeConnection();
+    });
 });

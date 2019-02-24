@@ -110,4 +110,8 @@ export default class Firestore implements Database {
                 });
         });
     }
+
+    closeConnection() {
+        this.app.delete();
+    }
 }
