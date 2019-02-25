@@ -79,9 +79,13 @@ describe('firestore', () => {
 
     describe('googleSignIn()', () => {
         it('uses GoogleAuthProvider for the redirect', () => {
-            firestore.googleSignIn().subscribe();
+            auth.signInWithRedirect.mockReturnValue(Promise.resolve());
 
-            expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+            firestore.googleSignIn().subscribe(
+                () => {
+                    expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+                }
+            );
         });
 
         it('fires next then completes the observable', done => {
@@ -118,10 +122,14 @@ describe('firestore', () => {
 
     describe('signOut()', () => {
         it('calls auth.SignOut()', () => {
-            firestore.signOut()
-                .subscribe();
+            auth.signOut.mockReturnValue(Promise.resolve());
 
-            expect(auth.signOut).toHaveBeenCalled();
+            firestore.signOut()
+                .subscribe(
+                    () => {
+                        expect(auth.signOut).toHaveBeenCalled();
+                    }
+                );
         });
 
         it('fires next then completes the observable', done => {
@@ -281,7 +289,7 @@ describe('firestore', () => {
                         done.fail(new Error('Observable should not receive document snapshot'));
                     },
                     err => {
-                        expect(err.message).toBe('Document does not exist');
+                        expect(err).toBe('Document does not exist');
                         done();
                     }
                 );
@@ -317,7 +325,7 @@ describe('firestore', () => {
 
         });
 
-        it('passes the getDoc() error to the observable', done => {
+        it('passes the deleteDoc() error to the observable', done => {
             const testErr = new Error();
             reference.delete.mockReturnValue(Promise.reject(testErr));
 
@@ -334,7 +342,18 @@ describe('firestore', () => {
         });
     });
 
-    afterAll(() => {
-        firestore.closeConnection();
+    describe('closeConnection()', () => {
+        it('deletes the firebase app', done => {
+            expect(app.isDeleted_).toBe(false);
+            firestore.closeConnection()
+                .subscribe(
+                    () => {
+                        expect(app.isDeleted_).toBe(true);
+                        done();
+                    }
+                );
+
+        });
     });
+
 });

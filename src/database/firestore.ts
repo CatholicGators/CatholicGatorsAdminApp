@@ -76,7 +76,7 @@ export default class Firestore implements Database {
                         observer.next(doc.data());
                         observer.complete();
                     } else {
-                        observer.error(new Error('Document does not exist'));
+                        observer.error('Document does not exist');
                     }
                 })
                 .catch((err) => {
@@ -112,6 +112,15 @@ export default class Firestore implements Database {
     }
 
     closeConnection() {
-        this.app.delete();
+        return Observable.create(observer => {
+            this.app.delete()
+                .then(() => {
+                    observer.next();
+                    observer.complete();
+                })
+                .catch((err) => {
+                    observer.error(err);
+                });
+        });
     }
 }
