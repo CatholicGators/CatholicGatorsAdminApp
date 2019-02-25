@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header should match snapshot 1`] = `
+exports[`Header.tsx should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Connect(WithStyles(Header))
     googleSignIn={[MockFunction]}
     signOut={[MockFunction]}
+    user={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
