@@ -32,7 +32,7 @@ type Props = {
     googleSignIn: () => any
 }
 
-class Header extends React.Component<Props> {
+export class Header extends React.Component<Props> {
     state = {
         anchorEl: null,
     };
@@ -63,19 +63,20 @@ class Header extends React.Component<Props> {
         const { anchorEl } = this.state;
 
         return (
-            <div className={classes.root}>
+            <div className={classes ? classes.root : null}>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <IconButton className={classes ? classes.menuButton : null} color="inherit" aria-label="Menu">
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                        <Typography variant="h6" color="inherit" className={classes ? classes.grow : null}>
                             Catholic Gators Admin
                         </Typography>
                         {user ? (
                             <div>
                                 <IconButton
-                                    aria-owns={anchorEl ? 'menu-appbar' : undefined}
+                                    id="avatar-btn"
+                                    aria-owns={anchorEl ? 'menu' : undefined}
                                     aria-haspopup="true"
                                     onClick={this.handleMenu.bind(this)}
                                     color="inherit"
@@ -83,7 +84,7 @@ class Header extends React.Component<Props> {
                                     <Avatar src={user.photoURL} />
                                 </IconButton>
                                 <Menu
-                                    id="menu-appbar"
+                                    id="menu"
                                     anchorEl={anchorEl}
                                     anchorOrigin={{
                                         vertical: 'top',
@@ -96,11 +97,11 @@ class Header extends React.Component<Props> {
                                     open={!!anchorEl}
                                     onClose={this.handleClose.bind(this)}
                                 >
-                                    <MenuItem onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
+                                    <MenuItem id="logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
                                 </Menu>
                             </div>
                         ) : (
-                            <Button color="inherit" onClick={this.handleLogin.bind(this)}>Login</Button>
+                            <Button id="login-btn" color="inherit" onClick={this.handleLogin.bind(this)}>Login</Button>
                         )}
                     </Toolbar>
                 </AppBar>
@@ -110,12 +111,12 @@ class Header extends React.Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+    user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  googleSignIn: () => dispatch(googleSignIn()),
-  signOut: () => dispatch(signOut())
+    googleSignIn: () => dispatch(googleSignIn()),
+    signOut: () => dispatch(signOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
