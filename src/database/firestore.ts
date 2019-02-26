@@ -3,9 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { Database } from './database';
-
-export default class Firestore implements Database {
+export default class Firestore {
     private app: app.App;
     private auth: auth.Auth;
     private db: firebase.firestore.Firestore;
