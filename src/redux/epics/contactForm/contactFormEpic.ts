@@ -12,7 +12,7 @@ export const submitContactFormEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(contactFormActions.SUBMIT_CONTACT_FORM),
         mergeMap((action: any) =>
-            firestore.updateData('contactForms', action.form).pipe(
+            firestore.addDoc('contactForms', action.form).pipe(
                 map(() => submitContactFormSuccess()),
                 catchError(err => ActionsObservable.of(submitContactFormErr(err)))
             )
