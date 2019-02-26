@@ -78,12 +78,13 @@ describe('firestore', () => {
     });
 
     describe('googleSignIn()', () => {
-        it('uses GoogleAuthProvider for the redirect', () => {
+        it('uses GoogleAuthProvider for the redirect', done => {
             auth.signInWithRedirect.mockReturnValue(Promise.resolve());
 
             firestore.googleSignIn().subscribe(
                 () => {
                     expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+                    done();
                 }
             );
         });
@@ -121,13 +122,14 @@ describe('firestore', () => {
     });
 
     describe('signOut()', () => {
-        it('calls auth.SignOut()', () => {
+        it('calls auth.SignOut()', done => {
             auth.signOut.mockReturnValue(Promise.resolve());
 
             firestore.signOut()
                 .subscribe(
                     () => {
                         expect(auth.signOut).toHaveBeenCalled();
+                        done();
                     }
                 );
         });
