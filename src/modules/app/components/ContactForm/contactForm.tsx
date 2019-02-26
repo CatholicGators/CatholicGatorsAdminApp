@@ -4,6 +4,8 @@ import {
   ZipCodeTextMask, 
   YearTextMask 
 } from './customTextMasks' 
+import { connect } from 'react-redux';
+import { submitContactForm } from '../../../../redux/actions/contactForm/contactFormActions';
 
 import {  
   MenuItem, 
@@ -12,7 +14,12 @@ import {
   createStyles,
   FormControl,
   InputLabel,
-  OutlinedInput
+  OutlinedInput,
+  Checkbox,
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+  Button
 } from '@material-ui/core';
 
 const styles = createStyles({
@@ -75,7 +82,7 @@ class ContactForm extends React.Component {
   state = {
     firstName: '',
     lastName: '',
-    gender: 'Controlled',
+    gender: '',
     phoneNumber: '',
     graduationSemester: '',
     graduationYear: '',
@@ -88,7 +95,25 @@ class ContactForm extends React.Component {
     parentName: '',
     parentPhone: '',
     parentEmail: '',
-    labelWidth: 0,
+    eventsGreekStudents: false,
+    eventsLatinoStudents: false,
+    eventsGraduateStudents: false,
+    receiveMonthlyNewsletter: false,
+    registerAsParishioner: false,
+    englishBibleStudy: false,
+    spanishBibleStudy: false,
+    freeFood: false,
+    guestSpeakers: false,
+    musicMinistry: false,
+    socials: false,
+    retreats: false,
+    intramuralSports: false,
+    proLifeClub: false,
+    RHC: false,
+    servingAtMass: false,
+    teachReligiousEd: false,
+    serviceProjects: false,
+    labelWidth: 0
   };
 
   constructor(public props: any) {
@@ -105,13 +130,19 @@ class ContactForm extends React.Component {
   }
 
   handleChange = (name: string) => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
+    if(event.target.type === "checkbox") {
+      this.setState({
+        [name]: event.target.checked,
+      });
+    } else {
+      this.setState({
+        [name]: event.target.value,
+      });
+    }
   };
 
   handleSubmit = (event) => {
-    //Make a network call somewhere
+    this.props.submitContactForm(this.state);
     event.preventDefault();
  }
 
@@ -182,8 +213,6 @@ class ContactForm extends React.Component {
             required
           />
         </FormControl>
-
-        {/** Here lies Graduation year ans semester */}
 
         <FormControl
           id="graduation-year"
@@ -350,10 +379,219 @@ class ContactForm extends React.Component {
           margin="normal"
           variant="outlined"
         ></TextField>
+
+        <FormLabel>I am interested in...</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.eventsGreekStudents} 
+                onChange={this.handleChange('eventsGreekStudents')} 
+                value="eventsGreekStudents"
+              ></Checkbox>
+            }
+            label="events for Greek students"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.eventsLatinoStudents} 
+                onChange={this.handleChange('eventsLatinoStudents')} 
+                value="eventsLatinoStudents" 
+              ></Checkbox>
+            }
+            label="events for Latino/a students"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.eventsGraduateStudents} 
+                onChange={this.handleChange('eventsGraduateStudents')} 
+                value="eventsGraduateStudents" 
+              ></Checkbox>
+            }
+            label="events for graduate students"
+          />
+        </FormGroup>
+
+        <FormLabel>I would like to...</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.receiveMonthlyNewsletter} 
+                onChange={this.handleChange('receiveMonthlyNewsletter')} 
+                value="receiveMonthlyNewsletter"
+              ></Checkbox>
+            }
+            label="receive the monthly e-newsletter"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.registerAsParishioner} 
+                onChange={this.handleChange('registerAsParishioner')} 
+                value="registerAsParishioner"
+              ></Checkbox>
+            }
+            label="register as a parishioner"
+          />
+        </FormGroup>
         
+        <FormLabel>I am interested in getting involved in...</FormLabel>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.englishBibleStudy} 
+                onChange={this.handleChange('englishBibleStudy')} 
+                value="englishBibleStudy"
+              ></Checkbox>
+            }
+            label="English Bible Studys"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.spanishBibleStudy} 
+                onChange={this.handleChange('spanishBibleStudy')} 
+                value="spanishBibleStudy"
+              ></Checkbox>
+            }
+            label="Spanish/Bilingual Bible Study"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.freeFood} 
+                onChange={this.handleChange('freeFood')} 
+                value="freeFood"
+              ></Checkbox>
+            }
+            label="Free Food"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.guestSpeakers} 
+                onChange={this.handleChange('guestSpeakers')} 
+                value="guestSpeakers"
+              ></Checkbox>
+            }
+            label="Guest Speakers"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.musicMinistry} 
+                onChange={this.handleChange('musicMinistry')} 
+                value="musicMinistry"
+              ></Checkbox>
+            }
+            label="Music Ministry"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.socials} 
+                onChange={this.handleChange('socials')} 
+                value="socials"
+              ></Checkbox>
+            }
+            label="Socials"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.retreats} 
+                onChange={this.handleChange('retreats')} 
+                value="retreats"
+              ></Checkbox>
+            }
+            label="Retreats"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.intramuralSports} 
+                onChange={this.handleChange('intramuralSports')} 
+                value="intramuralSports"
+              ></Checkbox>
+            }
+            label="Intramural Sports"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.proLifeClub} 
+                onChange={this.handleChange('proLifeClub')} 
+                value="proLifeClub"
+              ></Checkbox>
+            }
+            label="Pro-Life Club"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.RHC} 
+                onChange={this.handleChange('RHC')} 
+                value="RHC"
+              ></Checkbox>
+            }
+            label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.servingAtMass} 
+                onChange={this.handleChange('servingAtMass')} 
+                value="servingAtMass"
+              ></Checkbox>
+            }
+            label="Serving at Mass"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.teachReligiousEd} 
+                onChange={this.handleChange('teachReligiousEd')} 
+                value="teachReligiousEd"
+              ></Checkbox>
+            }
+            label="Teach Religious Education"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={this.state.serviceProjects} 
+                onChange={this.handleChange('serviceProjects')} 
+                value="serviceProjects"
+              ></Checkbox>
+            }
+            label="Service Projects and Trips"
+          />
+        </FormGroup>
+
+      <Button 
+        variant="contained" 
+        color="primary" 
+        className={classes.button}
+        type="submit"
+      >Submit</Button>
+
       </form>
     );
   }
 }
 
-export default withStyles(styles)(ContactForm);
+const mapStateToProps = state => ({
+  loading: state.contactForm.loading,
+  success: state.contactForm.success,
+  errorMessage: state.contactForm.errorMessage
+});
+
+const mapDispatchToProps = dispatch => ({
+  submitContactForm: form => dispatch(submitContactForm(form))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactForm));
