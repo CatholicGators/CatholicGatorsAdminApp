@@ -1,6 +1,6 @@
-import Firestore from '../firestore';
+import Firestore from './firestore';
 import * as firebase from 'firebase/app';
-import clientConfig from '../testUtils/testConfig';
+import clientConfig from './testUtils/testConfig';
 
 describe('firestore', () => {
     let firestore: Firestore
@@ -22,7 +22,7 @@ describe('firestore', () => {
                     done();
                 },
                 err => {
-                    done.fail(new Error('Add to test firebase failed'));
+                    done.fail(err);
                 }
             );
     });
@@ -35,7 +35,7 @@ describe('firestore', () => {
                     done();
                 },
                 err => {
-                    done.fail(new Error('Get from test firebase failed'));
+                    done.fail(err);
                 }
             );
     });
@@ -47,10 +47,19 @@ describe('firestore', () => {
         firestore.updateDoc(collection, docId, newTestData)
             .subscribe(
                 () => {
-                    done();
+                    firestore.getDoc(collection, docId)
+                        .subscribe(
+                            doc => {
+                                expect(doc).toEqual(newTestData);
+                                done();
+                            },
+                            err => {
+                                done.fail(err);
+                            }
+                        );
                 },
                 err => {
-                    done.fail(new Error('Update to test firebase failed'));
+                    done.fail(err);
                 }
             );
     });
@@ -62,7 +71,7 @@ describe('firestore', () => {
                     done();
                 },
                 err => {
-                    done.fail(new Error('Delete to test firebase failed'));
+                    done.fail(err);
                 }
             );
     });

@@ -4,42 +4,12 @@ import { auth as firebaseAuth } from 'firebase/app';
 import 'firebase/auth';
 
 import Firestore from './firestore';
+import { clientConfig, firebase, app, auth, authCallBack, authErrCallBack, reference } from './testUtils/mockFirebase';
 
 describe('firestore', () => {
-    let clientConfig,
-        firebase,
-        app,
-        auth,
-        authCallBack,
-        authErrCallBack,
-        firestore;
+    let firestore: Firestore
 
     beforeEach(() => {
-        clientConfig = "test";
-        auth = {
-            onAuthStateChanged: jest.fn((cb, errcb) => {
-                authCallBack = cb;
-                authErrCallBack = errcb;
-            }),
-            signInWithRedirect: jest.fn(),
-            signOut: jest.fn()
-        } 
-        app = {
-            auth: jest.fn(() => {
-                return auth;
-            })
-        };
-        firebase = {
-            apps: [],
-            initializeApp: jest.fn(() => {
-                firebase.apps.push(app);
-                return app
-            }),
-            app: jest.fn(() => {
-                return app;
-            })
-        };
-
         firestore = new Firestore(firebase, clientConfig);
     });
 
@@ -108,10 +78,15 @@ describe('firestore', () => {
     });
 
     describe('googleSignIn()', () => {
-        it('uses GoogleAuthProvider for the redirect', () => {
-            firestore.googleSignIn().subscribe();
+        it('uses GoogleAuthProvider for the redirect', done => {
+            auth.signInWithRedirect.mockReturnValue(Promise.resolve());
 
-            expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+            firestore.googleSignIn().subscribe(
+                () => {
+                    expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
+                    done();
+                }
+            );
         });
 
         it('fires next then completes the observable', done => {
@@ -147,11 +122,16 @@ describe('firestore', () => {
     });
 
     describe('signOut()', () => {
-        it('calls auth.SignOut()', () => {
-            firestore.signOut()
-                .subscribe();
+        it('calls auth.SignOut()', done => {
+            auth.signOut.mockReturnValue(Promise.resolve());
 
-            expect(auth.signOut).toHaveBeenCalled();
+            firestore.signOut()
+                .subscribe(
+                    () => {
+                        expect(auth.signOut).toHaveBeenCalled();
+                        done();
+                    }
+                );
         });
 
         it('fires next then completes the observable', done => {
@@ -185,4 +165,197 @@ describe('firestore', () => {
                 );
         });
     });
+
+    describe('addDoc()', () => {
+        it('successfully adds a document', done => {
+            reference.add.mockReturnValue(Promise.resolve());
+
+            firestore.addDoc('collection', {})
+                .subscribe(
+                    _ => {
+                        expect(reference.add).toHaveBeenCalled();
+                        done();
+                    }
+                );
+        });
+
+        it('passes document reference to the observable', done => {
+            const docRef = {docId: 'id'};
+            reference.add.mockReturnValue(Promise.resolve(docRef));
+
+            firestore.addDoc('collection', {})
+                .subscribe(
+                    ref => {
+                        expect(ref).toBe(docRef);
+                        done();
+                    }
+                );
+        });
+
+        it('passes the addDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.add.mockReturnValue(Promise.reject(testErr))
+
+            firestore.addDoc('collection', {})
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('updateDoc()', () => {
+        it('successfully updates a document', done => {
+            reference.update.mockReturnValue(Promise.resolve())
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    () => {
+                        expect(reference.update).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
+        });
+
+        it('passes the addDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.update.mockReturnValue(Promise.reject(testErr))
+
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('getDoc()', () => {
+        it('successfully gets a document', done => {
+            const data = { mockData: 'data' }
+            const documentSnapshot = {
+                exists: true,
+                data: () => data
+            }
+            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+
+            firestore.getDoc('collection', 'docId')
+                .subscribe(
+                    ()  => {
+                        expect(reference.get).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
+        });
+
+        it('passes only the data to the observable', done => {
+            const data = { mockData: 'data' }
+            const documentSnapshot = {
+                exists: true,
+                data: () => data
+            }
+            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+
+            firestore.getDoc('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        expect(entity).toBe(data);
+                        done();
+                    },
+                    err => {
+                        done.fail(new Error('Observable should not pass error'));
+                    }
+                );
+        });
+
+        it('passes an error to the observable when the document does not exist', done => {
+            const documentSnapshot = {
+                exists: false,
+                data: () => null
+            }
+            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+
+            firestore.getDoc('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Observable should not receive document snapshot'));
+                    },
+                    err => {
+                        expect(err).toBe('Document does not exist');
+                        done();
+                    }
+                );
+        });
+
+        it('passes the getDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.get.mockReturnValue(Promise.reject(testErr));
+
+            firestore.getDoc('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('deleteDoc()', () => {
+        it('successfully deletes a document', done => {
+            reference.delete.mockReturnValue(Promise.resolve());
+            firestore.deleteDoc('collection', 'docId')
+                .subscribe(
+                    () => {
+                        expect(reference.delete).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
+        });
+
+        it('passes the deleteDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.delete.mockReturnValue(Promise.reject(testErr));
+
+            firestore.deleteDoc('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('closeConnection()', () => {
+        it('deletes the firebase app', done => {
+            expect(app.isDeleted_).toBe(false);
+            firestore.closeConnection()
+                .subscribe(
+                    () => {
+                        expect(app.isDeleted_).toBe(true);
+                        done();
+                    }
+                );
+
+        });
+    });
+
 });
