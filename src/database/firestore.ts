@@ -2,6 +2,7 @@ import { app, auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { Observable } from 'rxjs/internal/Observable';
+import { from } from 'rxjs';
 
 export default class Firestore {
     private app: app.App;
@@ -28,42 +29,15 @@ export default class Firestore {
     }
 
     googleSignIn() {
-        return Observable.create(observer => {
-            this.auth.signInWithRedirect(new auth.GoogleAuthProvider())
-                .then(() => {
-                    observer.next();
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.auth.signInWithRedirect(new auth.GoogleAuthProvider()));
     }
 
     signOut() {
-        return Observable.create(observer => {
-            this.auth.signOut()
-                .then(() => {
-                    observer.next();
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.auth.signOut());
     }
 
     addDoc(collection: string, entity: object) {
-        return Observable.create(observer => {
-            this.db.collection(collection).add(entity)
-                .then((ref) => {
-                    observer.next(ref);
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.db.collection(collection).add(entity))
     }
 
     getDoc(collection: string, docId: string) {
@@ -84,41 +58,14 @@ export default class Firestore {
     }
 
     updateDoc(collection: string, docId: string, entity: object) {
-        return Observable.create(observer => {
-            this.db.collection(collection).doc(docId).update(entity)
-                .then(() => {
-                    observer.next();
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.db.collection(collection).doc(docId).update(entity))
     }
 
     deleteDoc(collection: string, docId: string) {
-        return Observable.create(observer => {
-            this.db.collection(collection).doc(docId).delete()
-                .then(() => {
-                    observer.next();
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.db.collection(collection).doc(docId).delete());
     }
 
     closeConnection() {
-        return Observable.create(observer => {
-            this.app.delete()
-                .then(() => {
-                    observer.next();
-                    observer.complete();
-                })
-                .catch((err) => {
-                    observer.error(err);
-                });
-        });
+        return from(this.app.delete())
     }
 }
