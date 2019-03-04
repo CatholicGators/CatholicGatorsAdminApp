@@ -9,6 +9,7 @@ let clientConfig,
 clientConfig = "test";
 reference = {
     add: jest.fn(),
+    set: jest.fn(),
     get: jest.fn(),
     update: jest.fn(),
     delete: jest.fn()

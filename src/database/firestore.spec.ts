@@ -33,7 +33,7 @@ describe('firestore', () => {
     });
 
     describe('listenForUser()', () => {
-        it('emits user every time auth.onAuthStateChanged(...) calls its callback', done => {
+        it.skip('emits user every time auth.onAuthStateChanged(...) calls its callback', done => {
             const users = [
                 {
                     name: "Ryan",
@@ -174,6 +174,19 @@ describe('firestore', () => {
                 .subscribe(
                     _ => {
                         expect(reference.add).toHaveBeenCalled();
+                        done();
+                    }
+                );
+        });
+
+        //TODO: Move this into its own test suite
+        it('successfully adds a document with a specified docId', done => {
+            reference.set.mockReturnValue(Promise.resolve());
+
+            firestore.addOrUpdateDocById('collection', 'docId', {})
+                .subscribe(
+                    _ => {
+                        expect(reference.set).toHaveBeenCalled();
                         done();
                     }
                 );
@@ -339,6 +352,27 @@ describe('firestore', () => {
                     err => {
                         expect(err).toBe(testErr);
                         done();
+                    }
+                );
+        });
+    });
+
+    describe('doesExist()', () => {
+        it('passes whether a doc exists to the observable', done => {
+            const documentSnapshot = {
+                exists: false,
+                data: () => null
+            }
+            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+
+            firestore.doesExist('collection', 'docId')
+                .subscribe(
+                    exists => {
+                        expect(exists).toBe(false);
+                        done();
+                    },
+                    err => {
+                        done.fail(err);
                     }
                 );
         });

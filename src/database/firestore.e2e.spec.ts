@@ -1,3 +1,5 @@
+import { forkJoin } from 'rxjs/index';
+
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
 import clientConfig from './testUtils/testConfig';
@@ -7,6 +9,7 @@ describe('firestore', () => {
     const collection = 'collection';
     const testDoc = {testData: 'data'};
     let docId;
+    const specificDocId = 'docId';
 
     beforeEach(() => {
         firestore = new Firestore(firebase, clientConfig);
@@ -19,6 +22,18 @@ describe('firestore', () => {
                 ref => {
                     docId = ref.id;
                     expect(ref).toEqual(expect.anything());
+                    done();
+                },
+                err => {
+                    done.fail(err);
+                }
+            );
+    });
+
+    it('successfully adds a document with a specified docId', done => {
+        firestore.addOrUpdateDocById(collection, specificDocId, testDoc)
+            .subscribe(
+                () => {
                     done();
                 },
                 err => {
@@ -65,7 +80,10 @@ describe('firestore', () => {
     });
 
     it('successfully deletes a document', done => {
-        firestore.deleteDoc(collection, docId)
+        forkJoin(
+            firestore.deleteDoc(collection, docId),
+            firestore.deleteDoc(collection, specificDocId)
+        )
             .subscribe(
                 () => {
                     done();
