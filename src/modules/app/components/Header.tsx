@@ -102,7 +102,6 @@ export class Header extends React.Component<Props> {
 
     render() {
         const { user, classes } = this.props;
-        // const { anchorEl } = this.state;
 
         return (
             <div className={classes ? classes.root : null}>
