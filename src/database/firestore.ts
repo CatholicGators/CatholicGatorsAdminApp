@@ -118,14 +118,7 @@ export default class Firestore {
 
         const storeUser = ({exists, firebaseUser}) => {
                     const docId = firebaseUser.uid;
-                    const user: User = {
-                        name: firebaseUser.displayName,
-                        email: firebaseUser.email,
-                        photoURL: firebaseUser.photoURL,
-                        isApproved: firebaseUser.email === ADMIN_EMAIL,
-                        isAdmin: firebaseUser.email === ADMIN_EMAIL,
-                    }
-
+                    const user: User = this.wrapFirebaseUser(firebaseUser);
                     let observable;
 
                     if (exists) {
@@ -154,5 +147,16 @@ export default class Firestore {
             login$,
             logout$,
         ) as Observable<User>;
+    }
+
+    private wrapFirebaseUser(user: firebase.User): User {
+        return {
+            name: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            isApproved: user.email === ADMIN_EMAIL,
+            isAdmin: user.email === ADMIN_EMAIL,
+        }
+
     }
 }
