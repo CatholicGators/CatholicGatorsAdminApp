@@ -1,5 +1,5 @@
 import { forkJoin } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
@@ -67,7 +67,7 @@ describe('firestore', () => {
         };
         firestore.updateDoc(collection, docId, newTestData)
             .pipe(
-                flatMap(_ => firestore.getDoc(collection, docId))
+                mergeMap(_ => firestore.getDoc(collection, docId))
             ).subscribe(
                 doc => {
                     expect(doc).toEqual({
@@ -88,7 +88,7 @@ describe('firestore', () => {
             firestore.deleteDoc(collection, specificDocId)
         )
             .pipe(
-                flatMap(
+                mergeMap(
                     _ => forkJoin(
                         firestore.getDoc(collection, docId),
                         firestore.getDoc(collection, specificDocId)

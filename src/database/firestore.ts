@@ -2,7 +2,7 @@ import { app, auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { Observable, from, merge } from 'rxjs';
-import { flatMap, map, partition } from 'rxjs/operators';
+import { mergeMap, map, partition } from 'rxjs/operators';
 
 import User from './models/user';
 import Document from './models/document';
@@ -138,7 +138,7 @@ export default class Firestore {
                     }
 
                     return observable.pipe(
-                        flatMap(_ => this.getDoc(USER_COLLECTION, firebaseUser.uid)),
+                        mergeMap(_ => this.getDoc(USER_COLLECTION, firebaseUser.uid)),
                         map(userObject => (<Document>userObject).data)
                     ) as Observable<User>;
                 }
@@ -146,8 +146,8 @@ export default class Firestore {
         let [login$, logout$] = partition(x => x !== null)(this.firebaseUser$);
         login$ = login$
             .pipe(
-                flatMap(attachExistence),
-                flatMap(storeUser)
+                mergeMap(attachExistence),
+                mergeMap(storeUser)
         );
 
         return merge(
