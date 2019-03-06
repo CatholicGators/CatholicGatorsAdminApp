@@ -2,9 +2,12 @@ let clientConfig,
     firebase,
     app,
     auth,
-    authCallBack,
-    authErrCallBack,
+    authCallBacks,
+    authErrCallBacks,
     reference;
+
+authCallBacks = [];
+authErrCallBacks = [];
 
 clientConfig = "test";
 reference = {
@@ -28,8 +31,8 @@ const db = {
 
 auth = {
     onAuthStateChanged: jest.fn((cb, errcb) => {
-        authCallBack = cb;
-        authErrCallBack = errcb;
+        authCallBacks.push(cb);
+        authErrCallBacks.push(errcb);
     }),
     signInWithRedirect: jest.fn(),
     signOut: jest.fn()
@@ -60,4 +63,4 @@ firebase = {
     })
 };
 
-export { clientConfig, firebase, app, auth, authCallBack, authErrCallBack, reference }
+export { clientConfig, firebase, app, auth, authCallBacks, authErrCallBacks, reference }

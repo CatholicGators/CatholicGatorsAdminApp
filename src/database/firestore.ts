@@ -2,7 +2,7 @@ import { app, auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { Observable, from, merge } from 'rxjs';
-import { flatMap, map, partition, share} from 'rxjs/operators';
+import { flatMap, map, partition } from 'rxjs/operators';
 
 import User from './models/user';
 import Document from './models/document';
@@ -29,8 +29,6 @@ export default class Firestore {
                 user => observer.next(user),
                 err => observer.error(err)
             )
-        ).pipe(
-            share()
         );
         this.user$ = this.storeUserInfoOnLogin();
     };

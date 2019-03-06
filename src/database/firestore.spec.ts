@@ -4,7 +4,7 @@ import { auth as firebaseAuth } from 'firebase/app';
 import 'firebase/auth';
 
 import Firestore from './firestore';
-import { clientConfig, firebase, app, auth, authCallBack, authErrCallBack, reference } from './testUtils/mockFirebase';
+import { clientConfig, firebase, app, auth, authCallBacks, authErrCallBacks, reference } from './testUtils/mockFirebase';
 import DocumentNotFoundError from './models/documentNotFoundError';
 
 describe('firestore', () => {
@@ -69,9 +69,11 @@ describe('firestore', () => {
                     done();
                 });
 
-            users.forEach(user => {
-                authCallBack(user);
-            });
+            users.forEach(user =>
+                authCallBacks.forEach(cb =>
+                    cb(user)
+                )
+            );
         });
 
         it('passes the auth.onAuthStateChanged(...) error to the observable', done => {
@@ -88,7 +90,7 @@ describe('firestore', () => {
                     }
                 );
 
-            authErrCallBack(err);
+            authErrCallBacks.forEach(cb => cb(err));
         });
     });
 
