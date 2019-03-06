@@ -5,6 +5,7 @@ import 'firebase/auth';
 
 import Firestore from './firestore';
 import { clientConfig, firebase, app, auth, authCallBack, authErrCallBack, reference } from './testUtils/mockFirebase';
+import DocumentNotFoundError from './models/documentNotFoundError';
 
 describe('firestore', () => {
     let firestore: Firestore
@@ -30,10 +31,16 @@ describe('firestore', () => {
 
             expect(app.auth).toHaveBeenCalled();
         });
+
+        it('initializes the app\'s Firestore', () => {
+            new Firestore(firebase, clientConfig);
+
+            expect(app.firestore).toHaveBeenCalled();
+        });
     });
 
     describe('listenForUser()', () => {
-        it.skip('emits user every time auth.onAuthStateChanged(...) calls its callback', done => {
+        it('emits user every time auth.onAuthStateChanged(...) calls its callback', done => {
             const users = [
                 {
                     name: "Ryan",
@@ -44,19 +51,27 @@ describe('firestore', () => {
                 }
             ];
 
+            reference.get.mockResolvedValue({
+                exists: true,
+                data: () => {
+                    return {};
+                }
+            });
+            reference.set.mockResolvedValue();
+            reference.update.mockResolvedValue();
+
             firestore.listenForUser()
                 .pipe(
                     take(users.length),
                     toArray()
                 ).subscribe(result => {
-                    expect(result).toEqual(users);
+                    expect(result.length).toEqual(users.length);
                     done();
                 });
 
             users.forEach(user => {
                 authCallBack(user);
             });
-
         });
 
         it('passes the auth.onAuthStateChanged(...) error to the observable', done => {
@@ -79,7 +94,7 @@ describe('firestore', () => {
 
     describe('googleSignIn()', () => {
         it('uses GoogleAuthProvider for the redirect', done => {
-            auth.signInWithRedirect.mockReturnValue(Promise.resolve());
+            auth.signInWithRedirect.mockResolvedValue();
 
             firestore.googleSignIn().subscribe(
                 () => {
@@ -90,7 +105,7 @@ describe('firestore', () => {
         });
 
         it('fires next then completes the observable', done => {
-            auth.signInWithRedirect.mockReturnValue(Promise.resolve());
+            auth.signInWithRedirect.mockResolvedValue();
             let resultCorrect = false;
 
             firestore.googleSignIn()
@@ -108,7 +123,7 @@ describe('firestore', () => {
 
         it('passes the auth.signInWithRedirect(...) error to the observable', done => {
             const testErr = 'test';
-            auth.signInWithRedirect.mockReturnValue(Promise.reject(testErr));
+            auth.signInWithRedirect.mockRejectedValue(testErr);
 
             firestore.googleSignIn()
                 .subscribe(
@@ -123,7 +138,7 @@ describe('firestore', () => {
 
     describe('signOut()', () => {
         it('calls auth.SignOut()', done => {
-            auth.signOut.mockReturnValue(Promise.resolve());
+            auth.signOut.mockResolvedValue();
 
             firestore.signOut()
                 .subscribe(
@@ -135,7 +150,7 @@ describe('firestore', () => {
         });
 
         it('fires next then completes the observable', done => {
-            auth.signOut.mockReturnValue(Promise.resolve());
+            auth.signOut.mockResolvedValue();
             let resultCorrect = false;
 
             firestore.signOut()
@@ -153,7 +168,7 @@ describe('firestore', () => {
 
         it('passes the auth.signOut() error to the observable', done => {
             const testErr = 'test';
-            auth.signOut.mockReturnValue(Promise.reject(testErr));
+            auth.signOut.mockRejectedValue(testErr);
 
             firestore.signOut()
                 .subscribe(
@@ -168,7 +183,7 @@ describe('firestore', () => {
 
     describe('addDoc()', () => {
         it('successfully adds a document', done => {
-            reference.add.mockReturnValue(Promise.resolve());
+            reference.add.mockResolvedValue();
 
             firestore.addDoc('collection', {})
                 .subscribe(
@@ -181,7 +196,7 @@ describe('firestore', () => {
 
         //TODO: Move this into its own test suite
         it('successfully adds a document with a specified docId', done => {
-            reference.set.mockReturnValue(Promise.resolve());
+            reference.set.mockResolvedValue();
 
             firestore.addOrUpdateDocById('collection', 'docId', {})
                 .subscribe(
@@ -194,7 +209,7 @@ describe('firestore', () => {
 
         it('passes document reference to the observable', done => {
             const docRef = {docId: 'id'};
-            reference.add.mockReturnValue(Promise.resolve(docRef));
+            reference.add.mockResolvedValue(docRef);
 
             firestore.addDoc('collection', {})
                 .subscribe(
@@ -207,7 +222,7 @@ describe('firestore', () => {
 
         it('passes the addDoc() error to the observable', done => {
             const testErr = new Error();
-            reference.add.mockReturnValue(Promise.reject(testErr))
+            reference.add.mockRejectedValue(testErr)
 
             firestore.addDoc('collection', {})
                 .subscribe(
@@ -224,7 +239,7 @@ describe('firestore', () => {
 
     describe('updateDoc()', () => {
         it('successfully updates a document', done => {
-            reference.update.mockReturnValue(Promise.resolve())
+            reference.update.mockResolvedValue()
             firestore.updateDoc('collection', 'docId', {})
                 .subscribe(
                     () => {
@@ -237,7 +252,7 @@ describe('firestore', () => {
 
         it('passes the addDoc() error to the observable', done => {
             const testErr = new Error();
-            reference.update.mockReturnValue(Promise.reject(testErr))
+            reference.update.mockRejectedValue(testErr)
 
             firestore.updateDoc('collection', 'docId', {})
                 .subscribe(
@@ -259,7 +274,7 @@ describe('firestore', () => {
                 exists: true,
                 data: () => data
             }
-            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+            reference.get.mockResolvedValue(documentSnapshot);
 
             firestore.getDoc('collection', 'docId')
                 .subscribe(
@@ -271,18 +286,22 @@ describe('firestore', () => {
 
         });
 
-        it('passes only the data to the observable', done => {
-            const data = { mockData: 'data' }
+        it('passes only the id and data to the observable', done => {
+            const docId = 'docId';
+            const data = { mockData: 'data' };
             const documentSnapshot = {
                 exists: true,
                 data: () => data
-            }
-            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+            };
+            reference.get.mockResolvedValue(documentSnapshot);
 
-            firestore.getDoc('collection', 'docId')
+            firestore.getDoc('collection', docId)
                 .subscribe(
                     entity => {
-                        expect(entity).toBe(data);
+                        expect(entity).toEqual({
+                            id: docId,
+                            data: data
+                        });
                         done();
                     },
                     err => {
@@ -296,7 +315,7 @@ describe('firestore', () => {
                 exists: false,
                 data: () => null
             }
-            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+            reference.get.mockResolvedValue(documentSnapshot);
 
             firestore.getDoc('collection', 'docId')
                 .subscribe(
@@ -304,7 +323,7 @@ describe('firestore', () => {
                         done.fail(new Error('Observable should not receive document snapshot'));
                     },
                     err => {
-                        expect(err).toBe('Document does not exist');
+                        expect(err instanceof DocumentNotFoundError).toBeTruthy();
                         done();
                     }
                 );
@@ -312,7 +331,7 @@ describe('firestore', () => {
 
         it('passes the getDoc() error to the observable', done => {
             const testErr = new Error();
-            reference.get.mockReturnValue(Promise.reject(testErr));
+            reference.get.mockRejectedValue(testErr);
 
             firestore.getDoc('collection', 'docId')
                 .subscribe(
@@ -329,7 +348,7 @@ describe('firestore', () => {
 
     describe('deleteDoc()', () => {
         it('successfully deletes a document', done => {
-            reference.delete.mockReturnValue(Promise.resolve());
+            reference.delete.mockResolvedValue();
             firestore.deleteDoc('collection', 'docId')
                 .subscribe(
                     () => {
@@ -342,7 +361,7 @@ describe('firestore', () => {
 
         it('passes the deleteDoc() error to the observable', done => {
             const testErr = new Error();
-            reference.delete.mockReturnValue(Promise.reject(testErr));
+            reference.delete.mockRejectedValue(testErr);
 
             firestore.deleteDoc('collection', 'docId')
                 .subscribe(
@@ -363,7 +382,7 @@ describe('firestore', () => {
                 exists: false,
                 data: () => null
             }
-            reference.get.mockReturnValue(Promise.resolve(documentSnapshot));
+            reference.get.mockResolvedValue(documentSnapshot);
 
             firestore.doesExist('collection', 'docId')
                 .subscribe(

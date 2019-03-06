@@ -1,10 +1,12 @@
 import { app, auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { Observable, from } from 'rxjs';
-import { filter, flatMap, map, merge } from 'rxjs/operators'
+import { Observable, from, merge } from 'rxjs';
+import { flatMap, map, partition, share} from 'rxjs/operators';
 
-import User from './user';
+import User from './models/user';
+import Document from './models/document';
+import DocumentNotFoundError from './models/documentNotFoundError';
 
 const USER_COLLECTION = 'users';
 const ADMIN_EMAIL = 'sandy@catholicgators.org'; // TODO: we might want to migrate this to some form of config
@@ -27,8 +29,10 @@ export default class Firestore {
                 user => observer.next(user),
                 err => observer.error(err)
             )
+        ).pipe(
+            share()
         );
-        this.storeUserInfoOnLogin();
+        this.user$ = this.storeUserInfoOnLogin();
     };
 
     listenForUser(): Observable<User> {
@@ -51,19 +55,22 @@ export default class Firestore {
             return from(this.db.collection(collection).doc(docId).set(entity));
     }
 
-    getDoc(collection: string, docId: string): Observable<firebase.firestore.DocumentData> {
+    getDoc(collection: string, docId: string): Observable<Document> {
         return from(this.db.collection(collection).doc(docId).get())
             .pipe(
                 map(docSnapshot => {
                     if (docSnapshot.exists)
-                        return docSnapshot.data();
+                        return {
+                            id: docId,
+                            data: docSnapshot.data()
+                        };
                     else
-                        throw 'Document does not exist';
+                        throw new DocumentNotFoundError(docId);
                 })
             )
     }
 
-    getCollection(collection: string) {
+    getCollection(collection: string): Observable<Document[]> {
         return from(this.db.collection(collection).get())
             .pipe(
                 map(querySnapshot => {
@@ -104,17 +111,15 @@ export default class Firestore {
         return from(this.app.delete());
     }
 
-    private storeUserInfoOnLogin() {
-        const login$ = this.firebaseUser$
-            .pipe(
-                filter(x => x !== null),
-                flatMap(firebaseUser =>
+    private storeUserInfoOnLogin(): Observable<User> {
+        const attachExistence = firebaseUser =>
                     this.doesExist(USER_COLLECTION, firebaseUser.uid)
                         .pipe(
                             map(exists => ({exists, firebaseUser}))
-                        )
-                ),
-                flatMap(({exists, firebaseUser}) => {
+                        );
+
+        const storeUser = ({exists, firebaseUser}) => {
+                    const docId = firebaseUser.uid;
                     const user: User = {
                         name: firebaseUser.displayName,
                         email: firebaseUser.email,
@@ -127,27 +132,29 @@ export default class Firestore {
 
                     if (exists) {
                         // If the user already exists, just update their profile pic
-                        observable = this.updateDoc(USER_COLLECTION, firebaseUser.uid, {
+                        observable = this.updateDoc(USER_COLLECTION, docId, {
                             photoURL: user.photoURL
                         })
                     } else {
-                        observable = this.addOrUpdateDocById(USER_COLLECTION, firebaseUser.uid, user);
+                        observable = this.addOrUpdateDocById(USER_COLLECTION, docId, user);
                     }
 
                     return observable.pipe(
-                        flatMap(_ => this.getDoc(USER_COLLECTION, firebaseUser.uid))
+                        flatMap(_ => this.getDoc(USER_COLLECTION, firebaseUser.uid)),
+                        map(userObject => (<Document>userObject).data)
                     ) as Observable<User>;
-                })
+                }
+
+        let [login$, logout$] = partition(x => x !== null)(this.firebaseUser$);
+        login$ = login$
+            .pipe(
+                flatMap(attachExistence),
+                flatMap(storeUser)
         );
 
-        const logout$ = this.firebaseUser$
-            .pipe(
-                filter(x => x === null)
-            );
-
-        this.user$ = login$
-            .pipe(
-                merge(logout$)
-            ) as Observable<User>;
+        return merge(
+            login$,
+            logout$,
+        ) as Observable<User>;
     }
 }

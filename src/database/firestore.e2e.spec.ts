@@ -1,8 +1,10 @@
-import { forkJoin } from 'rxjs/index';
+import { forkJoin } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
 import clientConfig from './testUtils/testConfig';
+import DocumentNotFoundError from './models/documentNotFoundError'
 
 describe('firestore', () => {
     let firestore: Firestore
@@ -46,7 +48,11 @@ describe('firestore', () => {
         firestore.getDoc(collection, docId)
             .subscribe(
                 doc => {
-                    expect(doc).toEqual(testDoc);
+                    expect(doc).toEqual({
+                        id: docId,
+                        data: testDoc
+                    }
+                    );
                     done();
                 },
                 err => {
@@ -60,23 +66,20 @@ describe('firestore', () => {
             testData: 'new data'
         };
         firestore.updateDoc(collection, docId, newTestData)
-            .subscribe(
-                () => {
-                    firestore.getDoc(collection, docId)
-                        .subscribe(
-                            doc => {
-                                expect(doc).toEqual(newTestData);
-                                done();
-                            },
-                            err => {
-                                done.fail(err);
-                            }
-                        );
+            .pipe(
+                flatMap(_ => firestore.getDoc(collection, docId))
+            ).subscribe(
+                doc => {
+                    expect(doc).toEqual({
+                        id: docId,
+                        data: newTestData
+                    });
+                    done();
                 },
                 err => {
                     done.fail(err);
                 }
-            );
+            )
     });
 
     it('successfully deletes a document', done => {
@@ -84,12 +87,21 @@ describe('firestore', () => {
             firestore.deleteDoc(collection, docId),
             firestore.deleteDoc(collection, specificDocId)
         )
+            .pipe(
+                flatMap(
+                    _ => forkJoin(
+                        firestore.getDoc(collection, docId),
+                        firestore.getDoc(collection, specificDocId)
+                    )
+                )
+            )
             .subscribe(
                 () => {
-                    done();
+                    done.fail('Test should not have been able to retrieve doc after deletion');
                 },
                 err => {
-                    done.fail(err);
+                    expect(err instanceof DocumentNotFoundError).toBeTruthy();
+                    done();
                 }
             );
     });

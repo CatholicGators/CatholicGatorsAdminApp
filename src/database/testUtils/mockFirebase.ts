@@ -15,20 +15,6 @@ reference = {
     delete: jest.fn()
 };
 
-class App {
-    isDeleted_ = false;
-    auth = jest.fn(() => {
-        return auth;
-    });
-    firestore = jest.fn(() => {
-        return db;
-    });
-    delete = jest.fn(() => {
-        this.isDeleted_ = true;
-        return Promise.resolve();
-    });
-}
-
 const collectionReference = {
     doc: (docId) => { return reference },
         ...reference
@@ -48,6 +34,20 @@ auth = {
     signInWithRedirect: jest.fn(),
     signOut: jest.fn()
 };
+class App {
+    isDeleted_ = false;
+    auth = jest.fn(() => {
+        return auth;
+    });
+    firestore = jest.fn(() => {
+        return db;
+    });
+    delete = jest.fn(() => {
+        this.isDeleted_ = true;
+        return Promise.resolve();
+    });
+}
+
 app = new App();
 firebase = {
     apps: [],
