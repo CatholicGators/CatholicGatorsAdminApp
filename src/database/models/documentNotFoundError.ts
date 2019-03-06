@@ -5,6 +5,6 @@ export default class DocumentNotFoundError extends Error {
         if (document)
             this.message = `Document ${document} does not exist in database`;
         else
-            this.message = "Document does not exist in database";
+            this.message = 'Document does not exist in database';
     }
 }
