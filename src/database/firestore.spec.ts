@@ -196,19 +196,6 @@ describe('firestore', () => {
                 );
         });
 
-        //TODO: Move this into its own test suite
-        it('successfully adds a document with a specified docId', done => {
-            reference.set.mockResolvedValue();
-
-            firestore.addOrUpdateDocById('collection', 'docId', {})
-                .subscribe(
-                    _ => {
-                        expect(reference.set).toHaveBeenCalled();
-                        done();
-                    }
-                );
-        });
-
         it('passes document reference to the observable', done => {
             const docRef = {docId: 'id'};
             reference.add.mockResolvedValue(docRef);
@@ -239,24 +226,24 @@ describe('firestore', () => {
         });
     });
 
-    describe('updateDoc()', () => {
-        it('successfully updates a document', done => {
-            reference.update.mockResolvedValue()
-            firestore.updateDoc('collection', 'docId', {})
+    describe('addOrUpdateDocById()', () => {
+        it('successfully adds a document with a specified docId', done => {
+            reference.set.mockResolvedValue();
+
+            firestore.addOrUpdateDocById('collection', 'docId', {})
                 .subscribe(
-                    () => {
-                        expect(reference.update).toHaveBeenCalled();
+                    _ => {
+                        expect(reference.set).toHaveBeenCalled();
                         done();
                     }
                 );
-
         });
 
-        it('passes the addDoc() error to the observable', done => {
+        it('passes the addOrUpdateDocById() error to the observable', done => {
             const testErr = new Error();
-            reference.update.mockRejectedValue(testErr)
+            reference.set.mockRejectedValue(testErr)
 
-            firestore.updateDoc('collection', 'docId', {})
+            firestore.addOrUpdateDocById('collection', 'docId', {})
                 .subscribe(
                     entity => {
                         done.fail(new Error('Promise should not resolve'));
@@ -348,24 +335,110 @@ describe('firestore', () => {
         });
     });
 
-    describe('deleteDoc()', () => {
-        it('successfully deletes a document', done => {
-            reference.delete.mockResolvedValue();
-            firestore.deleteDoc('collection', 'docId')
+    describe('getCollection()', () => {
+        it('successfully gets a collection', done => {
+            const docs = [
+                {
+                    id: '1',
+                    data: () => ({ data: 'data' })
+                },
+                {
+                    id: '2',
+                    data: () => ({ data: 'data' })
+                },
+                {
+                    id: '3',
+                    data: () => ({ data: 'data' })
+                },
+            ]
+            const returnedDocs = [
+                {
+                    id: '1',
+                    data: { data: 'data' }
+                },
+                {
+                    id: '2',
+                    data: { data: 'data' }
+                },
+                {
+                    id: '3',
+                    data: { data: 'data' }
+                },
+            ]
+            reference.get.mockResolvedValue({ docs });
+
+            firestore.getCollection('collection')
                 .subscribe(
-                    () => {
-                        expect(reference.delete).toHaveBeenCalled();
+                    collection => {
+                        expect(collection).toEqual(returnedDocs);
                         done();
                     }
                 );
-
         });
 
-        it('passes the deleteDoc() error to the observable', done => {
+        it('passes the getCollection() error to the observable', done => {
             const testErr = new Error();
-            reference.delete.mockRejectedValue(testErr);
+            reference.get.mockRejectedValue(testErr);
 
-            firestore.deleteDoc('collection', 'docId')
+            firestore.getCollection('collection')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('getUsers()', () => {
+        it('successfully gets a list of users', done => {
+            const docs = [
+                {
+                    id: '1',
+                    data: () => ({ name: 'Ryan' })
+                },
+                {
+                    id: '2',
+                    data: () => ({ name: 'MCP' })
+                },
+                {
+                    id: '3',
+                    data: () => ({ name: 'Joey' })
+                },
+            ]
+            const returnedDocs = [
+                {
+                    id: '1',
+                    data: { name: 'Ryan' }
+                },
+                {
+                    id: '2',
+                    data: { name: 'MCP' }
+                },
+                {
+                    id: '3',
+                    data: { name: 'Joey' }
+                },
+            ]
+            reference.get.mockResolvedValue({ docs });
+
+            firestore.getUsers()
+                .subscribe(
+                    collection => {
+                        expect(collection).toEqual(returnedDocs);
+                        done();
+                    }
+                );
+        });
+
+        it('passes the getUsers() error to the observable', done => {
+            const testErr = new Error();
+            reference.get.mockRejectedValue(testErr);
+
+            firestore.getUsers()
                 .subscribe(
                     entity => {
                         done.fail(new Error('Promise should not resolve'));
@@ -394,6 +467,82 @@ describe('firestore', () => {
                     },
                     err => {
                         done.fail(err);
+                    }
+                );
+        });
+
+        it('passes the doesExist() error to the observable', done => {
+            const testErr = new Error();
+            reference.get.mockRejectedValue(testErr);
+
+            firestore.doesExist('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('updateDoc()', () => {
+        it('successfully updates a document', done => {
+            reference.update.mockResolvedValue()
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    () => {
+                        expect(reference.update).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
+        });
+
+        it('passes the updateDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.update.mockRejectedValue(testErr)
+
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('deleteDoc()', () => {
+        it('successfully deletes a document', done => {
+            reference.delete.mockResolvedValue();
+            firestore.deleteDoc('collection', 'docId')
+                .subscribe(
+                    () => {
+                        expect(reference.delete).toHaveBeenCalled();
+                        done();
+                    }
+                );
+
+        });
+
+        it('passes the deleteDoc() error to the observable', done => {
+            const testErr = new Error();
+            reference.delete.mockRejectedValue(testErr);
+
+            firestore.deleteDoc('collection', 'docId')
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
                     }
                 );
         });

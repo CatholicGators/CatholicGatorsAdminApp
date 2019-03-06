@@ -83,7 +83,7 @@ export default class Firestore {
                     }
                     return docs;
                 })
-            )
+            );
     }
 
     getUsers() {
