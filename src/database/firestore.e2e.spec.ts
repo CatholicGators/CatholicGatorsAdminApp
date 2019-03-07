@@ -33,7 +33,7 @@ describe('firestore', () => {
     });
 
     it('successfully adds a document with a specified docId', done => {
-        firestore.addOrUpdateDocById(collection, specificDocId, testDoc)
+        firestore.upsertDocById(collection, specificDocId, testDoc)
             .subscribe(
                 () => {
                     done();

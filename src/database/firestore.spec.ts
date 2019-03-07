@@ -226,11 +226,11 @@ describe('firestore', () => {
         });
     });
 
-    describe('addOrUpdateDocById()', () => {
+    describe('upsertDocById()', () => {
         it('successfully adds a document with a specified docId', done => {
             reference.set.mockResolvedValue();
 
-            firestore.addOrUpdateDocById('collection', 'docId', {})
+            firestore.upsertDocById('collection', 'docId', {})
                 .subscribe(
                     _ => {
                         expect(reference.set).toHaveBeenCalled();
@@ -239,11 +239,11 @@ describe('firestore', () => {
                 );
         });
 
-        it('passes the addOrUpdateDocById() error to the observable', done => {
+        it('passes the upsertDocById() error to the observable', done => {
             const testErr = new Error();
             reference.set.mockRejectedValue(testErr)
 
-            firestore.addOrUpdateDocById('collection', 'docId', {})
+            firestore.upsertDocById('collection', 'docId', {})
                 .subscribe(
                     entity => {
                         done.fail(new Error('Promise should not resolve'));
@@ -494,7 +494,7 @@ describe('firestore', () => {
             firestore.updateDoc('collection', 'docId', {})
                 .subscribe(
                     () => {
-                        expect(reference.update).toHaveBeenCalled();
+                        expect(reference.update).toHaveBeenCalledWith({});
                         done();
                     }
                 );

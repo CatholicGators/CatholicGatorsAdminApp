@@ -49,7 +49,7 @@ export default class Firestore {
         return from(this.db.collection(collection).add(entity));
     }
 
-    addOrUpdateDocById(collection: string, docId: string, entity: object): Observable<void>{
+    upsertDocById(collection: string, docId: string, entity: object): Observable<void>{
             return from(this.db.collection(collection).doc(docId).set(entity));
     }
 
@@ -127,7 +127,7 @@ export default class Firestore {
                             photoURL: user.photoURL
                         })
                     } else {
-                        observable = this.addOrUpdateDocById(USER_COLLECTION, docId, user);
+                        observable = this.upsertDocById(USER_COLLECTION, docId, user);
                     }
 
                     return observable.pipe(

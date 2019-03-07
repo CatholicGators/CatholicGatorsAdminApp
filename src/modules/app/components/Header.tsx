@@ -10,7 +10,6 @@ import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
 
