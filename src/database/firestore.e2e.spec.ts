@@ -1,12 +1,17 @@
+import { forkJoin } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
 import clientConfig from './testUtils/testConfig';
+import DocumentNotFoundError from './models/documentNotFoundError'
 
 describe('firestore', () => {
     let firestore: Firestore
     const collection = 'collection';
     const testDoc = {testData: 'data'};
     let docId;
+    const specificDocId = 'docId';
 
     beforeEach(() => {
         firestore = new Firestore(firebase, clientConfig);
@@ -27,11 +32,27 @@ describe('firestore', () => {
             );
     });
 
+    it('successfully adds a document with a specified docId', done => {
+        firestore.upsertDocById(collection, specificDocId, testDoc)
+            .subscribe(
+                () => {
+                    done();
+                },
+                err => {
+                    done.fail(err);
+                }
+            );
+    });
+
     it('successfully gets a document', done => {
         firestore.getDoc(collection, docId)
             .subscribe(
                 doc => {
-                    expect(doc).toEqual(testDoc);
+                    expect(doc).toEqual({
+                        id: docId,
+                        data: testDoc
+                    }
+                    );
                     done();
                 },
                 err => {
@@ -45,33 +66,42 @@ describe('firestore', () => {
             testData: 'new data'
         };
         firestore.updateDoc(collection, docId, newTestData)
-            .subscribe(
-                () => {
-                    firestore.getDoc(collection, docId)
-                        .subscribe(
-                            doc => {
-                                expect(doc).toEqual(newTestData);
-                                done();
-                            },
-                            err => {
-                                done.fail(err);
-                            }
-                        );
-                },
-                err => {
-                    done.fail(err);
-                }
-            );
-    });
-
-    it('successfully deletes a document', done => {
-        firestore.deleteDoc(collection, docId)
-            .subscribe(
-                () => {
+            .pipe(
+                mergeMap(_ => firestore.getDoc(collection, docId))
+            ).subscribe(
+                doc => {
+                    expect(doc).toEqual({
+                        id: docId,
+                        data: newTestData
+                    });
                     done();
                 },
                 err => {
                     done.fail(err);
+                }
+            )
+    });
+
+    it('successfully deletes a document', done => {
+        forkJoin(
+            firestore.deleteDoc(collection, docId),
+            firestore.deleteDoc(collection, specificDocId)
+        )
+            .pipe(
+                mergeMap(
+                    _ => forkJoin(
+                        firestore.getDoc(collection, docId),
+                        firestore.getDoc(collection, specificDocId)
+                    )
+                )
+            )
+            .subscribe(
+                () => {
+                    done.fail('Test should not have been able to retrieve doc after deletion');
+                },
+                err => {
+                    expect(err instanceof DocumentNotFoundError).toBeTruthy();
+                    done();
                 }
             );
     });

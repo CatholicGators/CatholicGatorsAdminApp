@@ -27,7 +27,7 @@ export const listenForUserEpic = (action$, _, { firestore }) => {
 export const googleSignInEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(authActions.GOOGLE_SIGN_IN),
-        mergeMap(() => 
+        mergeMap(() =>
             firestore.googleSignIn().pipe(
                 map(() => googleSignedIn()),
                 catchError(err => ActionsObservable.of(googleSignInErr(err)))
@@ -39,7 +39,7 @@ export const googleSignInEpic = (action$, _, { firestore }) => {
 export const signOutEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(authActions.SIGN_OUT),
-        mergeMap(() => 
+        mergeMap(() =>
             firestore.signOut().pipe(
                 map(() => signedOut()),
                 catchError(err => ActionsObservable.of(signOutErr(err)))
