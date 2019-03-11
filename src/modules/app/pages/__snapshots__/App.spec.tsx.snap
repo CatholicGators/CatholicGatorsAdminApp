@@ -65,7 +65,12 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+<<<<<<< HEAD
+        "ref": null,
+        "rendered": Object {
+=======
         Object {
+>>>>>>> 4c06f1b... Moved files to best fit folder structure and removed unused code
           "instance": null,
           "key": undefined,
           "nodeType": "class",
@@ -77,7 +82,12 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+<<<<<<< HEAD
+        "type": [Function],
+      },
+=======
       ],
+>>>>>>> 4c06f1b... Moved files to best fit folder structure and removed unused code
       "type": "div",
     },
     "type": [Function],
@@ -151,7 +161,9 @@ ShallowWrapper {
           "getChildContext": Object {
             "calledByRenderer": false,
           },
-          "getDerivedStateFromProps": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
@@ -160,5 +172,6 @@ ShallowWrapper {
       },
     },
   },
+  Symbol(enzyme.__childContext__): null,
 }
 `;
