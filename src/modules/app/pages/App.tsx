@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { listenForUser } from '../../../redux/actions/auth/authActions';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import { listenForUser } from '../../../redux/actions/auth/authActions';
 import Header from '../components/Header';
+import { Admin } from './Admin';
 
 type Props = {
   listenForUser: () => any;
@@ -14,8 +17,13 @@ export class App extends Component<Props> {
   render() {
     return (
       <div>
-        <Header></Header>
-        <h1>Home!</h1>
+        <Router>
+          <div>
+            <Header></Header>
+            <h1>Home!</h1>
+            <Route path="/admin/" component={Admin}></Route>
+          </div>
+        </Router>
       </div>
     );
   }
