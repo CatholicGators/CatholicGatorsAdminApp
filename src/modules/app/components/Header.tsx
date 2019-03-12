@@ -20,6 +20,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import VpnKey from '@material-ui/icons/VpnKey';
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
 
@@ -37,11 +40,23 @@ const styles = (theme: Theme) => createStyles({
             display: 'none'
         }
     },
-    list: {
+    mobileMenuItems: {
         width: 250,
+        marginBottom: 'auto'
     },
-    toolbar: theme.mixins.toolbar,
-    menuItems: {
+    toolbar: {
+        minHeight: '64px'
+    },
+    drawerHeader: {
+        ...theme.mixins.toolbar,
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: '64px'
+    },
+    mobileAvatar: {
+        margin: theme.spacing.unit
+    },
+    desktopMenuItems: {
         display: 'flex',
         [theme.breakpoints.down('xs')]: {
             display: 'none'
@@ -65,13 +80,19 @@ const styles = (theme: Theme) => createStyles({
             color: 'inherit'
         },
         '&:hover': {
-            color: theme.palette.secondary.main
+            color: theme.palette.secondary.main,
+            transition: 'color',
+            transitionDuration: '200ms',
         }
     },
     navLinkTextDesktop: {
         color: 'inherit'
     },
     desktopSelected: {
+        color: theme.palette.secondary.main
+    },
+    progress: {
+        margin: 12,
         color: theme.palette.secondary.main
     }
 });
@@ -108,7 +129,7 @@ export class Header extends React.Component<Props, State> {
     ];
     state = {
         anchorEl: null,
-        drawerOpen: false
+        drawerOpen: true
     };
 
     constructor(public props) {
@@ -142,19 +163,80 @@ export class Header extends React.Component<Props, State> {
       });
     };
 
-    desktopItems() {
+    render() {
+        const { classes, user } = this.props;
+
+        return (
+            <div className={classes ? classes.root : null}>
+                <AppBar position="static">
+                    <Toolbar className={classes ? classes.toolbar : null}>
+                        <IconButton
+                            className={classes ? classes.menuButton : null}
+                            color="inherit"
+                            aria-label="Menu"
+                            onClick={() => this.toggleDrawer(true)}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography variant="h6" color="inherit" className={classes ? classes.grow : null}>
+                            Catholic Gators Admin
+                        </Typography>
+                        <div className={classes ? classes.desktopMenuItems : null}>
+                            {this.getDesktopMenuItems()}
+                            {this.getDesktopProfile()}
+                        </div>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    open={this.state.drawerOpen}
+                    onClose={() => this.toggleDrawer(false)}
+                >
+                    <div className={classes ? classes.mobileMenuItems : null}>
+                        <div className={classes ? classes.drawerHeader : null}>
+                            {this.getMobileProfile()}
+                        </div>
+                        <Divider />
+                        <List>
+                            {this.getMobileMenuItems()}
+                        </List>
+                    </div>
+                    {user ? 
+                        <div>
+                            <Divider />
+                            <ListItem
+                                button
+                                key='logout'
+                                onClick={() => {
+                                    this.toggleDrawer(false);
+                                    this.handleLogout();
+                                }}
+                            >
+                                <ListItemIcon>
+                                    <ExitToApp/>
+                                </ListItemIcon>
+                                <ListItemText primary='Logout' />
+                            </ListItem>
+                        </div>
+                    : null}
+                </Drawer>
+            </div>
+        );
+    }
+
+    getDesktopProfile() {
         const { anchorEl } = this.state;
         const { classes, user } = this.props;
 
         switch(this.props.user) {
             case undefined:
-                return <div>Loading...</div>; // TODO: Replace this with CircularProgress
+                return <CircularProgress className={classes ? classes.progress : null} />
 
             case null:
                 return (
                     <Button
                         id="login-btn"
                         color="inherit"
+                        variant="outlined"
                         onClick={this.handleLogin.bind(this)}
                     >
                         Login
@@ -163,22 +245,7 @@ export class Header extends React.Component<Props, State> {
 
             default:
                 return (
-                    <div className={classes ? classes.menuItems : null}>
-                        {this.menuLinks.map(link =>
-                            <NavLink
-                                exact
-                                key={link.text}
-                                to={link.href}
-                                className={classes ? classes.navLinkDesktop : null}
-                                activeClassName={classes ? classes.desktopSelected : null}
-                            >
-                                <Typography
-                                    className={classes ? classes.navLinkTextDesktop : null}
-                                >
-                                    {link.text}
-                                </Typography>
-                            </NavLink>
-                        )}
+                    <div>
                         <IconButton
                             id="avatar-btn"
                             aria-owns={anchorEl ? 'menu' : undefined}
@@ -209,63 +276,88 @@ export class Header extends React.Component<Props, State> {
         }
     }
 
-    render() {
-        const { classes } = this.props;
+    getDesktopMenuItems() {
+        const { classes, user } = this.props;
 
-        return (
-            <div className={classes ? classes.root : null}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            className={classes ? classes.menuButton : null}
-                            color="inherit"
-                            aria-label="Menu"
-                            onClick={() => this.toggleDrawer(true)}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" className={classes ? classes.grow : null}>
-                            Catholic Gators Admin
-                        </Typography>
-                        {this.desktopItems()}
-                    </Toolbar>
-                </AppBar>
-                <Drawer open={this.state.drawerOpen} onClose={() => this.toggleDrawer(false)}>
-                    <div
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => this.toggleDrawer(false)}
-                        onKeyDown={() => this.toggleDrawer(false)}
+        if(!!user) {
+            return this.menuLinks.map(link =>
+                <NavLink
+                    exact
+                    key={link.text}
+                    to={link.href}
+                    className={classes ? classes.navLinkDesktop : null}
+                    activeClassName={classes ? classes.desktopSelected : null}
+                >
+                    <Typography
+                        className={classes ? classes.navLinkTextDesktop : null}
                     >
-                        <div className={classes ? classes.list : null}>
-                            <div className={classes.toolbar}/>
-                            <Divider />
-                            <List>
-                                {this.menuLinks.map(link =>
-                                    <NavLink
-                                        exact
-                                        key={link.text}
-                                        to={link.href}
-                                        className={classes ? classes.navLinkMobile : null}
-                                    >
-                                        <ListItem
-                                            button
-                                            key={link.text}
-                                            selected={this.props.location.pathname == link.href}
-                                        >
-                                                <ListItemIcon>
-                                                    <link.icon/>
-                                                </ListItemIcon>
-                                                <ListItemText primary={link.text} />
-                                        </ListItem>
-                                    </NavLink>
-                                )}
-                            </List>
-                        </div>
-                    </div>
-                </Drawer>
-            </div>
-        );
+                        {link.text}
+                    </Typography>
+                </NavLink>
+            );
+        } else {
+            return null;
+        }
+    }
+
+    getMobileProfile() {
+        const { classes, user } = this.props;
+
+        switch(this.props.user) {
+            case undefined:
+                return <CircularProgress className={classes ? classes.progress : null} />
+            case null:
+                return null
+            default:
+                return <Avatar className={classes ? classes.mobileAvatar : null} src={user.photoURL} />
+        }
+    }
+
+    getMobileMenuItems() {
+        const { classes, user } = this.props;
+        switch(user) {
+            case undefined:
+                return null;
+            case null:
+                return (
+                    <ListItem
+                        button
+                        key='login'
+                        onClick={() => {
+                            this.toggleDrawer(false);
+                            this.handleLogin();
+                        }}
+                    >
+                            <ListItemIcon>
+                                <PowerSettingsNew/>
+                            </ListItemIcon>
+                            <ListItemText primary='Login' />
+                    </ListItem>
+                );
+            default:
+                return (
+                    this.menuLinks.map(link =>
+                        <NavLink
+                            exact
+                            key={link.text}
+                            to={link.href}
+                            className={classes ? classes.navLinkMobile : null}
+                            onClick={() => this.toggleDrawer(false)}
+                        >
+                            <ListItem
+                                button
+                                key={link.text}
+                                selected={this.props.location.pathname == link.href}
+                            >
+                                    <ListItemIcon>
+                                        <link.icon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary={link.text} />
+                            </ListItem>
+                        </NavLink>
+                    )
+                );
+        }
     }
 }
 

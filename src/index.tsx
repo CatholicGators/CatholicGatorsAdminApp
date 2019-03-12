@@ -3,19 +3,28 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import orange from '@material-ui/core/colors/orange';
+import {
+    MuiThemeProvider,
+    createMuiTheme,
+    Theme
+} from '@material-ui/core/styles';
 
 import './index.css';
 import App from './modules/app/pages/App';
 import * as serviceWorker from './utils/serviceWorker';
+import {
+    blue,
+    orange
+} from '@material-ui/core/colors';
 
-const theme = createMuiTheme({
+const theme: Theme = createMuiTheme({
     palette: {
         primary: blue,
         secondary: orange,
-    }
+    },
+    typography: {
+        useNextVariants: true,
+    },
 });
 
 ReactDOM.render(

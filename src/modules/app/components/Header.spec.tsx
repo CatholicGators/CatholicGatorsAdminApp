@@ -4,11 +4,15 @@ import { shallow } from 'enzyme';
 import { Header } from './Header';
 
 describe('Header', () => {
-    let props, wrapper;
+    let props, wrapper, pathname;
 
     beforeEach(() => {
+        pathname = '/';
         props = {
             user: {},
+            location: {
+                pathname
+            },
             signOut: jest.fn(),
             googleSignIn: jest.fn()
         };
