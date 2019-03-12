@@ -19,7 +19,10 @@ import {
   FormControlLabel,
   FormLabel,
   FormGroup,
-  Button
+  Button,
+  Typography,
+  Divider,
+  Grid
 } from '@material-ui/core';
 
 const styles = createStyles({
@@ -27,15 +30,28 @@ const styles = createStyles({
       display: 'flex',
       flexWrap: 'wrap',
     },
-    textField: {
+    feild: {
       marginLeft: 10,
       marginRight: 10,
+      width: 250
     },
-    dense: {
-      marginTop: 16,
+    feildSmaller: {
+      marginLeft: 10,
+      marginRight: 10,
+      width: 100
     },
-    menu: {
-      width: 200,
+    feildLarger: {
+      marginLeft: 10,
+      marginRight: 10,
+      width: 300
+    },
+    margins: {
+      marginLeft: 10,
+      marginRight: 10
+    },
+    button: {
+      marginLeft: 10,
+      marginRight: 10
     }
 });
 
@@ -83,6 +99,7 @@ class ContactForm extends React.Component {
     firstName: '',
     lastName: '',
     gender: '',
+    email: '',
     phoneNumber: '',
     graduationSemester: '',
     graduationYear: '',
@@ -123,7 +140,6 @@ class ContactForm extends React.Component {
   }
 
   focusTextInput() {
-    console.log(this.inputLabelRef.current.offsetWidth)
     this.setState({
       labelWidth: this.inputLabelRef.current.offsetWidth
     });
@@ -143,7 +159,6 @@ class ContactForm extends React.Component {
 
   handleSubmit = (event) => {
     this.props.submitContactForm(this.state);
-    event.preventDefault();
  }
 
   render() {
@@ -151,33 +166,34 @@ class ContactForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
+        <Typography variant="h5" component="h3" className={classes.margin}>
+	        Personal information
+        </Typography>
         <TextField 
           id="first-name"
           label="First Name" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.firstName}
           onChange={this.handleChange('firstName')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-        
         <TextField 
           id="last-name"
           label="Last Name" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.lastName}
           onChange={this.handleChange('lastName')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-
         <TextField
           id="gender"
           select
           label="Gender"
-          className={classes.textField}
+          className={classes.feildSmaller}
           value={this.state.gender}
           onChange={this.handleChange('gender')}
           margin="normal"
@@ -190,10 +206,9 @@ class ContactForm extends React.Component {
             </MenuItem>
           ))}
         </TextField>
-
         <FormControl
           id="phone-number"
-          className={classes.formControl} 
+          className={classes.feild} 
           variant="outlined" 
           margin="normal"
           required
@@ -213,10 +228,34 @@ class ContactForm extends React.Component {
             required
           />
         </FormControl>
-
+        <TextField 
+          id="email"
+          label="Email" 
+          className={classes.feild}
+          value={this.state.email}
+          onChange={this.handleChange('email')}
+          margin="normal"
+          variant="outlined"
+          required
+        ></TextField>
+        <TextField 
+          id="housing-complex"
+          label="Name of Dorm/Complex you live in" 
+          className={classes.feildLarger}
+          value={this.state.housingComplex}
+          onChange={this.handleChange('housingComplex')}
+          margin="normal"
+          variant="outlined"
+        ></TextField>
+        <br/>
+        <Divider variant="middle" />
+        <br/>
+        <Typography variant="h5" component="h3" className={classes.margin}>
+	        Academic information
+        </Typography>
         <FormControl
           id="graduation-year"
-          className={classes.formControl} 
+          className={classes.feild} 
           variant="outlined" 
           margin="normal"
           required
@@ -236,12 +275,11 @@ class ContactForm extends React.Component {
             required
           />
         </FormControl>
-
         <TextField
           id="graduation-semester"
           select
           label="Graduation Semester"
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.graduationSemester}
           onChange={this.handleChange('graduationSemester')}
           margin="normal"
@@ -254,12 +292,11 @@ class ContactForm extends React.Component {
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
         id="school"
         select
         label="School"
-        className={classes.textField}
+        className={classes.feildSmaller}
         value={this.state.school}
         onChange={this.handleChange('school')}
         margin="normal"
@@ -272,43 +309,45 @@ class ContactForm extends React.Component {
             </MenuItem>
           ))}
         </TextField>
-
+        <br/>
+        <Divider variant="middle" />
+        <br/>
+        <Typography variant="h5" component="h3" className={classes.margin}>
+	        Parent's information
+        </Typography>
         <TextField 
           id="permanent-address"
           label="Permanent Address" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.permanentAddress}
           onChange={this.handleChange('permanentAddress')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-
         <TextField 
           id="city"
           label="City" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.city}
           onChange={this.handleChange('city')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-
         <TextField 
           id="state"
           label="State" 
-          className={classes.textField}
+          className={classes.feildSmaller}
           value={this.state.state}
           onChange={this.handleChange('state')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-
         <FormControl
           id="zip-code"
-          className={classes.formControl} 
+          className={classes.feild} 
           variant="outlined" 
           margin="normal"
           required
@@ -328,20 +367,18 @@ class ContactForm extends React.Component {
             required
           />
         </FormControl>
-
         <TextField 
           id="parent-name"
           label="Parent's Name" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.parentName}
           onChange={this.handleChange('parentName')}
           margin="normal"
           variant="outlined"
         ></TextField>
-
         <FormControl
           id="parent-phone-number"
-          className={classes.formControl} 
+          className={classes.feild} 
           variant="outlined" 
           margin="normal"
         >
@@ -359,27 +396,22 @@ class ContactForm extends React.Component {
             onClick={this.focusTextInput}
           />
         </FormControl>
-
         <TextField 
           id="parent-email"
           label="Parent's Email" 
-          className={classes.textField}
+          className={classes.feild}
           value={this.state.parentEmail}
           onChange={this.handleChange('parentEmail')}
           margin="normal"
           variant="outlined"
         ></TextField>
-
-        <TextField 
-          id="housing-complex"
-          label="Name of Dorm/Complex you live in" 
-          className={classes.textField}
-          value={this.state.housingComplex}
-          onChange={this.handleChange('housingComplex')}
-          margin="normal"
-          variant="outlined"
-        ></TextField>
-
+        <br/>
+        <Divider variant="middle" />
+        <br/>
+        <Typography variant="h5" component="h3" className={classes.margin}>
+	        Your interests
+        </Typography>
+        <br/>
         <FormLabel>I am interested in...</FormLabel>
         <FormGroup>
           <FormControlLabel
@@ -413,8 +445,8 @@ class ContactForm extends React.Component {
             label="events for graduate students"
           />
         </FormGroup>
-
-        <FormLabel>I would like to...</FormLabel>
+        <br/>
+        <FormLabel className={classes.margins}>I would like to...</FormLabel>
         <FormGroup>
           <FormControlLabel
             control={
@@ -437,148 +469,157 @@ class ContactForm extends React.Component {
             label="register as a parishioner"
           />
         </FormGroup>
-        
-        <FormLabel>I am interested in getting involved in...</FormLabel>
+        <br/>
+        <FormLabel className={classes.margins}>I am interested in getting involved in...</FormLabel>
         <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.englishBibleStudy} 
-                onChange={this.handleChange('englishBibleStudy')} 
-                value="englishBibleStudy"
-              ></Checkbox>
-            }
-            label="English Bible Studys"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.spanishBibleStudy} 
-                onChange={this.handleChange('spanishBibleStudy')} 
-                value="spanishBibleStudy"
-              ></Checkbox>
-            }
-            label="Spanish/Bilingual Bible Study"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.freeFood} 
-                onChange={this.handleChange('freeFood')} 
-                value="freeFood"
-              ></Checkbox>
-            }
-            label="Free Food"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.guestSpeakers} 
-                onChange={this.handleChange('guestSpeakers')} 
-                value="guestSpeakers"
-              ></Checkbox>
-            }
-            label="Guest Speakers"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.musicMinistry} 
-                onChange={this.handleChange('musicMinistry')} 
-                value="musicMinistry"
-              ></Checkbox>
-            }
-            label="Music Ministry"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.socials} 
-                onChange={this.handleChange('socials')} 
-                value="socials"
-              ></Checkbox>
-            }
-            label="Socials"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.retreats} 
-                onChange={this.handleChange('retreats')} 
-                value="retreats"
-              ></Checkbox>
-            }
-            label="Retreats"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.intramuralSports} 
-                onChange={this.handleChange('intramuralSports')} 
-                value="intramuralSports"
-              ></Checkbox>
-            }
-            label="Intramural Sports"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.proLifeClub} 
-                onChange={this.handleChange('proLifeClub')} 
-                value="proLifeClub"
-              ></Checkbox>
-            }
-            label="Pro-Life Club"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.RHC} 
-                onChange={this.handleChange('RHC')} 
-                value="RHC"
-              ></Checkbox>
-            }
-            label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.servingAtMass} 
-                onChange={this.handleChange('servingAtMass')} 
-                value="servingAtMass"
-              ></Checkbox>
-            }
-            label="Serving at Mass"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.teachReligiousEd} 
-                onChange={this.handleChange('teachReligiousEd')} 
-                value="teachReligiousEd"
-              ></Checkbox>
-            }
-            label="Teach Religious Education"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={this.state.serviceProjects} 
-                onChange={this.handleChange('serviceProjects')} 
-                value="serviceProjects"
-              ></Checkbox>
-            }
-            label="Service Projects and Trips"
-          />
+          <Grid container direction="row">
+            <Grid item className={classes.margins}>
+              <Grid container direction="column">
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.englishBibleStudy} 
+                      onChange={this.handleChange('englishBibleStudy')} 
+                      value="englishBibleStudy"
+                    ></Checkbox>
+                  }
+                  label="English Bible Studys"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.spanishBibleStudy} 
+                      onChange={this.handleChange('spanishBibleStudy')} 
+                      value="spanishBibleStudy"
+                    ></Checkbox>
+                  }
+                  label="Spanish/Bilingual Bible Study"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.freeFood} 
+                      onChange={this.handleChange('freeFood')} 
+                      value="freeFood"
+                    ></Checkbox>
+                  }
+                  label="Free Food"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.guestSpeakers} 
+                      onChange={this.handleChange('guestSpeakers')} 
+                      value="guestSpeakers"
+                    ></Checkbox>
+                  }
+                  label="Guest Speakers"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.musicMinistry} 
+                      onChange={this.handleChange('musicMinistry')} 
+                      value="musicMinistry"
+                    ></Checkbox>
+                  }
+                  label="Music Ministry"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.socials} 
+                      onChange={this.handleChange('socials')} 
+                      value="socials"
+                    ></Checkbox>
+                  }
+                  label="Socials"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.retreats} 
+                      onChange={this.handleChange('retreats')} 
+                      value="retreats"
+                    ></Checkbox>
+                  }
+                  label="Retreats"
+                />
+              </Grid>
+            </Grid>
+            <Grid item className={classes.margins}>
+              <Grid container direction="column">
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.intramuralSports} 
+                      onChange={this.handleChange('intramuralSports')} 
+                      value="intramuralSports"
+                    ></Checkbox>
+                  }
+                  label="Intramural Sports"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.proLifeClub} 
+                      onChange={this.handleChange('proLifeClub')} 
+                      value="proLifeClub"
+                    ></Checkbox>
+                  }
+                  label="Pro-Life Club"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.RHC} 
+                      onChange={this.handleChange('RHC')} 
+                      value="RHC"
+                    ></Checkbox>
+                  }
+                  label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.servingAtMass} 
+                      onChange={this.handleChange('servingAtMass')} 
+                      value="servingAtMass"
+                    ></Checkbox>
+                  }
+                  label="Serving at Mass"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.teachReligiousEd} 
+                      onChange={this.handleChange('teachReligiousEd')} 
+                      value="teachReligiousEd"
+                    ></Checkbox>
+                  }
+                  label="Teach Religious Education"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={this.state.serviceProjects} 
+                      onChange={this.handleChange('serviceProjects')} 
+                      value="serviceProjects"
+                    ></Checkbox>
+                  }
+                  label="Service Projects and Trips"
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </FormGroup>
-
-      <Button 
-        variant="contained" 
-        color="primary" 
-        className={classes.button}
-        type="submit"
-      >Submit</Button>
-
+        <br/>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          className={classes.button}
+          type="submit"
+        > Submit </Button>
       </form>
     );
   }
