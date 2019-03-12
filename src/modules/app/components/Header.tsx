@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 
-import { createStyles, withStyles } from '@material-ui/core';
+import { createStyles, withStyles, Theme } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -22,7 +23,7 @@ import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
 
 import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
 
-const styles = createStyles({
+const styles = (theme: Theme) => createStyles({
     root: {
         flexGrow: 1
     },
@@ -31,11 +32,49 @@ const styles = createStyles({
     },
     menuButton: {
         marginLeft: -12,
-        marginRight: 20
+        marginRight: 20,
+        [theme.breakpoints.up('sm')]: {
+            display: 'none'
+        }
     },
     list: {
-      width: 250,
+        width: 250,
     },
+    toolbar: theme.mixins.toolbar,
+    menuItems: {
+        display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+        }
+    },
+    navLinkMobile: {
+        color: 'inherit',
+        textDecoration: 'none',
+        '&:visited': {
+            color: 'inherit'
+        }
+    },
+    navLinkDesktop: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: 'inherit',
+        textDecoration: 'none',
+        '&:visited': {
+            color: 'inherit'
+        }
+    },
+    navLinkTextDesktop: {
+        color: 'inherit'
+    },
+    selected: {
+        color: 'red'
+    },
+    mobileSelected: {
+        color: 'green'
+    }
 });
 
 type Props = {
@@ -44,7 +83,30 @@ type Props = {
     googleSignIn: () => any
 }
 
-export class Header extends React.Component<Props> {
+type State = {
+    anchorEl: string | null,
+    drawerOpen: boolean
+}
+
+type MenuLink = {
+    text: string,
+    href: string,
+    icon: any
+}
+
+export class Header extends React.Component<Props, State> {
+    readonly menuLinks: Array<MenuLink> = [
+        {
+            text: 'Contact Form',
+            href: '/',
+            icon: FormatAlignLeft
+        },
+        {
+            text: 'Admin',
+            href: '/admin',
+            icon: VpnKey
+        }
+    ];
     state = {
         anchorEl: null,
         drawerOpen: false
@@ -55,11 +117,15 @@ export class Header extends React.Component<Props> {
     }
 
     handleMenu(event) {
-        this.setState({ anchorEl: event.currentTarget });
+        this.setState({
+            anchorEl: event.currentTarget
+        });
     }
 
     handleClose() {
-        this.setState({ anchorEl: null });
+        this.setState({
+            anchorEl: null
+        });
     }
 
     handleLogin() {
@@ -71,55 +137,81 @@ export class Header extends React.Component<Props> {
         this.handleClose();
     }
 
-    toggleDrawer(isOpen){
+    toggleDrawer(isOpen: boolean){
       this.setState({
         drawerOpen: isOpen,
       });
     };
 
-    profile(user) {
+    desktopItems() {
         const { anchorEl } = this.state;
+        const { classes, user } = this.props;
 
-        switch(user) {
+        switch(this.props.user) {
             case undefined:
                 return <div>Loading...</div>; // TODO: Replace this with CircularProgress
 
             case null:
-                return <Button id="login-btn" color="inherit" onClick={this.handleLogin.bind(this)}>Login</Button>
+                return (
+                    <Button
+                        id="login-btn"
+                        color="inherit"
+                        onClick={this.handleLogin.bind(this)}
+                    >
+                        Login
+                    </Button>
+                );
 
             default:
-                return <div>
-                    <IconButton
-                        id="avatar-btn"
-                        aria-owns={anchorEl ? 'menu' : undefined}
-                        aria-haspopup="true"
-                        onClick={this.handleMenu.bind(this)}
-                        color="inherit"
-                    >
-                        <Avatar src={user.photoURL} />
-                    </IconButton>
-                    <Menu
-                        id="menu"
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={!!anchorEl}
-                        onClose={this.handleClose.bind(this)}
-                    >
-                        <MenuItem id="logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
-                    </Menu>
-                </div>
+                return (
+                    <div className={classes ? classes.menuItems : null}>
+                        {this.menuLinks.map(link =>
+                            <NavLink
+                                exact
+                                key={link.text}
+                                to={link.href}
+                                className={classes ? classes.navLinkDesktop : null}
+                                activeClassName={classes ? classes.selected : null}
+                            >
+                                <Typography
+                                    className={classes ? classes.navLinkTextDesktop : null}
+                                >
+                                    {link.text}
+                                </Typography>
+                            </NavLink>
+                        )}
+                        <IconButton
+                            id="avatar-btn"
+                            aria-owns={anchorEl ? 'menu' : undefined}
+                            aria-haspopup="true"
+                            onClick={this.handleMenu.bind(this)}
+                            color="inherit"
+                        >
+                            <Avatar src={user.photoURL} />
+                        </IconButton>
+                        <Menu
+                            id="menu"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={!!anchorEl}
+                            onClose={this.handleClose.bind(this)}
+                        >
+                            <MenuItem id="logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
+                        </Menu>
+                    </div>
+                );
         }
     }
 
     render() {
-        const { user, classes } = this.props;
+        const { classes } = this.props;
 
         return (
             <div className={classes ? classes.root : null}>
@@ -136,7 +228,7 @@ export class Header extends React.Component<Props> {
                         <Typography variant="h6" color="inherit" className={classes ? classes.grow : null}>
                             Catholic Gators Admin
                         </Typography>
-                        {this.profile(user)}
+                        {this.desktopItems()}
                     </Toolbar>
                 </AppBar>
                 <Drawer open={this.state.drawerOpen} onClose={() => this.toggleDrawer(false)}>
@@ -147,25 +239,30 @@ export class Header extends React.Component<Props> {
                         onKeyDown={() => this.toggleDrawer(false)}
                     >
                         <div className={classes ? classes.list : null}>
+                            <div className={classes.toolbar}/>
+                            <Divider />
                             <List>
-                                <ListItem button key="Contact">
-                                    <ListItemIcon>
-                                        <FormatAlignLeft/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Contact Form" />
-                                </ListItem>
-                                <ListItem button key="Admin">
-                                    <ListItemIcon>
-                                        <VpnKey/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="Admin" />
-                                </ListItem>
+                                {this.menuLinks.map(link =>
+                                    <NavLink
+                                        exact
+                                        key={link.text}
+                                        to={link.href}
+                                        className={classes ? classes.navLinkMobile : null}
+                                        activeClassName={classes ? classes.mobileSelected : null}>
+                                        <ListItem
+                                            button
+                                            key={link.text}>
+                                                <ListItemIcon>
+                                                    <link.icon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary={link.text} />
+                                        </ListItem>
+                                    </NavLink>
+                                )}
                             </List>
                         </div>
                     </div>
                 </Drawer>
-                
-            <Link to="/admin/">Admin</Link>
             </div>
         );
     }
@@ -180,4 +277,4 @@ const mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header)));
