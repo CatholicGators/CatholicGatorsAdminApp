@@ -1,7 +1,7 @@
 import { authActions } from '../../actions/auth/authActions';
 
 export const INITIAL_AUTH_STATE = {
-    user: null,
+    user: undefined,
 };
 
 const applySetUser = (state, action) => ({
