@@ -2,9 +2,6 @@ env:
 - DOCKER_COMPOSE_VERSION=3.7
 addons:
   ssh_known_hosts: 157.230.182.92
-language: node_js
-node_js:
-- "11.10.1"
 script:
 - docker build -t test-cg-admin-app .
 - docker run -e CI=true -d --name test test-cg-admin-app
