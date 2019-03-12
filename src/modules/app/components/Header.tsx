@@ -48,7 +48,6 @@ const styles = (theme: Theme) => createStyles({
         }
     },
     navLinkMobile: {
-        color: 'inherit',
         textDecoration: 'none',
         '&:visited': {
             color: 'inherit'
@@ -64,16 +63,16 @@ const styles = (theme: Theme) => createStyles({
         textDecoration: 'none',
         '&:visited': {
             color: 'inherit'
+        },
+        '&:hover': {
+            color: theme.palette.secondary.main
         }
     },
     navLinkTextDesktop: {
         color: 'inherit'
     },
-    selected: {
-        color: 'red'
-    },
-    mobileSelected: {
-        color: 'green'
+    desktopSelected: {
+        color: theme.palette.secondary.main
     }
 });
 
@@ -171,7 +170,7 @@ export class Header extends React.Component<Props, State> {
                                 key={link.text}
                                 to={link.href}
                                 className={classes ? classes.navLinkDesktop : null}
-                                activeClassName={classes ? classes.selected : null}
+                                activeClassName={classes ? classes.desktopSelected : null}
                             >
                                 <Typography
                                     className={classes ? classes.navLinkTextDesktop : null}
@@ -248,10 +247,12 @@ export class Header extends React.Component<Props, State> {
                                         key={link.text}
                                         to={link.href}
                                         className={classes ? classes.navLinkMobile : null}
-                                        activeClassName={classes ? classes.mobileSelected : null}>
+                                    >
                                         <ListItem
                                             button
-                                            key={link.text}>
+                                            key={link.text}
+                                            selected={this.props.location.pathname == link.href}
+                                        >
                                                 <ListItemIcon>
                                                     <link.icon/>
                                                 </ListItemIcon>
