@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import { listenForUser } from '../../../redux/actions/auth/authActions';
 import { connect } from 'react-redux';
+import { getUsers } from '../../../redux/actions/auth/authActions';
 
 type Props = {
-  listenForUser: () => any;
+  users: any
+  getUsers: () => any;
 }
 
 export class Admin extends Component<Props> {
+  componentDidMount() {
+    this.props.getUsers()
+  }
+
   render() {
     return (
       <div>
         <h1>Admin!</h1>
+        {JSON.stringify(this.props.users)}
       </div>
-    );
+    )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  listenForUser: () => dispatch(listenForUser())
-});
+const mapStateToProps = state => ({
+  users: state.auth.users
+})
 
-export default connect(null, mapDispatchToProps)(Admin);
+const mapDispatchToProps = dispatch => ({
+  getUsers: () => dispatch(getUsers())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin)

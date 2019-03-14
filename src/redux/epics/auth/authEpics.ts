@@ -9,7 +9,9 @@ import {
     googleSignedIn,
     listenForUserErr,
     googleSignInErr,
-    signOutErr
+    signOutErr,
+    getUsersSuccess,
+    getUsersErr
 } from '../../actions/auth/authActions';
 
 export const listenForUserEpic = (action$, _, { firestore }) => {
@@ -48,8 +50,21 @@ export const signOutEpic = (action$, _, { firestore }) => {
     )
 }
 
+export const getUsersEpic = (action$, _, { firestore }) => {
+    return action$.pipe(
+        ofType(authActions.GET_USERS),
+        mergeMap(() =>
+            firestore.getUsers().pipe(
+                map(users => getUsersSuccess(users)),
+                catchError(err => ActionsObservable.of(getUsersErr(err)))
+            )
+        )
+    )
+}
+
 export default combineEpics(
     listenForUserEpic,
     googleSignInEpic,
-    signOutEpic
+    signOutEpic,
+    getUsersEpic
 );

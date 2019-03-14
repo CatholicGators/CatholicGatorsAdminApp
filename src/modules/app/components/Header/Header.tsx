@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from "react-router-dom";
 
 import { createStyles, withStyles, Theme } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,18 +12,12 @@ import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import VpnKey from '@material-ui/icons/VpnKey';
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
-import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
-import ExitToApp from '@material-ui/icons/ExitToApp';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { googleSignIn, signOut } from '../../../redux/actions/auth/authActions';
+import { googleSignIn, signOut } from '../../../../redux/actions/auth/authActions';
+import MobileDrawer from '../MobileDrawer/MobileDrawer';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -40,32 +33,13 @@ const styles = (theme: Theme) => createStyles({
             display: 'none'
         }
     },
-    mobileMenuItems: {
-        width: 250,
-        marginBottom: 'auto'
-    },
     toolbar: {
         minHeight: '64px'
-    },
-    drawerHeader: {
-        ...theme.mixins.toolbar,
-        display: 'flex',
-        alignItems: 'center',
-        minHeight: '64px'
-    },
-    mobileAvatar: {
-        margin: theme.spacing.unit
     },
     desktopMenuItems: {
         display: 'flex',
         [theme.breakpoints.down('xs')]: {
             display: 'none'
-        }
-    },
-    navLinkMobile: {
-        textDecoration: 'none',
-        '&:visited': {
-            color: 'inherit'
         }
     },
     navLinkDesktop: {
@@ -108,7 +82,7 @@ type State = {
     drawerOpen: boolean
 }
 
-type MenuLink = {
+export type MenuLink = {
     text: string,
     href: string,
     icon: any
@@ -129,7 +103,7 @@ export class Header extends React.Component<Props, State> {
     ];
     state = {
         anchorEl: null,
-        drawerOpen: true
+        drawerOpen: false
     };
 
     constructor(public props) {
@@ -171,6 +145,7 @@ export class Header extends React.Component<Props, State> {
                 <AppBar position="static">
                     <Toolbar className={classes ? classes.toolbar : null}>
                         <IconButton
+                            id='menu-btn'
                             className={classes ? classes.menuButton : null}
                             color="inherit"
                             aria-label="Menu"
@@ -182,43 +157,37 @@ export class Header extends React.Component<Props, State> {
                             Catholic Gators Admin
                         </Typography>
                         <div className={classes ? classes.desktopMenuItems : null}>
-                            {this.getDesktopMenuItems()}
+                            { user ?
+                                this.menuLinks.map(link =>
+                                    <NavLink
+                                        exact
+                                        key={link.text}
+                                        to={link.href}
+                                        className={classes ? classes.navLinkDesktop : null}
+                                        activeClassName={classes ? classes.desktopSelected : null}
+                                    >
+                                        <Typography
+                                            className={classes ? classes.navLinkTextDesktop : null}
+                                        >
+                                            {link.text}
+                                        </Typography>
+                                    </NavLink>
+                                )
+                                : null
+                            }
                             {this.getDesktopProfile()}
                         </div>
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    open={this.state.drawerOpen}
-                    onClose={() => this.toggleDrawer(false)}
-                >
-                    <div className={classes ? classes.mobileMenuItems : null}>
-                        <div className={classes ? classes.drawerHeader : null}>
-                            {this.getMobileProfile()}
-                        </div>
-                        <Divider />
-                        <List>
-                            {this.getMobileMenuItems()}
-                        </List>
-                    </div>
-                    {user ? 
-                        <div>
-                            <Divider />
-                            <ListItem
-                                button
-                                key='logout'
-                                onClick={() => {
-                                    this.toggleDrawer(false);
-                                    this.handleLogout();
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <ExitToApp/>
-                                </ListItemIcon>
-                                <ListItemText primary='Logout' />
-                            </ListItem>
-                        </div>
-                    : null}
-                </Drawer>
+                <MobileDrawer
+                    isOpen={this.state.drawerOpen}
+                    user={user}
+                    closeDrawer={() => this.toggleDrawer(false)}
+                    menuLinks={this.menuLinks}
+                    logout={() => this.props.signOut() }
+                    login={() => this.props.googleSignIn() }
+                    selectedPath={this.props.location.pathname}
+                />
             </div>
         );
     }
@@ -229,12 +198,12 @@ export class Header extends React.Component<Props, State> {
 
         switch(this.props.user) {
             case undefined:
-                return <CircularProgress className={classes ? classes.progress : null} />
+                return <CircularProgress id='desktop-spinner' className={classes ? classes.progress : null} />
 
             case null:
                 return (
                     <Button
-                        id="login-btn"
+                        id="desktop-login-btn"
                         color="inherit"
                         variant="outlined"
                         onClick={this.handleLogin.bind(this)}
@@ -269,93 +238,9 @@ export class Header extends React.Component<Props, State> {
                             open={!!anchorEl}
                             onClose={this.handleClose.bind(this)}
                         >
-                            <MenuItem id="logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
+                            <MenuItem id="desktop-logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
                         </Menu>
                     </div>
-                );
-        }
-    }
-
-    getDesktopMenuItems() {
-        const { classes, user } = this.props;
-
-        if(!!user) {
-            return this.menuLinks.map(link =>
-                <NavLink
-                    exact
-                    key={link.text}
-                    to={link.href}
-                    className={classes ? classes.navLinkDesktop : null}
-                    activeClassName={classes ? classes.desktopSelected : null}
-                >
-                    <Typography
-                        className={classes ? classes.navLinkTextDesktop : null}
-                    >
-                        {link.text}
-                    </Typography>
-                </NavLink>
-            );
-        } else {
-            return null;
-        }
-    }
-
-    getMobileProfile() {
-        const { classes, user } = this.props;
-
-        switch(this.props.user) {
-            case undefined:
-                return <CircularProgress className={classes ? classes.progress : null} />
-            case null:
-                return null
-            default:
-                return <Avatar className={classes ? classes.mobileAvatar : null} src={user.photoURL} />
-        }
-    }
-
-    getMobileMenuItems() {
-        const { classes, user } = this.props;
-        switch(user) {
-            case undefined:
-                return null;
-            case null:
-                return (
-                    <ListItem
-                        button
-                        key='login'
-                        onClick={() => {
-                            this.toggleDrawer(false);
-                            this.handleLogin();
-                        }}
-                    >
-                            <ListItemIcon>
-                                <PowerSettingsNew/>
-                            </ListItemIcon>
-                            <ListItemText primary='Login' />
-                    </ListItem>
-                );
-            default:
-                return (
-                    this.menuLinks.map(link =>
-                        <NavLink
-                            exact
-                            key={link.text}
-                            to={link.href}
-                            className={classes ? classes.navLinkMobile : null}
-                            onClick={() => this.toggleDrawer(false)}
-                        >
-                            <ListItem
-                                button
-                                key={link.text}
-                                selected={this.props.location.pathname == link.href}
-                            >
-                                    <ListItemIcon>
-                                        <link.icon/>
-                                    </ListItemIcon>
-                                    <ListItemText primary={link.text} />
-                            </ListItem>
-                        </NavLink>
-                    )
                 );
         }
     }

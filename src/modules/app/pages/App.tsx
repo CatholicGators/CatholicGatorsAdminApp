@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { listenForUser } from '../../../redux/actions/auth/authActions';
-import Header from '../components/Header';
-import { Admin } from './Admin';
+import Header from '../components/Header/Header';
+import Admin from './Admin';
 
 type Props = {
   listenForUser: () => any;

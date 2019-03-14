@@ -5,7 +5,8 @@ import { ActionsObservable } from "redux-observable";
 import {
     listenForUserEpic,
     googleSignInEpic,
-    signOutEpic
+    signOutEpic,
+    getUsersEpic
 } from './authEpics';
 
 import {
@@ -17,17 +18,21 @@ import {
     signedOut,
     listenForUserErr,
     googleSignInErr,
-    signOutErr
+    signOutErr,
+    getUsers,
+    getUsersSuccess,
+    getUsersErr
 } from "../../actions/auth/authActions";
 
 describe('authEpics', () => {
-    let dependencies, firestore, user;
+    let dependencies, firestore, user, users;
 
     beforeEach(() => {
         firestore = {
             listenForUser: jest.fn(),
             googleSignIn: jest.fn(),
-            signOut: jest.fn()
+            signOut: jest.fn(),
+            getUsers: jest.fn()
         };
 
         dependencies = {
@@ -37,6 +42,16 @@ describe('authEpics', () => {
         user = {
             name: "MCP"
         };
+
+        users = [
+            user,
+            {
+                name: "Joey"
+            },
+            {
+                name: "Ryan"
+            }
+        ];
     });
 
     describe('listenForUserEpic', () => {
@@ -130,6 +145,39 @@ describe('authEpics', () => {
             firestore.signOut.mockReturnValue(throwError(expectedAction.err));
 
             return signOutEpic(action$, state$, dependencies)
+                .pipe(toArray())
+                .toPromise()
+                .then((result) => {
+                    expect(result).toEqual([expectedAction]);
+                });
+        });
+    });
+
+    describe('getUsersEpic', () => {
+        let action$, state$;
+
+        beforeAll(() => {
+            action$ = ActionsObservable.from([getUsers()]);
+            state$ = of();
+        });
+
+        it('emits GET_USERS_SUCCESS action after successful get', () => {
+            firestore.getUsers.mockReturnValue(of(users));
+            const expectedAction = getUsersSuccess(users);
+
+            return getUsersEpic(action$, state$, dependencies)
+                .pipe(toArray())
+                .toPromise()
+                .then((result) => {
+                    expect(result).toEqual([expectedAction]);
+                });
+        });
+
+        it('emits GET_USERS_ERR when firestore.getUsers() returns an error', () => {
+            const expectedAction = getUsersErr("test");
+            firestore.getUsers.mockReturnValue(throwError(expectedAction.err));
+
+            return getUsersEpic(action$, state$, dependencies)
                 .pipe(toArray())
                 .toPromise()
                 .then((result) => {
