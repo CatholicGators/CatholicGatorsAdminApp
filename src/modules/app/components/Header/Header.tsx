@@ -8,16 +8,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
 import VpnKey from '@material-ui/icons/VpnKey';
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { googleSignIn, signOut } from '../../../../redux/actions/auth/authActions';
 import MobileDrawer from '../MobileDrawer/MobileDrawer';
+import ToolbarAvatar from '../ToolbarAvatar/ToolbarAvatar';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -64,10 +60,6 @@ const styles = (theme: Theme) => createStyles({
     },
     desktopSelected: {
         color: theme.palette.secondary.main
-    },
-    progress: {
-        margin: 12,
-        color: theme.palette.secondary.main
     }
 });
 
@@ -78,7 +70,6 @@ type Props = {
 }
 
 type State = {
-    anchorEl: string | null,
     drawerOpen: boolean
 }
 
@@ -102,33 +93,11 @@ export class Header extends React.Component<Props, State> {
         }
     ];
     state = {
-        anchorEl: null,
         drawerOpen: false
     };
 
     constructor(public props) {
         super(props);
-    }
-
-    handleMenu(event) {
-        this.setState({
-            anchorEl: event.currentTarget
-        });
-    }
-
-    handleClose() {
-        this.setState({
-            anchorEl: null
-        });
-    }
-
-    handleLogin() {
-        this.props.googleSignIn();
-    }
-
-    handleLogout() {
-        this.props.signOut();
-        this.handleClose();
     }
 
     toggleDrawer(isOpen: boolean){
@@ -175,7 +144,11 @@ export class Header extends React.Component<Props, State> {
                                 )
                                 : null
                             }
-                            {this.getDesktopProfile()}
+                            <ToolbarAvatar
+                                user={user}
+                                login={() => this.props.googleSignIn()}
+                                logout={() => this.props.signOut()}
+                            />
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -190,59 +163,6 @@ export class Header extends React.Component<Props, State> {
                 />
             </div>
         );
-    }
-
-    getDesktopProfile() {
-        const { anchorEl } = this.state;
-        const { classes, user } = this.props;
-
-        switch(this.props.user) {
-            case undefined:
-                return <CircularProgress id='desktop-spinner' className={classes ? classes.progress : null} />
-
-            case null:
-                return (
-                    <Button
-                        id="desktop-login-btn"
-                        color="inherit"
-                        variant="outlined"
-                        onClick={this.handleLogin.bind(this)}
-                    >
-                        Login
-                    </Button>
-                );
-
-            default:
-                return (
-                    <div>
-                        <IconButton
-                            id="avatar-btn"
-                            aria-owns={anchorEl ? 'menu' : undefined}
-                            aria-haspopup="true"
-                            onClick={this.handleMenu.bind(this)}
-                            color="inherit"
-                        >
-                            <Avatar src={user.photoURL} />
-                        </IconButton>
-                        <Menu
-                            id="menu"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={!!anchorEl}
-                            onClose={this.handleClose.bind(this)}
-                        >
-                            <MenuItem id="desktop-logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
-                        </Menu>
-                    </div>
-                );
-        }
     }
 }
 
