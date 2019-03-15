@@ -1,4 +1,4 @@
-export default class User {
+export default interface User {
     name: String;
     email: String;
     photoURL: String;
