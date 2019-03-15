@@ -4,9 +4,9 @@ import 'firebase/auth';
 import { Observable, from, merge } from 'rxjs';
 import { mergeMap, map, partition } from 'rxjs/operators';
 
-import User from './models/user';
-import Document from './models/document';
-import DocumentNotFoundError from './models/documentNotFoundError';
+import User from '../models/user';
+import Document from '../models/document';
+import DocumentNotFoundError from '../models/documentNotFoundError';
 
 const USER_COLLECTION = 'users';
 const ADMIN_EMAIL = 'sandy@catholicgators.org'; // TODO: we might want to migrate this to some form of config
@@ -88,6 +88,30 @@ export default class Firestore {
 
     getUsers() {
         return this.getCollection(USER_COLLECTION);
+    }
+
+    approveUser(id: string) {
+        this.db.collection(USER_COLLECTION).doc(id).update({
+            isApproved: true
+        });
+    }
+
+    disapproveUser(id: string) {
+        this.db.collection(USER_COLLECTION).doc(id).update({
+            isApproved: false
+        });
+    }
+
+    makeAdmin(id: string) {
+        this.db.collection(USER_COLLECTION).doc(id).update({
+            isAdmin: true
+        });
+    }
+
+    removeAdmin(id: string) {
+        this.db.collection(USER_COLLECTION).doc(id).update({
+            isAdmin: false
+        });
     }
 
     doesExist(collection: string, docId: string): Observable<boolean> {

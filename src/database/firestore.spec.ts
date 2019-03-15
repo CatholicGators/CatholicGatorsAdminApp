@@ -5,7 +5,7 @@ import 'firebase/auth';
 
 import Firestore from './firestore';
 import { clientConfig, firebase, app, auth, authCallBacks, authErrCallBacks, reference } from './testUtils/mockFirebase';
-import DocumentNotFoundError from './models/documentNotFoundError';
+import DocumentNotFoundError from '../models/documentNotFoundError';
 
 describe('firestore', () => {
     let firestore: Firestore

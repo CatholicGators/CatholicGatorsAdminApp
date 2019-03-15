@@ -4,7 +4,7 @@ import { mergeMap } from 'rxjs/operators';
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
 import clientConfig from './testUtils/testConfig';
-import DocumentNotFoundError from './models/documentNotFoundError'
+import DocumentNotFoundError from '../models/documentNotFoundError'
 
 describe('firestore', () => {
     let firestore: Firestore
