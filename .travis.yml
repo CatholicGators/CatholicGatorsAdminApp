@@ -1,5 +1,9 @@
 env:
 - DOCKER_COMPOSE_VERSION=3.7
+cache:
+  yarn: true
+  directories:
+    - node_modules
 addons:
   ssh_known_hosts: 157.230.182.92
 script:
