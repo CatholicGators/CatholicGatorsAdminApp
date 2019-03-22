@@ -1,28 +1,18 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
+import { menuLinks } from '../Header/Header'
 import { MobileDrawer } from './MobileDrawer';
-import VpnKey from '@material-ui/icons/VpnKey';
-import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
 
 describe('MobileDrawer', () => {
     let props, wrapper;
 
     beforeEach(() => {
         props = {
-            user: {},
-            menuLinks: [
-                {
-                    text: 'Contact Form',
-                    href: '/',
-                    icon: FormatAlignLeft
-                },
-                {
-                    text: 'Admin',
-                    href: '/admin',
-                    icon: VpnKey
-                }
-            ],
+            user: {
+                isAdmin: true
+            },
+            menuLinks,
             isOpen: false,
             selectedPath: '/',
             closeDrawer: jest.fn(),
@@ -47,6 +37,10 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#logout-btn')).toBe(false)
             expect(wrapper.exists('#avatar')).toBe(false)
         })
+        
+        it('renders no links', () => {
+            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false))
+        })
     })
 
     describe('user is not logged in', () => {
@@ -59,6 +53,10 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#login-btn')).toBe(true)
             expect(wrapper.exists('#logout-btn')).toBe(false)
             expect(wrapper.exists('#avatar')).toBe(false)
+        })
+        
+        it('renders no links', () => {
+            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false))
         })
         
         describe('login', () => {
@@ -82,6 +80,16 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#login-btn')).toBe(false)
             expect(wrapper.exists('#logout-btn')).toBe(true)
             expect(wrapper.exists('#avatar')).toBe(true)
+        })
+        
+        it('renders all links when user is an admin', () => {
+            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true))
+        })
+
+        it('renders only unAuthorized links when user is not an admin', () => {
+            wrapper.setProps({ user: { ...props.user, isAdmin: false }})
+
+            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
         })
 
         describe('logout', () => {

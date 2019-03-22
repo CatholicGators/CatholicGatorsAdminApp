@@ -1,6 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
-import { MemoryRouter } from 'react-router-dom'
+import { shallow } from 'enzyme'
 
 import { Header, menuLinks } from './Header'
 
@@ -30,33 +29,12 @@ describe('Header', () => {
     })
 
     it('renders all links when user is an admin', () => {
-        const dom = mount(
-            <MemoryRouter>
-                <div>
-                    <Header {...props} />
-                </div>
-            </MemoryRouter>
-        )
-
-        menuLinks.forEach(link => expect(dom.exists(`NavLink[to='${link.href}']`)).toBe(true))
+        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true))
     })
 
     it('renders only unAuthorized links when user is not an admin', () => {
-        props = {
-            ...props,
-            user: {
-                ...props.user,
-                isAdmin: false
-            }
-        }
-        const dom = mount(
-            <MemoryRouter>
-                <div>
-                    <Header {...props} />
-                </div>
-            </MemoryRouter>
-        )
+        wrapper.setProps({ user: { ...props.user, isAdmin: false }})
 
-        menuLinks.forEach(link => expect(dom.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
+        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
     })
 })

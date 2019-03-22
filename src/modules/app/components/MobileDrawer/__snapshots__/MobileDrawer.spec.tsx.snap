@@ -13,17 +13,23 @@ ShallowWrapper {
         Object {
           "href": "/",
           "icon": [Function],
+          "needsAuthorization": false,
           "text": "Contact Form",
         },
         Object {
           "href": "/admin",
           "icon": [Function],
+          "needsAuthorization": true,
           "text": "Admin",
         },
       ]
     }
     selectedPath="/"
-    user={Object {}}
+    user={
+      Object {
+        "isAdmin": true,
+      }
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
