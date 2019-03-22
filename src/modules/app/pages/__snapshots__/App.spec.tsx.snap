@@ -34,9 +34,11 @@ ShallowWrapper {
     "props": Object {
       "children": <div>
         <withRouter(Connect(WithStyles(Header))) />
-        <Route
+        <PrivateRoute
           component={[Function]}
+          isAuthorized={false}
           path="/admin/"
+          redirectPathname="/"
         />
       </div>,
     },
@@ -48,9 +50,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <withRouter(Connect(WithStyles(Header))) />,
-          <Route
+          <PrivateRoute
             component={[Function]}
+            isAuthorized={false}
             path="/admin/"
+            redirectPathname="/"
           />,
         ],
       },
@@ -68,10 +72,12 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "component": [Function],
+            "isAuthorized": false,
             "path": "/admin/",
+            "redirectPathname": "/",
           },
           "ref": null,
           "rendered": null,
@@ -90,9 +96,11 @@ ShallowWrapper {
       "props": Object {
         "children": <div>
           <withRouter(Connect(WithStyles(Header))) />
-          <Route
+          <PrivateRoute
             component={[Function]}
+            isAuthorized={false}
             path="/admin/"
+            redirectPathname="/"
           />
         </div>,
       },
@@ -104,9 +112,11 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <withRouter(Connect(WithStyles(Header))) />,
-            <Route
+            <PrivateRoute
               component={[Function]}
+              isAuthorized={false}
               path="/admin/"
+              redirectPathname="/"
             />,
           ],
         },
@@ -124,10 +134,12 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
               "component": [Function],
+              "isAuthorized": false,
               "path": "/admin/",
+              "redirectPathname": "/",
             },
             "ref": null,
             "rendered": null,
