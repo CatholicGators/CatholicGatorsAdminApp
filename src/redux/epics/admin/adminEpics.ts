@@ -6,7 +6,8 @@ import {
     adminActions,
     getUsersSuccess,
     getUsersErr,
-    updateUserSuccess
+    updateUserSuccess,
+    deleteUserSuccess
 } from '../../actions/admin/adminActions';
 
 export const getUsersEpic = (action$, _, { firestore }) => {
@@ -31,7 +32,18 @@ export const updateUserEpic = (action$) => {
     )
 }
 
+export const deleteUserEpic = (action$) => {
+    return action$.pipe(
+        ofType(adminActions.DELETE_USER),
+        mergeMap((action: any) => {
+            console.log("Deleting user")
+            return ActionsObservable.of(deleteUserSuccess(action.id))
+        })
+    )
+}
+
 export default combineEpics(
     getUsersEpic,
-    updateUserEpic
+    updateUserEpic,
+    deleteUserEpic
 );

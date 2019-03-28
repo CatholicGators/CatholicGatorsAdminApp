@@ -4,7 +4,10 @@ export const adminActions = {
     GET_USERS_ERR: 'GET_USERS_ERR',
     UPDATE_USER: 'UPDATE_USER',
     UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS',
-    UPDATE_USER_ERR: 'UPDATE_USER_ERR'
+    UPDATE_USER_ERR: 'UPDATE_USER_ERR',
+    DELETE_USER: 'DELETE_USER',
+    DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
+    DELETE_USER_ERR: 'DELETE_USER_ERR'
 }
 
 export function getUsers() {
@@ -29,4 +32,16 @@ export function updateUserErr(err) {
 
 export function updateUserSuccess(user) {
     return { type: adminActions.UPDATE_USER_SUCCESS, user }
+}
+
+export function deleteUser(id) {
+    return { type: adminActions.DELETE_USER, id }
+}
+
+export function deleteUserSuccess(id) {
+    return { type: adminActions.UPDATE_USER_SUCCESS, id }
+}
+
+export function deleteUserErr(err) {
+    return { type: adminActions.DELETE_USER_ERR, err}
 }

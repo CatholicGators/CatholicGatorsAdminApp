@@ -17,6 +17,11 @@ const applyUpdatedUser = (state, action) => ({
     ) 
 })
 
+const applyDeletedUser = (state, action) => ({
+    ...state,
+    users: state.users.filter(user => user.id != action.id)
+})
+
 function adminReducer(state = INITIAL_AUTH_STATE, action) {
     switch(action.type) {
         case adminActions.GET_USERS_SUCCESS : {
@@ -24,6 +29,9 @@ function adminReducer(state = INITIAL_AUTH_STATE, action) {
         }
         case adminActions.UPDATE_USER_SUCCESS : {
             return applyUpdatedUser(state, action)
+        }
+        case adminActions.DELETE_USER_SUCCESS : {
+            return applyDeletedUser(state, action)
         }
         default : return state;
     }
