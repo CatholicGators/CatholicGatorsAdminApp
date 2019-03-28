@@ -9,9 +9,7 @@ import {
     googleSignedIn,
     listenForUserErr,
     googleSignInErr,
-    signOutErr,
-    getUsersSuccess,
-    getUsersErr
+    signOutErr
 } from '../../actions/auth/authActions';
 
 export const listenForUserEpic = (action$, _, { userService }) => {
@@ -50,6 +48,7 @@ export const signOutEpic = (action$, _, { userService }) => {
     )
 }
 
+<<<<<<< HEAD
 export const getUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(authActions.GET_USERS),
@@ -62,9 +61,10 @@ export const getUsersEpic = (action$, _, { userService }) => {
     )
 }
 
+=======
+>>>>>>> 1bde6cf... Added admin redux module
 export default combineEpics(
     listenForUserEpic,
     googleSignInEpic,
-    signOutEpic,
-    getUsersEpic
+    signOutEpic
 );

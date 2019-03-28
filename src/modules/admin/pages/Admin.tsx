@@ -16,7 +16,10 @@ import {
   Typography
 } from '@material-ui/core';
 
-import { getUsers } from '../../../redux/actions/auth/authActions';
+import {
+  getUsers,
+  updateUser
+} from '../../../redux/actions/admin/adminActions';
 
 const styles = (theme: Theme) => createStyles({
   tableWrapper: {
@@ -33,12 +36,20 @@ const styles = (theme: Theme) => createStyles({
 type Props = {
   classes: any
   users: any
-  getUsers: () => any
+  getUsers: () => any,
+  updateUser: (user) => any
 }
 
 export class Admin extends Component<Props> {
   componentDidMount() {
     this.props.getUsers()
+  }
+
+  handleAdminToggle(user, checked) {
+    this.props.updateUser({
+      ...user,
+      isAdmin: checked
+    })
   }
 
   render() {
@@ -77,6 +88,7 @@ export class Admin extends Component<Props> {
                     <Switch
                       disabled={!user.isApproved}
                       checked={user.isAdmin}
+                      onChange={(_, checked) => this.handleAdminToggle(user, checked)}
                     />
                   </TableCell>
                 </TableRow>
@@ -90,11 +102,12 @@ export class Admin extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  users: state.auth.users
+  users: state.admin.users
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(getUsers())
+  getUsers: () => dispatch(getUsers()),
+  updateUser: user => dispatch(updateUser(user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Admin))

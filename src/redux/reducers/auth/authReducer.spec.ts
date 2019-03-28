@@ -1,23 +1,13 @@
-import { setUser, getUsersSuccess } from '../../actions/auth/authActions';
+import { setUser } from '../../actions/auth/authActions';
 import authReducer, { INITIAL_AUTH_STATE } from './authReducer';
 
 describe('authReducer', () => {
-    let user, users;
+    let user;
 
     beforeAll(() => {
         user = {
             name: "Joey"
         };
-
-        users = [
-            user,
-            {
-                name: "Joey"
-            },
-            {
-                name: "Ryan"
-            }
-        ];
     });
 
     it('returns the state unmutated by default', () => {
@@ -38,13 +28,4 @@ describe('authReducer', () => {
             user: action.user
         });
     });
-
-    it('applies list of users on GET_USERS_SUCCESS', () => {
-        const action = getUsersSuccess(users);
-
-        expect(authReducer(undefined, action)).toEqual({
-            ...INITIAL_AUTH_STATE,
-            users: action.users
-        })
-    })
 });

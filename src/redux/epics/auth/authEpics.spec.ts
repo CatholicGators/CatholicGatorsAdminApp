@@ -5,8 +5,7 @@ import { ActionsObservable } from "redux-observable";
 import {
     listenForUserEpic,
     googleSignInEpic,
-    signOutEpic,
-    getUsersEpic
+    signOutEpic
 } from './authEpics';
 
 import {
@@ -18,14 +17,15 @@ import {
     signedOut,
     listenForUserErr,
     googleSignInErr,
-    signOutErr,
-    getUsers,
-    getUsersSuccess,
-    getUsersErr
+    signOutErr
 } from "../../actions/auth/authActions";
 
 describe('authEpics', () => {
+<<<<<<< HEAD
     let dependencies, userService, user, users;
+=======
+    let dependencies, firestore, user;
+>>>>>>> 1bde6cf... Added admin redux module
 
     beforeEach(() => {
         userService = {
@@ -42,16 +42,6 @@ describe('authEpics', () => {
         user = {
             name: "MCP"
         };
-
-        users = [
-            user,
-            {
-                name: "Joey"
-            },
-            {
-                name: "Ryan"
-            }
-        ];
     });
 
     describe('listenForUserEpic', () => {
@@ -152,6 +142,7 @@ describe('authEpics', () => {
                 });
         });
     });
+<<<<<<< HEAD
 
     describe('getUsersEpic', () => {
         let action$, state$;
@@ -186,3 +177,6 @@ describe('authEpics', () => {
         });
     });
 });
+=======
+});
+>>>>>>> 1bde6cf... Added admin redux module
