@@ -25,18 +25,37 @@ import {
 const styles = (theme: Theme) => createStyles({
   tableWrapper: {
     maxWidth: '1000px',
-    marginTop: '50px',
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    margin: '50px auto',
   },
   tableCard: {
-    overflowX: 'auto'
+    overflowX: 'auto',
+    margin: `0 ${theme.spacing.unit}px`
   },
   tableLoadingContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '300px',
+  },
+  hiddenColxs: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    }
+  },
+  hiddenColsm: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
+  profilePicCol: {
+    paddingRight: theme.spacing.unit * 2
+  },
+  emailCol: {
+    [theme.breakpoints.down('xs')]: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
   }
 })
 
@@ -83,45 +102,45 @@ export class Admin extends Component<Props> {
               Users
             </Typography>
           </Toolbar>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Profile Pic</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Approved</TableCell>
-                <TableCell>Admin</TableCell>
-              </TableRow>
-            </TableHead>
             {users ? 
-              <TableBody>
-                {users.map(user => (
-                  <TableRow key={user.id}>
-                    <TableCell>
-                      <Avatar src={user.photoURL} />
-                    </TableCell>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      <Switch
-                        checked={user.isApproved}
-                        onChange={(_, checked) => this.handleApprovedToggle(user, checked)}/>
-                    </TableCell>
-                    <TableCell>
-                      <Switch
-                        disabled={!user.isApproved}
-                        checked={user.isAdmin}
-                        onChange={(_, checked) => this.handleAdminToggle(user, checked)}
-                      />
-                    </TableCell>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
+                    <TableCell className={classes ? classes.hiddenColsm : null}>Name</TableCell>
+                    <TableCell className={classes ? classes.emailCol : null}>Email</TableCell>
+                    <TableCell className={classes ? classes.hiddenColxs : null}>Approved</TableCell>
+                    <TableCell className={classes ? classes.hiddenColxs : null}>Admin</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
+                </TableHead>
+                <TableBody>
+                  {users.map(user => (
+                    <TableRow key={user.id}>
+                      <TableCell className={classes ? classes.profilePicCol : null}>
+                        <Avatar src={user.data.photoURL} />
+                      </TableCell>
+                      <TableCell className={classes ? classes.hiddenColsm : null}>{user.data.name}</TableCell>
+                      <TableCell className={classes ? classes.emailCol : null}>{user.data.email}</TableCell>
+                      <TableCell className={classes ? classes.hiddenColxs : null}>
+                        <Switch
+                          checked={user.data.isApproved}
+                          onChange={(_, checked) => this.handleApprovedToggle(user, checked)}/>
+                      </TableCell>
+                      <TableCell className={classes ? classes.hiddenColxs : null}>
+                        <Switch
+                          disabled={!user.data.isApproved}
+                          checked={user.data.isAdmin}
+                          onChange={(_, checked) => this.handleAdminToggle(user, checked)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             : null }
-          </Table>
           {!users ?
             <div className={classes ? classes.tableLoadingContainer : null}>
-              <CircularProgress />
+              <CircularProgress size="60px" />
             </div>
           : null}
         </Paper>
