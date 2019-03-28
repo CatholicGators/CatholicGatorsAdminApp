@@ -13,7 +13,8 @@ import {
   Avatar,
   Switch,
   Toolbar,
-  Typography
+  Typography,
+  CircularProgress
 } from '@material-ui/core';
 
 import {
@@ -30,6 +31,12 @@ const styles = (theme: Theme) => createStyles({
   },
   tableCard: {
     overflowX: 'auto'
+  },
+  tableLoadingContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '300px',
   }
 })
 
@@ -45,10 +52,23 @@ export class Admin extends Component<Props> {
     this.props.getUsers()
   }
 
+  handleApprovedToggle(user, checked) {
+    this.props.updateUser({
+      ...user,
+      data: {
+        ...user.data,
+        isApproved: checked
+      }
+    })
+  }
+
   handleAdminToggle(user, checked) {
     this.props.updateUser({
       ...user,
-      isAdmin: checked
+      data: {
+        ...user.data,
+        isAdmin: checked
+      }
     })
   }
 
@@ -73,28 +93,37 @@ export class Admin extends Component<Props> {
                 <TableCell>Admin</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {users ? users.map(user => (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    <Avatar src={user.photoURL} />
-                  </TableCell>
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>
-                    <Switch checked={user.isApproved} />
-                  </TableCell>
-                  <TableCell>
-                    <Switch
-                      disabled={!user.isApproved}
-                      checked={user.isAdmin}
-                      onChange={(_, checked) => this.handleAdminToggle(user, checked)}
-                    />
-                  </TableCell>
-                </TableRow>
-              )) : null}
-            </TableBody>
+            {users ? 
+              <TableBody>
+                {users.map(user => (
+                  <TableRow key={user.id}>
+                    <TableCell>
+                      <Avatar src={user.photoURL} />
+                    </TableCell>
+                    <TableCell>{user.name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={user.isApproved}
+                        onChange={(_, checked) => this.handleApprovedToggle(user, checked)}/>
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        disabled={!user.isApproved}
+                        checked={user.isAdmin}
+                        onChange={(_, checked) => this.handleAdminToggle(user, checked)}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            : null }
           </Table>
+          {!users ?
+            <div className={classes ? classes.tableLoadingContainer : null}>
+              <CircularProgress />
+            </div>
+          : null}
         </Paper>
       </div>
     )

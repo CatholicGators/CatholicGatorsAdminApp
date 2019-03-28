@@ -62,8 +62,12 @@ ShallowWrapper {
               </WithStyles(TableCell)>
             </WithStyles(TableRow)>
           </WithStyles(TableHead)>
-          <WithStyles(TableBody) />
         </WithStyles(Table)>
+        <div
+          className={null}
+        >
+          <WithStyles(CircularProgress) />
+        </div>
       </WithStyles(Paper)>,
       "className": null,
     },
@@ -101,8 +105,12 @@ ShallowWrapper {
                 </WithStyles(TableCell)>
               </WithStyles(TableRow)>
             </WithStyles(TableHead)>
-            <WithStyles(TableBody) />
           </WithStyles(Table)>,
+          <div
+            className={null}
+          >
+            <WithStyles(CircularProgress) />
+          </div>,
         ],
         "className": null,
       },
@@ -159,7 +167,7 @@ ShallowWrapper {
                   </WithStyles(TableCell)>
                 </WithStyles(TableRow)>
               </WithStyles(TableHead)>,
-              <WithStyles(TableBody) />,
+              null,
             ],
           },
           "ref": null,
@@ -273,19 +281,29 @@ ShallowWrapper {
               },
               "type": [Function],
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": null,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
+            null,
           ],
           "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <WithStyles(CircularProgress) />,
+            "className": null,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": "div",
         },
       ],
       "type": [Function],
@@ -328,8 +346,12 @@ ShallowWrapper {
                 </WithStyles(TableCell)>
               </WithStyles(TableRow)>
             </WithStyles(TableHead)>
-            <WithStyles(TableBody) />
           </WithStyles(Table)>
+          <div
+            className={null}
+          >
+            <WithStyles(CircularProgress) />
+          </div>
         </WithStyles(Paper)>,
         "className": null,
       },
@@ -367,8 +389,12 @@ ShallowWrapper {
                   </WithStyles(TableCell)>
                 </WithStyles(TableRow)>
               </WithStyles(TableHead)>
-              <WithStyles(TableBody) />
             </WithStyles(Table)>,
+            <div
+              className={null}
+            >
+              <WithStyles(CircularProgress) />
+            </div>,
           ],
           "className": null,
         },
@@ -425,7 +451,7 @@ ShallowWrapper {
                     </WithStyles(TableCell)>
                   </WithStyles(TableRow)>
                 </WithStyles(TableHead)>,
-                <WithStyles(TableBody) />,
+                null,
               ],
             },
             "ref": null,
@@ -539,19 +565,29 @@ ShallowWrapper {
                 },
                 "type": [Function],
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": null,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
+              null,
             ],
             "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <WithStyles(CircularProgress) />,
+              "className": null,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
           },
         ],
         "type": [Function],

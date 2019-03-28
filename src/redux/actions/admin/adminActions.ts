@@ -27,6 +27,6 @@ export function updateUserErr(err) {
     return { type: adminActions.UPDATE_USER_ERR, err }
 }
 
-export function updateUserSuccess() {
-    return { type: adminActions.UPDATE_USER_SUCCESS }
+export function updateUserSuccess(user) {
+    return { type: adminActions.UPDATE_USER_SUCCESS, user }
 }

@@ -5,7 +5,8 @@ import { combineEpics } from 'redux-observable';
 import {
     adminActions,
     getUsersSuccess,
-    getUsersErr
+    getUsersErr,
+    updateUserSuccess
 } from '../../actions/admin/adminActions';
 
 export const getUsersEpic = (action$, _, { firestore }) => {
@@ -20,6 +21,17 @@ export const getUsersEpic = (action$, _, { firestore }) => {
     )
 }
 
+export const updateUserEpic = (action$) => {
+    return action$.pipe(
+        ofType(adminActions.UPDATE_USER),
+        mergeMap((action: any) => {
+            console.log("Updating user")
+            return ActionsObservable.of(updateUserSuccess(action.user))
+        })
+    )
+}
+
 export default combineEpics(
-    getUsersEpic
+    getUsersEpic,
+    updateUserEpic
 );
