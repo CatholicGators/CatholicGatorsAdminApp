@@ -10,24 +10,17 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Avatar,
-  Switch,
-  Toolbar,
-  Typography,
   CircularProgress,
   Checkbox,
-  Tooltip,
-  IconButton
 } from '@material-ui/core';
-import DoneIcon from '@material-ui/icons/Done'
-import DeleteIcon from '@material-ui/icons/Delete';
-import VpnKey from '@material-ui/icons/VpnKey';
 
 import {
   getUsers,
   updateUser,
   deleteUser
 } from '../../../redux/actions/admin/adminActions';
+import UserTableRow from '../components/UserTableRow/UserTableRow';
+import UserTableToolbar from '../components/UserTableToolbar/UserTableToolbar';
 
 const styles = (theme: Theme) => createStyles({
   tableWrapper: {
@@ -38,27 +31,11 @@ const styles = (theme: Theme) => createStyles({
     overflowX: 'auto',
     margin: `0 ${theme.spacing.unit}px`
   },
-  toolbarTitle: {
-    marginRight: 'auto'
-  },
   tableLoadingContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '300px',
-  },
-  hiddenColxs: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
-    }
-  },
-  hiddenColsm: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
-  },
-  profilePicCol: {
-    paddingRight: theme.spacing.unit * 2
   }
 })
 
@@ -83,7 +60,7 @@ export class Admin extends Component<Props, State> {
     this.props.getUsers()
   }
 
-  handleApprovedToggle(user, checked) {
+  handleApproveToggle(user, checked) {
     this.props.updateUser({
       ...user,
       data: {
@@ -93,7 +70,7 @@ export class Admin extends Component<Props, State> {
     })
   }
 
-  handleAdminToggle(user, checked) {
+  handleAuthorizeToggle(user, checked) {
     this.props.updateUser({
       ...user,
       data: {
@@ -177,105 +154,46 @@ export class Admin extends Component<Props, State> {
     return (
       <div className={classes ? classes.tableWrapper : null}>
         <Paper className={classes ? classes.tableCard : null}>
-          <Toolbar>
-            <div className={classes ? classes.toolbarTitle : null}>
-              {selected.length > 0 ? (
-                <Typography color="inherit" variant="subtitle1">
-                  {selected.length} selected
-                </Typography>
-              ) : (
-                <Typography variant="h6">
-                  Users
-                </Typography>
-              )}
-            </div>
-            {selected.length > 0 ? (
-              <div>
-                <Tooltip title="Approve">
-                  <IconButton
-                    onClick={() => this.handleBatchApprove()}
-                    aria-label="Approve"
-                  >
-                    <DoneIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Make admin">
-                  <IconButton
-                    onClick={() => this.handleBatchAuthorize()}
-                    aria-label="Make admin"
-                  >
-                    <VpnKey />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton
-                    aria-label="Delete"
-                    onClick={() => this.handleBatchDelete()}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              </div>
-            ) : null}
-          </Toolbar>
-            {users ? 
-              <Table>
-                <TableHead>
-                  <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      indeterminate={selected.length > 0 && selected.length < users.length}
-                      checked={selected.length === users.length && users.length !== 0}
-                      onChange={event => this.handleSelectAllClick(event)}
+          <UserTableToolbar
+            numSelected={selected.length}
+            handleBatchApprove={this.handleBatchApprove.bind(this)}
+            handleBatchAuthorize={this.handleBatchAuthorize.bind(this)}
+            handleBatchDelete={this.handleBatchDelete.bind(this)}
+          />
+          {users ? 
+            <Table>
+              <TableHead>
+                <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    indeterminate={selected.length > 0 && selected.length < users.length}
+                    checked={selected.length === users.length && users.length !== 0}
+                    onChange={event => this.handleSelectAllClick(event)}
+                  />
+                </TableCell>
+                  <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
+                  <TableCell className={classes ? classes.hiddenColsm : null}>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell className={classes ? classes.hiddenColxs : null}>Approved</TableCell>
+                  <TableCell className={classes ? classes.hiddenColxs : null}>Admin</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {users.map(user => {
+                  const isSelected = this.isSelected(user.id);
+                  return (
+                    <UserTableRow
+                      user={user}
+                      isSelected={isSelected}
+                      handleSelect={this.handleSelect.bind(this)}
+                      handleApproveToggle={this.handleApproveToggle.bind(this)}
+                      handleAuthorizeToggle={this.handleAuthorizeToggle.bind(this)}
                     />
-                  </TableCell>
-                    <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
-                    <TableCell className={classes ? classes.hiddenColsm : null}>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell className={classes ? classes.hiddenColxs : null}>Approved</TableCell>
-                    <TableCell className={classes ? classes.hiddenColxs : null}>Admin</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {users.map(user => {
-                    const isSelected = this.isSelected(user.id);
-                    return (
-                      <TableRow
-                        hover
-                        aria-checked={isSelected}
-                        tabIndex={-1}
-                        key={user.id}
-                        selected={isSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            onClick={() => this.handleSelect(user.id)}
-                            checked={isSelected}
-                          />
-                        </TableCell>
-                        <TableCell className={classes ? classes.profilePicCol : null}>
-                          <Avatar src={user.data.photoURL} />
-                        </TableCell>
-                        <TableCell className={classes ? classes.hiddenColsm : null}>{user.data.name}</TableCell>
-                        <TableCell>{user.data.email}</TableCell>
-                        <TableCell className={classes ? classes.hiddenColxs : null}>
-                          <Switch
-                            checked={user.data.isApproved}
-                            onChange={(_, checked) => this.handleApprovedToggle(user, checked)}/>
-                        </TableCell>
-                        <TableCell className={classes ? classes.hiddenColxs : null}>
-                          <Switch
-                            disabled={!user.data.isApproved}
-                            checked={user.data.isAdmin}
-                            onChange={(_, checked) => this.handleAdminToggle(user, checked)}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            : null }
+                  )
+                })}
+              </TableBody>
+            </Table>
+          : null }
           {!users ?
             <div className={classes ? classes.tableLoadingContainer : null}>
               <CircularProgress size="60px" />
