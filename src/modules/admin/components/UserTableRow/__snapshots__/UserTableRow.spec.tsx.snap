@@ -13,6 +13,7 @@ ShallowWrapper {
         "data": Object {
           "photoUrl": "",
         },
+        "id": "test",
       }
     }
   />,
@@ -27,7 +28,7 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": undefined,
+    "key": "test",
     "nodeType": "class",
     "props": Object {
       "aria-checked": true,
@@ -200,7 +201,7 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": undefined,
+      "key": "test",
       "nodeType": "class",
       "props": Object {
         "aria-checked": true,
