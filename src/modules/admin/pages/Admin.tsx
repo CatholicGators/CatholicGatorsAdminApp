@@ -146,6 +146,7 @@ export class Admin extends Component<Props, State> {
           isApproved: true
         }
       }))
+    this.setState({ selected: [] })
   }
 
   handleBatchAuthorize() {
@@ -159,12 +160,14 @@ export class Admin extends Component<Props, State> {
           isAdmin: true
         }
       }))
+    this.setState({ selected: [] })
   }
 
   handleBatchDelete() {
     this.props.users
       .filter(user => this.isSelected(user.id))
       .map(user => this.props.deleteUser(user.id))
+    this.setState({ selected: [] })
   }
 
   render() {
@@ -222,7 +225,7 @@ export class Admin extends Component<Props, State> {
                   <TableCell padding="checkbox">
                     <Checkbox
                       indeterminate={selected.length > 0 && selected.length < users.length}
-                      checked={selected.length === users.length}
+                      checked={selected.length === users.length && users.length !== 0}
                       onChange={event => this.handleSelectAllClick(event)}
                     />
                   </TableCell>

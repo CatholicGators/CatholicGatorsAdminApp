@@ -36,11 +36,15 @@ ShallowWrapper {
         className={null}
       >
         <WithStyles(Toolbar)>
-          <WithStyles(Typography)
-            variant="h6"
+          <div
+            className={null}
           >
-            Users
-          </WithStyles(Typography)>
+            <WithStyles(Typography)
+              variant="h6"
+            >
+              Users
+            </WithStyles(Typography)>
+          </div>
         </WithStyles(Toolbar)>
         <div
           className={null}
@@ -60,11 +64,15 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <WithStyles(Toolbar)>
-            <WithStyles(Typography)
-              variant="h6"
+            <div
+              className={null}
             >
-              Users
-            </WithStyles(Typography)>
+              <WithStyles(Typography)
+                variant="h6"
+              >
+                Users
+              </WithStyles(Typography)>
+            </div>
           </WithStyles(Toolbar)>,
           null,
           <div
@@ -84,25 +92,50 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <WithStyles(Typography)
-              variant="h6"
-            >
-              Users
-            </WithStyles(Typography)>,
+            "children": Array [
+              <div
+                className={null}
+              >
+                <WithStyles(Typography)
+                  variant="h6"
+                >
+                  Users
+                </WithStyles(Typography)>
+              </div>,
+              null,
+            ],
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Users",
-              "variant": "h6",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <WithStyles(Typography)
+                  variant="h6"
+                >
+                  Users
+                </WithStyles(Typography)>,
+                "className": null,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Users",
+                  "variant": "h6",
+                },
+                "ref": null,
+                "rendered": "Users",
+                "type": [Function],
+              },
+              "type": "div",
             },
-            "ref": null,
-            "rendered": "Users",
-            "type": [Function],
-          },
+            null,
+          ],
           "type": [Function],
         },
         null,
@@ -145,11 +178,15 @@ ShallowWrapper {
           className={null}
         >
           <WithStyles(Toolbar)>
-            <WithStyles(Typography)
-              variant="h6"
+            <div
+              className={null}
             >
-              Users
-            </WithStyles(Typography)>
+              <WithStyles(Typography)
+                variant="h6"
+              >
+                Users
+              </WithStyles(Typography)>
+            </div>
           </WithStyles(Toolbar)>
           <div
             className={null}
@@ -169,11 +206,15 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <WithStyles(Toolbar)>
-              <WithStyles(Typography)
-                variant="h6"
+              <div
+                className={null}
               >
-                Users
-              </WithStyles(Typography)>
+                <WithStyles(Typography)
+                  variant="h6"
+                >
+                  Users
+                </WithStyles(Typography)>
+              </div>
             </WithStyles(Toolbar)>,
             null,
             <div
@@ -193,25 +234,50 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <WithStyles(Typography)
-                variant="h6"
-              >
-                Users
-              </WithStyles(Typography)>,
+              "children": Array [
+                <div
+                  className={null}
+                >
+                  <WithStyles(Typography)
+                    variant="h6"
+                  >
+                    Users
+                  </WithStyles(Typography)>
+                </div>,
+                null,
+              ],
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Users",
-                "variant": "h6",
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <WithStyles(Typography)
+                    variant="h6"
+                  >
+                    Users
+                  </WithStyles(Typography)>,
+                  "className": null,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "Users",
+                    "variant": "h6",
+                  },
+                  "ref": null,
+                  "rendered": "Users",
+                  "type": [Function],
+                },
+                "type": "div",
               },
-              "ref": null,
-              "rendered": "Users",
-              "type": [Function],
-            },
+              null,
+            ],
             "type": [Function],
           },
           null,

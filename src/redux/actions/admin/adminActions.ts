@@ -39,7 +39,7 @@ export function deleteUser(id) {
 }
 
 export function deleteUserSuccess(id) {
-    return { type: adminActions.UPDATE_USER_SUCCESS, id }
+    return { type: adminActions.DELETE_USER_SUCCESS, id }
 }
 
 export function deleteUserErr(err) {
