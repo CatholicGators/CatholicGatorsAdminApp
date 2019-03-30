@@ -42,7 +42,7 @@ export default class Firestore {
                     else
                         throw new DocumentNotFoundError(docId);
                 })
-            )
+            );
     }
 
     getCollection(collection: string): Observable<Document[]> {

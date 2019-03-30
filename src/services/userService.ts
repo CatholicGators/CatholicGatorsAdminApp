@@ -1,9 +1,9 @@
 import { auth } from 'firebase/app';
+import 'firebase/auth';
 import { Observable, merge, from } from 'rxjs';
 import { mergeMap, map, partition } from 'rxjs/operators';
 
 import User from '../models/user';
-import Document from '../models/document';
 import Firestore from '../database/firestore';
 
 const USER_COLLECTION = 'users';
@@ -18,7 +18,6 @@ export default class UserService {
     constructor(firestore: Firestore) {
         this.db = firestore;
         this.auth = firestore.getAuth();
-        this.user$ = this.storeUserInfoOnLogin();
 
         this.firebaseUser$ = Observable.create(observer =>
             this.auth.onAuthStateChanged(
@@ -26,6 +25,7 @@ export default class UserService {
                 err => observer.error(err)
             )
         );
+        this.user$ = this.storeUserInfoOnLogin();
     }
 
     googleSignIn(): Observable<void> {
@@ -40,8 +40,20 @@ export default class UserService {
         return this.user$;
     }
 
-    getUsers() {
-        return this.db.getCollection(USER_COLLECTION);
+    addUser(user: User): Observable<firebase.firestore.DocumentReference> {
+        return this.db.addDoc(USER_COLLECTION, user);
+    }
+
+    getUser(id:string): Observable<User> {
+        return this.db.getDoc(USER_COLLECTION, id) as Observable<User>;
+    }
+
+    getAllUsers(): Observable<User[]> {
+        return this.db.getCollection(USER_COLLECTION) as Observable<User[]>;
+    }
+
+    updateUser(id: string, update: Object): Observable<void> {
+        return this.db.updateDoc(USER_COLLECTION, id, update);
     }
 
     approveUser(id: string): Observable<void> {
@@ -68,6 +80,10 @@ export default class UserService {
         });
     }
 
+    deleteUser(id: string): Observable<void> {
+        return this.db.deleteDoc(USER_COLLECTION, id);
+    }
+
     private storeUserInfoOnLogin(): Observable<User> {
         const attachExistence = firebaseUser =>
                     this.db.doesExist(USER_COLLECTION, firebaseUser.uid)
@@ -90,8 +106,7 @@ export default class UserService {
                     }
 
                     return observable.pipe(
-                        mergeMap(_ => this.db.getDoc(USER_COLLECTION, firebaseUser.uid)),
-                        map(userObject => (<Document>userObject).data)
+                        mergeMap(_ => this.db.getDoc(USER_COLLECTION, firebaseUser.uid))
                     ) as Observable<User>;
                 }
 
@@ -110,6 +125,7 @@ export default class UserService {
 
     private wrapFirebaseUser(user: firebase.User): User {
         return {
+            id: user.uid,
             name: user.displayName,
             email: user.email,
             photoURL: user.photoURL,
