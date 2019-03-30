@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 import { UserTableToolbar } from './UserTableToolbar';
+import { IconButton } from '@material-ui/core';
 
 describe('UserTableToolbar', () => {
     let wrapper, props;
@@ -17,5 +18,36 @@ describe('UserTableToolbar', () => {
 
     it('matches snapshot', () => {
         expect(wrapper).toMatchSnapshot()
+    })
+
+    it('hides action buttons when nothing selected', () => {
+        expect(wrapper.exists(IconButton)).toBe(false)
+    })
+
+    it('shows the action buttons when something is selected', () => {
+        wrapper.setProps({ numSelected: 1 })
+
+        expect(wrapper.exists(IconButton)).toBe(true)
+    })
+
+    it('calls handleBatchApprove() when the approve IconButton is clicked', () => {
+        wrapper.setProps({ numSelected: 1 })
+        wrapper.find('#approve-icon-btn').simulate('click')
+
+        expect(props.handleBatchApprove).toHaveBeenCalled()
+    })
+
+    it('calls handleBatchAuthorize() when the authorize IconButton is clicked', () => {
+        wrapper.setProps({ numSelected: 1 })
+        wrapper.find('#authorize-icon-btn').simulate('click')
+
+        expect(props.handleBatchAuthorize).toHaveBeenCalled()
+    })
+
+    it('calls handleBatchDelete() when the delete IconButton is clicked', () => {
+        wrapper.setProps({ numSelected: 1 })
+        wrapper.find('#delete-icon-btn').simulate('click')
+
+        expect(props.handleBatchDelete).toHaveBeenCalledWith()
     })
 })

@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from 'react-redux';
 import {
   TableRow,
   TableCell,
@@ -7,18 +8,27 @@ import {
   Switch,
   Theme,
   createStyles,
-  withStyles
+  withStyles,
+  IconButton
 } from "@material-ui/core";
+import CheckIcon from '@material-ui/icons/Check';
+import { updateUser } from "../../../../redux/actions/admin/adminActions";
 
 const styles = (theme: Theme) => createStyles({
-  hiddenColxs: {
+  hiddenxs: {
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     }
   },
-  hiddenColsm: {
+  hiddensm: {
     [theme.breakpoints.down('sm')]: {
       display: 'none'
+    }
+  },
+  avatarIconBtn: {
+    padding: 0,
+    [theme.breakpoints.up('sm')]: {
+        display: 'none'
     }
   },
   profilePicCol: {
@@ -31,53 +41,89 @@ type Props = {
   classes: any,
   isSelected: boolean,
   handleSelect: (id) => any,
-  handleApproveToggle: (user: any, checked: boolean) => any,
-  handleAuthorizeToggle: (user: any, checked: boolean) => any
+  updateUser: (user) => void
 }
 
-export const UserTableRow = (props: Props) => {
-  const {
-    user,
-    classes,
-    isSelected,
-    handleSelect,
-    handleApproveToggle,
-    handleAuthorizeToggle
-  } = props
+export class UserTableRow extends React.Component<Props> {
 
-  return (
-    <TableRow
-      hover
-      aria-checked={isSelected}
-      tabIndex={-1}
-      key={user.id}
-      selected={isSelected}
-    >
-      <TableCell padding="checkbox">
-        <Checkbox
-          onClick={() => handleSelect(user.id)}
-          checked={isSelected}
-        />
-      </TableCell>
-      <TableCell className={classes ? classes.profilePicCol : null}>
-        <Avatar src={user.data.photoURL} />
-      </TableCell>
-      <TableCell className={classes ? classes.hiddenColsm : null}>{user.data.name}</TableCell>
-      <TableCell>{user.data.email}</TableCell>
-      <TableCell className={classes ? classes.hiddenColxs : null}>
-        <Switch
-          checked={user.data.isApproved}
-          onChange={(_, checked) => handleApproveToggle(user, checked)}/>
-      </TableCell>
-      <TableCell className={classes ? classes.hiddenColxs : null}>
-        <Switch
-          disabled={!user.data.isApproved}
-          checked={user.data.isAdmin}
-          onChange={(_, checked) => handleAuthorizeToggle(user, checked)}
-        />
-      </TableCell>
-    </TableRow>
-  );
+  handleApproveToggle(user, checked) {
+    this.props.updateUser({
+      ...user,
+      data: {
+        ...user.data,
+        isApproved: checked
+      }
+    })
+  }
+
+  handleAuthorizeToggle(user, checked) {
+    this.props.updateUser({
+      ...user,
+      data: {
+        ...user.data,
+        isAdmin: checked
+      }
+    })
+  }
+
+  render() {
+    const {
+      user,
+      classes,
+      isSelected,
+      handleSelect,
+    } = this.props
+  
+    return (
+      <TableRow
+        hover
+        aria-checked={isSelected}
+        tabIndex={-1}
+        key={user.id}
+        selected={isSelected}
+      >
+        <TableCell
+          className={classes ? classes.hiddenxs : null}
+          padding="checkbox"
+        >
+          <Checkbox
+            onClick={() => handleSelect(user.id)}
+            checked={isSelected}
+          />
+        </TableCell>
+        <TableCell className={classes ? classes.profilePicCol : null}>
+          <Avatar className={classes ? classes.hiddenxs : null } src={user.data.photoURL} />
+          <IconButton
+            className={classes ? classes.avatarIconBtn : null }
+            onClick={() => handleSelect(user.id)}>
+            <Avatar src={isSelected ? null : user.data.photoURL}>
+              {isSelected ? <CheckIcon/> : null}
+            </Avatar>
+          </IconButton>
+        </TableCell>
+        <TableCell className={classes ? classes.hiddensm : null}>{user.data.name}</TableCell>
+        <TableCell>{user.data.email}</TableCell>
+        <TableCell>
+          <Switch
+            id='approve-switch'
+            checked={user.data.isApproved}
+            onChange={(_, checked) => this.handleApproveToggle(user, checked)}/>
+        </TableCell>
+        <TableCell>
+          <Switch
+            id='authorize-switch'
+            disabled={!user.data.isApproved}
+            checked={user.data.isAdmin}
+            onChange={(_, checked) => this.handleAuthorizeToggle(user, checked)}
+          />
+        </TableCell>
+      </TableRow>
+    );
+  }
 }
 
-export default withStyles(styles)(UserTableRow)
+const mapDispatchToProps = dispatch => ({
+  updateUser: user => dispatch(updateUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(UserTableRow))

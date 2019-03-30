@@ -36,6 +36,17 @@ const styles = (theme: Theme) => createStyles({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '300px',
+  },
+  hiddensm: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
+  profilePicCol: {
+    paddingRight: theme.spacing.unit * 2,
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    }
   }
 })
 
@@ -58,26 +69,6 @@ export class Admin extends Component<Props, State> {
 
   componentDidMount() {
     this.props.getUsers()
-  }
-
-  handleApproveToggle(user, checked) {
-    this.props.updateUser({
-      ...user,
-      data: {
-        ...user.data,
-        isApproved: checked
-      }
-    })
-  }
-
-  handleAuthorizeToggle(user, checked) {
-    this.props.updateUser({
-      ...user,
-      data: {
-        ...user.data,
-        isAdmin: checked
-      }
-    })
   }
 
   handleSelectAllClick(event) {
@@ -172,10 +163,10 @@ export class Admin extends Component<Props, State> {
                   />
                 </TableCell>
                   <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
-                  <TableCell className={classes ? classes.hiddenColsm : null}>Name</TableCell>
+                  <TableCell className={classes ? classes.hiddensm : null}>Name</TableCell>
                   <TableCell>Email</TableCell>
-                  <TableCell className={classes ? classes.hiddenColxs : null}>Approved</TableCell>
-                  <TableCell className={classes ? classes.hiddenColxs : null}>Admin</TableCell>
+                  <TableCell>Approved</TableCell>
+                  <TableCell>Admin</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -183,11 +174,10 @@ export class Admin extends Component<Props, State> {
                   const isSelected = this.isSelected(user.id);
                   return (
                     <UserTableRow
+                      key={user.id}
                       user={user}
                       isSelected={isSelected}
                       handleSelect={this.handleSelect.bind(this)}
-                      handleApproveToggle={this.handleApproveToggle.bind(this)}
-                      handleAuthorizeToggle={this.handleAuthorizeToggle.bind(this)}
                     />
                   )
                 })}
@@ -195,10 +185,10 @@ export class Admin extends Component<Props, State> {
             </Table>
           : null }
           {!users ?
-            <div className={classes ? classes.tableLoadingContainer : null}>
+            <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
               <CircularProgress size="60px" />
             </div>
-          : null}
+          : null }
         </Paper>
       </div>
     )

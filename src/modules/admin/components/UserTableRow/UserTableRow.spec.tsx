@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 import { UserTableRow } from './UserTableRow';
-import { Checkbox, Switch } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
 
 describe('UserTableRow', () => {
     let wrapper, props;
@@ -16,8 +16,7 @@ describe('UserTableRow', () => {
             },
             isSelected: true,
             handleSelect: jest.fn(),
-            handleApproveToggle: jest.fn(),
-            handleAuthorizeToggle: jest.fn()
+            updateUser: jest.fn()
         }
         wrapper = shallow(<UserTableRow {...props}/>)
     })
@@ -32,17 +31,29 @@ describe('UserTableRow', () => {
         expect(props.handleSelect).toHaveBeenCalledWith(props.user.id)
     })
 
-    it('calls handleApproveToggle with the user and the checked value when the approve switched is toggled', () => {
+    it('updates the user when the approve switched is toggled', () => {
         const checked = true
-        wrapper.find(Switch).first().simulate('change', {target: {checked}}, checked)
+        wrapper.find('#approve-switch').simulate('change', {target: {checked}}, checked)
 
-        expect(props.handleApproveToggle).toHaveBeenCalledWith(props.user, checked)
+        expect(props.updateUser).toHaveBeenCalledWith({
+            ...props.user,
+            data: {
+                ...props.user.data,
+                isApproved: checked
+            }
+        })
     })
 
-    it('calls handleAuthorizeToggle with the user and the checked value when the authorize switch is toggled', () => {
+    it('updates the user when the authorize switch is toggled', () => {
         const checked = true
-        wrapper.find(Switch).at(1).simulate('change', {target: {checked}}, checked)
+        wrapper.find('#authorize-switch').simulate('change', {target: {checked}}, checked)
 
-        expect(props.handleAuthorizeToggle).toHaveBeenCalledWith(props.user, checked)
+        expect(props.updateUser).toHaveBeenCalledWith({
+            ...props.user,
+            data: {
+                ...props.user.data,
+                isAdmin: checked
+            }
+        })
     })
 })

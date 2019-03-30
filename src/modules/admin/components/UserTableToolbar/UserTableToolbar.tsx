@@ -51,6 +51,7 @@ export const UserTableToolbar = (props: Props) => {
                 <div>
                     <Tooltip title="Approve">
                         <IconButton
+                            id="approve-icon-btn"
                             onClick={() => handleBatchApprove()}
                             aria-label="Approve"
                         >
@@ -59,6 +60,7 @@ export const UserTableToolbar = (props: Props) => {
                     </Tooltip>
                     <Tooltip title="Make admin">
                         <IconButton
+                            id="authorize-icon-btn"
                             onClick={() => handleBatchAuthorize()}
                             aria-label="Make admin"
                         >
@@ -67,6 +69,7 @@ export const UserTableToolbar = (props: Props) => {
                     </Tooltip>
                     <Tooltip title="Delete">
                         <IconButton
+                            id="delete-icon-btn"
                             aria-label="Delete"
                             onClick={() => handleBatchDelete()}
                         >
