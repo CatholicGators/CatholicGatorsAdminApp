@@ -58,7 +58,7 @@ export default class Firestore {
                 map(docSnapshot => {
                     if (docSnapshot.exists) {
                         return {
-                            id: docId,
+                            id: docSnapshot.id,
                             ...docSnapshot.data()
                         };
                     }

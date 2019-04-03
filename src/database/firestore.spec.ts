@@ -256,6 +256,7 @@ describe('firestore', () => {
             const data = { mockData: 'data' };
             const documentSnapshot = {
                 exists: true,
+                id: docId,
                 data: () => data
             };
             reference.get.mockResolvedValue(documentSnapshot);
