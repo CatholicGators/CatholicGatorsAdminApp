@@ -32,7 +32,7 @@ describe('authEpics', () => {
             listenForUser: jest.fn(),
             googleSignIn: jest.fn(),
             signOut: jest.fn(),
-            getUsers: jest.fn()
+            getAllUsers: jest.fn()
         };
 
         dependencies = {
@@ -162,7 +162,7 @@ describe('authEpics', () => {
         });
 
         it('emits GET_USERS_SUCCESS action after successful get', () => {
-            userService.getUsers.mockReturnValue(of(users));
+            userService.getAllUsers.mockReturnValue(of(users));
             const expectedAction = getUsersSuccess(users);
 
             return getUsersEpic(action$, state$, dependencies)
@@ -175,7 +175,7 @@ describe('authEpics', () => {
 
         it('emits GET_USERS_ERR when userService.getUsers() returns an error', () => {
             const expectedAction = getUsersErr("test");
-            userService.getUsers.mockReturnValue(throwError(expectedAction.err));
+            userService.getAllUsers.mockReturnValue(throwError(expectedAction.err));
 
             return getUsersEpic(action$, state$, dependencies)
                 .pipe(toArray())

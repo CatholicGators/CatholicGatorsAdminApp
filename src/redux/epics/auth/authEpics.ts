@@ -54,7 +54,7 @@ export const getUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(authActions.GET_USERS),
         mergeMap(() =>
-            userService.getUsers().pipe(
+            userService.getAllUsers().pipe(
                 map(users => getUsersSuccess(users)),
                 catchError(err => ActionsObservable.of(getUsersErr(err)))
             )
