@@ -152,28 +152,28 @@ export class MobileDrawer extends React.Component<Props> {
                     </ListItem>
                 );
             default:
-                return (
-                    menuLinks.map(link =>
-                        <NavLink
-                            exact
-                            key={link.text}
-                            to={link.href}
-                            className={classes ? classes.navLink : null}
-                            onClick={() => this.props.closeDrawer()}
-                        >
-                            <ListItem
-                                button
-                                key={link.text}
-                                selected={this.props.selectedPath == link.href}
-                            >
-                                    <ListItemIcon>
-                                        <link.icon/>
-                                    </ListItemIcon>
-                                    <ListItemText primary={link.text} />
-                            </ListItem>
-                        </NavLink>
-                    )
-                );
+                return menuLinks
+                            .filter(link => !link.needsAuthorization || user.isAdmin)
+                            .map(link => 
+                                <NavLink
+                                    exact
+                                    key={link.text}
+                                    to={link.href}
+                                    className={classes ? classes.navLink : null}
+                                    onClick={() => this.props.closeDrawer()}
+                                >
+                                    <ListItem
+                                        button
+                                        key={link.text}
+                                        selected={this.props.selectedPath == link.href}
+                                    >
+                                            <ListItemIcon>
+                                                <link.icon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary={link.text} />
+                                    </ListItem>
+                                </NavLink>
+                            )
         }
     }
 }

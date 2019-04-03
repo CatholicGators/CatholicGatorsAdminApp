@@ -1,23 +1,14 @@
 FROM node:11.6.0-alpine
 
-# Create app directory
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+COPY package.json yarn.lock ./
+RUN yarn
 
-#Install serve
-RUN npm install -g serve
-
-# Install app dependencies
-COPY package.json /usr/src/app/
-COPY package-lock.json /usr/src/app/
-RUN npm install
-
-# Bundle app source and build
 COPY . /usr/src/app
-RUN npm run build
+RUN yarn build
 
 # Expose port
 EXPOSE 3000
 
 # Serve the app
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["yarn", "run", "serve"]

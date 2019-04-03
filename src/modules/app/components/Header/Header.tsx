@@ -76,22 +76,25 @@ type State = {
 export type MenuLink = {
     text: string,
     href: string,
-    icon: any
+    icon: any,
+    needsAuthorization: boolean
 }
+export const menuLinks: Array<MenuLink> = [
+    {
+        text: 'Contact Form',
+        href: '/',
+        icon: FormatAlignLeft,
+        needsAuthorization: false
+    },
+    {
+        text: 'Admin',
+        href: '/admin',
+        icon: VpnKey,
+        needsAuthorization: true
+    }
+];
 
 export class Header extends React.Component<Props, State> {
-    readonly menuLinks: Array<MenuLink> = [
-        {
-            text: 'Contact Form',
-            href: '/',
-            icon: FormatAlignLeft
-        },
-        {
-            text: 'Admin',
-            href: '/admin',
-            icon: VpnKey
-        }
-    ];
     state = {
         drawerOpen: false
     };
@@ -127,21 +130,23 @@ export class Header extends React.Component<Props, State> {
                         </Typography>
                         <div className={classes ? classes.desktopMenuItems : null}>
                             { user ?
-                                this.menuLinks.map(link =>
-                                    <NavLink
-                                        exact
-                                        key={link.text}
-                                        to={link.href}
-                                        className={classes ? classes.navLinkDesktop : null}
-                                        activeClassName={classes ? classes.desktopSelected : null}
-                                    >
-                                        <Typography
-                                            className={classes ? classes.navLinkTextDesktop : null}
-                                        >
-                                            {link.text}
-                                        </Typography>
-                                    </NavLink>
-                                )
+                                menuLinks
+                                    .filter(link => !link.needsAuthorization || user.isAdmin)
+                                    .map(link => 
+                                            <NavLink
+                                                exact
+                                                key={link.text}
+                                                to={link.href}
+                                                className={classes ? classes.navLinkDesktop : null}
+                                                activeClassName={classes ? classes.desktopSelected : null}
+                                            >
+                                                <Typography
+                                                    className={classes ? classes.navLinkTextDesktop : null}
+                                                >
+                                                    {link.text}
+                                                </Typography>
+                                            </NavLink>
+                                    )
                                 : null
                             }
                             <ToolbarAvatar
@@ -156,7 +161,7 @@ export class Header extends React.Component<Props, State> {
                     isOpen={this.state.drawerOpen}
                     user={user}
                     closeDrawer={() => this.toggleDrawer(false)}
-                    menuLinks={this.menuLinks}
+                    menuLinks={menuLinks}
                     logout={() => this.props.signOut() }
                     login={() => this.props.googleSignIn() }
                     selectedPath={this.props.location.pathname}

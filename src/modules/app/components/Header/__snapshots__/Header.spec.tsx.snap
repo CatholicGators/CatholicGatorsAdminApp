@@ -11,7 +11,11 @@ ShallowWrapper {
       }
     }
     signOut={[MockFunction]}
-    user={Object {}}
+    user={
+      Object {
+        "isAdmin": true,
+      }
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -82,7 +86,11 @@ ShallowWrapper {
               <WithStyles(ToolbarAvatar)
                 login={[Function]}
                 logout={[Function]}
-                user={Object {}}
+                user={
+                  Object {
+                    "isAdmin": true,
+                  }
+                }
               />
             </div>
           </WithStyles(Toolbar)>
@@ -97,17 +105,23 @@ ShallowWrapper {
               Object {
                 "href": "/",
                 "icon": [Function],
+                "needsAuthorization": false,
                 "text": "Contact Form",
               },
               Object {
                 "href": "/admin",
                 "icon": [Function],
+                "needsAuthorization": true,
                 "text": "Admin",
               },
             ]
           }
           selectedPath="/"
-          user={Object {}}
+          user={
+            Object {
+              "isAdmin": true,
+            }
+          }
         />,
       ],
       "className": null,
@@ -170,7 +184,11 @@ ShallowWrapper {
               <WithStyles(ToolbarAvatar)
                 login={[Function]}
                 logout={[Function]}
-                user={Object {}}
+                user={
+                  Object {
+                    "isAdmin": true,
+                  }
+                }
               />
             </div>
           </WithStyles(Toolbar)>,
@@ -231,7 +249,11 @@ ShallowWrapper {
                 <WithStyles(ToolbarAvatar)
                   login={[Function]}
                   logout={[Function]}
-                  user={Object {}}
+                  user={
+                    Object {
+                      "isAdmin": true,
+                    }
+                  }
                 />
               </div>,
             ],
@@ -314,7 +336,11 @@ ShallowWrapper {
                   <WithStyles(ToolbarAvatar)
                     login={[Function]}
                     logout={[Function]}
-                    user={Object {}}
+                    user={
+                      Object {
+                        "isAdmin": true,
+                      }
+                    }
                   />,
                 ],
                 "className": null,
@@ -390,7 +416,9 @@ ShallowWrapper {
                   "props": Object {
                     "login": [Function],
                     "logout": [Function],
-                    "user": Object {},
+                    "user": Object {
+                      "isAdmin": true,
+                    },
                   },
                   "ref": null,
                   "rendered": null,
@@ -417,16 +445,20 @@ ShallowWrapper {
             Object {
               "href": "/",
               "icon": [Function],
+              "needsAuthorization": false,
               "text": "Contact Form",
             },
             Object {
               "href": "/admin",
               "icon": [Function],
+              "needsAuthorization": true,
               "text": "Admin",
             },
           ],
           "selectedPath": "/",
-          "user": Object {},
+          "user": Object {
+            "isAdmin": true,
+          },
         },
         "ref": null,
         "rendered": null,
@@ -496,7 +528,11 @@ ShallowWrapper {
                 <WithStyles(ToolbarAvatar)
                   login={[Function]}
                   logout={[Function]}
-                  user={Object {}}
+                  user={
+                    Object {
+                      "isAdmin": true,
+                    }
+                  }
                 />
               </div>
             </WithStyles(Toolbar)>
@@ -511,17 +547,23 @@ ShallowWrapper {
                 Object {
                   "href": "/",
                   "icon": [Function],
+                  "needsAuthorization": false,
                   "text": "Contact Form",
                 },
                 Object {
                   "href": "/admin",
                   "icon": [Function],
+                  "needsAuthorization": true,
                   "text": "Admin",
                 },
               ]
             }
             selectedPath="/"
-            user={Object {}}
+            user={
+              Object {
+                "isAdmin": true,
+              }
+            }
           />,
         ],
         "className": null,
@@ -584,7 +626,11 @@ ShallowWrapper {
                 <WithStyles(ToolbarAvatar)
                   login={[Function]}
                   logout={[Function]}
-                  user={Object {}}
+                  user={
+                    Object {
+                      "isAdmin": true,
+                    }
+                  }
                 />
               </div>
             </WithStyles(Toolbar)>,
@@ -645,7 +691,11 @@ ShallowWrapper {
                   <WithStyles(ToolbarAvatar)
                     login={[Function]}
                     logout={[Function]}
-                    user={Object {}}
+                    user={
+                      Object {
+                        "isAdmin": true,
+                      }
+                    }
                   />
                 </div>,
               ],
@@ -728,7 +778,11 @@ ShallowWrapper {
                     <WithStyles(ToolbarAvatar)
                       login={[Function]}
                       logout={[Function]}
-                      user={Object {}}
+                      user={
+                        Object {
+                          "isAdmin": true,
+                        }
+                      }
                     />,
                   ],
                   "className": null,
@@ -804,7 +858,9 @@ ShallowWrapper {
                     "props": Object {
                       "login": [Function],
                       "logout": [Function],
-                      "user": Object {},
+                      "user": Object {
+                        "isAdmin": true,
+                      },
                     },
                     "ref": null,
                     "rendered": null,
@@ -831,16 +887,20 @@ ShallowWrapper {
               Object {
                 "href": "/",
                 "icon": [Function],
+                "needsAuthorization": false,
                 "text": "Contact Form",
               },
               Object {
                 "href": "/admin",
                 "icon": [Function],
+                "needsAuthorization": true,
                 "text": "Admin",
               },
             ],
             "selectedPath": "/",
-            "user": Object {},
+            "user": Object {
+              "isAdmin": true,
+            },
           },
           "ref": null,
           "rendered": null,
