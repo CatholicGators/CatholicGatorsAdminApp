@@ -11,7 +11,19 @@ describe('firestore', () => {
     const collection = 'collection';
     const testDoc = {testData: 'data'};
     let docId;
+    let docIds;
     const specificDocId = 'docId';
+    const testDocs = [
+        {
+            testData: '0'
+        },
+        {
+            testData: '1'
+        },
+        {
+            testData: '2'
+        }
+    ];
 
     beforeEach(() => {
         firestore = new Firestore(firebase, clientConfig);
@@ -36,6 +48,19 @@ describe('firestore', () => {
         firestore.upsertDocById(collection, specificDocId, testDoc)
             .subscribe(
                 () => {
+                    done();
+                },
+                err => {
+                    done.fail(err);
+                }
+            );
+    });
+
+    it('successfully adds multiple documents', done => {
+        firestore.upsertDocs(collection, testDocs)
+            .subscribe(
+                refs => {
+                    docIds = refs.map(x => x.id);
                     done();
                 },
                 err => {
@@ -82,6 +107,33 @@ describe('firestore', () => {
             )
     });
 
+    it('successfully updates multiple documents', done => {
+        const newTestData = [
+            {
+                id: docIds[0],
+                testData: 'x'
+            },
+            {
+                id: docIds[1],
+                testData: 'y'
+            },
+            {
+                id: docIds[2],
+                testData: 'z'
+            }
+        ];
+
+        firestore.updateDocs(collection, newTestData)
+            .subscribe(
+                _ => {
+                    done();
+                },
+                err => {
+                    done.fail(err);
+                }
+            );
+    });
+
     it('successfully deletes a document', done => {
         forkJoin(
             firestore.deleteDoc(collection, docId),
@@ -93,6 +145,24 @@ describe('firestore', () => {
                         firestore.getDoc(collection, docId),
                         firestore.getDoc(collection, specificDocId)
                     )
+                )
+            )
+            .subscribe(
+                () => {
+                    done.fail('Test should not have been able to retrieve doc after deletion');
+                },
+                err => {
+                    expect(err instanceof DocumentNotFoundError).toBeTruthy();
+                    done();
+                }
+            );
+    });
+
+    it('successfully deletes multiple documents', done => {
+        firestore.deleteDocs(collection, docIds)
+            .pipe(
+                mergeMap(
+                    _ => firestore.getDoc(collection, docIds[0])
                 )
             )
             .subscribe(

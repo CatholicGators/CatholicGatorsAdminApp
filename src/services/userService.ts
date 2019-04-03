@@ -44,6 +44,10 @@ export default class UserService {
         return this.db.addDoc(USER_COLLECTION, user);
     }
 
+    addUsers(users: User[]): Observable<void> {
+        return this.db.upsertDocs(USER_COLLECTION, users);
+    }
+
     getUser(id:string): Observable<User> {
         return this.db.getDoc(USER_COLLECTION, id) as Observable<User>;
     }

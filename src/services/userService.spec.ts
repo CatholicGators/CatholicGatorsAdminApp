@@ -457,13 +457,5 @@ describe('UserService', () => {
 });
 
 function restoreMocks() {
-    auth.signInWithRedirect.mockRestore();
-    auth.signOut.mockRestore();
-    firestore.getDoc.mockRestore();
-    firestore.doesExist.mockRestore();
-    firestore.upsertDocById.mockRestore();
-    firestore.addDoc.mockRestore();
-    firestore.getCollection.mockRestore();
-    firestore.updateDoc.mockRestore();
-    firestore.deleteDoc.mockRestore();
+    jest.clearAllMocks();
 }

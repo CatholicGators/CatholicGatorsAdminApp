@@ -1,6 +1,9 @@
 let clientConfig,
     firebase,
     app,
+    db,
+    batch,
+    collectionReference,
     reference;
 
 clientConfig = "test";
@@ -12,15 +15,18 @@ reference = {
     delete: jest.fn()
 };
 
-const collectionReference = {
-    doc: (docId) => { return reference },
+collectionReference = {
+    doc: jest.fn(docId => reference),
         ...reference
 };
-const collection = () => {
-    return collectionReference;
-};
-const db = {
-    collection
+batch = {
+    set: jest.fn(),
+    commit: jest.fn()
+}
+
+db = {
+    collection: jest.fn(() => collectionReference),
+    batch: jest.fn(() => batch)
 };
 
 class App {
@@ -35,16 +41,16 @@ class App {
     });
 }
 
-app = new App();
 firebase = {
     apps: [],
     initializeApp: jest.fn(() => {
+        app = new App();
         firebase.apps.push(app);
         return app;
     }),
     app: jest.fn(() => {
-        return app;
+        return firebase.apps[0];
     })
 };
 
-export { clientConfig, firebase, app, reference }
+export { clientConfig, firebase, app, db, batch, collectionReference, reference }

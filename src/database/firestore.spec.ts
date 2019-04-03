@@ -1,7 +1,7 @@
 import 'firebase/auth';
 
 import Firestore from './firestore';
-import { clientConfig, firebase, app, reference } from './testUtils/mockFirebase';
+import { clientConfig, firebase, app, db, batch, collectionReference, reference } from './testUtils/mockFirebase';
 import DocumentNotFoundError from '../models/documentNotFoundError';
 
 describe('firestore', () => {
@@ -99,6 +99,127 @@ describe('firestore', () => {
             reference.set.mockRejectedValue(testErr)
 
             firestore.upsertDocById('collection', 'docId', {})
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('upsertDocs()', () => {
+        it('successfully adds documents without an id', done => {
+            const documents = [
+                {
+                    field: '0'
+                },
+                {
+                    field: '1'
+                },
+                {
+                    field: '2'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenCalledWith();
+                        done();
+                    }
+                );
+        });
+
+        it('successfully adds documents with an id', done => {
+            const documents = [
+                {
+                    field: '0',
+                    id: 'a'
+                },
+                {
+                    field: '1',
+                    id: 'b'
+                },
+                {
+                    field: '2',
+                    id: 'c'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(1, 'a');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(2, 'b');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(3, 'c');
+                        done();
+                    }
+                );
+        });
+
+        it('successfully adds documents with a uid', done => {
+            const documents = [
+                {
+                    field: '0',
+                    uid: 'a'
+                },
+                {
+                    field: '1',
+                    uid: 'b'
+                },
+                {
+                    field: '2',
+                    uid: 'c'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(1, 'a');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(2, 'b');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(3, 'c');
+                        done();
+                    }
+                );
+        });
+
+        it('passes the upsertDocs() error to the observable', done => {
+            const testErr = new Error();
+            const documents = [
+                {
+                    field: '0',
+                    uid: 'a'
+                },
+                {
+                    field: '1',
+                    uid: 'b'
+                },
+                {
+                    field: '2',
+                    uid: 'c'
+                }
+            ]
+
+            batch.commit.mockRejectedValue(testErr);
+
+            firestore.upsertDocs('collection', documents)
                 .subscribe(
                     entity => {
                         done.fail(new Error('Promise should not resolve'));
@@ -359,4 +480,11 @@ describe('firestore', () => {
         });
     });
 
+    afterEach(() => {
+        restoreMocks();
+    });
+
+    function restoreMocks() {
+        jest.clearAllMocks();
+    }
 });
