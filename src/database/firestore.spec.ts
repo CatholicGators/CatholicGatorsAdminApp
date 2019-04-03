@@ -265,7 +265,7 @@ describe('firestore', () => {
                     entity => {
                         expect(entity).toEqual({
                             id: docId,
-                            data: data
+                            ...data
                         });
                         done();
                     },
@@ -313,32 +313,35 @@ describe('firestore', () => {
 
     describe('getCollection()', () => {
         it('successfully gets a collection', done => {
+            const mockData = {
+                data: 'data'
+            };
             const docs = [
                 {
                     id: '1',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
                 {
                     id: '2',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
                 {
                     id: '3',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
             ]
             const returnedDocs = [
                 {
                     id: '1',
-                    data: { data: 'data' }
+                    ...mockData
                 },
                 {
                     id: '2',
-                    data: { data: 'data' }
+                    ...mockData
                 },
                 {
                     id: '3',
-                    data: { data: 'data' }
+                    ...mockData
                 },
             ]
             reference.get.mockResolvedValue({ docs });

@@ -75,7 +75,7 @@ describe('firestore', () => {
                 doc => {
                     expect(doc).toEqual({
                         id: docId,
-                        data: testDoc
+                        ...testDoc
                     }
                     );
                     done();
@@ -97,7 +97,7 @@ describe('firestore', () => {
                 doc => {
                     expect(doc).toEqual({
                         id: docId,
-                        data: newTestData
+                        ...newTestData
                     });
                     done();
                 },

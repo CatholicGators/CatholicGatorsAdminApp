@@ -52,16 +52,16 @@ export default class Firestore {
             );
     }
 
-
     getDoc(collection: string, docId: string): Observable<Document> {
         return from(this.db.collection(collection).doc(docId).get())
             .pipe(
                 map(docSnapshot => {
-                    if (docSnapshot.exists)
+                    if (docSnapshot.exists) {
                         return {
                             id: docId,
-                            data: docSnapshot.data()
+                            ...docSnapshot.data()
                         };
+                    }
                     else
                         throw new DocumentNotFoundError(docId);
                 })
@@ -78,7 +78,7 @@ export default class Firestore {
                         const doc = queryDocumentSnapshots[i];
                         docs.push({
                             id: doc.id,
-                            data: doc.data()
+                            ...doc.data()
                         });
                     }
                     return docs;

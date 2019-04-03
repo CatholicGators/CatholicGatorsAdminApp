@@ -44,7 +44,7 @@ export default class UserService {
         return this.db.addDoc(USER_COLLECTION, user);
     }
 
-    addUsers(users: User[]): Observable<void> {
+    addUsers(users: User[]): Observable<firebase.firestore.DocumentReference[]> {
         return this.db.upsertDocs(USER_COLLECTION, users);
     }
 
@@ -58,6 +58,10 @@ export default class UserService {
 
     updateUser(id: string, update: Object): Observable<void> {
         return this.db.updateDoc(USER_COLLECTION, id, update);
+    }
+
+    updateUsers(users: User[]): Observable<firebase.firestore.DocumentReference[]> {
+        return this.db.updateDocs(USER_COLLECTION, users);
     }
 
     approveUser(id: string): Observable<void> {
@@ -86,6 +90,10 @@ export default class UserService {
 
     deleteUser(id: string): Observable<void> {
         return this.db.deleteDoc(USER_COLLECTION, id);
+    }
+
+    deleteUsers(ids: string[]): Observable<void> {
+        return this.db.deleteDocs(USER_COLLECTION, ids);
     }
 
     private storeUserInfoOnLogin(): Observable<User> {

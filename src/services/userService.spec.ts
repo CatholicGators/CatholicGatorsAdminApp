@@ -177,7 +177,7 @@ describe('UserService', () => {
         });
     });
 
-    describe('addUser', () => {
+    describe('addUser()', () => {
         it('adds a user to the user collection', done => {
             const user = {
                 name: 'Ryan'
@@ -203,6 +203,59 @@ describe('UserService', () => {
             firestore.addDoc.mockReturnValue(throwError(mockErr));
 
             userService.addUser(user)
+                .subscribe(
+                    () => {
+                        done.fail('Error was not tripped');
+                    },
+                    err => {
+                        expect(err).toBe(mockErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('addUsers()', () => {
+        it('adds users to the user collection', done => {
+            const users = [
+                {
+                    name: 'Ryan'
+                },
+                {
+                    name: 'Joey'
+                },
+                {
+                    name: 'MCP'
+                }
+            ]
+            firestore.upsertDocs.mockReturnValue(of([{}]));
+
+            userService.addUsers(users)
+                .subscribe(
+                    () => {
+                        expect(firestore.upsertDocs).toHaveBeenCalledWith(USER_COLLECTION, users);
+                        done();
+                    }
+                );
+        });
+
+        it('passes the upsertDocs() error to the observable', done => {
+            const users = [
+                {
+                    name: 'Ryan'
+                },
+                {
+                    name: 'Joey'
+                },
+                {
+                    name: 'MCP'
+                }
+            ]
+            const mockErr = 'test';
+
+            firestore.upsertDocs.mockReturnValue(throwError(mockErr));
+
+            userService.addUsers(users)
                 .subscribe(
                     () => {
                         done.fail('Error was not tripped');
@@ -320,6 +373,65 @@ describe('UserService', () => {
             userService.updateUser(id, update)
                 .subscribe(
                     _ => {
+                        done.fail('Error was not tripped');
+                    },
+                    err => {
+                        expect(err).toBe(mockErr);
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('updateUsers()', () => {
+        it('updates users in the user collection', done => {
+            const users = [
+                {
+                    id: '0',
+                    name: 'Ryan'
+                },
+                {
+                    id: '1',
+                    name: 'Joey'
+                },
+                {
+                    id: '2',
+                    name: 'MCP'
+                }
+            ]
+            firestore.updateDocs.mockReturnValue(of([{}]));
+
+            userService.updateUsers(users)
+                .subscribe(
+                    () => {
+                        expect(firestore.updateDocs).toHaveBeenCalledWith(USER_COLLECTION, users);
+                        done();
+                    }
+                );
+        });
+
+        it('passes the updateDocs() error to the observable', done => {
+            const users = [
+                {
+                    id: '0',
+                    name: 'Ryan'
+                },
+                {
+                    id: '1',
+                    name: 'Joey'
+                },
+                {
+                    id: '2',
+                    name: 'MCP'
+                }
+            ]
+            const mockErr = 'test';
+
+            firestore.updateDocs.mockReturnValue(throwError(mockErr));
+
+            userService.updateUsers(users)
+                .subscribe(
+                    () => {
                         done.fail('Error was not tripped');
                     },
                     err => {
@@ -454,6 +566,60 @@ describe('UserService', () => {
                 );
         });
     });
+
+    describe('deleteUsers()', () => {
+        it('deletes users in the user collection', done => {
+            const users = [
+                {
+                    id: '0'
+                },
+                {
+                    id: '1'
+                },
+                {
+                    id: '2'
+                }
+            ]
+            firestore.deleteDocs.mockReturnValue(of([{}]));
+
+            userService.deleteUsers(users)
+                .subscribe(
+                    () => {
+                        expect(firestore.deleteDocs).toHaveBeenCalledWith(USER_COLLECTION, users);
+                        done();
+                    }
+                );
+        });
+
+        it('passes the deleteDocs() error to the observable', done => {
+            const users = [
+                {
+                    id: '0'
+                },
+                {
+                    id: '1'
+                },
+                {
+                    id: '2'
+                }
+            ]
+            const mockErr = 'test';
+
+            firestore.deleteDocs.mockReturnValue(throwError(mockErr));
+
+            userService.deleteUsers(users)
+                .subscribe(
+                    () => {
+                        done.fail('Error was not tripped');
+                    },
+                    err => {
+                        expect(err).toBe(mockErr);
+                        done();
+                    }
+                );
+        });
+    });
+
 });
 
 function restoreMocks() {
