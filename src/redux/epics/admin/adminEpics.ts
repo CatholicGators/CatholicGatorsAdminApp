@@ -10,11 +10,11 @@ import {
     deleteUserSuccess
 } from '../../actions/admin/adminActions';
 
-export const getUsersEpic = (action$, _, { firestore }) => {
+export const getUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(adminActions.GET_USERS),
         mergeMap(() =>
-            firestore.getUsers().pipe(
+            userService.getAllUsers().pipe(
                 map(users => getUsersSuccess(users)),
                 catchError(err => ActionsObservable.of(getUsersErr(err)))
             )

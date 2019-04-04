@@ -48,21 +48,6 @@ export const signOutEpic = (action$, _, { userService }) => {
     )
 }
 
-<<<<<<< HEAD
-export const getUsersEpic = (action$, _, { userService }) => {
-    return action$.pipe(
-        ofType(authActions.GET_USERS),
-        mergeMap(() =>
-            userService.getAllUsers().pipe(
-                map(users => getUsersSuccess(users)),
-                catchError(err => ActionsObservable.of(getUsersErr(err)))
-            )
-        )
-    )
-}
-
-=======
->>>>>>> 1bde6cf... Added admin redux module
 export default combineEpics(
     listenForUserEpic,
     googleSignInEpic,

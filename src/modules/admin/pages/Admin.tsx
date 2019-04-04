@@ -109,10 +109,7 @@ export class Admin extends Component<Props, State> {
       .filter(user => this.isSelected(user.id))
       .map(user => this.props.updateUser({
         ...user,
-        data: {
-          ...user.data,
-          isApproved: true
-        }
+        isApproved: true
       }))
     this.setState({ selected: [] })
   }
@@ -122,11 +119,8 @@ export class Admin extends Component<Props, State> {
       .filter(user => this.isSelected(user.id))
       .map(user => this.props.updateUser({
         ...user,
-        data: {
-          ...user.data,
-          isApproved: true,
-          isAdmin: true
-        }
+        isApproved: true,
+        isAdmin: true
       }))
     this.setState({ selected: [] })
   }

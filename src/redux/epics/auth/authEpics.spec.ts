@@ -21,11 +21,7 @@ import {
 } from "../../actions/auth/authActions";
 
 describe('authEpics', () => {
-<<<<<<< HEAD
     let dependencies, userService, user, users;
-=======
-    let dependencies, firestore, user;
->>>>>>> 1bde6cf... Added admin redux module
 
     beforeEach(() => {
         userService = {
@@ -142,41 +138,4 @@ describe('authEpics', () => {
                 });
         });
     });
-<<<<<<< HEAD
-
-    describe('getUsersEpic', () => {
-        let action$, state$;
-
-        beforeAll(() => {
-            action$ = ActionsObservable.from([getUsers()]);
-            state$ = of();
-        });
-
-        it('emits GET_USERS_SUCCESS action after successful get', () => {
-            userService.getAllUsers.mockReturnValue(of(users));
-            const expectedAction = getUsersSuccess(users);
-
-            return getUsersEpic(action$, state$, dependencies)
-                .pipe(toArray())
-                .toPromise()
-                .then((result) => {
-                    expect(result).toEqual([expectedAction]);
-                });
-        });
-
-        it('emits GET_USERS_ERR when userService.getUsers() returns an error', () => {
-            const expectedAction = getUsersErr("test");
-            userService.getAllUsers.mockReturnValue(throwError(expectedAction.err));
-
-            return getUsersEpic(action$, state$, dependencies)
-                .pipe(toArray())
-                .toPromise()
-                .then((result) => {
-                    expect(result).toEqual([expectedAction]);
-                });
-        });
-    });
 });
-=======
-});
->>>>>>> 1bde6cf... Added admin redux module

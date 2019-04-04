@@ -10,9 +10,7 @@ describe('UserTableRow', () => {
         props = {
             user: {
                 id: 'test',
-                data: {
-                    photoUrl: ''
-                }
+                photoUrl: ''
             },
             isSelected: true,
             handleSelect: jest.fn(),
@@ -37,10 +35,7 @@ describe('UserTableRow', () => {
 
         expect(props.updateUser).toHaveBeenCalledWith({
             ...props.user,
-            data: {
-                ...props.user.data,
-                isApproved: checked
-            }
+            isApproved: checked
         })
     })
 
@@ -50,10 +45,7 @@ describe('UserTableRow', () => {
 
         expect(props.updateUser).toHaveBeenCalledWith({
             ...props.user,
-            data: {
-                ...props.user.data,
-                isAdmin: checked
-            }
+            isAdmin: checked
         })
     })
 })

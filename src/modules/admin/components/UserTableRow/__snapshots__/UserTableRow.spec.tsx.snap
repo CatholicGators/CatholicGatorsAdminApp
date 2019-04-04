@@ -9,10 +9,8 @@ ShallowWrapper {
     updateUser={[MockFunction]}
     user={
       Object {
-        "data": Object {
-          "photoUrl": "",
-        },
         "id": "test",
+        "photoUrl": "",
       }
     }
   />,

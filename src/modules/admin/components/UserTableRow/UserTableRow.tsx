@@ -49,20 +49,14 @@ export class UserTableRow extends React.Component<Props> {
   handleApproveToggle(user, checked) {
     this.props.updateUser({
       ...user,
-      data: {
-        ...user.data,
-        isApproved: checked
-      }
+      isApproved: checked
     })
   }
 
   handleAuthorizeToggle(user, checked) {
     this.props.updateUser({
       ...user,
-      data: {
-        ...user.data,
-        isAdmin: checked
-      }
+      isAdmin: checked
     })
   }
 
@@ -92,28 +86,28 @@ export class UserTableRow extends React.Component<Props> {
           />
         </TableCell>
         <TableCell className={classes ? classes.profilePicCol : null}>
-          <Avatar className={classes ? classes.hiddenxs : null } src={user.data.photoURL} />
+          <Avatar className={classes ? classes.hiddenxs : null } src={user.photoURL} />
           <IconButton
             className={classes ? classes.avatarIconBtn : null }
             onClick={() => handleSelect(user.id)}>
-            <Avatar src={isSelected ? null : user.data.photoURL}>
+            <Avatar src={isSelected ? null : user.photoURL}>
               {isSelected ? <CheckIcon/> : null}
             </Avatar>
           </IconButton>
         </TableCell>
-        <TableCell className={classes ? classes.hiddensm : null}>{user.data.name}</TableCell>
-        <TableCell>{user.data.email}</TableCell>
+        <TableCell className={classes ? classes.hiddensm : null}>{user.name}</TableCell>
+        <TableCell>{user.email}</TableCell>
         <TableCell>
           <Switch
             id='approve-switch'
-            checked={user.data.isApproved}
+            checked={user.isApproved}
             onChange={(_, checked) => this.handleApproveToggle(user, checked)}/>
         </TableCell>
         <TableCell>
           <Switch
             id='authorize-switch'
-            disabled={!user.data.isApproved}
-            checked={user.data.isAdmin}
+            disabled={!user.isApproved}
+            checked={user.isAdmin}
             onChange={(_, checked) => this.handleAuthorizeToggle(user, checked)}
           />
         </TableCell>
