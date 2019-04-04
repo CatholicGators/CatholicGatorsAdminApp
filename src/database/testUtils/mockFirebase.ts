@@ -1,13 +1,10 @@
 let clientConfig,
     firebase,
     app,
-    auth,
-    authCallBacks,
-    authErrCallBacks,
+    db,
+    batch,
+    collectionReference,
     reference;
-
-authCallBacks = [];
-authErrCallBacks = [];
 
 clientConfig = "test";
 reference = {
@@ -18,30 +15,23 @@ reference = {
     delete: jest.fn()
 };
 
-const collectionReference = {
-    doc: (docId) => { return reference },
+collectionReference = {
+    doc: jest.fn(docId => reference),
         ...reference
 };
-const collection = () => {
-    return collectionReference;
-};
-const db = {
-    collection
+batch = {
+    set: jest.fn(),
+    commit: jest.fn()
+}
+
+db = {
+    collection: jest.fn(() => collectionReference),
+    batch: jest.fn(() => batch)
 };
 
-auth = {
-    onAuthStateChanged: jest.fn((cb, errcb) => {
-        authCallBacks.push(cb);
-        authErrCallBacks.push(errcb);
-    }),
-    signInWithRedirect: jest.fn(),
-    signOut: jest.fn()
-};
 class App {
     isDeleted_ = false;
-    auth = jest.fn(() => {
-        return auth;
-    });
+    auth = jest.fn();
     firestore = jest.fn(() => {
         return db;
     });
@@ -51,16 +41,16 @@ class App {
     });
 }
 
-app = new App();
 firebase = {
     apps: [],
     initializeApp: jest.fn(() => {
+        app = new App();
         firebase.apps.push(app);
         return app;
     }),
     app: jest.fn(() => {
-        return app;
+        return firebase.apps[0];
     })
 };
 
-export { clientConfig, firebase, app, auth, authCallBacks, authErrCallBacks, reference }
+export { clientConfig, firebase, app, db, batch, collectionReference, reference }

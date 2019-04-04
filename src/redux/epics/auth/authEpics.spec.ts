@@ -25,18 +25,18 @@ import {
 } from "../../actions/auth/authActions";
 
 describe('authEpics', () => {
-    let dependencies, firestore, user, users;
+    let dependencies, userService, user, users;
 
     beforeEach(() => {
-        firestore = {
+        userService = {
             listenForUser: jest.fn(),
             googleSignIn: jest.fn(),
             signOut: jest.fn(),
-            getUsers: jest.fn()
+            getAllUsers: jest.fn()
         };
 
         dependencies = {
-            firestore
+            userService
         };
 
         user = {
@@ -64,7 +64,7 @@ describe('authEpics', () => {
 
         it('emits SET_USER action for every user emitted', () => {
             const expectedAction = setUser(user);
-            firestore.listenForUser.mockReturnValue(of(expectedAction.user));
+            userService.listenForUser.mockReturnValue(of(expectedAction.user));
 
             return listenForUserEpic(action$, state$, dependencies)
                 .pipe(toArray())
@@ -74,9 +74,9 @@ describe('authEpics', () => {
                 });
         });
 
-        it('emits LISTEN_FOR_USER_ERR when firestore.listenForUser() returns an error', () => {
+        it('emits LISTEN_FOR_USER_ERR when userService.listenForUser() returns an error', () => {
             const expectedAction = listenForUserErr("test");
-            firestore.listenForUser.mockReturnValue(throwError(expectedAction.err));
+            userService.listenForUser.mockReturnValue(throwError(expectedAction.err));
 
             return listenForUserEpic(action$, state$, dependencies)
                 .pipe(toArray())
@@ -96,7 +96,7 @@ describe('authEpics', () => {
         });
 
         it('emits GOOGLE_SIGNED_IN action after sign in', () => {
-            firestore.googleSignIn.mockReturnValue(of(undefined));
+            userService.googleSignIn.mockReturnValue(of(undefined));
             const expectedAction = googleSignedIn();
 
             return googleSignInEpic(action$, state$, dependencies)
@@ -107,9 +107,9 @@ describe('authEpics', () => {
                 });
         });
 
-        it('emits GOOGLE_SIGN_IN_ERR when firestore.googleSignIn() returns an error', () => {
+        it('emits GOOGLE_SIGN_IN_ERR when userService.googleSignIn() returns an error', () => {
             const expectedAction = googleSignInErr("test");
-            firestore.googleSignIn.mockReturnValue(throwError(expectedAction.err));
+            userService.googleSignIn.mockReturnValue(throwError(expectedAction.err));
 
             return googleSignInEpic(action$, state$, dependencies)
                 .pipe(toArray())
@@ -129,7 +129,7 @@ describe('authEpics', () => {
         });
 
         it('emits SIGNED_OUT action after sign in', () => {
-            firestore.signOut.mockReturnValue(of(undefined));
+            userService.signOut.mockReturnValue(of(undefined));
             const expectedAction = signedOut();
 
             return signOutEpic(action$, state$, dependencies)
@@ -140,9 +140,9 @@ describe('authEpics', () => {
                 });
         });
 
-        it('emits SIGN_OUT_ERR when firestore.signout() returns an error', () => {
+        it('emits SIGN_OUT_ERR when userService.signout() returns an error', () => {
             const expectedAction = signOutErr("test");
-            firestore.signOut.mockReturnValue(throwError(expectedAction.err));
+            userService.signOut.mockReturnValue(throwError(expectedAction.err));
 
             return signOutEpic(action$, state$, dependencies)
                 .pipe(toArray())
@@ -162,7 +162,7 @@ describe('authEpics', () => {
         });
 
         it('emits GET_USERS_SUCCESS action after successful get', () => {
-            firestore.getUsers.mockReturnValue(of(users));
+            userService.getAllUsers.mockReturnValue(of(users));
             const expectedAction = getUsersSuccess(users);
 
             return getUsersEpic(action$, state$, dependencies)
@@ -173,9 +173,9 @@ describe('authEpics', () => {
                 });
         });
 
-        it('emits GET_USERS_ERR when firestore.getUsers() returns an error', () => {
+        it('emits GET_USERS_ERR when userService.getUsers() returns an error', () => {
             const expectedAction = getUsersErr("test");
-            firestore.getUsers.mockReturnValue(throwError(expectedAction.err));
+            userService.getAllUsers.mockReturnValue(throwError(expectedAction.err));
 
             return getUsersEpic(action$, state$, dependencies)
                 .pipe(toArray())

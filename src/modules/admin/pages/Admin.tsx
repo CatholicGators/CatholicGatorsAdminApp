@@ -66,17 +66,17 @@ export class Admin extends Component<Props> {
               {users ? users.map(user => (
                 <TableRow key={user.id}>
                   <TableCell>
-                    <Avatar src={user.data.photoURL} />
+                    <Avatar src={user.photoURL} />
                   </TableCell>
-                  <TableCell>{user.data.name}</TableCell>
-                  <TableCell>{user.data.email}</TableCell>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <Switch checked={user.data.isApproved} />
+                    <Switch checked={user.isApproved} />
                   </TableCell>
                   <TableCell>
                     <Switch
-                      disabled={!user.data.isApproved}
-                      checked={user.data.isAdmin}
+                      disabled={!user.isApproved}
+                      checked={user.isAdmin}
                     />
                   </TableCell>
                 </TableRow>

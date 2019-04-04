@@ -1,11 +1,8 @@
-import { toArray, take } from 'rxjs/operators';
-
-import { auth as firebaseAuth } from 'firebase/app';
 import 'firebase/auth';
 
 import Firestore from './firestore';
-import { clientConfig, firebase, app, auth, authCallBacks, authErrCallBacks, reference } from './testUtils/mockFirebase';
-import DocumentNotFoundError from './models/documentNotFoundError';
+import { clientConfig, firebase, app, db, batch, collectionReference, reference } from './testUtils/mockFirebase';
+import DocumentNotFoundError from '../models/documentNotFoundError';
 
 describe('firestore', () => {
     let firestore: Firestore
@@ -26,12 +23,6 @@ describe('firestore', () => {
             expect(firebase.app).toHaveBeenCalledTimes(1);
         });
 
-        it('initializes the app\'s auth', () => {
-            new Firestore(firebase, clientConfig);
-
-            expect(app.auth).toHaveBeenCalled();
-        });
-
         it('initializes the app\'s Firestore', () => {
             new Firestore(firebase, clientConfig);
 
@@ -39,147 +30,11 @@ describe('firestore', () => {
         });
     });
 
-    describe('listenForUser()', () => {
-        it('emits user every time auth.onAuthStateChanged(...) calls its callback', done => {
-            const users = [
-                {
-                    name: "Ryan",
-                },
-                null,
-                {
-                    name: "MCP"
-                }
-            ];
+    describe('getAuth()', () => {
+        it('retrieves the auth object from Firebase', () => {
+            firestore.getAuth();
 
-            reference.get.mockResolvedValue({
-                exists: true,
-                data: () => {
-                    return {};
-                }
-            });
-            reference.set.mockResolvedValue();
-            reference.update.mockResolvedValue();
-
-            firestore.listenForUser()
-                .pipe(
-                    take(users.length),
-                    toArray()
-                ).subscribe(result => {
-                    expect(result.length).toEqual(users.length);
-                    done();
-                });
-
-            users.forEach(user =>
-                authCallBacks.forEach(cb =>
-                    cb(user)
-                )
-            );
-        });
-
-        it('passes the auth.onAuthStateChanged(...) error to the observable', done => {
-            const err = 'test';
-
-            firestore.listenForUser()
-                .subscribe(
-                    () => {
-                        throw 'The error was not tripped';
-                    },
-                    result => {
-                        expect(result).toBe(err)
-                        done();
-                    }
-                );
-
-            authErrCallBacks.forEach(cb => cb(err));
-        });
-    });
-
-    describe('googleSignIn()', () => {
-        it('uses GoogleAuthProvider for the redirect', done => {
-            auth.signInWithRedirect.mockResolvedValue();
-
-            firestore.googleSignIn().subscribe(
-                () => {
-                    expect(auth.signInWithRedirect).toHaveBeenCalledWith(new firebaseAuth.GoogleAuthProvider());
-                    done();
-                }
-            );
-        });
-
-        it('fires next then completes the observable', done => {
-            auth.signInWithRedirect.mockResolvedValue();
-            let resultCorrect = false;
-
-            firestore.googleSignIn()
-                .subscribe(
-                    result => {
-                        resultCorrect = result === undefined;
-                    },
-                    undefined,
-                    () => {
-                        expect(resultCorrect).toBe(true);
-                        done();
-                    }
-                );
-        });
-
-        it('passes the auth.signInWithRedirect(...) error to the observable', done => {
-            const testErr = 'test';
-            auth.signInWithRedirect.mockRejectedValue(testErr);
-
-            firestore.googleSignIn()
-                .subscribe(
-                    undefined,
-                    err => {
-                        expect(err).toBe(testErr);
-                        done();
-                    }
-                );
-        });
-    });
-
-    describe('signOut()', () => {
-        it('calls auth.SignOut()', done => {
-            auth.signOut.mockResolvedValue();
-
-            firestore.signOut()
-                .subscribe(
-                    () => {
-                        expect(auth.signOut).toHaveBeenCalled();
-                        done();
-                    }
-                );
-        });
-
-        it('fires next then completes the observable', done => {
-            auth.signOut.mockResolvedValue();
-            let resultCorrect = false;
-
-            firestore.signOut()
-                .subscribe(
-                    result => {
-                        resultCorrect = result === undefined;
-                    },
-                    undefined,
-                    () => {
-                        expect(resultCorrect).toBe(true);
-                        done();
-                    }
-                );
-        });
-
-        it('passes the auth.signOut() error to the observable', done => {
-            const testErr = 'test';
-            auth.signOut.mockRejectedValue(testErr);
-
-            firestore.signOut()
-                .subscribe(
-                    undefined,
-                    err => {
-                        expect(err).toBe(testErr);
-                        done();
-                    }
-                );
+            expect(app.auth).toHaveBeenCalled();
         });
     });
 
@@ -256,6 +111,127 @@ describe('firestore', () => {
         });
     });
 
+    describe('upsertDocs()', () => {
+        it('successfully adds documents without an id', done => {
+            const documents = [
+                {
+                    field: '0'
+                },
+                {
+                    field: '1'
+                },
+                {
+                    field: '2'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenCalledWith();
+                        done();
+                    }
+                );
+        });
+
+        it('successfully adds documents with an id', done => {
+            const documents = [
+                {
+                    field: '0',
+                    id: 'a'
+                },
+                {
+                    field: '1',
+                    id: 'b'
+                },
+                {
+                    field: '2',
+                    id: 'c'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(1, 'a');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(2, 'b');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(3, 'c');
+                        done();
+                    }
+                );
+        });
+
+        it('successfully adds documents with a uid', done => {
+            const documents = [
+                {
+                    field: '0',
+                    uid: 'a'
+                },
+                {
+                    field: '1',
+                    uid: 'b'
+                },
+                {
+                    field: '2',
+                    uid: 'c'
+                }
+            ]
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    _ => {
+                        expect(db.batch).toHaveBeenCalled();
+                        expect(batch.set).toHaveBeenCalledTimes(3);
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(1, 'a');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(2, 'b');
+                        expect(collectionReference.doc).toHaveBeenNthCalledWith(3, 'c');
+                        done();
+                    }
+                );
+        });
+
+        it('passes the upsertDocs() error to the observable', done => {
+            const testErr = new Error();
+            const documents = [
+                {
+                    field: '0',
+                    uid: 'a'
+                },
+                {
+                    field: '1',
+                    uid: 'b'
+                },
+                {
+                    field: '2',
+                    uid: 'c'
+                }
+            ]
+
+            batch.commit.mockRejectedValue(testErr);
+
+            firestore.upsertDocs('collection', documents)
+                .subscribe(
+                    entity => {
+                        done.fail(new Error('Promise should not resolve'));
+                    },
+                    err => {
+                        expect(err).toBe(testErr);
+                        done();
+                    }
+                );
+        });
+    });
+
     describe('getDoc()', () => {
         it('successfully gets a document', done => {
             const data = { mockData: 'data' }
@@ -280,6 +256,7 @@ describe('firestore', () => {
             const data = { mockData: 'data' };
             const documentSnapshot = {
                 exists: true,
+                id: docId,
                 data: () => data
             };
             reference.get.mockResolvedValue(documentSnapshot);
@@ -289,7 +266,7 @@ describe('firestore', () => {
                     entity => {
                         expect(entity).toEqual({
                             id: docId,
-                            data: data
+                            ...data
                         });
                         done();
                     },
@@ -337,32 +314,35 @@ describe('firestore', () => {
 
     describe('getCollection()', () => {
         it('successfully gets a collection', done => {
+            const mockData = {
+                data: 'data'
+            };
             const docs = [
                 {
                     id: '1',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
                 {
                     id: '2',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
                 {
                     id: '3',
-                    data: () => ({ data: 'data' })
+                    data: () => mockData
                 },
             ]
             const returnedDocs = [
                 {
                     id: '1',
-                    data: { data: 'data' }
+                    ...mockData
                 },
                 {
                     id: '2',
-                    data: { data: 'data' }
+                    ...mockData
                 },
                 {
                     id: '3',
-                    data: { data: 'data' }
+                    ...mockData
                 },
             ]
             reference.get.mockResolvedValue({ docs });
@@ -381,64 +361,6 @@ describe('firestore', () => {
             reference.get.mockRejectedValue(testErr);
 
             firestore.getCollection('collection')
-                .subscribe(
-                    entity => {
-                        done.fail(new Error('Promise should not resolve'));
-                    },
-                    err => {
-                        expect(err).toBe(testErr);
-                        done();
-                    }
-                );
-        });
-    });
-
-    describe('getUsers()', () => {
-        it('successfully gets a list of users', done => {
-            const docs = [
-                {
-                    id: '1',
-                    data: () => ({ name: 'Ryan' })
-                },
-                {
-                    id: '2',
-                    data: () => ({ name: 'MCP' })
-                },
-                {
-                    id: '3',
-                    data: () => ({ name: 'Joey' })
-                },
-            ]
-            const returnedDocs = [
-                {
-                    id: '1',
-                    data: { name: 'Ryan' }
-                },
-                {
-                    id: '2',
-                    data: { name: 'MCP' }
-                },
-                {
-                    id: '3',
-                    data: { name: 'Joey' }
-                },
-            ]
-            reference.get.mockResolvedValue({ docs });
-
-            firestore.getUsers()
-                .subscribe(
-                    collection => {
-                        expect(collection).toEqual(returnedDocs);
-                        done();
-                    }
-                );
-        });
-
-        it('passes the getUsers() error to the observable', done => {
-            const testErr = new Error();
-            reference.get.mockRejectedValue(testErr);
-
-            firestore.getUsers()
                 .subscribe(
                     entity => {
                         done.fail(new Error('Promise should not resolve'));
@@ -562,4 +484,11 @@ describe('firestore', () => {
         });
     });
 
+    afterEach(() => {
+        restoreMocks();
+    });
+
+    function restoreMocks() {
+        jest.clearAllMocks();
+    }
 });

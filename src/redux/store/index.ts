@@ -6,19 +6,16 @@ import * as firebase from 'firebase/app';
 import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import Firestore from '../../database/firestore';
+import UserService from '../../services/userService';
+import clientConfig from '../../config/clientConfig';
 
-const clientConfig = {
-  apiKey: "AIzaSyDCDeYDMBWkNDv6vYHvliK75FZIYeui8go",
-  authDomain: "catholic-gators-dev.firebaseapp.com",
-  databaseURL: "https://catholic-gators-dev.firebaseio.com",
-  projectId: "catholic-gators-dev",
-  storageBucket: "catholic-gators-dev.appspot.com",
-  messagingSenderId: "1019003476611"
-};
+const firestore = new Firestore(firebase, clientConfig);
+const userService = new UserService(firestore);
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
-    firestore: new Firestore(firebase, clientConfig)
+    firestore,
+    userService
   }
 });
 
