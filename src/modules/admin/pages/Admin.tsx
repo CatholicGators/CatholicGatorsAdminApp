@@ -17,7 +17,7 @@ import {
 import {
   getUsers,
   updateUser,
-  deleteUser
+  batchDeleteUsers
 } from '../../../redux/actions/admin/adminActions';
 import UserTableRow from '../components/UserTableRow/UserTableRow';
 import UserTableToolbar from '../components/UserTableToolbar/UserTableToolbar';
@@ -53,9 +53,10 @@ const styles = (theme: Theme) => createStyles({
 type Props = {
   classes: any
   users: any
-  getUsers: () => any,
-  updateUser: (user) => any,
-  deleteUser: (id) => any
+  getUsers: () => void,
+  updateUser: (user) => void,
+  deleteUser: (id) => void,
+  batchDeleteUsers: (ids) => void
 }
 
 type State = {
@@ -126,9 +127,7 @@ export class Admin extends Component<Props, State> {
   }
 
   handleBatchDelete() {
-    this.props.users
-      .filter(user => this.isSelected(user.id))
-      .map(user => this.props.deleteUser(user.id))
+    this.props.batchDeleteUsers([...this.state.selected])
     this.setState({ selected: [] })
   }
 
@@ -196,7 +195,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getUsers: () => dispatch(getUsers()),
   updateUser: user => dispatch(updateUser(user)),
-  deleteUser: id => dispatch(deleteUser(id))
+  batchDeleteUsers: ids => dispatch(batchDeleteUsers(ids))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Admin))

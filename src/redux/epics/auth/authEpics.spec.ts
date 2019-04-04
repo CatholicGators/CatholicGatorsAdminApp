@@ -21,7 +21,7 @@ import {
 } from "../../actions/auth/authActions";
 
 describe('authEpics', () => {
-    let dependencies, userService, user, users;
+    let dependencies, userService, user;
 
     beforeEach(() => {
         userService = {

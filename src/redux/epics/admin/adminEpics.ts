@@ -6,8 +6,9 @@ import {
     adminActions,
     getUsersSuccess,
     getUsersErr,
-    updateUserSuccess,
-    deleteUserSuccess
+    getUsers,
+    batchDeleteUsersErr,
+    updateUserErr
 } from '../../actions/admin/adminActions';
 
 export const getUsersEpic = (action$, _, { userService }) => {
@@ -22,28 +23,32 @@ export const getUsersEpic = (action$, _, { userService }) => {
     )
 }
 
-export const updateUserEpic = (action$) => {
+export const updateUserEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(adminActions.UPDATE_USER),
-        mergeMap((action: any) => {
-            console.log("Updating user")
-            return ActionsObservable.of(updateUserSuccess(action.user))
-        })
+        mergeMap((action: any) => 
+            userService.updateUser(action.user.id, action.user).pipe(
+                map(() => getUsers()),
+                catchError(err => ActionsObservable.of(updateUserErr(err)))
+            )
+        )
     )
 }
 
-export const deleteUserEpic = (action$) => {
+export const batchDeleteUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
-        ofType(adminActions.DELETE_USER),
-        mergeMap((action: any) => {
-            console.log("Deleting user")
-            return ActionsObservable.of(deleteUserSuccess(action.id))
-        })
+        ofType(adminActions.BATCH_DELETE_USERS),
+        mergeMap((action: any) => 
+            userService.deleteUsers(action.ids).pipe(
+                map(() => getUsers()),
+                catchError(err => ActionsObservable.of(batchDeleteUsersErr(err)))
+            )
+        )
     )
 }
 
 export default combineEpics(
     getUsersEpic,
     updateUserEpic,
-    deleteUserEpic
+    batchDeleteUsersEpic
 );

@@ -7,7 +7,10 @@ export const adminActions = {
     UPDATE_USER_ERR: 'UPDATE_USER_ERR',
     DELETE_USER: 'DELETE_USER',
     DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
-    DELETE_USER_ERR: 'DELETE_USER_ERR'
+    DELETE_USER_ERR: 'DELETE_USER_ERR',
+    BATCH_DELETE_USERS: 'BATCH_DELETE_USERS',
+    BATCH_DELETE_USERS_SUCCESS: 'BATCH_DELETE_USERS_SUCCESS',
+    BATCH_DELETE_USERS_ERR: 'BATCH_DELETE_USERS_ERR'
 }
 
 export function getUsers() {
@@ -44,4 +47,16 @@ export function deleteUserSuccess(id) {
 
 export function deleteUserErr(err) {
     return { type: adminActions.DELETE_USER_ERR, err}
+}
+
+export function batchDeleteUsers(ids: String[]) {
+    return { type: adminActions.BATCH_DELETE_USERS, ids }
+}
+
+export function batchDeleteUsersSuccess(ids: String[]) {
+    return { type: adminActions.BATCH_DELETE_USERS_SUCCESS, ids }
+}
+
+export function batchDeleteUsersErr(err) {
+    return { type: adminActions.BATCH_DELETE_USERS_ERR, err}
 }

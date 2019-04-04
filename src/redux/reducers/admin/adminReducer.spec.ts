@@ -1,4 +1,7 @@
-import { getUsersSuccess } from '../../actions/admin/adminActions';
+import {
+    getUsersSuccess,
+    updateUserSuccess
+} from '../../actions/admin/adminActions';
 import adminReducer, { INITIAL_AUTH_STATE } from './adminReducer';
 
 describe('adminReducer', () => {
@@ -7,10 +10,14 @@ describe('adminReducer', () => {
     beforeAll(() => {
         users = [
             {
-                name: "Joey"
+                id: "1",
+                name: "Joey",
+                isAdmin: false
             },
             {
-                name: "Ryan"
+                id: "2",
+                name: "Ryan",
+                isAdmin: false
             }
         ];
     });
@@ -21,6 +28,24 @@ describe('adminReducer', () => {
         expect(adminReducer(undefined, action)).toEqual({
             ...INITIAL_AUTH_STATE,
             users: action.users
+        })
+    })
+
+    it('updates user on UPDATE_USER_SUCCESS', () => {
+        const newUser = {
+            ...users[0],
+            isAdmin: true
+        }
+        const newUsers = [...users]
+        newUsers[0] = newUser
+        const action = updateUserSuccess(newUser)
+        const state = {
+            users
+        }
+
+        expect(adminReducer(state, action)).toEqual({
+            ...state,
+            users: newUsers
         })
     })
 });
