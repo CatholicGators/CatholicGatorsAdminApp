@@ -7,6 +7,7 @@ import Header from '../components/Header/Header';
 import Admin from '../../admin/pages/Admin';
 import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute';
 import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
+import MyContacts from '../../contact/pages/myContacts';
 
 type Props = {
   user: any;
@@ -31,6 +32,7 @@ export class App extends Component<Props> {
               isAuthorized={this.props.user ? this.props.user.isAdmin : false}
               redirectPathname="/"
             ></AuthorizedRoute>
+            <Route path="/my-contacts/" component={MyContacts}></Route>
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </div>
