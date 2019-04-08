@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { listenForUser } from '../../../redux/actions/auth/authActions';
 import Header from '../components/Header/Header';
 import Admin from '../../admin/pages/Admin';
 import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute';
+import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
 
 type Props = {
   user: any;
@@ -28,6 +29,7 @@ export class App extends Component<Props> {
             isAuthorized={this.props.user ? this.props.user.isAdmin : false}
             redirectPathname="/"
           ></AuthorizedRoute>
+           <Route exact path="/" component={ContactForm} />
         </div>
       </Router>
     );
