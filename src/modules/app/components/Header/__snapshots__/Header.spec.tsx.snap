@@ -75,6 +75,19 @@ ShallowWrapper {
                 aria-current="page"
                 className={null}
                 exact={true}
+                to="/my-contacts"
+              >
+                <WithStyles(Typography)
+                  className={null}
+                >
+                  My Contacts
+                </WithStyles(Typography)>
+              </NavLink>
+              <NavLink
+                activeClassName={null}
+                aria-current="page"
+                className={null}
+                exact={true}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -107,6 +120,12 @@ ShallowWrapper {
                 "icon": [Function],
                 "needsAuthorization": false,
                 "text": "Contact Form",
+              },
+              Object {
+                "href": "/my-contacts",
+                "icon": [Function],
+                "needsAuthorization": false,
+                "text": "My Contacts",
               },
               Object {
                 "href": "/admin",
@@ -173,6 +192,19 @@ ShallowWrapper {
                 aria-current="page"
                 className={null}
                 exact={true}
+                to="/my-contacts"
+              >
+                <WithStyles(Typography)
+                  className={null}
+                >
+                  My Contacts
+                </WithStyles(Typography)>
+              </NavLink>
+              <NavLink
+                activeClassName={null}
+                aria-current="page"
+                className={null}
+                exact={true}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -231,6 +263,19 @@ ShallowWrapper {
                     className={null}
                   >
                     Contact Form
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
                   </WithStyles(Typography)>
                 </NavLink>
                 <NavLink
@@ -324,6 +369,19 @@ ShallowWrapper {
                       aria-current="page"
                       className={null}
                       exact={true}
+                      to="/my-contacts"
+                    >
+                      <WithStyles(Typography)
+                        className={null}
+                      >
+                        My Contacts
+                      </WithStyles(Typography)>
+                    </NavLink>,
+                    <NavLink
+                      activeClassName={null}
+                      aria-current="page"
+                      className={null}
+                      exact={true}
                       to="/admin"
                     >
                       <WithStyles(Typography)
@@ -374,6 +432,37 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Contact Form",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "My Contacts",
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": null,
+                    "aria-current": "page",
+                    "children": <WithStyles(Typography)
+                      className={null}
+                    >
+                      My Contacts
+                    </WithStyles(Typography)>,
+                    "className": null,
+                    "exact": true,
+                    "to": "/my-contacts",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": "My Contacts",
+                      "className": null,
+                    },
+                    "ref": null,
+                    "rendered": "My Contacts",
                     "type": [Function],
                   },
                   "type": [Function],
@@ -449,6 +538,12 @@ ShallowWrapper {
               "text": "Contact Form",
             },
             Object {
+              "href": "/my-contacts",
+              "icon": [Function],
+              "needsAuthorization": false,
+              "text": "My Contacts",
+            },
+            Object {
               "href": "/admin",
               "icon": [Function],
               "needsAuthorization": true,
@@ -517,6 +612,19 @@ ShallowWrapper {
                   aria-current="page"
                   className={null}
                   exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -549,6 +657,12 @@ ShallowWrapper {
                   "icon": [Function],
                   "needsAuthorization": false,
                   "text": "Contact Form",
+                },
+                Object {
+                  "href": "/my-contacts",
+                  "icon": [Function],
+                  "needsAuthorization": false,
+                  "text": "My Contacts",
                 },
                 Object {
                   "href": "/admin",
@@ -615,6 +729,19 @@ ShallowWrapper {
                   aria-current="page"
                   className={null}
                   exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -673,6 +800,19 @@ ShallowWrapper {
                       className={null}
                     >
                       Contact Form
+                    </WithStyles(Typography)>
+                  </NavLink>
+                  <NavLink
+                    activeClassName={null}
+                    aria-current="page"
+                    className={null}
+                    exact={true}
+                    to="/my-contacts"
+                  >
+                    <WithStyles(Typography)
+                      className={null}
+                    >
+                      My Contacts
                     </WithStyles(Typography)>
                   </NavLink>
                   <NavLink
@@ -766,6 +906,19 @@ ShallowWrapper {
                         aria-current="page"
                         className={null}
                         exact={true}
+                        to="/my-contacts"
+                      >
+                        <WithStyles(Typography)
+                          className={null}
+                        >
+                          My Contacts
+                        </WithStyles(Typography)>
+                      </NavLink>,
+                      <NavLink
+                        activeClassName={null}
+                        aria-current="page"
+                        className={null}
+                        exact={true}
                         to="/admin"
                       >
                         <WithStyles(Typography)
@@ -816,6 +969,37 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Contact Form",
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": "My Contacts",
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": null,
+                      "aria-current": "page",
+                      "children": <WithStyles(Typography)
+                        className={null}
+                      >
+                        My Contacts
+                      </WithStyles(Typography)>,
+                      "className": null,
+                      "exact": true,
+                      "to": "/my-contacts",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": "My Contacts",
+                        "className": null,
+                      },
+                      "ref": null,
+                      "rendered": "My Contacts",
                       "type": [Function],
                     },
                     "type": [Function],
@@ -889,6 +1073,12 @@ ShallowWrapper {
                 "icon": [Function],
                 "needsAuthorization": false,
                 "text": "Contact Form",
+              },
+              Object {
+                "href": "/my-contacts",
+                "icon": [Function],
+                "needsAuthorization": false,
+                "text": "My Contacts",
               },
               Object {
                 "href": "/admin",

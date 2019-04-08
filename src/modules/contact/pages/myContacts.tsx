@@ -16,7 +16,7 @@ export class MyContacts extends Component<Props> {
         return (
             <div>
                 <h1>My Contacts</h1>
-                <div>{JSON.stringify(this.props.contacts)}</div>
+                <pre>{JSON.stringify(this.props.contacts, null, 2)}</pre>
             </div>
         );
     }

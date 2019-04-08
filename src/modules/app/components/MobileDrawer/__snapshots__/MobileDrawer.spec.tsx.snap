@@ -17,6 +17,12 @@ ShallowWrapper {
           "text": "Contact Form",
         },
         Object {
+          "href": "/my-contacts",
+          "icon": [Function],
+          "needsAuthorization": false,
+          "text": "My Contacts",
+        },
+        Object {
           "href": "/admin",
           "icon": [Function],
           "needsAuthorization": true,
@@ -90,6 +96,26 @@ ShallowWrapper {
                 </WithStyles(ListItemIcon)>
                 <WithStyles(ListItemText)
                   primary="Contact Form"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              onClick={[Function]}
+              to="/my-contacts"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(InboxIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="My Contacts"
                 />
               </WithStyles(ListItem)>
             </NavLink>
@@ -184,6 +210,26 @@ ShallowWrapper {
                   </WithStyles(ListItemIcon)>
                   <WithStyles(ListItemText)
                     primary="Contact Form"
+                  />
+                </WithStyles(ListItem)>
+              </NavLink>
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                onClick={[Function]}
+                to="/my-contacts"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(InboxIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="My Contacts"
                   />
                 </WithStyles(ListItem)>
               </NavLink>
@@ -370,6 +416,26 @@ ShallowWrapper {
                   className={null}
                   exact={true}
                   onClick={[Function]}
+                  to="/my-contacts"
+                >
+                  <WithStyles(ListItem)
+                    button={true}
+                    selected={false}
+                  >
+                    <WithStyles(ListItemIcon)>
+                      <pure(InboxIcon) />
+                    </WithStyles(ListItemIcon)>
+                    <WithStyles(ListItemText)
+                      primary="My Contacts"
+                    />
+                  </WithStyles(ListItem)>
+                </NavLink>,
+                <NavLink
+                  activeClassName="active"
+                  aria-current="page"
+                  className={null}
+                  exact={true}
+                  onClick={[Function]}
                   to="/admin"
                 >
                   <WithStyles(ListItem)
@@ -455,6 +521,83 @@ ShallowWrapper {
                       "nodeType": "class",
                       "props": Object {
                         "primary": "Contact Form",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "My Contacts",
+                "nodeType": "function",
+                "props": Object {
+                  "activeClassName": "active",
+                  "aria-current": "page",
+                  "children": <WithStyles(ListItem)
+                    button={true}
+                    selected={false}
+                  >
+                    <WithStyles(ListItemIcon)>
+                      <pure(InboxIcon) />
+                    </WithStyles(ListItemIcon)>
+                    <WithStyles(ListItemText)
+                      primary="My Contacts"
+                    />
+                  </WithStyles(ListItem)>,
+                  "className": null,
+                  "exact": true,
+                  "onClick": [Function],
+                  "to": "/my-contacts",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": "My Contacts",
+                  "nodeType": "class",
+                  "props": Object {
+                    "button": true,
+                    "children": Array [
+                      <WithStyles(ListItemIcon)>
+                        <pure(InboxIcon) />
+                      </WithStyles(ListItemIcon)>,
+                      <WithStyles(ListItemText)
+                        primary="My Contacts"
+                      />,
+                    ],
+                    "selected": false,
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": <pure(InboxIcon) />,
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {},
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "primary": "My Contacts",
                       },
                       "ref": null,
                       "rendered": null,
@@ -701,6 +844,26 @@ ShallowWrapper {
                 className={null}
                 exact={true}
                 onClick={[Function]}
+                to="/my-contacts"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(InboxIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="My Contacts"
+                  />
+                </WithStyles(ListItem)>
+              </NavLink>
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                onClick={[Function]}
                 to="/admin"
               >
                 <WithStyles(ListItem)
@@ -786,6 +949,26 @@ ShallowWrapper {
                     </WithStyles(ListItemIcon)>
                     <WithStyles(ListItemText)
                       primary="Contact Form"
+                    />
+                  </WithStyles(ListItem)>
+                </NavLink>
+                <NavLink
+                  activeClassName="active"
+                  aria-current="page"
+                  className={null}
+                  exact={true}
+                  onClick={[Function]}
+                  to="/my-contacts"
+                >
+                  <WithStyles(ListItem)
+                    button={true}
+                    selected={false}
+                  >
+                    <WithStyles(ListItemIcon)>
+                      <pure(InboxIcon) />
+                    </WithStyles(ListItemIcon)>
+                    <WithStyles(ListItemText)
+                      primary="My Contacts"
                     />
                   </WithStyles(ListItem)>
                 </NavLink>
@@ -972,6 +1155,26 @@ ShallowWrapper {
                     className={null}
                     exact={true}
                     onClick={[Function]}
+                    to="/my-contacts"
+                  >
+                    <WithStyles(ListItem)
+                      button={true}
+                      selected={false}
+                    >
+                      <WithStyles(ListItemIcon)>
+                        <pure(InboxIcon) />
+                      </WithStyles(ListItemIcon)>
+                      <WithStyles(ListItemText)
+                        primary="My Contacts"
+                      />
+                    </WithStyles(ListItem)>
+                  </NavLink>,
+                  <NavLink
+                    activeClassName="active"
+                    aria-current="page"
+                    className={null}
+                    exact={true}
+                    onClick={[Function]}
                     to="/admin"
                   >
                     <WithStyles(ListItem)
@@ -1057,6 +1260,83 @@ ShallowWrapper {
                         "nodeType": "class",
                         "props": Object {
                           "primary": "Contact Form",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                    ],
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "My Contacts",
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": "active",
+                    "aria-current": "page",
+                    "children": <WithStyles(ListItem)
+                      button={true}
+                      selected={false}
+                    >
+                      <WithStyles(ListItemIcon)>
+                        <pure(InboxIcon) />
+                      </WithStyles(ListItemIcon)>
+                      <WithStyles(ListItemText)
+                        primary="My Contacts"
+                      />
+                    </WithStyles(ListItem)>,
+                    "className": null,
+                    "exact": true,
+                    "onClick": [Function],
+                    "to": "/my-contacts",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": "My Contacts",
+                    "nodeType": "class",
+                    "props": Object {
+                      "button": true,
+                      "children": Array [
+                        <WithStyles(ListItemIcon)>
+                          <pure(InboxIcon) />
+                        </WithStyles(ListItemIcon)>,
+                        <WithStyles(ListItemText)
+                          primary="My Contacts"
+                        />,
+                      ],
+                      "selected": false,
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": <pure(InboxIcon) />,
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {},
+                          "ref": null,
+                          "rendered": null,
+                          "type": [Function],
+                        },
+                        "type": [Function],
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "primary": "My Contacts",
                         },
                         "ref": null,
                         "rendered": null,
