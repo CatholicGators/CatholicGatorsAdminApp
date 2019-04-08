@@ -9,9 +9,7 @@ import {
     googleSignedIn,
     listenForUserErr,
     googleSignInErr,
-    signOutErr,
-    getUsersSuccess,
-    getUsersErr
+    signOutErr
 } from '../../actions/auth/authActions';
 
 export const listenForUserEpic = (action$, _, { userService }) => {
@@ -50,21 +48,8 @@ export const signOutEpic = (action$, _, { userService }) => {
     )
 }
 
-export const getUsersEpic = (action$, _, { userService }) => {
-    return action$.pipe(
-        ofType(authActions.GET_USERS),
-        mergeMap(() =>
-            userService.getAllUsers().pipe(
-                map(users => getUsersSuccess(users)),
-                catchError(err => ActionsObservable.of(getUsersErr(err)))
-            )
-        )
-    )
-}
-
 export default combineEpics(
     listenForUserEpic,
     googleSignInEpic,
-    signOutEpic,
-    getUsersEpic
+    signOutEpic
 );

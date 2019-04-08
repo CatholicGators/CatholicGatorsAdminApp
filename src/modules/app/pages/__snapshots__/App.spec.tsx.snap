@@ -34,12 +34,22 @@ ShallowWrapper {
     "props": Object {
       "children": <div>
         <withRouter(Connect(WithStyles(Header))) />
-        <PrivateRoute
-          component={[Function]}
-          isAuthorized={false}
-          path="/admin/"
-          redirectPathname="/"
-        />
+        <Switch>
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />
+          <PrivateRoute
+            component={[Function]}
+            isAuthorized={false}
+            path="/admin/"
+            redirectPathname="/"
+          />
+          <Route
+            render={[Function]}
+          />
+        </Switch>
       </div>,
     },
     "ref": null,
@@ -50,12 +60,22 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <withRouter(Connect(WithStyles(Header))) />,
-          <PrivateRoute
-            component={[Function]}
-            isAuthorized={false}
-            path="/admin/"
-            redirectPathname="/"
-          />,
+          <Switch>
+            <Route
+              component={[Function]}
+              exact={true}
+              path="/"
+            />
+            <PrivateRoute
+              component={[Function]}
+              isAuthorized={false}
+              path="/admin/"
+              redirectPathname="/"
+            />
+            <Route
+              render={[Function]}
+            />
+          </Switch>,
         ],
       },
       "ref": null,
@@ -72,15 +92,66 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "class",
           "props": Object {
-            "component": [Function],
-            "isAuthorized": false,
-            "path": "/admin/",
-            "redirectPathname": "/",
+            "children": Array [
+              <Route
+                component={[Function]}
+                exact={true}
+                path="/"
+              />,
+              <PrivateRoute
+                component={[Function]}
+                isAuthorized={false}
+                path="/admin/"
+                redirectPathname="/"
+              />,
+              <Route
+                render={[Function]}
+              />,
+            ],
           },
           "ref": null,
-          "rendered": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "component": [Function],
+                "isAuthorized": false,
+                "path": "/admin/",
+                "redirectPathname": "/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "render": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
           "type": [Function],
         },
       ],
@@ -96,12 +167,22 @@ ShallowWrapper {
       "props": Object {
         "children": <div>
           <withRouter(Connect(WithStyles(Header))) />
-          <PrivateRoute
-            component={[Function]}
-            isAuthorized={false}
-            path="/admin/"
-            redirectPathname="/"
-          />
+          <Switch>
+            <Route
+              component={[Function]}
+              exact={true}
+              path="/"
+            />
+            <PrivateRoute
+              component={[Function]}
+              isAuthorized={false}
+              path="/admin/"
+              redirectPathname="/"
+            />
+            <Route
+              render={[Function]}
+            />
+          </Switch>
         </div>,
       },
       "ref": null,
@@ -112,12 +193,22 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <withRouter(Connect(WithStyles(Header))) />,
-            <PrivateRoute
-              component={[Function]}
-              isAuthorized={false}
-              path="/admin/"
-              redirectPathname="/"
-            />,
+            <Switch>
+              <Route
+                component={[Function]}
+                exact={true}
+                path="/"
+              />
+              <PrivateRoute
+                component={[Function]}
+                isAuthorized={false}
+                path="/admin/"
+                redirectPathname="/"
+              />
+              <Route
+                render={[Function]}
+              />
+            </Switch>,
           ],
         },
         "ref": null,
@@ -134,15 +225,66 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {
-              "component": [Function],
-              "isAuthorized": false,
-              "path": "/admin/",
-              "redirectPathname": "/",
+              "children": Array [
+                <Route
+                  component={[Function]}
+                  exact={true}
+                  path="/"
+                />,
+                <PrivateRoute
+                  component={[Function]}
+                  isAuthorized={false}
+                  path="/admin/"
+                  redirectPathname="/"
+                />,
+                <Route
+                  render={[Function]}
+                />,
+              ],
             },
             "ref": null,
-            "rendered": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "exact": true,
+                  "path": "/",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "component": [Function],
+                  "isAuthorized": false,
+                  "path": "/admin/",
+                  "redirectPathname": "/",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "render": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
             "type": [Function],
           },
         ],
