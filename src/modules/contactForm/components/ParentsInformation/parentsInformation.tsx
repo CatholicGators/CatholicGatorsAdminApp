@@ -3,7 +3,7 @@ import { PhoneNumberTextMask } from '../CustomTextMasks/phoneNumberTextMask'
 import { ZipCodeTextMask } from '../CustomTextMasks/zipCodeTextMask'
 import { styles } from '../../utils/ContactFormStyles'
 
-import { 
+import {
   withStyles,
   TextField,
   FormControl,
@@ -36,30 +36,30 @@ class ParentsInformation extends React.Component {
 
     return (
       <React.Fragment>
-        <TextField 
+        <TextField
           id="permanent-address"
-          label="Permanent Address" 
-          className={classes.feild}
+          label="Permanent Address"
+          className={classes.fieldLarger}
           value={this.props.data.permanentAddress}
           onChange={handleChange('permanentAddress')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-        <TextField 
+        <TextField
           id="city"
-          label="City" 
-          className={classes.feild}
+          label="City"
+          className={classes.field}
           value={this.props.data.city}
           onChange={handleChange('city')}
           margin="normal"
           variant="outlined"
           required
         ></TextField>
-        <TextField 
+        <TextField
           id="state"
-          label="State" 
-          className={classes.feildSmaller}
+          label="State"
+          className={classes.fieldSmaller}
           value={this.props.data.props}
           onChange={handleChange('state')}
           margin="normal"
@@ -68,8 +68,8 @@ class ParentsInformation extends React.Component {
         ></TextField>
         <FormControl
           id="zip-code"
-          className={classes.feild} 
-          variant="outlined" 
+          className={classes.fieldSmaller}
+          variant="outlined"
           margin="normal"
           required
         >
@@ -88,10 +88,10 @@ class ParentsInformation extends React.Component {
             required
           />
         </FormControl>
-        <TextField 
+        <TextField
           id="parent-name"
-          label="Parent's Name" 
-          className={classes.feild}
+          label="Parent's Name"
+          className={classes.field}
           value={this.props.data.parentName}
           onChange={handleChange('parentName')}
           margin="normal"
@@ -99,8 +99,8 @@ class ParentsInformation extends React.Component {
         ></TextField>
         <FormControl
           id="parent-phone-number"
-          className={classes.feild} 
-          variant="outlined" 
+          className={classes.field}
+          variant="outlined"
           margin="normal"
         >
           <div ref={this.inputLabelRef}>
@@ -117,10 +117,10 @@ class ParentsInformation extends React.Component {
             onClick={this.focusTextInput}
           />
         </FormControl>
-        <TextField 
+        <TextField
           id="parent-email"
-          label="Parent's Email" 
-          className={classes.feild}
+          label="Parent's Email"
+          className={classes.field}
           value={this.props.data.parentEmail}
           onChange={handleChange('parentEmail')}
           margin="normal"

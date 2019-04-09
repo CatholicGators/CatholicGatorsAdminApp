@@ -3,7 +3,7 @@ import { PhoneNumberTextMask } from '../CustomTextMasks/phoneNumberTextMask'
 import { YearTextMask } from '../CustomTextMasks/yearTextMask'
 import { styles } from '../../utils/ContactFormStyles'
 
-import { 
+import {
     withStyles,
     TextField,
     MenuItem,
@@ -52,8 +52,8 @@ const semester = [
 class PersonalInformation extends React.Component {
   private inputLabelRef: React.RefObject<HTMLDivElement>
 
-  state = { 
-    labelWidth: 0 
+  state = {
+    labelWidth: 0
   };
 
   constructor(public props: any) {
@@ -75,20 +75,20 @@ class PersonalInformation extends React.Component {
     return (
       <React.Fragment>
         <form>
-          <TextField 
+          <TextField
             id="first-name"
-            label="First Name" 
-            className={classes.feild}
+            label="First Name"
+            className={classes.field}
             value={this.props.data.firstName}
             onChange={handleChange('firstName')}
             margin="normal"
             variant="outlined"
             required
           ></TextField>
-          <TextField 
+          <TextField
             id="last-name"
-            label="Last Name" 
-            className={classes.feild}
+            label="Last Name"
+            className={classes.field}
             value={this.props.data.lastName}
             onChange={handleChange('lastName')}
             margin="normal"
@@ -99,7 +99,7 @@ class PersonalInformation extends React.Component {
             id="gender"
             select
             label="Gender"
-            className={classes.feildSmaller}
+            className={classes.fieldSmaller}
             value={this.props.data.gender}
             onChange={handleChange('gender')}
             margin="normal"
@@ -112,15 +112,32 @@ class PersonalInformation extends React.Component {
               </MenuItem>
             ))}
           </TextField>
+          <TextField
+          id="school"
+          select
+          label="School"
+          className={classes.fieldSmaller}
+          value={this.props.data.school}
+          onChange={handleChange('school')}
+          margin="normal"
+          variant="outlined"
+          required
+          >
+            {schools.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <FormControl
             id="phone-number"
-            className={classes.feild} 
-            variant="outlined" 
+            className={classes.field}
+            variant="outlined"
             margin="normal"
             required
           >
             <div ref={this.inputLabelRef}>
-              <InputLabel 
+              <InputLabel
                 htmlFor="phone-number"
               >Phone number</InputLabel>
             </div>
@@ -134,20 +151,20 @@ class PersonalInformation extends React.Component {
               required
             />
           </FormControl>
-          <TextField 
+          <TextField
             id="email"
-            label="Email" 
-            className={classes.feild}
+            label="Email"
+            className={classes.fieldLarger}
             value={this.props.data.email}
             onChange={handleChange('email')}
             margin="normal"
             variant="outlined"
             required
           ></TextField>
-          <TextField 
+          <TextField
             id="housing-complex"
-            label="Name of Dorm/Complex you live in" 
-            className={classes.feildLarger}
+            label="Name of Dorm/Complex you live in"
+            className={classes.fieldLarger}
             value={this.props.data.housingComplex}
             onChange={handleChange('housingComplex')}
             margin="normal"
@@ -155,8 +172,8 @@ class PersonalInformation extends React.Component {
           ></TextField>
           <FormControl
             id="graduation-year"
-            className={classes.feild} 
-            variant="outlined" 
+            className={classes.field}
+            variant="outlined"
             margin="normal"
             required
           >
@@ -179,7 +196,7 @@ class PersonalInformation extends React.Component {
             id="graduationSemester"
             select
             label="Graduation Semester"
-            className={classes.feild}
+            className={classes.field}
             value={this.props.data.graduationSemester}
             onChange={handleChange('graduationSemester')}
             margin="normal"
@@ -187,23 +204,6 @@ class PersonalInformation extends React.Component {
             required
             >
             {semester.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-          id="school"
-          select
-          label="School"
-          className={classes.feildSmaller}
-          value={this.props.data.school}
-          onChange={handleChange('school')}
-          margin="normal"
-          variant="outlined"
-          required
-          >
-            {schools.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>

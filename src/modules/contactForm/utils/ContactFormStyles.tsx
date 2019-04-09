@@ -1,5 +1,5 @@
 import {
-Theme, 
+Theme,
 createStyles
 } from '@material-ui/core'
 
@@ -8,20 +8,20 @@ export var styles = (theme: Theme) => createStyles({
         display: 'flex',
         flexWrap: 'wrap',
       },
-      feild: {
-        marginLeft: 10,
-        marginRight: 10,
-        width: 250
+      field: {
+        marginLeft: '2%',
+        marginRight: '2%',
+        width: '46%'
       },
-      feildSmaller: {
-        marginLeft: 10,
-        marginRight: 10,
-        width: 100
+      fieldSmaller: {
+        marginLeft: '2%',
+        marginRight: '2%',
+        width: '21%'
       },
-      feildLarger: {
-        marginLeft: 10,
-        marginRight: 10,
-        width: 300
+      fieldLarger: {
+        marginLeft: '2%',
+        marginRight: '2%',
+        width: '96%'
       },
       margins: {
         marginLeft: 10,
