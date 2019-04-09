@@ -10,7 +10,6 @@ import { steps, filterState } from '../../utils/ContactFormUtils'
 
 import {
   withStyles,
-  Button,
   Typography,
   Paper,
   Stepper,
@@ -116,22 +115,7 @@ class ContactForm extends React.Component<any, any> {
               ))}
             </Stepper>
             <React.Fragment>
-              {getStepContent(activeStep, this.state, this.handleChange)}
-              <div className={classes.buttons}>
-                {activeStep !== 0 && (
-                  <Button onClick={this.handleBack} className={classes.button}>
-                    Back
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Submit form' : 'Next'}
-                </Button>
-              </div>
+              {getStepContent(activeStep, this.state, this.handleChange, this.handleNext, this.handleBack)}
             </React.Fragment>
           </Paper>
         </main>
@@ -140,14 +124,14 @@ class ContactForm extends React.Component<any, any> {
   }
 }
 
-function getStepContent(step, state, handleChange) {
+function getStepContent(step, state, handleChange, handleNext, handleBack) {
   switch (step) {
     case 0:
-      return <PersonalInformation data={state} handleChange = {handleChange} />;
+      return <PersonalInformation data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
     case 1:
-      return <ParentsInformation data={state} handleChange = {handleChange} />;
+      return <ParentsInformation data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
     case 2:
-      return <Interests data={state} handleChange = {handleChange} />;
+      return <Interests data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
     default:
       throw new Error('Unknown step');
   }

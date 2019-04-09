@@ -11,12 +11,14 @@ export var styles = (theme: Theme) => createStyles({
       field: {
         marginLeft: '2%',
         marginRight: '2%',
-        width: '46%'
+        width: '46%',
+        minWidth: 250
       },
       fieldSmaller: {
         marginLeft: '2%',
         marginRight: '2%',
-        width: '21%'
+        width: '21%',
+        minWidth: 100
       },
       fieldLarger: {
         marginLeft: '2%',

@@ -9,7 +9,8 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
-    OutlinedInput
+    OutlinedInput,
+    Button
 } from "@material-ui/core";
 
 const genders = [
@@ -74,7 +75,7 @@ class PersonalInformation extends React.Component {
 
     return (
       <React.Fragment>
-        <form>
+        <form onSubmit={this.props.handleNext}>
           <TextField
             id="first-name"
             label="First Name"
@@ -209,6 +210,14 @@ class PersonalInformation extends React.Component {
               </MenuItem>
             ))}
           </TextField>
+          <div className={classes.buttons}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.button}
+                > Next </Button>
+            </div>
         </form>
       </React.Fragment>
     );
