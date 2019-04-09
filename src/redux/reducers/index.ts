@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import authReducer from './auth/authReducer';
-import contactFormReducer from './contactForm/contactFormReducer'
+import adminReducer from './admin/adminReducer';
 
 export default combineReducers({
   auth: authReducer,
-  contactForm: contactFormReducer
+  contactForm: contactFormReducer,
+  admin: adminReducer
 });

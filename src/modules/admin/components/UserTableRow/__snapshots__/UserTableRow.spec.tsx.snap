@@ -1,0 +1,531 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserTableRow matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <UserTableRow
+    handleSelect={[MockFunction]}
+    isSelected={true}
+    updateUser={[MockFunction]}
+    user={
+      Object {
+        "id": "test",
+        "photoUrl": "",
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": "test",
+    "nodeType": "class",
+    "props": Object {
+      "aria-checked": true,
+      "children": Array [
+        <WithStyles(TableCell)
+          className={null}
+          padding="checkbox"
+        >
+          <WithStyles(Checkbox)
+            checked={true}
+            onClick={[Function]}
+          />
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)
+          className={null}
+        >
+          <WithStyles(Avatar)
+            className={null}
+          />
+          <WithStyles(IconButton)
+            className={null}
+            onClick={[Function]}
+          >
+            <WithStyles(Avatar)
+              src={null}
+            >
+              <pure(CheckIcon) />
+            </WithStyles(Avatar)>
+          </WithStyles(IconButton)>
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)
+          className={null}
+        />,
+        <WithStyles(TableCell) />,
+        <WithStyles(TableCell)>
+          <WithStyles(Switch)
+            id="approve-switch"
+            onChange={[Function]}
+          />
+        </WithStyles(TableCell)>,
+        <WithStyles(TableCell)>
+          <WithStyles(Switch)
+            disabled={true}
+            id="authorize-switch"
+            onChange={[Function]}
+          />
+        </WithStyles(TableCell)>,
+      ],
+      "hover": true,
+      "selected": true,
+      "tabIndex": -1,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <WithStyles(Checkbox)
+            checked={true}
+            onClick={[Function]}
+          />,
+          "className": null,
+          "padding": "checkbox",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "checked": true,
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <WithStyles(Avatar)
+              className={null}
+            />,
+            <WithStyles(IconButton)
+              className={null}
+              onClick={[Function]}
+            >
+              <WithStyles(Avatar)
+                src={null}
+              >
+                <pure(CheckIcon) />
+              </WithStyles(Avatar)>
+            </WithStyles(IconButton)>,
+          ],
+          "className": null,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "className": null,
+              "src": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <WithStyles(Avatar)
+                src={null}
+              >
+                <pure(CheckIcon) />
+              </WithStyles(Avatar)>,
+              "className": null,
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <pure(CheckIcon) />,
+                "src": null,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": undefined,
+          "className": null,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <WithStyles(Switch)
+            id="approve-switch"
+            onChange={[Function]}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "checked": undefined,
+            "id": "approve-switch",
+            "onChange": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <WithStyles(Switch)
+            disabled={true}
+            id="authorize-switch"
+            onChange={[Function]}
+          />,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "checked": undefined,
+            "disabled": true,
+            "id": "authorize-switch",
+            "onChange": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": "test",
+      "nodeType": "class",
+      "props": Object {
+        "aria-checked": true,
+        "children": Array [
+          <WithStyles(TableCell)
+            className={null}
+            padding="checkbox"
+          >
+            <WithStyles(Checkbox)
+              checked={true}
+              onClick={[Function]}
+            />
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)
+            className={null}
+          >
+            <WithStyles(Avatar)
+              className={null}
+            />
+            <WithStyles(IconButton)
+              className={null}
+              onClick={[Function]}
+            >
+              <WithStyles(Avatar)
+                src={null}
+              >
+                <pure(CheckIcon) />
+              </WithStyles(Avatar)>
+            </WithStyles(IconButton)>
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)
+            className={null}
+          />,
+          <WithStyles(TableCell) />,
+          <WithStyles(TableCell)>
+            <WithStyles(Switch)
+              id="approve-switch"
+              onChange={[Function]}
+            />
+          </WithStyles(TableCell)>,
+          <WithStyles(TableCell)>
+            <WithStyles(Switch)
+              disabled={true}
+              id="authorize-switch"
+              onChange={[Function]}
+            />
+          </WithStyles(TableCell)>,
+        ],
+        "hover": true,
+        "selected": true,
+        "tabIndex": -1,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Checkbox)
+              checked={true}
+              onClick={[Function]}
+            />,
+            "className": null,
+            "padding": "checkbox",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "checked": true,
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Avatar)
+                className={null}
+              />,
+              <WithStyles(IconButton)
+                className={null}
+                onClick={[Function]}
+              >
+                <WithStyles(Avatar)
+                  src={null}
+                >
+                  <pure(CheckIcon) />
+                </WithStyles(Avatar)>
+              </WithStyles(IconButton)>,
+            ],
+            "className": null,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "className": null,
+                "src": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <WithStyles(Avatar)
+                  src={null}
+                >
+                  <pure(CheckIcon) />
+                </WithStyles(Avatar)>,
+                "className": null,
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <pure(CheckIcon) />,
+                  "src": null,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": undefined,
+            "className": null,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Switch)
+              id="approve-switch"
+              onChange={[Function]}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "checked": undefined,
+              "id": "approve-switch",
+              "onChange": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Switch)
+              disabled={true}
+              id="authorize-switch"
+              onChange={[Function]}
+            />,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "checked": undefined,
+              "disabled": true,
+              "id": "authorize-switch",
+              "onChange": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;

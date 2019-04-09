@@ -35,35 +35,20 @@ ShallowWrapper {
       "children": <WithStyles(Paper)
         className={null}
       >
-        <WithStyles(Toolbar)>
-          <WithStyles(Typography)
-            variant="h6"
-          >
-            Users
-          </WithStyles(Typography)>
-        </WithStyles(Toolbar)>
-        <WithStyles(Table)>
-          <WithStyles(TableHead)>
-            <WithStyles(TableRow)>
-              <WithStyles(TableCell)>
-                Profile Pic
-              </WithStyles(TableCell)>
-              <WithStyles(TableCell)>
-                Name
-              </WithStyles(TableCell)>
-              <WithStyles(TableCell)>
-                Email
-              </WithStyles(TableCell)>
-              <WithStyles(TableCell)>
-                Approved
-              </WithStyles(TableCell)>
-              <WithStyles(TableCell)>
-                Admin
-              </WithStyles(TableCell)>
-            </WithStyles(TableRow)>
-          </WithStyles(TableHead)>
-          <WithStyles(TableBody) />
-        </WithStyles(Table)>
+        <WithStyles(UserTableToolbar)
+          handleBatchApprove={[Function]}
+          handleBatchAuthorize={[Function]}
+          handleBatchDelete={[Function]}
+          numSelected={0}
+        />
+        <div
+          className={null}
+          id="loading-spinner"
+        >
+          <WithStyles(CircularProgress)
+            size="60px"
+          />
+        </div>
       </WithStyles(Paper)>,
       "className": null,
     },
@@ -74,35 +59,21 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <WithStyles(Toolbar)>
-            <WithStyles(Typography)
-              variant="h6"
-            >
-              Users
-            </WithStyles(Typography)>
-          </WithStyles(Toolbar)>,
-          <WithStyles(Table)>
-            <WithStyles(TableHead)>
-              <WithStyles(TableRow)>
-                <WithStyles(TableCell)>
-                  Profile Pic
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Name
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Email
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Approved
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Admin
-                </WithStyles(TableCell)>
-              </WithStyles(TableRow)>
-            </WithStyles(TableHead)>
-            <WithStyles(TableBody) />
-          </WithStyles(Table)>,
+          <WithStyles(UserTableToolbar)
+            handleBatchApprove={[Function]}
+            handleBatchAuthorize={[Function]}
+            handleBatchDelete={[Function]}
+            numSelected={0}
+          />,
+          null,
+          <div
+            className={null}
+            id="loading-spinner"
+          >
+            <WithStyles(CircularProgress)
+              size="60px"
+            />
+          </div>,
         ],
         "className": null,
       },
@@ -113,11 +84,26 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <WithStyles(Typography)
-              variant="h6"
-            >
-              Users
-            </WithStyles(Typography)>,
+            "handleBatchApprove": [Function],
+            "handleBatchAuthorize": [Function],
+            "handleBatchDelete": [Function],
+            "numSelected": 0,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        null,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <WithStyles(CircularProgress)
+              size="60px"
+            />,
+            "className": null,
+            "id": "loading-spinner",
           },
           "ref": null,
           "rendered": Object {
@@ -125,167 +111,13 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": "Users",
-              "variant": "h6",
+              "size": "60px",
             },
             "ref": null,
-            "rendered": "Users",
+            "rendered": null,
             "type": [Function],
           },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <WithStyles(TableHead)>
-                <WithStyles(TableRow)>
-                  <WithStyles(TableCell)>
-                    Profile Pic
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Name
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Email
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Approved
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Admin
-                  </WithStyles(TableCell)>
-                </WithStyles(TableRow)>
-              </WithStyles(TableHead)>,
-              <WithStyles(TableBody) />,
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <WithStyles(TableRow)>
-                  <WithStyles(TableCell)>
-                    Profile Pic
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Name
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Email
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Approved
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Admin
-                  </WithStyles(TableCell)>
-                </WithStyles(TableRow)>,
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": Array [
-                    <WithStyles(TableCell)>
-                      Profile Pic
-                    </WithStyles(TableCell)>,
-                    <WithStyles(TableCell)>
-                      Name
-                    </WithStyles(TableCell)>,
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>,
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>,
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>,
-                  ],
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "children": "Profile Pic",
-                    },
-                    "ref": null,
-                    "rendered": "Profile Pic",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "children": "Name",
-                    },
-                    "ref": null,
-                    "rendered": "Name",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "children": "Email",
-                    },
-                    "ref": null,
-                    "rendered": "Email",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "children": "Approved",
-                    },
-                    "ref": null,
-                    "rendered": "Approved",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "children": "Admin",
-                    },
-                    "ref": null,
-                    "rendered": "Admin",
-                    "type": [Function],
-                  },
-                ],
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": null,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
+          "type": "div",
         },
       ],
       "type": [Function],
@@ -301,35 +133,20 @@ ShallowWrapper {
         "children": <WithStyles(Paper)
           className={null}
         >
-          <WithStyles(Toolbar)>
-            <WithStyles(Typography)
-              variant="h6"
-            >
-              Users
-            </WithStyles(Typography)>
-          </WithStyles(Toolbar)>
-          <WithStyles(Table)>
-            <WithStyles(TableHead)>
-              <WithStyles(TableRow)>
-                <WithStyles(TableCell)>
-                  Profile Pic
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Name
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Email
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Approved
-                </WithStyles(TableCell)>
-                <WithStyles(TableCell)>
-                  Admin
-                </WithStyles(TableCell)>
-              </WithStyles(TableRow)>
-            </WithStyles(TableHead)>
-            <WithStyles(TableBody) />
-          </WithStyles(Table)>
+          <WithStyles(UserTableToolbar)
+            handleBatchApprove={[Function]}
+            handleBatchAuthorize={[Function]}
+            handleBatchDelete={[Function]}
+            numSelected={0}
+          />
+          <div
+            className={null}
+            id="loading-spinner"
+          >
+            <WithStyles(CircularProgress)
+              size="60px"
+            />
+          </div>
         </WithStyles(Paper)>,
         "className": null,
       },
@@ -340,35 +157,21 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <WithStyles(Toolbar)>
-              <WithStyles(Typography)
-                variant="h6"
-              >
-                Users
-              </WithStyles(Typography)>
-            </WithStyles(Toolbar)>,
-            <WithStyles(Table)>
-              <WithStyles(TableHead)>
-                <WithStyles(TableRow)>
-                  <WithStyles(TableCell)>
-                    Profile Pic
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Name
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Email
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Approved
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Admin
-                  </WithStyles(TableCell)>
-                </WithStyles(TableRow)>
-              </WithStyles(TableHead)>
-              <WithStyles(TableBody) />
-            </WithStyles(Table)>,
+            <WithStyles(UserTableToolbar)
+              handleBatchApprove={[Function]}
+              handleBatchAuthorize={[Function]}
+              handleBatchDelete={[Function]}
+              numSelected={0}
+            />,
+            null,
+            <div
+              className={null}
+              id="loading-spinner"
+            >
+              <WithStyles(CircularProgress)
+                size="60px"
+              />
+            </div>,
           ],
           "className": null,
         },
@@ -379,11 +182,26 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <WithStyles(Typography)
-                variant="h6"
-              >
-                Users
-              </WithStyles(Typography)>,
+              "handleBatchApprove": [Function],
+              "handleBatchAuthorize": [Function],
+              "handleBatchDelete": [Function],
+              "numSelected": 0,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          null,
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <WithStyles(CircularProgress)
+                size="60px"
+              />,
+              "className": null,
+              "id": "loading-spinner",
             },
             "ref": null,
             "rendered": Object {
@@ -391,167 +209,13 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": "Users",
-                "variant": "h6",
+                "size": "60px",
               },
               "ref": null,
-              "rendered": "Users",
+              "rendered": null,
               "type": [Function],
             },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": Array [
-                <WithStyles(TableHead)>
-                  <WithStyles(TableRow)>
-                    <WithStyles(TableCell)>
-                      Profile Pic
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Name
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>
-                  </WithStyles(TableRow)>
-                </WithStyles(TableHead)>,
-                <WithStyles(TableBody) />,
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": <WithStyles(TableRow)>
-                    <WithStyles(TableCell)>
-                      Profile Pic
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Name
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>
-                  </WithStyles(TableRow)>,
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "children": Array [
-                      <WithStyles(TableCell)>
-                        Profile Pic
-                      </WithStyles(TableCell)>,
-                      <WithStyles(TableCell)>
-                        Name
-                      </WithStyles(TableCell)>,
-                      <WithStyles(TableCell)>
-                        Email
-                      </WithStyles(TableCell)>,
-                      <WithStyles(TableCell)>
-                        Approved
-                      </WithStyles(TableCell)>,
-                      <WithStyles(TableCell)>
-                        Admin
-                      </WithStyles(TableCell)>,
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "children": "Profile Pic",
-                      },
-                      "ref": null,
-                      "rendered": "Profile Pic",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "children": "Name",
-                      },
-                      "ref": null,
-                      "rendered": "Name",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "children": "Email",
-                      },
-                      "ref": null,
-                      "rendered": "Email",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "children": "Approved",
-                      },
-                      "ref": null,
-                      "rendered": "Approved",
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "children": "Admin",
-                      },
-                      "ref": null,
-                      "rendered": "Admin",
-                      "type": [Function],
-                    },
-                  ],
-                  "type": [Function],
-                },
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "children": null,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": [Function],
+            "type": "div",
           },
         ],
         "type": [Function],

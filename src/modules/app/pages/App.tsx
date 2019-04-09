@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import { listenForUser } from '../../../redux/actions/auth/authActions';
 import Header from '../components/Header/Header';
@@ -23,13 +23,16 @@ export class App extends Component<Props> {
       <Router>
         <div>
           <Header></Header>
-          <AuthorizedRoute
-            path="/admin/"
-            component={Admin}
-            isAuthorized={this.props.user ? this.props.user.isAdmin : false}
-            redirectPathname="/"
-          ></AuthorizedRoute>
-           <Route exact path="/" component={ContactForm} />
+          <Switch>
+            <Route exact path='/' component={ContactForm}/>
+            <AuthorizedRoute
+              path="/admin/"
+              component={Admin}
+              isAuthorized={this.props.user ? this.props.user.isAdmin : false}
+              redirectPathname="/"
+            ></AuthorizedRoute>
+            <Route render={() => <Redirect to="/" />} />
+          </Switch>
         </div>
       </Router>
     );
