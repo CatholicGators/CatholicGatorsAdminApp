@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getContacts } from '../../../redux/actions/contact/contactActions'
+import { getContacts } from '../../../../redux/actions/contactForm/contactFormActions'
 import {
   Theme,
   createStyles,
@@ -79,7 +79,7 @@ export class MyContacts extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-    contacts: state.contact.contacts
+    contacts: state.contactForm.contacts
 })
 
 const mapDispatchToProps = dispatch => ({

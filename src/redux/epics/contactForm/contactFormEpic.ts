@@ -5,7 +5,9 @@ import { combineEpics } from 'redux-observable';
 import {
     contactFormActions,
     submitContactFormSuccess,
-    submitContactFormErr
+    submitContactFormErr,
+    getContactsSuccess,
+    getContactsErr
 } from '../../actions/contactForm/contactFormActions';
 
 export const submitContactFormEpic = (action$, _, { firestore }) => {
@@ -20,6 +22,19 @@ export const submitContactFormEpic = (action$, _, { firestore }) => {
     );
 };
 
+export const getContactsEpic = (action$, _, { firestore }) => {
+    return action$.pipe(
+        ofType(contactFormActions.GET_CONTACTS),
+        mergeMap(() =>
+            firestore.getCollection('contactForms').pipe(
+                map(user => getContactsSuccess(user)),
+                catchError(err => ActionsObservable.of(getContactsErr(err)))
+            )
+        )
+    );
+}
+
 export default combineEpics(
-    submitContactFormEpic
+    submitContactFormEpic,
+    getContactsEpic
 );

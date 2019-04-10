@@ -7,7 +7,7 @@ import Header from '../components/Header/Header';
 import Admin from '../../admin/pages/Admin';
 import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute';
 import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
-import MyContacts from '../../contact/pages/myContacts';
+import MyContacts from '../../contactForm/pages/MyContacts/MyContacts';
 
 type Props = {
   user: any;

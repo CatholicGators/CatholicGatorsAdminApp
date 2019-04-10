@@ -3,7 +3,8 @@ import { contactFormActions } from "../../actions/contactForm/contactFormActions
 export const INITIAL_CONTACT_FORM_STATE = {
     errorMessage: null,
     success: null,
-    loading: false
+    loading: false,
+    contacts: undefined,
 };
 
 const setLoading = (state) => ({
@@ -26,6 +27,11 @@ const setError = (state, action) => ({
     loading: false
 });
 
+const applyContacts = (state, action) => ({
+    ...state,
+    contacts: action.contacts
+})
+
 function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
     switch(action.type) {
         case contactFormActions.SUBMIT_CONTACT_FORM : {
@@ -36,6 +42,9 @@ function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
         }
         case contactFormActions.SUBMIT_CONTACT_FORM_ERR : {
             return setError(state, action);
+        }
+        case contactFormActions.GET_CONTACTS_SUCCESS : {
+            return applyContacts(state, action)
         }
         default : return state;
     }

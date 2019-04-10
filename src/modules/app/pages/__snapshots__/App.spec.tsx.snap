@@ -47,6 +47,10 @@ ShallowWrapper {
             redirectPathname="/"
           />
           <Route
+            component={[Function]}
+            path="/my-contacts/"
+          />
+          <Route
             render={[Function]}
           />
         </Switch>
@@ -71,6 +75,10 @@ ShallowWrapper {
               isAuthorized={false}
               path="/admin/"
               redirectPathname="/"
+            />
+            <Route
+              component={[Function]}
+              path="/my-contacts/"
             />
             <Route
               render={[Function]}
@@ -105,6 +113,10 @@ ShallowWrapper {
                 isAuthorized={false}
                 path="/admin/"
                 redirectPathname="/"
+              />,
+              <Route
+                component={[Function]}
+                path="/my-contacts/"
               />,
               <Route
                 render={[Function]}
@@ -145,6 +157,18 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
+                "component": [Function],
+                "path": "/my-contacts/",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
                 "render": [Function],
               },
               "ref": null,
@@ -152,18 +176,6 @@ ShallowWrapper {
               "type": [Function],
             },
           ],
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "component": [Function],
-            "path": "/my-contacts/",
-          },
-          "ref": null,
-          "rendered": null,
           "type": [Function],
         },
       ],
@@ -192,6 +204,10 @@ ShallowWrapper {
               redirectPathname="/"
             />
             <Route
+              component={[Function]}
+              path="/my-contacts/"
+            />
+            <Route
               render={[Function]}
             />
           </Switch>
@@ -216,6 +232,10 @@ ShallowWrapper {
                 isAuthorized={false}
                 path="/admin/"
                 redirectPathname="/"
+              />
+              <Route
+                component={[Function]}
+                path="/my-contacts/"
               />
               <Route
                 render={[Function]}
@@ -250,6 +270,10 @@ ShallowWrapper {
                   isAuthorized={false}
                   path="/admin/"
                   redirectPathname="/"
+                />,
+                <Route
+                  component={[Function]}
+                  path="/my-contacts/"
                 />,
                 <Route
                   render={[Function]}
@@ -290,6 +314,18 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
+                  "component": [Function],
+                  "path": "/my-contacts/",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
                   "render": [Function],
                 },
                 "ref": null,
@@ -297,18 +333,6 @@ ShallowWrapper {
                 "type": [Function],
               },
             ],
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "component": [Function],
-              "path": "/my-contacts/",
-            },
-            "ref": null,
-            "rendered": null,
             "type": [Function],
           },
         ],
