@@ -6,6 +6,7 @@ import { listenForUser } from '../../../redux/actions/auth/authActions';
 import Header from '../components/Header/Header';
 import Admin from '../../admin/pages/Admin';
 import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute';
+import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
 
 type Props = {
   user: any;
@@ -23,7 +24,7 @@ export class App extends Component<Props> {
         <div>
           <Header></Header>
           <Switch>
-            <Route exact path='/' component={() => <h1>Home!</h1>}/>
+            <Route exact path='/' component={ContactForm}/>
             <AuthorizedRoute
               path="/admin/"
               component={Admin}
