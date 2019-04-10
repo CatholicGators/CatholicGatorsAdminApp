@@ -138,7 +138,7 @@ export class Header extends React.Component<Props, State> {
                         <div className={classes ? classes.desktopMenuItems : null}>
                             { user ?
                                 menuLinks
-                                    .filter(link => !link.needsAuthorization || user.isAdmin)
+                                    .filter(link => !link.needsAuthorization || (user.isAdmin && user.isApproved))
                                     .map(link => 
                                             <NavLink
                                                 exact

@@ -29,10 +29,10 @@ export class App extends Component<Props> {
             <AuthorizedRoute
               path="/admin/"
               component={Admin}
-              isAuthorized={this.props.user ? this.props.user.isAdmin : false}
+              isAuthorized={this.props.user ? this.props.user.isAdmin && this.props.user.isApproved : false}
               redirectPathname="/"
-            ></AuthorizedRoute>
-            <Route path="/my-contacts/" component={MyContacts}></Route>
+            />
+            <Route path="/my-contacts/" component={MyContacts}/>
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </div>

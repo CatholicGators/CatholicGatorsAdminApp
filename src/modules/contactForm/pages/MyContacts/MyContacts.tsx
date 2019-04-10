@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getContacts } from '../../../../redux/actions/contactForm/contactFormActions'
+import { withRouter } from 'react-router-dom'
 import {
   Theme,
   createStyles,
@@ -13,8 +13,14 @@ import {
   TableBody,
   Toolbar,
   Typography,
-  Checkbox
+  Checkbox,
+  Card,
+  CardContent,
+  CardActions,
+  Button
 } from '@material-ui/core'
+
+import { getContacts } from '../../../../redux/actions/contactForm/contactFormActions'
 
 const styles = (theme: Theme) => createStyles({
   tableWrapper: {
@@ -23,12 +29,21 @@ const styles = (theme: Theme) => createStyles({
     marginLeft: 'auto',
     marginRight: 'auto'
   },
+  cardWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '50px',
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
+  },
   tableCard: {
     overflowX: 'auto'
   }
 })
 
 type Props = {
+    history: any,
+    user: any,
     classes: any,
     contacts: any,
     getContacts: () => void
@@ -39,10 +54,14 @@ export class MyContacts extends Component<Props> {
         this.props.getContacts()
     }
 
+    goToHome() {
+        this.props.history.push('/')
+    }
+
     render() {
-        const { classes, contacts } =  this.props
+        const { classes, contacts, user } =  this.props
     
-        return (
+        return user && user.isApproved ? (
             <div className={classes ? classes.tableWrapper : null}>
                 <Paper className={classes ? classes.tableCard : null}>
                     <Toolbar>
@@ -74,16 +93,33 @@ export class MyContacts extends Component<Props> {
                     </Table>
                 </Paper>
             </div>
-        );
+        ) : (
+            <div className={classes ? classes.cardWrapper : null}>
+                <Card>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            You are not approved
+                        </Typography>
+                        <Typography component="p">
+                            Please seek approval from an admin
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button color="primary" onClick={() => this.goToHome()}>Ok</Button>
+                    </CardActions>
+                </Card>
+            </div>
+        )
     }
 }
 
 const mapStateToProps = state => ({
-    contacts: state.contactForm.contacts
+    contacts: state.contactForm.contacts,
+    user: state.auth.user
 })
 
 const mapDispatchToProps = dispatch => ({
     getContacts: () => dispatch(getContacts())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MyContacts))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MyContacts)))
