@@ -52,6 +52,11 @@ export var styles = (theme: Theme) => createStyles({
       stepper: {
         padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
       },
+      stepLabel: {
+        [theme.breakpoints.down('xs')]: {
+            display: "none"
+        }
+      },
       buttons: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -60,4 +65,9 @@ export var styles = (theme: Theme) => createStyles({
         marginTop: theme.spacing.unit * 3,
         marginLeft: theme.spacing.unit,
       },
+      spinner: {
+          marginLeft: '48%',
+          marginRight: '48%',
+          size: 100
+      }
   });

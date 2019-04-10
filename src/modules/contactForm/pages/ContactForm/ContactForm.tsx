@@ -9,142 +9,152 @@ import { styles } from '../../utils/ContactFormStyles'
 import { steps, filterState } from '../../utils/ContactFormUtils'
 
 import {
-  withStyles,
-  Typography,
-  Paper,
-  Stepper,
-  Step,
-  StepLabel
+    withStyles,
+    Typography,
+    Paper,
+    Stepper,
+    Step,
+    StepLabel,
+    CircularProgress
 } from '@material-ui/core';
 
 const initState = {
-  firstName: '',
-  lastName: '',
-  gender: '',
-  email: '',
-  phoneNumber: '',
-  graduationSemester: '',
-  graduationYear: '',
-  school: '',
-  permanentAddress: '',
-  city: '',
-  state: '',
-  zipCode: '',
-  housingComplex: '',
-  parentName: '',
-  parentPhone: '',
-  parentEmail: '',
-  eventsGreekStudents: false,
-  eventsLatinoStudents: false,
-  eventsGraduateStudents: false,
-  receiveMonthlyNewsletter: false,
-  registerAsParishioner: false,
-  englishBibleStudy: false,
-  spanishBibleStudy: false,
-  freeFood: false,
-  guestSpeakers: false,
-  musicMinistry: false,
-  socials: false,
-  retreats: false,
-  intramuralSports: false,
-  proLifeClub: false,
-  RHC: false,
-  servingAtMass: false,
-  teachReligiousEd: false,
-  serviceProjects: false,
-  activeStep: 0
+    firstName: '',
+    lastName: '',
+    gender: '',
+    email: '',
+    phoneNumber: '',
+    graduationSemester: '',
+    graduationYear: '',
+    school: '',
+    permanentAddress: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    housingComplex: '',
+    parentName: '',
+    parentPhone: '',
+    parentEmail: '',
+    eventsGreekStudents: false,
+    eventsLatinoStudents: false,
+    eventsGraduateStudents: false,
+    receiveMonthlyNewsletter: false,
+    registerAsParishioner: false,
+    englishBibleStudy: false,
+    spanishBibleStudy: false,
+    freeFood: false,
+    guestSpeakers: false,
+    musicMinistry: false,
+    socials: false,
+    retreats: false,
+    intramuralSports: false,
+    proLifeClub: false,
+    RHC: false,
+    servingAtMass: false,
+    teachReligiousEd: false,
+    serviceProjects: false,
+    activeStep: 0
 };
 
 class ContactForm extends React.Component<any, any> {
 
-  constructor(public props: any) {
-    super(props)
-    this.state = initState;
-  }
-
-  handleChange = (name: string) => event => {
-    if(event.target.type === "checkbox") {
-      this.setState({
-        [name]: event.target.checked
-      });
-    } else {
-      this.setState({
-          [name]: event.target.value
-      });
+    constructor(public props: any) {
+        super(props)
+        this.state = initState;
     }
-  };
 
-  handleNext = () => {
-    if(this.state.activeStep === steps.length - 1) {
-      this.handleReset();
-      this.props.submitContactForm(filterState(this.state));
-      this.props.history.push('/thank-you')
-    } else {
-      this.setState((prevState : any) => ({
-        activeStep: prevState.activeStep + 1,
-      }));
-    }
-  };
+    handleChange = (name: string) => event => {
+        if (event.target.type === "checkbox") {
+            this.setState({
+                [name]: event.target.checked
+            });
+        } else {
+            this.setState({
+                [name]: event.target.value
+            });
+        }
+    };
 
-  handleBack = () => {
-    this.setState((prevState : any) => ({
-      activeStep: prevState.activeStep - 1,
-    }));
-  };
+    handleNext = () => {
+        if (this.state.activeStep === steps.length - 1) {
+            this.props.submitContactForm(filterState(this.state));
+        }
+        this.setState((prevState: any) => ({
+            activeStep: prevState.activeStep + 1,
+        }));
+    };
 
-  handleReset = () => {
-    this.setState(initState);
-  };
+    handleBack = () => {
+        this.setState((prevState: any) => ({
+            activeStep: prevState.activeStep - 1,
+        }));
+    };
 
-  render() {
-    const { classes } = this.props;
-    const { activeStep } = this.state;
+    render() {
+        const { classes } = this.props;
+        const { activeStep } = this.state;
 
-    return (
-      <React.Fragment>
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
-              Join Catholic Gators
-            </Typography>
-            <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map(label => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+        return (
             <React.Fragment>
-              {getStepContent(activeStep, this.state, this.handleChange, this.handleNext, this.handleBack)}
+                <main className={classes.layout}>
+                    <Paper className={classes.paper}>
+                        <Typography component="h1" variant="h4" align="center">
+                            Join Catholic Gators
+            </Typography>
+                        <Stepper activeStep={activeStep} className={classes.stepper}>
+                            {steps.map(label => (
+                                <Step key={label}>
+                                    <StepLabel classes={{ label: classes.stepLabel }}>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
+                        <React.Fragment>
+                            {getStepContent(activeStep, this.state, this.props, this.handleChange, this.handleNext, this.handleBack)}
+                        </React.Fragment>
+                    </Paper>
+                </main>
             </React.Fragment>
-          </Paper>
-        </main>
-      </React.Fragment>
-    );
-  }
+        );
+    }
 }
 
-function getStepContent(step, state, handleChange, handleNext, handleBack) {
-  switch (step) {
-    case 0:
-      return <PersonalInformation data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
-    case 1:
-      return <ParentsInformation data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
-    case 2:
-      return <Interests data={state} handleChange = {handleChange} handleNext = {handleNext} handleBack={handleBack} />;
-    default:
-      throw new Error('Unknown step');
-  }
+function getStepContent(step, state, props, handleChange, handleNext, handleBack) {
+    if(props.loading) {
+        return <CircularProgress id='spinner' className={props.classes.spinner} />
+    } else if (props.success) {
+        return (
+            <Typography component="h1" variant="h4" align="center">
+                Thank you submitting! We will be contacting you soon.
+            </Typography>
+        )
+    } else if (props.success) {
+        return (
+            <Typography component="h1" variant="h4" align="center">
+                There was an error submitting. Please try again later.
+            </Typography>
+        )
+    } else {
+        switch (step) {
+            case 0:
+                return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+            case 1:
+                return <ParentsInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+            case 2:
+                return <Interests data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+            default:
+                throw new Error('Unknown step');
+        }
+    }
 }
 
 const mapDispatchToProps = dispatch => ({
-  submitContactForm: form => dispatch(submitContactForm(form))
+    submitContactForm: form => dispatch(submitContactForm(form))
 });
 
 const mapStateToProps = state => ({
-  loading: state.contactForm.loading,
-  success: state.contactForm.success,
-  errorMessage: state.contactForm.errorMessage
+    loading: state.contactForm.loading,
+    success: state.contactForm.success,
+    errorMessage: state.contactForm.errorMessage
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactForm));
