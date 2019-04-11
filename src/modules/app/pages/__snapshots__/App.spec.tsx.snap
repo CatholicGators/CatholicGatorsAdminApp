@@ -46,9 +46,11 @@ ShallowWrapper {
             path="/admin/"
             redirectPathname="/"
           />
-          <Route
+          <PrivateRoute
             component={[Function]}
+            isAuthorized={false}
             path="/my-contacts/"
+            redirectPathname="/"
           />
           <Route
             render={[Function]}
@@ -76,9 +78,11 @@ ShallowWrapper {
               path="/admin/"
               redirectPathname="/"
             />
-            <Route
+            <PrivateRoute
               component={[Function]}
+              isAuthorized={false}
               path="/my-contacts/"
+              redirectPathname="/"
             />
             <Route
               render={[Function]}
@@ -114,9 +118,11 @@ ShallowWrapper {
                 path="/admin/"
                 redirectPathname="/"
               />,
-              <Route
+              <PrivateRoute
                 component={[Function]}
+                isAuthorized={false}
                 path="/my-contacts/"
+                redirectPathname="/"
               />,
               <Route
                 render={[Function]}
@@ -155,10 +161,12 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
                 "component": [Function],
+                "isAuthorized": false,
                 "path": "/my-contacts/",
+                "redirectPathname": "/",
               },
               "ref": null,
               "rendered": null,
@@ -203,9 +211,11 @@ ShallowWrapper {
               path="/admin/"
               redirectPathname="/"
             />
-            <Route
+            <PrivateRoute
               component={[Function]}
+              isAuthorized={false}
               path="/my-contacts/"
+              redirectPathname="/"
             />
             <Route
               render={[Function]}
@@ -233,9 +243,11 @@ ShallowWrapper {
                 path="/admin/"
                 redirectPathname="/"
               />
-              <Route
+              <PrivateRoute
                 component={[Function]}
+                isAuthorized={false}
                 path="/my-contacts/"
+                redirectPathname="/"
               />
               <Route
                 render={[Function]}
@@ -271,9 +283,11 @@ ShallowWrapper {
                   path="/admin/"
                   redirectPathname="/"
                 />,
-                <Route
+                <PrivateRoute
                   component={[Function]}
+                  isAuthorized={false}
                   path="/my-contacts/"
+                  redirectPathname="/"
                 />,
                 <Route
                   render={[Function]}
@@ -312,10 +326,12 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "class",
+                "nodeType": "function",
                 "props": Object {
                   "component": [Function],
+                  "isAuthorized": false,
                   "path": "/my-contacts/",
+                  "redirectPathname": "/",
                 },
                 "ref": null,
                 "rendered": null,

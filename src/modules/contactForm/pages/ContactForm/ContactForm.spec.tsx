@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import ContactForm from './ContactForm';
 
-describe('App', () => {
+describe('ContactForm', () => {
     let props, wrapper;
 
     beforeEach(() => {
