@@ -13,22 +13,14 @@ import {
 } from "@material-ui/core";
 
 class ParentsInformation extends React.Component {
-  private inputLabelRef: React.RefObject<HTMLDivElement>
 
   constructor(public props: any) {
     super(props)
-    this.inputLabelRef = React.createRef();
-    this.focusTextInput = this.focusTextInput.bind(this);
   }
 
   state = {
-    labelWidth: 0
-  }
-
-  focusTextInput() {
-    this.setState({
-      labelWidth: this.inputLabelRef.current.offsetWidth
-    });
+    zipCodeWidth: 75,
+    phoneNumberWidth: 165
   }
 
   render() {
@@ -62,7 +54,7 @@ class ParentsInformation extends React.Component {
             id="state"
             label="State"
             className={classes.fieldSmaller}
-            value={this.props.data.props}
+            value={this.props.data.state}
             onChange={handleChange('state')}
             margin="normal"
             variant="outlined"
@@ -75,20 +67,17 @@ class ParentsInformation extends React.Component {
             margin="normal"
             required
             >
-            <div ref={this.inputLabelRef}>
-                <InputLabel
-                htmlFor="zip-code"
-                >Zip Code</InputLabel>
-            </div>
-            <OutlinedInput
+                <InputLabel htmlFor="zip-code">
+                    Zip Code
+                </InputLabel>
+                <OutlinedInput
                 id="zip-code"
                 value={this.props.data.zipCode}
                 onChange={handleChange('zipCode')}
                 inputComponent={ZipCodeTextMask as any}
-                labelWidth={this.state.labelWidth}
-                onClick={this.focusTextInput}
+                labelWidth={this.state.zipCodeWidth}
                 required
-            />
+                />
             </FormControl>
             <TextField
             id="parent-name"
@@ -105,19 +94,16 @@ class ParentsInformation extends React.Component {
             variant="outlined"
             margin="normal"
             >
-            <div ref={this.inputLabelRef}>
-                <InputLabel
-                htmlFor="parent-phone-number"
-                >Parent's phone number</InputLabel>
-            </div>
-            <OutlinedInput
+                <InputLabel htmlFor="parent-phone-number">
+                    Parent's phone number
+                </InputLabel>
+                <OutlinedInput
                 id="parent-phone-number"
                 value={this.props.data.parentPhone}
                 onChange={handleChange('parentPhone')}
                 inputComponent={PhoneNumberTextMask as any}
-                labelWidth={this.state.labelWidth}
-                onClick={this.focusTextInput}
-            />
+                labelWidth={this.state.phoneNumberWidth}
+                />
             </FormControl>
             <TextField
             id="parent-email"
@@ -134,10 +120,10 @@ class ParentsInformation extends React.Component {
                     className={classes.button}
                 > Back </Button>
                 <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className={classes.button}
+                variant="contained"
+                color="primary"
+                type="submit"
+                className={classes.button}
                 > Next </Button>
               </div>
         </form>
