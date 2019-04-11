@@ -68,7 +68,7 @@ class PersonalInformation extends React.Component {
     return (
       <React.Fragment>
         <form onSubmit={this.props.handleNext}>
-          <TextField
+            <TextField
             id="first-name"
             label="First Name"
             className={classes.field}
@@ -77,8 +77,8 @@ class PersonalInformation extends React.Component {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
-          <TextField
+            ></TextField>
+            <TextField
             id="last-name"
             label="Last Name"
             className={classes.field}
@@ -87,8 +87,8 @@ class PersonalInformation extends React.Component {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
-          <TextField
+            ></TextField>
+            <TextField
             id="gender"
             select
             label="Gender"
@@ -99,49 +99,49 @@ class PersonalInformation extends React.Component {
             variant="outlined"
             required
             >
-            {genders.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-          id="school"
-          select
-          label="School"
-          className={classes.fieldSmaller}
-          value={this.props.data.school}
-          onChange={handleChange('school')}
-          margin="normal"
-          variant="outlined"
-          required
-          >
-            {schools.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <FormControl
+                {genders.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                </MenuItem>
+                ))}
+            </TextField>
+            <TextField
+            id="school"
+            select
+            label="School"
+            className={classes.fieldSmaller}
+            value={this.props.data.school}
+            onChange={handleChange('school')}
+            margin="normal"
+            variant="outlined"
+            required
+            >
+                {schools.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                </MenuItem>
+                ))}
+            </TextField>
+            <FormControl
             id="phone-number"
             className={classes.field}
             variant="outlined"
             margin="normal"
             required
-          >
-              <InputLabel
-                htmlFor="phone-number"
-              >Phone number</InputLabel>
-            <OutlinedInput
-              id="phone-number"
-              value={this.props.data.phoneNumber}
-              onChange={handleChange('phoneNumber')}
-              inputComponent={PhoneNumberTextMask as any}
-              labelWidth={this.state.phoneNumberWidth}
-              required
-            />
-          </FormControl>
-          <TextField
+            >
+                <InputLabel htmlFor="phone-number">
+                    Phone number
+                </InputLabel>
+                <OutlinedInput
+                id="phone-number"
+                value={this.props.data.phoneNumber}
+                onChange={handleChange('phoneNumber')}
+                inputComponent={PhoneNumberTextMask as any}
+                labelWidth={this.state.phoneNumberWidth}
+                required
+                />
+            </FormControl>
+            <TextField
             id="email"
             label="Email"
             className={classes.fieldLarger}
@@ -150,8 +150,8 @@ class PersonalInformation extends React.Component {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
-          <TextField
+            ></TextField>
+            <TextField
             id="housing-complex"
             label="Name of Dorm/Complex"
             className={classes.fieldLarger}
@@ -159,27 +159,27 @@ class PersonalInformation extends React.Component {
             onChange={handleChange('housingComplex')}
             margin="normal"
             variant="outlined"
-          ></TextField>
-          <FormControl
+            ></TextField>
+            <FormControl
             id="graduation-year"
             className={classes.field}
             variant="outlined"
             margin="normal"
             required
-          >
-              <InputLabel
+            >
+                <InputLabel
                 htmlFor="graduation-year"
-              >Graduation Year</InputLabel>
-            <OutlinedInput
-            id="graduationYear"
-            value={this.props.data.graduationYear}
-            onChange={handleChange('graduationYear')}
-            inputComponent={YearTextMask as any}
-            labelWidth={this.state.yearWidth}
-            required
-            />
-          </FormControl>
-          <TextField
+                >Graduation Year</InputLabel>
+                <OutlinedInput
+                id="graduationYear"
+                value={this.props.data.graduationYear}
+                onChange={handleChange('graduationYear')}
+                inputComponent={YearTextMask as any}
+                labelWidth={this.state.yearWidth}
+                required
+                />
+            </FormControl>
+            <TextField
             id="graduationSemester"
             select
             label="Graduation Semester"
@@ -195,8 +195,8 @@ class PersonalInformation extends React.Component {
                 {option.label}
               </MenuItem>
             ))}
-          </TextField>
-          <div className={classes.buttons}>
+            </TextField>
+            <div className={classes.buttons}>
                 <Button
                 variant="contained"
                 color="primary"
