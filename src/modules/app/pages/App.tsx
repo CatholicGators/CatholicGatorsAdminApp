@@ -32,7 +32,12 @@ export class App extends Component<Props> {
               isAuthorized={this.props.user ? this.props.user.isAdmin && this.props.user.isApproved : false}
               redirectPathname="/"
             />
-            <Route path="/my-contacts/" component={MyContacts}/>
+            <AuthorizedRoute
+              path="/my-contacts/"
+              component={MyContacts}
+              isAuthorized={this.props.user !== undefined}
+              redirectPathname="/"
+            />
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </div>

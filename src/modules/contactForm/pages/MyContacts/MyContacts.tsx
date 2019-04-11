@@ -17,7 +17,8 @@ import {
   Card,
   CardContent,
   CardActions,
-  Button
+  Button,
+  CircularProgress
 } from '@material-ui/core'
 
 import { getContacts } from '../../../../redux/actions/contactForm/contactFormActions'
@@ -25,9 +26,7 @@ import { getContacts } from '../../../../redux/actions/contactForm/contactFormAc
 const styles = (theme: Theme) => createStyles({
   tableWrapper: {
     maxWidth: '1000px',
-    marginTop: '50px',
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    margin: '50px auto'
   },
   cardWrapper: {
     display: 'flex',
@@ -38,7 +37,13 @@ const styles = (theme: Theme) => createStyles({
   },
   tableCard: {
     overflowX: 'auto'
-  }
+  },
+  tableLoadingContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '300px',
+  },
 })
 
 type Props = {
@@ -69,28 +74,34 @@ export class MyContacts extends Component<Props> {
                             My Contacts
                         </Typography>
                     </Toolbar>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Phone Number</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Called</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {contacts ? contacts.map(contact => (
-                            <TableRow hover key={contact.id}>
-                                <TableCell>{`${contact.firstName} ${contact.lastName}`}</TableCell>
-                                <TableCell>{contact.phoneNumber}</TableCell>
-                                <TableCell>{contact.email}</TableCell>
-                                <TableCell>
-                                    <Checkbox checked={contact.called} />
-                                </TableCell>
-                            </TableRow>
-                        )) : null}
-                        </TableBody>
-                    </Table>
+                    {contacts ?
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Phone Number</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Called</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {contacts.map(contact => (
+                                <TableRow hover key={contact.id}>
+                                    <TableCell>{`${contact.firstName} ${contact.lastName}`}</TableCell>
+                                    <TableCell>{contact.phoneNumber}</TableCell>
+                                    <TableCell>{contact.email}</TableCell>
+                                    <TableCell>
+                                        <Checkbox checked={contact.called} />
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    :
+                        <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
+                            <CircularProgress size="60px" />
+                        </div>
+                    }
                 </Paper>
             </div>
         ) : (

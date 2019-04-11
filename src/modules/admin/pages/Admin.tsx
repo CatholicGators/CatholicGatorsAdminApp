@@ -144,7 +144,7 @@ export class Admin extends Component<Props, State> {
             handleBatchAuthorize={this.handleBatchAuthorize.bind(this)}
             handleBatchDelete={this.handleBatchDelete.bind(this)}
           />
-          {users ? 
+          {users ?
             <Table>
               <TableHead>
                 <TableRow>
@@ -176,12 +176,11 @@ export class Admin extends Component<Props, State> {
                 })}
               </TableBody>
             </Table>
-          : null }
-          {!users ?
+          :
             <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
               <CircularProgress size="60px" />
             </div>
-          : null }
+          }
         </Paper>
       </div>
     )
