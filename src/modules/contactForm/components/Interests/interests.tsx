@@ -23,11 +23,13 @@ class Interests extends React.Component {
     return (
       <React.Fragment>
         <form onSubmit={this.props.handleNext}>
-            <FormLabel>I am interested in...</FormLabel>
+            <FormLabel className={classes.margins}>I am interested in...</FormLabel>
             <FormGroup>
             <FormControlLabel
                 control={
                 <Checkbox
+                    className={classes.Checkbox}
+					color='primary'
                     checked={this.props.data.eventsGreekStudents}
                     onChange={handleChange('eventsGreekStudents')}
                     value="eventsGreekStudents"
@@ -38,6 +40,8 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
+                    className={classes.Checkbox}
+					color='primary'
                     checked={this.props.data.eventsLatinoStudents}
                     onChange={handleChange('eventsLatinoStudents')}
                     value="eventsLatinoStudents"
@@ -48,6 +52,8 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
+                    className={classes.Checkbox}
+					color='primary'
                     checked={this.props.data.eventsGraduateStudents}
                     onChange={handleChange('eventsGraduateStudents')}
                     value="eventsGraduateStudents"
@@ -62,6 +68,8 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
+                    className={classes.Checkbox}
+					color='primary'
                     checked={this.props.data.receiveMonthlyNewsletter}
                     onChange={handleChange('receiveMonthlyNewsletter')}
                     value="receiveMonthlyNewsletter"
@@ -72,6 +80,8 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
+                    className={classes.Checkbox}
+					color='primary'
                     checked={this.props.data.registerAsParishioner}
                     onChange={handleChange('registerAsParishioner')}
                     value="registerAsParishioner"
@@ -82,147 +92,173 @@ class Interests extends React.Component {
             </FormGroup>
             <br/>
             <FormLabel className={classes.margins}>
-            I am interested in getting involved in...
+                I am interested in getting involved in...
             </FormLabel>
             <FormGroup>
             <Grid container direction="row">
-                <Grid item className={classes.margins}>
-                <Grid container direction="column">
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.englishBibleStudy}
-                        onChange={handleChange('englishBibleStudy')}
-                        value="englishBibleStudy"
-                        ></Checkbox>
-                    }
-                    label="English Bible Studys"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.spanishBibleStudy}
-                        onChange={handleChange('spanishBibleStudy')}
-                        value="spanishBibleStudy"
-                        ></Checkbox>
-                    }
-                    label="Spanish/Bilingual Bible Study"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.freeFood}
-                        onChange={handleChange('freeFood')}
-                        value="freeFood"
-                        ></Checkbox>
-                    }
-                    label="Free Food"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.guestSpeakers}
-                        onChange={handleChange('guestSpeakers')}
-                        value="guestSpeakers"
-                        ></Checkbox>
-                    }
-                    label="Guest Speakers"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.musicMinistry}
-                        onChange={handleChange('musicMinistry')}
-                        value="musicMinistry"
-                        ></Checkbox>
-                    }
-                    label="Music Ministry"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.socials}
-                        onChange={handleChange('socials')}
-                        value="socials"
-                        ></Checkbox>
-                    }
-                    label="Socials"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.retreats}
-                        onChange={handleChange('retreats')}
-                        value="retreats"
-                        ></Checkbox>
-                    }
-                    label="Retreats"
-                    />
+                <Grid item>
+                    <Grid container direction="column">
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+					        color='primary'
+                            checked={this.props.data.englishBibleStudy}
+                            onChange={handleChange('englishBibleStudy')}
+                            value="englishBibleStudy"
+                            ></Checkbox>
+                        }
+                        label="English Bible Studys"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+					        color='primary'
+                            checked={this.props.data.spanishBibleStudy}
+                            onChange={handleChange('spanishBibleStudy')}
+                            value="spanishBibleStudy"
+                            ></Checkbox>
+                        }
+                        label="Spanish/Bilingual Bible Study"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.freeFood}
+                            onChange={handleChange('freeFood')}
+                            value="freeFood"
+                            ></Checkbox>
+                        }
+                        label="Free Food"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.guestSpeakers}
+                            onChange={handleChange('guestSpeakers')}
+                            value="guestSpeakers"
+                            ></Checkbox>
+                        }
+                        label="Guest Speakers"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.musicMinistry}
+                            onChange={handleChange('musicMinistry')}
+                            value="musicMinistry"
+                            ></Checkbox>
+                        }
+                        label="Music Ministry"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.socials}
+                            onChange={handleChange('socials')}
+                            value="socials"
+                            ></Checkbox>
+                        }
+                        label="Socials"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.retreats}
+                            onChange={handleChange('retreats')}
+                            value="retreats"
+                            ></Checkbox>
+                        }
+                        label="Retreats"
+                        />
+                    </Grid>
                 </Grid>
-                </Grid>
-                <Grid item className={classes.margins}>
-                <Grid container direction="column">
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.intramuralSports}
-                        onChange={handleChange('intramuralSports')}
-                        value="intramuralSports"
-                        ></Checkbox>
-                    }
-                    label="Intramural Sports"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.proLifeClub}
-                        onChange={handleChange('proLifeClub')}
-                        value="proLifeClub"
-                        ></Checkbox>
-                    }
-                    label="Pro-Life Club"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.RHC}
-                        onChange={handleChange('RHC')}
-                        value="RHC"
-                        ></Checkbox>
-                    }
-                    label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.servingAtMass}
-                        onChange={handleChange('servingAtMass')}
-                        value="servingAtMass"
-                        ></Checkbox>
-                    }
-                    label="Serving at Mass"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.teachReligiousEd}
-                        onChange={handleChange('teachReligiousEd')}
-                        value="teachReligiousEd"
-                        ></Checkbox>
-                    }
-                    label="Teach Religious Education"
-                    />
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        checked={this.props.data.serviceProjects}
-                        onChange={handleChange('serviceProjects')}
-                        value="serviceProjects"
-                        ></Checkbox>
-                    }
-                    label="Service Projects and Trips"
-                    />
-                </Grid>
+                <Grid item>
+                    <Grid container direction="column">
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.intramuralSports}
+                            onChange={handleChange('intramuralSports')}
+                            value="intramuralSports"
+                            ></Checkbox>
+                        }
+                        label="Intramural Sports"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.proLifeClub}
+                            onChange={handleChange('proLifeClub')}
+                            value="proLifeClub"
+                            ></Checkbox>
+                        }
+                        label="Pro-Life Club"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.RHC}
+                            onChange={handleChange('RHC')}
+                            value="RHC"
+                            ></Checkbox>
+                        }
+                        label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.servingAtMass}
+                            onChange={handleChange('servingAtMass')}
+                            value="servingAtMass"
+                            ></Checkbox>
+                        }
+                        label="Serving at Mass"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+                            color='primary'
+                            checked={this.props.data.teachReligiousEd}
+                            onChange={handleChange('teachReligiousEd')}
+                            value="teachReligiousEd"
+                            ></Checkbox>
+                        }
+                        label="Teach Religious Education"
+                        />
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            className={classes.Checkbox}
+							color='primary'
+                            checked={this.props.data.serviceProjects}
+                            onChange={handleChange('serviceProjects')}
+                            value="serviceProjects"
+                            ></Checkbox>
+                        }
+                        label="Service Projects and Trips"
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
             </FormGroup>

@@ -9,16 +9,28 @@ export var styles = (theme: Theme) => createStyles({
         flexWrap: 'wrap',
       },
       field: {
-        marginLeft: '2%',
-        marginRight: '2%',
-        width: '46%',
-        minWidth: 250
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: '2%',
+            marginRight: '2%',
+            width: '96%'
+        },
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: '2%',
+            marginRight: '2%',
+            width: '46%',
+        }
       },
       fieldSmaller: {
-        marginLeft: '2%',
-        marginRight: '2%',
-        width: '21%',
-        minWidth: 100
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: '2%',
+            marginRight: '2%',
+            width: '46%',
+        },
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: '2%',
+            marginRight: '2%',
+            width: '21%',
+        }
       },
       fieldLarger: {
         marginLeft: '2%',
@@ -69,5 +81,9 @@ export var styles = (theme: Theme) => createStyles({
           marginLeft: '48%',
           marginRight: '48%',
           size: 100
+      },
+      Checkbox: {
+        marginLeft: 10,
+        marginRight: 10
       }
   });

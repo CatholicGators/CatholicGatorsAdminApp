@@ -51,22 +51,14 @@ const semester = [
 ];
 
 class PersonalInformation extends React.Component {
-  private inputLabelRef: React.RefObject<HTMLDivElement>
 
   state = {
-    labelWidth: 0
+    yearWidth: 120,
+    phoneNumberWidth: 110
   };
 
   constructor(public props: any) {
     super(props)
-    this.inputLabelRef = React.createRef();
-    this.focusTextInput = this.focusTextInput.bind(this);
-  }
-
-  focusTextInput() {
-    this.setState({
-      labelWidth: this.inputLabelRef.current.offsetWidth
-    });
   }
 
   render() {
@@ -137,18 +129,15 @@ class PersonalInformation extends React.Component {
             margin="normal"
             required
           >
-            <div ref={this.inputLabelRef}>
               <InputLabel
                 htmlFor="phone-number"
               >Phone number</InputLabel>
-            </div>
             <OutlinedInput
               id="phone-number"
               value={this.props.data.phoneNumber}
               onChange={handleChange('phoneNumber')}
               inputComponent={PhoneNumberTextMask as any}
-              labelWidth={this.state.labelWidth}
-              onClick={this.focusTextInput}
+              labelWidth={this.state.phoneNumberWidth}
               required
             />
           </FormControl>
@@ -164,7 +153,7 @@ class PersonalInformation extends React.Component {
           ></TextField>
           <TextField
             id="housing-complex"
-            label="Name of Dorm/Complex you live in"
+            label="Name of Dorm/Complex"
             className={classes.fieldLarger}
             value={this.props.data.housingComplex}
             onChange={handleChange('housingComplex')}
@@ -178,19 +167,16 @@ class PersonalInformation extends React.Component {
             margin="normal"
             required
           >
-            <div ref={this.inputLabelRef}>
               <InputLabel
                 htmlFor="graduation-year"
               >Graduation Year</InputLabel>
-            </div>
             <OutlinedInput
-              id="graduationYear"
-              value={this.props.data.graduationYear}
-              onChange={handleChange('graduationYear')}
-              inputComponent={YearTextMask as any}
-              labelWidth={this.state.labelWidth}
-              onClick={this.focusTextInput}
-              required
+            id="graduationYear"
+            value={this.props.data.graduationYear}
+            onChange={handleChange('graduationYear')}
+            inputComponent={YearTextMask as any}
+            labelWidth={this.state.yearWidth}
+            required
             />
           </FormControl>
           <TextField
@@ -212,10 +198,10 @@ class PersonalInformation extends React.Component {
           </TextField>
           <div className={classes.buttons}>
                 <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className={classes.button}
+                variant="contained"
+                color="primary"
+                type="submit"
+                className={classes.button}
                 > Next </Button>
             </div>
         </form>

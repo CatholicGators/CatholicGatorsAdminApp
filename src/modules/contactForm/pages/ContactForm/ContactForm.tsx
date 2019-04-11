@@ -15,7 +15,8 @@ import {
     Stepper,
     Step,
     StepLabel,
-    CircularProgress
+    CircularProgress,
+    Button
 } from '@material-ui/core';
 
 const initState = {
@@ -100,7 +101,7 @@ class ContactForm extends React.Component<any, any> {
                     <Paper className={classes.paper}>
                         <Typography component="h1" variant="h4" align="center">
                             Join Catholic Gators
-            </Typography>
+                        </Typography>
                         <Stepper activeStep={activeStep} className={classes.stepper}>
                             {steps.map(label => (
                                 <Step key={label}>
@@ -121,17 +122,33 @@ class ContactForm extends React.Component<any, any> {
 function getStepContent(step, state, props, handleChange, handleNext, handleBack) {
     if(props.loading) {
         return <CircularProgress id='spinner' className={props.classes.spinner} />
-    } else if (props.success) {
+    } else if (props.success === true) {
         return (
-            <Typography component="h1" variant="h4" align="center">
-                Thank you submitting! We will be contacting you soon.
-            </Typography>
+            <React.Fragment>
+                <Typography component="h1" variant="h6" className={props.classes.margins}>
+                    Thank you submitting! We will be contacting you soon.
+                </Typography>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    href="/"
+                    className={props.classes.button}
+                > Back to form </Button>
+            </React.Fragment>
         )
-    } else if (props.success) {
+    } else if (props.success === false) {
         return (
-            <Typography component="h1" variant="h4" align="center">
-                There was an error submitting. Please try again later.
-            </Typography>
+            <React.Fragment>
+                <Typography component="h1" variant="h6" className={props.classes.margins}>
+                    There was an error submitting. Please try again later.
+                </Typography>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    href="/"
+                    className={props.classes.button}
+                > Back to form </Button>
+            </React.Fragment>
         )
     } else {
         switch (step) {
