@@ -199,6 +199,27 @@ describe('UserService', () => {
                 );
         });
 
+        it('returns the user object', done => {
+            const mockUser = {
+                name: 'Ryan'
+            };
+
+            firestore.addDoc.mockReturnValue(of({
+                get: jest.fn(() => Promise.resolve({
+                    id: 'id',
+                    data: jest.fn(() => mockUser)
+                }))
+            }));
+
+            userService.addUser(mockUser)
+                .subscribe(
+                    user => {
+                        expect(user).toEqual({id: 'id', ...mockUser});
+                        done();
+                    }
+                );
+        });
+
         it('passes the addDoc() error to the observable', done => {
             const user = {
                 name: 'Ryan'
@@ -438,6 +459,28 @@ describe('UserService', () => {
                 );
         });
 
+        it('returns the user object after update', done => {
+            const id = '0';
+            const update = {
+                name: 'Joey'
+            };
+
+            firestore.updateDoc.mockReturnValue(of({
+                get: jest.fn(() => Promise.resolve({
+                    id: 'id',
+                    data: jest.fn(() => update)
+                }))
+            }));
+
+            userService.updateUser(id, update)
+                .subscribe(
+                    user => {
+                        expect(user).toEqual({id: 'id', ...update});
+                        done();
+                    }
+                );
+        });
+
         it('passes the updateDoc() error to the observable', done => {
             const id = '0';
             const update = {
@@ -495,12 +538,62 @@ describe('UserService', () => {
                         data: jest.fn(() => users[2])
                     }))
                 }
-]));
+            ]));
 
             userService.updateUsers(users)
                 .subscribe(
                     () => {
                         expect(firestore.updateDocs).toHaveBeenCalledWith(USER_COLLECTION, users);
+                        done();
+                    }
+                );
+        });
+
+        it('returns users after updating', done => {
+            const mockUsers = [
+                {
+                    id: '0',
+                    name: 'Ryan'
+                },
+                {
+                    id: '1',
+                    name: 'Joey'
+                },
+                {
+                    id: '2',
+                    name: 'MCP'
+                }
+            ]
+
+            const newUsers = mockUsers.map(x => {
+                return Object.assign({id: 'id'}, x)
+            });
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: mockUsers[0].id,
+                        data: jest.fn(() => ({ name: mockUsers[0].name }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: mockUsers[1].id,
+                        data: jest.fn(() => ({ name: mockUsers[1].name }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: mockUsers[2].id,
+                        data: jest.fn(() => ({ name: mockUsers[2].name }))
+                    }))
+                }
+            ]));
+
+            userService.updateUsers(mockUsers)
+                .subscribe(
+                    users => {
+                        expect(users).toEqual(newUsers);
                         done();
                     }
                 );
