@@ -94,6 +94,18 @@ describe('firestore', () => {
                 );
         });
 
+        it('returns the document reference', done => {
+            reference.set.mockResolvedValue();
+
+            firestore.upsertDocById('collection', 'docId', {})
+                .subscribe(
+                    docRef => {
+                        expect(docRef).toBe(reference);
+                        done();
+                    }
+                );
+        });
+
         it('passes the upsertDocById() error to the observable', done => {
             const testErr = new Error();
             reference.set.mockRejectedValue(testErr)
@@ -415,8 +427,20 @@ describe('firestore', () => {
             reference.update.mockResolvedValue()
             firestore.updateDoc('collection', 'docId', {})
                 .subscribe(
-                    () => {
+                    _ => {
                         expect(reference.update).toHaveBeenCalledWith({});
+                        done();
+                    }
+                );
+
+        });
+
+        it('returns the document reference', done => {
+            reference.update.mockResolvedValue()
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    docRef => {
+                        expect(docRef).toBe(reference);
                         done();
                     }
                 );

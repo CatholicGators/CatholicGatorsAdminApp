@@ -56,7 +56,7 @@ export default class UserService {
         return this.db.getCollection(USER_COLLECTION) as Observable<User[]>;
     }
 
-    updateUser(id: string, update: Object): Observable<void> {
+    updateUser(id: string, update: Object): Observable<firebase.firestore.DocumentReference> {
         return this.db.updateDoc(USER_COLLECTION, id, update);
     }
 
@@ -64,25 +64,25 @@ export default class UserService {
         return this.db.updateDocs(USER_COLLECTION, users);
     }
 
-    approveUser(id: string): Observable<void> {
+    approveUser(id: string): Observable<firebase.firestore.DocumentReference> {
         return this.db.updateDoc(USER_COLLECTION, id, {
             isApproved: true
         });
     }
 
-    disapproveUser(id: string): Observable<void> {
+    disapproveUser(id: string): Observable<firebase.firestore.DocumentReference> {
         return this.db.updateDoc(USER_COLLECTION, id, {
             isApproved: false
         });
     }
 
-    makeAdmin(id: string): Observable<void> {
+    makeAdmin(id: string): Observable<firebase.firestore.DocumentReference> {
         return this.db.updateDoc(USER_COLLECTION, id, {
             isAdmin: true
         });
     }
 
-    removeAdmin(id: string): Observable<void> {
+    removeAdmin(id: string): Observable<firebase.firestore.DocumentReference> {
         return this.db.updateDoc(USER_COLLECTION, id, {
             isAdmin: false
         });

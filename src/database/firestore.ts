@@ -26,8 +26,12 @@ export default class Firestore {
         return from(this.db.collection(collection).add(entity));
     }
 
-    upsertDocById(collection: string, docId: string, entity: object): Observable<void>{
-            return from(this.db.collection(collection).doc(docId).set(entity));
+    upsertDocById(collection: string, docId: string, entity: object): Observable<firebase.firestore.DocumentReference>{
+        const docRef = this.db.collection(collection).doc(docId);
+        return from(docRef.set(entity))
+            .pipe(
+                map(_ => docRef)
+            );
     }
 
     upsertDocs(collection: string, entities: any[]): Observable<firebase.firestore.DocumentReference[]> {
@@ -93,8 +97,12 @@ export default class Firestore {
             );
     }
 
-    updateDoc(collection: string, docId: string, entity: object): Observable<void> {
-        return from(this.db.collection(collection).doc(docId).update(entity));
+    updateDoc(collection: string, docId: string, entity: object): Observable<firebase.firestore.DocumentReference> {
+        const docRef = this.db.collection(collection).doc(docId);
+        return from(docRef.update(entity))
+            .pipe(
+                map(_ => docRef)
+            );
     }
 
     updateDocs(collection: string, entities: any[]): Observable<firebase.firestore.DocumentReference[]> {
