@@ -658,6 +658,95 @@ describe('UserService', () => {
         });
     });
 
+    describe('approveUsers()', () => {
+        it('updates users to be approved in the user collection', done => {
+            const ids = ['0', '1', '2'];
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => { isApproved: true })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => { isApproved: true })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => { isApproved: true })
+                    }))
+                }
+            ]));
+
+            userService.approveUsers(ids)
+                .subscribe(
+                    _ => {
+                        expect(firestore.updateDocs).toHaveBeenCalledWith(
+                            USER_COLLECTION,
+                            [
+                                {
+                                    id: '0',
+                                    isApproved: true
+                                },
+                                {
+                                    id: '1',
+                                    isApproved: true
+                                },
+                                {
+                                    id: '2',
+                                    isApproved: true
+                                },
+                            ]
+                        );
+                        done();
+                    }
+                );
+        });
+
+        it('returns updated users', done => {
+            const ids = ['0', '1', '2'];
+
+            const newUsers = ids.map(id => ({
+                id,
+                isApproved: true
+            }));
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => ({ isApproved: true }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => ({ isApproved: true }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => ({ isApproved: true }))
+                    }))
+                }
+            ]));
+
+            userService.approveUsers(ids)
+                .subscribe(
+                    users => {
+                        expect(users).toEqual(newUsers);
+                        done();
+                    }
+                );
+        });
+    });
+
     describe('disapproveUser()', () => {
         it('updates a user to be disapproved in the user collection', done => {
             const id = '0';
@@ -679,6 +768,95 @@ describe('UserService', () => {
                                 isApproved: false
                             }
                         );
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('disapproveUsers()', () => {
+        it('updates users to be not approved in the user collection', done => {
+            const ids = ['0', '1', '2'];
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => { isApproved: false })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => { isApproved: false })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => { isApproved: false })
+                    }))
+                }
+            ]));
+
+            userService.disapproveUsers(ids)
+                .subscribe(
+                    _ => {
+                        expect(firestore.updateDocs).toHaveBeenCalledWith(
+                            USER_COLLECTION,
+                            [
+                                {
+                                    id: '0',
+                                    isApproved: false
+                                },
+                                {
+                                    id: '1',
+                                    isApproved: false
+                                },
+                                {
+                                    id: '2',
+                                    isApproved: false
+                                },
+                            ]
+                        );
+                        done();
+                    }
+                );
+        });
+
+        it('returns updated users', done => {
+            const ids = ['0', '1', '2'];
+
+            const newUsers = ids.map(id => ({
+                id,
+                isApproved: false
+            }));
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => ({ isApproved: false }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => ({ isApproved: false }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => ({ isApproved: false }))
+                    }))
+                }
+            ]));
+
+            userService.approveUsers(ids)
+                .subscribe(
+                    users => {
+                        expect(users).toEqual(newUsers);
                         done();
                     }
                 );
@@ -712,6 +890,95 @@ describe('UserService', () => {
         });
     });
 
+    describe('makeAdmins()', () => {
+        it('updates users to be admins in the user collection', done => {
+            const ids = ['0', '1', '2'];
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => { isAdmin: true })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => { isAdmin: true })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => { isAdmin: true })
+                    }))
+                }
+            ]));
+
+            userService.makeAdmins(ids)
+                .subscribe(
+                    _ => {
+                        expect(firestore.updateDocs).toHaveBeenCalledWith(
+                            USER_COLLECTION,
+                            [
+                                {
+                                    id: '0',
+                                    isAdmin: true
+                                },
+                                {
+                                    id: '1',
+                                    isAdmin: true
+                                },
+                                {
+                                    id: '2',
+                                    isAdmin: true
+                                },
+                            ]
+                        );
+                        done();
+                    }
+                );
+        });
+
+        it('returns updated users', done => {
+            const ids = ['0', '1', '2'];
+
+            const newUsers = ids.map(id => ({
+                id,
+                isAdmin: true
+            }));
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => ({ isAdmin: true }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => ({ isAdmin: true }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => ({ isAdmin: true }))
+                    }))
+                }
+            ]));
+
+            userService.makeAdmins(ids)
+                .subscribe(
+                    users => {
+                        expect(users).toEqual(newUsers);
+                        done();
+                    }
+                );
+        });
+    });
+
     describe('removeAdmin()', () => {
         it('updates a user to no longer be an admin in the user collection', done => {
             const id = '0';
@@ -733,6 +1000,95 @@ describe('UserService', () => {
                                 isAdmin: false
                             }
                         );
+                        done();
+                    }
+                );
+        });
+    });
+
+    describe('removeAdmins()', () => {
+        it('updates users to not be admins in the user collection', done => {
+            const ids = ['0', '1', '2'];
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => { isAdmin: false })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => { isAdmin: false })
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => { isAdmin: false })
+                    }))
+                }
+            ]));
+
+            userService.removeAdmins(ids)
+                .subscribe(
+                    _ => {
+                        expect(firestore.updateDocs).toHaveBeenCalledWith(
+                            USER_COLLECTION,
+                            [
+                                {
+                                    id: '0',
+                                    isAdmin: false
+                                },
+                                {
+                                    id: '1',
+                                    isAdmin: false
+                                },
+                                {
+                                    id: '2',
+                                    isAdmin: false
+                                },
+                            ]
+                        );
+                        done();
+                    }
+                );
+        });
+
+        it('returns updated users', done => {
+            const ids = ['0', '1', '2'];
+
+            const newUsers = ids.map(id => ({
+                id,
+                isAdmin: false
+            }));
+
+            firestore.updateDocs.mockReturnValue(of([
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[0],
+                        data: jest.fn(() => ({ isAdmin: false }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[1],
+                        data: jest.fn(() => ({ isAdmin: false }))
+                    }))
+                },
+                {
+                    get: jest.fn(() => Promise.resolve({
+                        id: ids[2],
+                        data: jest.fn(() => ({ isAdmin: false }))
+                    }))
+                }
+            ]));
+
+            userService.removeAdmins(ids)
+                .subscribe(
+                    users => {
+                        expect(users).toEqual(newUsers);
                         done();
                     }
                 );

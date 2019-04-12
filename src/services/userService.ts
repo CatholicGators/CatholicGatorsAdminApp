@@ -45,7 +45,7 @@ export default class UserService {
     }
 
     addUsers(users: User[]): Observable<User[]> {
-        return this.docRefsObservableToUserObservables(this.db.upsertDocs(USER_COLLECTION, users));
+        return this.docRefsObservableToUsersObservable(this.db.upsertDocs(USER_COLLECTION, users));
     }
 
     getUser(id:string): Observable<User> {
@@ -61,7 +61,7 @@ export default class UserService {
     }
 
     updateUsers(users: User[]): Observable<User[]> {
-        return this.docRefsObservableToUserObservables(this.db.updateDocs(USER_COLLECTION, users));
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, users));
     }
 
     approveUser(id: string): Observable<User> {
@@ -70,10 +70,28 @@ export default class UserService {
         }));
     }
 
+    approveUsers(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isApproved: true
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    }
+
     disapproveUser(id: string): Observable<User> {
         return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isApproved: false
         }));
+    }
+
+    disapproveUsers(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isApproved: false
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
     }
 
     makeAdmin(id: string): Observable<User> {
@@ -82,10 +100,28 @@ export default class UserService {
         }));
     }
 
+    makeAdmins(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isAdmin: true
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    }
+
     removeAdmin(id: string): Observable<User> {
         return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isAdmin: false
         }));
+    }
+
+    removeAdmins(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isAdmin: false
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
     }
 
     deleteUser(id: string): Observable<void> {
@@ -157,7 +193,7 @@ export default class UserService {
             );
     }
 
-    private docRefsObservableToUserObservables(docRefs$: Observable<firebase.firestore.DocumentReference[]>): Observable<User[]> {
+    private docRefsObservableToUsersObservable(docRefs$: Observable<firebase.firestore.DocumentReference[]>): Observable<User[]> {
         return docRefs$
             .pipe(
                 mergeMap(refs => {
