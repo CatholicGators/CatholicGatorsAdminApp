@@ -126,7 +126,7 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
         return (
             <React.Fragment>
                 <Typography component="h1" variant="h6" className={props.classes.margins}>
-                    Thank you submitting! We will be contacting you soon.
+                    Thank you for submitting! We will be contacting you soon.
                 </Typography>
                 <Button
                     variant="contained"
