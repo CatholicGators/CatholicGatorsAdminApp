@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import VpnKey from '@material-ui/icons/VpnKey';
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft';
+import Inbox from '@material-ui/icons/Inbox';
 
 import { googleSignIn, signOut } from '../../../../redux/actions/auth/authActions';
 import MobileDrawer from '../MobileDrawer/MobileDrawer';
@@ -25,7 +26,7 @@ const styles = (theme: Theme) => createStyles({
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             display: 'none'
         }
     },
@@ -34,7 +35,7 @@ const styles = (theme: Theme) => createStyles({
     },
     desktopMenuItems: {
         display: 'flex',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             display: 'none'
         }
     },
@@ -87,6 +88,12 @@ export const menuLinks: Array<MenuLink> = [
         needsAuthorization: false
     },
     {
+        text: 'My Contacts',
+        href: '/my-contacts',
+        icon: Inbox,
+        needsAuthorization: false
+    },
+    {
         text: 'Admin',
         href: '/admin',
         icon: VpnKey,
@@ -131,7 +138,7 @@ export class Header extends React.Component<Props, State> {
                         <div className={classes ? classes.desktopMenuItems : null}>
                             { user ?
                                 menuLinks
-                                    .filter(link => !link.needsAuthorization || user.isAdmin)
+                                    .filter(link => !link.needsAuthorization || (user.isAdmin && user.isApproved))
                                     .map(link => 
                                             <NavLink
                                                 exact

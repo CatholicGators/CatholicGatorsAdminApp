@@ -1,0 +1,353 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyContacts should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <MyContacts
+    getContacts={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <WithStyles(Card)>
+        <WithStyles(CardContent)>
+          <WithStyles(Typography)
+            component="h2"
+            gutterBottom={true}
+            variant="h5"
+          >
+            You are not approved
+          </WithStyles(Typography)>
+          <WithStyles(Typography)
+            component="p"
+          >
+            Please seek approval from an admin
+          </WithStyles(Typography)>
+        </WithStyles(CardContent)>
+        <WithStyles(CardActions)>
+          <WithStyles(Button)
+            color="primary"
+            onClick={[Function]}
+          >
+            Ok
+          </WithStyles(Button)>
+        </WithStyles(CardActions)>
+      </WithStyles(Card)>,
+      "className": null,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <WithStyles(CardContent)>
+            <WithStyles(Typography)
+              component="h2"
+              gutterBottom={true}
+              variant="h5"
+            >
+              You are not approved
+            </WithStyles(Typography)>
+            <WithStyles(Typography)
+              component="p"
+            >
+              Please seek approval from an admin
+            </WithStyles(Typography)>
+          </WithStyles(CardContent)>,
+          <WithStyles(CardActions)>
+            <WithStyles(Button)
+              color="primary"
+              onClick={[Function]}
+            >
+              Ok
+            </WithStyles(Button)>
+          </WithStyles(CardActions)>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Typography)
+                component="h2"
+                gutterBottom={true}
+                variant="h5"
+              >
+                You are not approved
+              </WithStyles(Typography)>,
+              <WithStyles(Typography)
+                component="p"
+              >
+                Please seek approval from an admin
+              </WithStyles(Typography)>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "You are not approved",
+                "component": "h2",
+                "gutterBottom": true,
+                "variant": "h5",
+              },
+              "ref": null,
+              "rendered": "You are not approved",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Please seek approval from an admin",
+                "component": "p",
+              },
+              "ref": null,
+              "rendered": "Please seek approval from an admin",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Button)
+              color="primary"
+              onClick={[Function]}
+            >
+              Ok
+            </WithStyles(Button)>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Ok",
+              "color": "primary",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": "Ok",
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <WithStyles(Card)>
+          <WithStyles(CardContent)>
+            <WithStyles(Typography)
+              component="h2"
+              gutterBottom={true}
+              variant="h5"
+            >
+              You are not approved
+            </WithStyles(Typography)>
+            <WithStyles(Typography)
+              component="p"
+            >
+              Please seek approval from an admin
+            </WithStyles(Typography)>
+          </WithStyles(CardContent)>
+          <WithStyles(CardActions)>
+            <WithStyles(Button)
+              color="primary"
+              onClick={[Function]}
+            >
+              Ok
+            </WithStyles(Button)>
+          </WithStyles(CardActions)>
+        </WithStyles(Card)>,
+        "className": null,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <WithStyles(CardContent)>
+              <WithStyles(Typography)
+                component="h2"
+                gutterBottom={true}
+                variant="h5"
+              >
+                You are not approved
+              </WithStyles(Typography)>
+              <WithStyles(Typography)
+                component="p"
+              >
+                Please seek approval from an admin
+              </WithStyles(Typography)>
+            </WithStyles(CardContent)>,
+            <WithStyles(CardActions)>
+              <WithStyles(Button)
+                color="primary"
+                onClick={[Function]}
+              >
+                Ok
+              </WithStyles(Button)>
+            </WithStyles(CardActions)>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <WithStyles(Typography)
+                  component="h2"
+                  gutterBottom={true}
+                  variant="h5"
+                >
+                  You are not approved
+                </WithStyles(Typography)>,
+                <WithStyles(Typography)
+                  component="p"
+                >
+                  Please seek approval from an admin
+                </WithStyles(Typography)>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "You are not approved",
+                  "component": "h2",
+                  "gutterBottom": true,
+                  "variant": "h5",
+                },
+                "ref": null,
+                "rendered": "You are not approved",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Please seek approval from an admin",
+                  "component": "p",
+                },
+                "ref": null,
+                "rendered": "Please seek approval from an admin",
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <WithStyles(Button)
+                color="primary"
+                onClick={[Function]}
+              >
+                Ok
+              </WithStyles(Button)>,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Ok",
+                "color": "primary",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "Ok",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;
