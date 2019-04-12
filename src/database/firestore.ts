@@ -27,7 +27,7 @@ export default class Firestore {
     }
 
     upsertDocById(collection: string, docId: string, entity: object): Observable<void>{
-            return from(this.db.collection(collection).doc(docId).set(entity));
+        return from(this.db.collection(collection).doc(docId).set(entity));
     }
 
     upsertDocs(collection: string, entities: any[]): Observable<firebase.firestore.DocumentReference[]> {
