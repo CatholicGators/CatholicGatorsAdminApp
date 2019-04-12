@@ -1,6 +1,6 @@
 import { auth } from 'firebase/app';
 import 'firebase/auth';
-import { Observable, merge, from } from 'rxjs';
+import { Observable, merge, from, zip } from 'rxjs';
 import { mergeMap, map, partition } from 'rxjs/operators';
 
 import User from '../models/user';
@@ -40,12 +40,12 @@ export default class UserService {
         return this.user$;
     }
 
-    addUser(user: User): Observable<firebase.firestore.DocumentReference> {
-        return this.db.addDoc(USER_COLLECTION, user);
+    addUser(user: User): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.addDoc(USER_COLLECTION, user));
     }
 
-    addUsers(users: User[]): Observable<firebase.firestore.DocumentReference[]> {
-        return this.db.upsertDocs(USER_COLLECTION, users);
+    addUsers(users: User[]): Observable<User[]> {
+        return this.docRefsObservableToUserObservables(this.db.upsertDocs(USER_COLLECTION, users));
     }
 
     getUser(id:string): Observable<User> {
@@ -56,36 +56,36 @@ export default class UserService {
         return this.db.getCollection(USER_COLLECTION) as Observable<User[]>;
     }
 
-    updateUser(id: string, update: Object): Observable<firebase.firestore.DocumentReference> {
-        return this.db.updateDoc(USER_COLLECTION, id, update);
+    updateUser(id: string, update: Object): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, update));
     }
 
-    updateUsers(users: User[]): Observable<firebase.firestore.DocumentReference[]> {
-        return this.db.updateDocs(USER_COLLECTION, users);
+    updateUsers(users: User[]): Observable<User[]> {
+        return this.docRefsObservableToUserObservables(this.db.updateDocs(USER_COLLECTION, users));
     }
 
-    approveUser(id: string): Observable<firebase.firestore.DocumentReference> {
-        return this.db.updateDoc(USER_COLLECTION, id, {
+    approveUser(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isApproved: true
-        });
+        }));
     }
 
-    disapproveUser(id: string): Observable<firebase.firestore.DocumentReference> {
-        return this.db.updateDoc(USER_COLLECTION, id, {
+    disapproveUser(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isApproved: false
-        });
+        }));
     }
 
-    makeAdmin(id: string): Observable<firebase.firestore.DocumentReference> {
-        return this.db.updateDoc(USER_COLLECTION, id, {
+    makeAdmin(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isAdmin: true
-        });
+        }));
     }
 
-    removeAdmin(id: string): Observable<firebase.firestore.DocumentReference> {
-        return this.db.updateDoc(USER_COLLECTION, id, {
+    removeAdmin(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
             isAdmin: false
-        });
+        }));
     }
 
     deleteUser(id: string): Observable<void> {
@@ -144,5 +144,32 @@ export default class UserService {
             isApproved: user.email === ADMIN_EMAIL,
             isAdmin: user.email === ADMIN_EMAIL,
         }
+    }
+
+    private docRefObservableToUserObservable(docRef$: Observable<firebase.firestore.DocumentReference>): Observable<User> {
+        return docRef$
+            .pipe(
+                mergeMap(ref => from(ref.get())),
+                map(snapshot => ({
+                    id: snapshot.id,
+                    ...snapshot.data()
+                } as User))
+            );
+    }
+
+    private docRefsObservableToUserObservables(docRefs$: Observable<firebase.firestore.DocumentReference[]>): Observable<User[]> {
+        return docRefs$
+            .pipe(
+                mergeMap(refs => {
+                    const observables = refs.map(x => from(x.get()))
+                    return zip(...observables);
+                }),
+                map(snapshots => {
+                    return snapshots.map(snapshot => ({
+                        id: snapshot.id,
+                        ...snapshot.data()
+                    } as User));
+                })
+            );
     }
 }
