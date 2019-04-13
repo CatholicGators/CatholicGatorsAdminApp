@@ -3,7 +3,7 @@ import { mergeMap } from 'rxjs/operators';
 
 import Firestore from './firestore';
 import * as firebase from 'firebase/app';
-import clientConfig from './testUtils/testConfig';
+import clientConfig from '../config/testClientConfig';
 import DocumentNotFoundError from '../models/documentNotFoundError'
 
 describe('firestore', () => {
