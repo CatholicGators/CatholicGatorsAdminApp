@@ -64,64 +64,40 @@ export default class UserService {
         return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, users));
     }
 
-    approveUser(id: string): Observable<User> {
-        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
-            isApproved: true
-        }));
+    updateUserApproval(id: string, willBeApproved: boolean): Observable<User> {
+        let user$;
+        if(willBeApproved)
+            user$ = this.approveUser(id);
+        else
+            user$ = this.disapproveUser(id);
+        return user$;
     }
 
-    approveUsers(ids: string[]): Observable<User[]> {
-        const updates = ids.map(id => ({
-            id,
-            isApproved: true
-        }));
-
-        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    updateUsersApproval(ids: string[], willBeApproved: boolean): Observable<User> {
+        let user$;
+        if(willBeApproved)
+            user$ = this.approveUsers(ids);
+        else
+            user$ = this.disapproveUsers(ids);
+        return user$;
     }
 
-    disapproveUser(id: string): Observable<User> {
-        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
-            isApproved: false
-        }));
+    updateUserAdminStatus(id: string, willBeApproved: boolean): Observable<User> {
+        let user$;
+        if(willBeApproved)
+            user$ = this.makeAdmin(id);
+        else
+            user$ = this.removeAdmin(id);
+        return user$;
     }
 
-    disapproveUsers(ids: string[]): Observable<User[]> {
-        const updates = ids.map(id => ({
-            id,
-            isApproved: false
-        }));
-
-        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
-    }
-
-    makeAdmin(id: string): Observable<User> {
-        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
-            isAdmin: true
-        }));
-    }
-
-    makeAdmins(ids: string[]): Observable<User[]> {
-        const updates = ids.map(id => ({
-            id,
-            isAdmin: true
-        }));
-
-        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
-    }
-
-    removeAdmin(id: string): Observable<User> {
-        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
-            isAdmin: false
-        }));
-    }
-
-    removeAdmins(ids: string[]): Observable<User[]> {
-        const updates = ids.map(id => ({
-            id,
-            isAdmin: false
-        }));
-
-        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    updateUsersAdminStatus(ids: string[], willBeApproved: boolean): Observable<User> {
+        let user$;
+        if(willBeApproved)
+            user$ = this.makeAdmins(ids);
+        else
+            user$ = this.removeAdmins(ids);
+        return user$;
     }
 
     deleteUser(id: string): Observable<void> {
@@ -130,6 +106,66 @@ export default class UserService {
 
     deleteUsers(ids: string[]): Observable<void> {
         return this.db.deleteDocs(USER_COLLECTION, ids);
+    }
+
+    private approveUser(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
+            isApproved: true
+        }));
+    }
+
+    private approveUsers(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isApproved: true
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    }
+
+    private disapproveUser(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
+            isApproved: false
+        }));
+    }
+
+    private disapproveUsers(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isApproved: false
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    }
+
+    private makeAdmin(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
+            isAdmin: true
+        }));
+    }
+
+    private makeAdmins(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isAdmin: true
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
+    }
+
+    private removeAdmin(id: string): Observable<User> {
+        return this.docRefObservableToUserObservable(this.db.updateDoc(USER_COLLECTION, id, {
+            isAdmin: false
+        }));
+    }
+
+    private removeAdmins(ids: string[]): Observable<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            isAdmin: false
+        }));
+
+        return this.docRefsObservableToUsersObservable(this.db.updateDocs(USER_COLLECTION, updates));
     }
 
     private storeUserInfoOnLogin(): Observable<User> {

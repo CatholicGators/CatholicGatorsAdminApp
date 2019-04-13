@@ -163,7 +163,7 @@ export default class Firestore {
     }
 
     private removeId(obj: any) {
-        obj = Object.assign({}, obj);
+        obj = {...obj};
         if(obj.id)
             delete obj.id
         if(obj.uid)

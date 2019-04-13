@@ -258,7 +258,7 @@ describe('firestore', () => {
                 }
             ]
 
-            const documentsWithIds = documents.map(x => Object.assign({id: 'id'}, x))
+            const documentsWithIds = documents.map(x => ({id: 'id', ...x}));
 
             batch.commit.mockResolvedValue();
 
@@ -318,7 +318,7 @@ describe('firestore', () => {
             ]
 
             const documentsWithIds = documents.map(x => {
-                x = Object.assign({}, x);
+                x = { ...x };
                 x.uid = 'uid';
                 return x;
             })
