@@ -10,7 +10,7 @@ import UserService from '../../services/userService';
 import devClientConfig from '../../config/clientConfig';
 import prodClientConfig from '../../config/prodClientConfig'
 
-const firestore = (process.env.NODE_ENV === "production" ? new Firestore(firebase, prodClientConfig) : new Firestore(firebase, devClientConfig));
+const firestore = ((JSON.stringify(process.env.NODE_ENV) === JSON.stringify("production")) ? new Firestore(firebase, prodClientConfig) : new Firestore(firebase, devClientConfig));
 const userService = new UserService(firestore);
 
 const epicMiddleware = createEpicMiddleware({
