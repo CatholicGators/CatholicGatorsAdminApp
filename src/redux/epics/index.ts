@@ -1,5 +1,5 @@
 import { combineEpics } from 'redux-observable';
-import contactFormEpics from './contactForm/contactFormEpic'
+import contactFormEpics from './contactForm/contactFormEpics'
 import authEpics from './auth/authEpics';
 import adminEpics from './admin/adminEpics';
 

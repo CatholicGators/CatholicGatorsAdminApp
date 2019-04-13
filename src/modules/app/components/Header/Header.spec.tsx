@@ -9,7 +9,8 @@ describe('Header', () => {
     beforeEach(() => {
         props = {
             user: {
-                isAdmin: true
+                isAdmin: true,
+                isApproved: true
             },
             location: {
                 pathname: '/'

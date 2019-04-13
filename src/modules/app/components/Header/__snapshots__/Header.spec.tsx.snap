@@ -14,6 +14,7 @@ ShallowWrapper {
     user={
       Object {
         "isAdmin": true,
+        "isApproved": true,
       }
     }
   />,
@@ -75,6 +76,19 @@ ShallowWrapper {
                 aria-current="page"
                 className={null}
                 exact={true}
+                to="/my-contacts"
+              >
+                <WithStyles(Typography)
+                  className={null}
+                >
+                  My Contacts
+                </WithStyles(Typography)>
+              </NavLink>
+              <NavLink
+                activeClassName={null}
+                aria-current="page"
+                className={null}
+                exact={true}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -89,6 +103,7 @@ ShallowWrapper {
                 user={
                   Object {
                     "isAdmin": true,
+                    "isApproved": true,
                   }
                 }
               />
@@ -109,6 +124,12 @@ ShallowWrapper {
                 "text": "Contact Form",
               },
               Object {
+                "href": "/my-contacts",
+                "icon": [Function],
+                "needsAuthorization": false,
+                "text": "My Contacts",
+              },
+              Object {
                 "href": "/admin",
                 "icon": [Function],
                 "needsAuthorization": true,
@@ -120,6 +141,7 @@ ShallowWrapper {
           user={
             Object {
               "isAdmin": true,
+              "isApproved": true,
             }
           }
         />,
@@ -173,6 +195,19 @@ ShallowWrapper {
                 aria-current="page"
                 className={null}
                 exact={true}
+                to="/my-contacts"
+              >
+                <WithStyles(Typography)
+                  className={null}
+                >
+                  My Contacts
+                </WithStyles(Typography)>
+              </NavLink>
+              <NavLink
+                activeClassName={null}
+                aria-current="page"
+                className={null}
+                exact={true}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -187,6 +222,7 @@ ShallowWrapper {
                 user={
                   Object {
                     "isAdmin": true,
+                    "isApproved": true,
                   }
                 }
               />
@@ -238,6 +274,19 @@ ShallowWrapper {
                   aria-current="page"
                   className={null}
                   exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -252,6 +301,7 @@ ShallowWrapper {
                   user={
                     Object {
                       "isAdmin": true,
+                      "isApproved": true,
                     }
                   }
                 />
@@ -324,6 +374,19 @@ ShallowWrapper {
                       aria-current="page"
                       className={null}
                       exact={true}
+                      to="/my-contacts"
+                    >
+                      <WithStyles(Typography)
+                        className={null}
+                      >
+                        My Contacts
+                      </WithStyles(Typography)>
+                    </NavLink>,
+                    <NavLink
+                      activeClassName={null}
+                      aria-current="page"
+                      className={null}
+                      exact={true}
                       to="/admin"
                     >
                       <WithStyles(Typography)
@@ -339,6 +402,7 @@ ShallowWrapper {
                     user={
                       Object {
                         "isAdmin": true,
+                        "isApproved": true,
                       }
                     }
                   />,
@@ -374,6 +438,37 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Contact Form",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "My Contacts",
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": null,
+                    "aria-current": "page",
+                    "children": <WithStyles(Typography)
+                      className={null}
+                    >
+                      My Contacts
+                    </WithStyles(Typography)>,
+                    "className": null,
+                    "exact": true,
+                    "to": "/my-contacts",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": "My Contacts",
+                      "className": null,
+                    },
+                    "ref": null,
+                    "rendered": "My Contacts",
                     "type": [Function],
                   },
                   "type": [Function],
@@ -418,6 +513,7 @@ ShallowWrapper {
                     "logout": [Function],
                     "user": Object {
                       "isAdmin": true,
+                      "isApproved": true,
                     },
                   },
                   "ref": null,
@@ -449,6 +545,12 @@ ShallowWrapper {
               "text": "Contact Form",
             },
             Object {
+              "href": "/my-contacts",
+              "icon": [Function],
+              "needsAuthorization": false,
+              "text": "My Contacts",
+            },
+            Object {
               "href": "/admin",
               "icon": [Function],
               "needsAuthorization": true,
@@ -458,6 +560,7 @@ ShallowWrapper {
           "selectedPath": "/",
           "user": Object {
             "isAdmin": true,
+            "isApproved": true,
           },
         },
         "ref": null,
@@ -517,6 +620,19 @@ ShallowWrapper {
                   aria-current="page"
                   className={null}
                   exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -531,6 +647,7 @@ ShallowWrapper {
                   user={
                     Object {
                       "isAdmin": true,
+                      "isApproved": true,
                     }
                   }
                 />
@@ -551,6 +668,12 @@ ShallowWrapper {
                   "text": "Contact Form",
                 },
                 Object {
+                  "href": "/my-contacts",
+                  "icon": [Function],
+                  "needsAuthorization": false,
+                  "text": "My Contacts",
+                },
+                Object {
                   "href": "/admin",
                   "icon": [Function],
                   "needsAuthorization": true,
@@ -562,6 +685,7 @@ ShallowWrapper {
             user={
               Object {
                 "isAdmin": true,
+                "isApproved": true,
               }
             }
           />,
@@ -615,6 +739,19 @@ ShallowWrapper {
                   aria-current="page"
                   className={null}
                   exact={true}
+                  to="/my-contacts"
+                >
+                  <WithStyles(Typography)
+                    className={null}
+                  >
+                    My Contacts
+                  </WithStyles(Typography)>
+                </NavLink>
+                <NavLink
+                  activeClassName={null}
+                  aria-current="page"
+                  className={null}
+                  exact={true}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -629,6 +766,7 @@ ShallowWrapper {
                   user={
                     Object {
                       "isAdmin": true,
+                      "isApproved": true,
                     }
                   }
                 />
@@ -680,6 +818,19 @@ ShallowWrapper {
                     aria-current="page"
                     className={null}
                     exact={true}
+                    to="/my-contacts"
+                  >
+                    <WithStyles(Typography)
+                      className={null}
+                    >
+                      My Contacts
+                    </WithStyles(Typography)>
+                  </NavLink>
+                  <NavLink
+                    activeClassName={null}
+                    aria-current="page"
+                    className={null}
+                    exact={true}
                     to="/admin"
                   >
                     <WithStyles(Typography)
@@ -694,6 +845,7 @@ ShallowWrapper {
                     user={
                       Object {
                         "isAdmin": true,
+                        "isApproved": true,
                       }
                     }
                   />
@@ -766,6 +918,19 @@ ShallowWrapper {
                         aria-current="page"
                         className={null}
                         exact={true}
+                        to="/my-contacts"
+                      >
+                        <WithStyles(Typography)
+                          className={null}
+                        >
+                          My Contacts
+                        </WithStyles(Typography)>
+                      </NavLink>,
+                      <NavLink
+                        activeClassName={null}
+                        aria-current="page"
+                        className={null}
+                        exact={true}
                         to="/admin"
                       >
                         <WithStyles(Typography)
@@ -781,6 +946,7 @@ ShallowWrapper {
                       user={
                         Object {
                           "isAdmin": true,
+                          "isApproved": true,
                         }
                       }
                     />,
@@ -816,6 +982,37 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Contact Form",
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": "My Contacts",
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": null,
+                      "aria-current": "page",
+                      "children": <WithStyles(Typography)
+                        className={null}
+                      >
+                        My Contacts
+                      </WithStyles(Typography)>,
+                      "className": null,
+                      "exact": true,
+                      "to": "/my-contacts",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": "My Contacts",
+                        "className": null,
+                      },
+                      "ref": null,
+                      "rendered": "My Contacts",
                       "type": [Function],
                     },
                     "type": [Function],
@@ -860,6 +1057,7 @@ ShallowWrapper {
                       "logout": [Function],
                       "user": Object {
                         "isAdmin": true,
+                        "isApproved": true,
                       },
                     },
                     "ref": null,
@@ -891,6 +1089,12 @@ ShallowWrapper {
                 "text": "Contact Form",
               },
               Object {
+                "href": "/my-contacts",
+                "icon": [Function],
+                "needsAuthorization": false,
+                "text": "My Contacts",
+              },
+              Object {
                 "href": "/admin",
                 "icon": [Function],
                 "needsAuthorization": true,
@@ -900,6 +1104,7 @@ ShallowWrapper {
             "selectedPath": "/",
             "user": Object {
               "isAdmin": true,
+              "isApproved": true,
             },
           },
           "ref": null,
