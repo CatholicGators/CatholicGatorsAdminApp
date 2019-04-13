@@ -64,6 +64,38 @@ describe('firestore', () => {
                 );
         });
 
+        it('removes id from entity before storing', done => {
+            const mockObj = {
+                data: 'data'
+            }
+
+            reference.add.mockResolvedValue();
+
+            firestore.addDoc('collection', {id: 'id', ...mockObj})
+                .subscribe(
+                    ref => {
+                        expect(reference.add).toBeCalledWith(mockObj);
+                        done();
+                    }
+                );
+        });
+
+        it('removes uid from entity before storing', done => {
+            const mockObj = {
+                data: 'data'
+            }
+
+            reference.add.mockResolvedValue();
+
+            firestore.addDoc('collection', {uid: 'uid', ...mockObj})
+                .subscribe(
+                    ref => {
+                        expect(reference.add).toBeCalledWith(mockObj);
+                        done();
+                    }
+                );
+        });
+
         it('passes the addDoc() error to the observable', done => {
             const testErr = new Error();
             reference.add.mockRejectedValue(testErr)
@@ -89,6 +121,50 @@ describe('firestore', () => {
                 .subscribe(
                     _ => {
                         expect(reference.set).toHaveBeenCalled();
+                        done();
+                    }
+                );
+        });
+
+        it('returns the document reference', done => {
+            reference.set.mockResolvedValue();
+
+            firestore.upsertDocById('collection', 'docId', {})
+                .subscribe(
+                    docRef => {
+                        expect(docRef).toBe(reference);
+                        done();
+                    }
+                );
+        });
+
+        it('removes id before storing', done => {
+            const mockObj = {
+                data: 'data'
+            }
+
+            reference.set.mockResolvedValue();
+
+            firestore.upsertDocById('collection', 'docId', {id: 'id', ...mockObj})
+                .subscribe(
+                    docRef => {
+                        expect(reference.set).toHaveBeenCalledWith(mockObj);
+                        done();
+                    }
+                );
+        });
+
+        it('removes uid before storing', done => {
+            const mockObj = {
+                data: 'data'
+            }
+
+            reference.set.mockResolvedValue();
+
+            firestore.upsertDocById('collection', 'docId', {uid: 'uid', ...mockObj})
+                .subscribe(
+                    docRef => {
+                        expect(reference.set).toHaveBeenCalledWith(mockObj);
                         done();
                     }
                 );
@@ -169,6 +245,34 @@ describe('firestore', () => {
                 );
         });
 
+        it('removes id before storing', done => {
+            const documents: any[] = [
+                {
+                    field: '0',
+                },
+                {
+                    field: '1',
+                },
+                {
+                    field: '2',
+                }
+            ]
+
+            const documentsWithIds = documents.map(x => ({id: 'id', ...x}));
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documentsWithIds)
+                .subscribe(
+                    _ => {
+                        expect(batch.set.mock.calls[0][1]).toEqual(documents[0]);
+                        expect(batch.set.mock.calls[1][1]).toEqual(documents[1]);
+                        expect(batch.set.mock.calls[2][1]).toEqual(documents[2]);
+                        done();
+                    }
+                );
+        });
+
         it('successfully adds documents with a uid', done => {
             const documents = [
                 {
@@ -195,6 +299,38 @@ describe('firestore', () => {
                         expect(collectionReference.doc).toHaveBeenNthCalledWith(1, 'a');
                         expect(collectionReference.doc).toHaveBeenNthCalledWith(2, 'b');
                         expect(collectionReference.doc).toHaveBeenNthCalledWith(3, 'c');
+                        done();
+                    }
+                );
+        });
+
+        it('removes uid before storing', done => {
+            const documents: any[] = [
+                {
+                    field: '0',
+                },
+                {
+                    field: '1',
+                },
+                {
+                    field: '2',
+                }
+            ]
+
+            const documentsWithIds = documents.map(x => {
+                x = { ...x };
+                x.uid = 'uid';
+                return x;
+            })
+
+            batch.commit.mockResolvedValue();
+
+            firestore.upsertDocs('collection', documentsWithIds)
+                .subscribe(
+                    _ => {
+                        expect(batch.set.mock.calls[0][1]).toEqual(documents[0]);
+                        expect(batch.set.mock.calls[1][1]).toEqual(documents[1]);
+                        expect(batch.set.mock.calls[2][1]).toEqual(documents[2]);
                         done();
                     }
                 );
@@ -415,12 +551,55 @@ describe('firestore', () => {
             reference.update.mockResolvedValue()
             firestore.updateDoc('collection', 'docId', {})
                 .subscribe(
-                    () => {
+                    _ => {
                         expect(reference.update).toHaveBeenCalledWith({});
                         done();
                     }
                 );
 
+        });
+
+        it('returns the document reference', done => {
+            reference.update.mockResolvedValue()
+            firestore.updateDoc('collection', 'docId', {})
+                .subscribe(
+                    docRef => {
+                        expect(docRef).toBe(reference);
+                        done();
+                    }
+                );
+        });
+
+        it('removes id before storing', done => {
+            const mockObj = {
+                data: 'data'
+            };
+
+            reference.update.mockResolvedValue()
+
+            firestore.updateDoc('collection', 'docId', {id: 'id', ...mockObj})
+                .subscribe(
+                    _ => {
+                        expect(reference.update).toHaveBeenCalledWith(mockObj);
+                        done();
+                    }
+                );
+        });
+
+        it('removes uid before storing', done => {
+            const mockObj = {
+                data: 'data'
+            };
+
+            reference.update.mockResolvedValue()
+
+            firestore.updateDoc('collection', 'docId', {uid: 'uid', ...mockObj})
+                .subscribe(
+                    _ => {
+                        expect(reference.update).toHaveBeenCalledWith(mockObj);
+                        done();
+                    }
+                );
         });
 
         it('passes the updateDoc() error to the observable', done => {
@@ -439,6 +618,8 @@ describe('firestore', () => {
                 );
         });
     });
+
+    // TODO: Add updateDocs tests
 
     describe('deleteDoc()', () => {
         it('successfully deletes a document', done => {

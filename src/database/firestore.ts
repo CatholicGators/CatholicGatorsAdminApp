@@ -22,12 +22,20 @@ export default class Firestore {
         return this.app.auth();
     }
 
-    addDoc(collection: string, entity: object): Observable<firebase.firestore.DocumentReference> {
+    addDoc(collection: string, entity: any): Observable<firebase.firestore.DocumentReference> {
+        if(entity.id || entity.uid)
+            entity = this.removeId(entity);
         return from(this.db.collection(collection).add(entity));
     }
 
-    upsertDocById(collection: string, docId: string, entity: object): Observable<void>{
-        return from(this.db.collection(collection).doc(docId).set(entity));
+    upsertDocById(collection: string, docId: string, entity: any): Observable<firebase.firestore.DocumentReference>{
+        if(entity.id || entity.uid)
+            entity = this.removeId(entity);
+        const docRef = this.db.collection(collection).doc(docId);
+        return from(docRef.set(entity))
+            .pipe(
+                map(_ => docRef)
+            );
     }
 
     upsertDocs(collection: string, entities: any[]): Observable<firebase.firestore.DocumentReference[]> {
@@ -36,10 +44,14 @@ export default class Firestore {
 
         entities.forEach(entity => {
             let docRef;
-            if(entity.id)
+            if(entity.id){
                 docRef = this.db.collection(collection).doc(entity.id);
-            else if(entity.uid)
+                entity = this.removeId(entity);
+            }
+            else if(entity.uid){
                 docRef = this.db.collection(collection).doc(entity.uid);
+                entity = this.removeId(entity);
+            }
             else
                 docRef = this.db.collection(collection).doc();
             batch.set(docRef, entity);
@@ -93,8 +105,14 @@ export default class Firestore {
             );
     }
 
-    updateDoc(collection: string, docId: string, entity: object): Observable<void> {
-        return from(this.db.collection(collection).doc(docId).update(entity));
+    updateDoc(collection: string, docId: string, entity: any): Observable<firebase.firestore.DocumentReference> {
+        const docRef = this.db.collection(collection).doc(docId);
+        if(entity.id || entity.uid)
+            entity = this.removeId(entity);
+        return from(docRef.update(entity))
+            .pipe(
+                map(_ => docRef)
+            );
     }
 
     updateDocs(collection: string, entities: any[]): Observable<firebase.firestore.DocumentReference[]> {
@@ -104,17 +122,16 @@ export default class Firestore {
         return Observable.create(observer => {
             entities.forEach(entity => {
                 let docRef;
-                entity = Object.assign({}, entity);
                 if(entity.id){
                     docRef = this.db.collection(collection).doc(entity.id);
-                    delete entity.id;
+                    entity = this.removeId(entity);
                 }
                 else if(entity.uid){
                     docRef = this.db.collection(collection).doc(entity.uid);
-                    delete entity.uid;
+                    entity = this.removeId(entity);
                 }
                 else
-                    observer.error('Document has no id');
+                    observer.error(`Document has no id: ${JSON.stringify(entity)}`);
                 batch.update(docRef, entity);
                 docRefs.push(docRef);
             });
@@ -145,4 +162,12 @@ export default class Firestore {
         return from(this.app.delete());
     }
 
+    private removeId(obj: any) {
+        obj = {...obj};
+        if(obj.id)
+            delete obj.id
+        if(obj.uid)
+            delete obj.uid
+        return obj;
+    }
 }
