@@ -7,9 +7,10 @@ import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import Firestore from '../../database/firestore';
 import UserService from '../../services/userService';
-import clientConfig from '../../config/clientConfig';
+import devClientConfig from '../../config/clientConfig';
+import prodClientConfig from '../../config/prodClientConfig'
 
-const firestore = new Firestore(firebase, clientConfig);
+const firestore = (process.env.NODE_ENV === "production" ? new Firestore(firebase, prodClientConfig) : new Firestore(firebase, devClientConfig));
 const userService = new UserService(firestore);
 
 const epicMiddleware = createEpicMiddleware({
