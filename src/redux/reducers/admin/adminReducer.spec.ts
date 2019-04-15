@@ -40,6 +40,7 @@ describe('adminReducer', () => {
         newUsers[0] = newUser
         const action = updateUserSuccess(newUser)
         const state = {
+            ...INITIAL_AUTH_STATE,
             users
         }
 
