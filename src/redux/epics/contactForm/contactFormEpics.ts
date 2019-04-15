@@ -7,7 +7,9 @@ import {
     submitContactFormSuccess,
     submitContactFormErr,
     getContactsSuccess,
-    getContactsErr
+    getContactsErr,
+    updateContactStatusErr,
+    updateContactStatusSuccess
 } from '../../actions/contactForm/contactFormActions';
 
 export const submitContactFormEpic = (action$, _, { firestore }) => {
@@ -27,14 +29,27 @@ export const getContactsEpic = (action$, _, { firestore }) => {
         ofType(contactFormActions.GET_CONTACTS),
         mergeMap(() =>
             firestore.getCollection('contactForms').pipe(
-                map(user => getContactsSuccess(user)),
+                map(contacts => getContactsSuccess(contacts)),
                 catchError(err => ActionsObservable.of(getContactsErr(err)))
             )
         )
     );
 }
 
+export const updateContactStatusEpic = (action$, _, { firestore }) => {
+    return action$.pipe(
+        ofType(contactFormActions.UPDATE_CONTACT_STATUS),
+        mergeMap((action: any) =>
+            firestore.updateDoc('contactForms', action.contact.id, {...action.contact, status: action.status}).pipe(
+                map(() => updateContactStatusSuccess({...action.contact, status: action.status})),
+                catchError(err => ActionsObservable.of(updateContactStatusErr(err)))
+            )
+        )
+    )
+}
+
 export default combineEpics(
     submitContactFormEpic,
-    getContactsEpic
+    getContactsEpic,
+    updateContactStatusEpic
 );

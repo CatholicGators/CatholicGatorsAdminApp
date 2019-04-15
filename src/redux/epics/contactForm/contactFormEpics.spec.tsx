@@ -4,7 +4,8 @@ import { ActionsObservable } from "redux-observable"
 
 import {
     submitContactFormEpic,
-    getContactsEpic
+    getContactsEpic,
+    updateContactStatusEpic
 } from './contactFormEpics'
 
 import {
@@ -13,7 +14,10 @@ import {
     submitContactFormErr,
     getContactsSuccess,
     getContactsErr,
-    getContacts
+    getContacts,
+    updateContactStatus,
+    updateContactStatusSuccess,
+    updateContactStatusErr
 } from "../../actions/contactForm/contactFormActions"
 
 describe('contactFormEpics', () => {
@@ -22,7 +26,8 @@ describe('contactFormEpics', () => {
     beforeEach(() => {
         firestore = {
             addDoc: jest.fn(),
-            getCollection: jest.fn()
+            getCollection: jest.fn(),
+            updateDoc: jest.fn()
         }
 
         dependencies = {
@@ -101,6 +106,40 @@ describe('contactFormEpics', () => {
             firestore.getCollection.mockReturnValue(throwError(expectedAction.err))
 
             return getContactsEpic(action$, state$, dependencies)
+                .pipe(toArray())
+                .toPromise()
+                .then((result) => {
+                    expect(result).toEqual([expectedAction])
+                })
+        })
+    })
+
+    describe('updateContactStatusEpic', () => {
+        let action$, state$, contact, status = "Test"
+
+        beforeAll(() => {
+            contact = contacts[0]
+            action$ = ActionsObservable.from([updateContactStatus(contact, status)])
+            state$ = of()
+        })
+
+        it('emits GET_CONTACTS_SUCCESS action after successful get', () => {
+            firestore.updateDoc.mockReturnValue(of(contacts))
+            const expectedAction = updateContactStatusSuccess({ ...contact, status })
+
+            return updateContactStatusEpic(action$, state$, dependencies)
+                .pipe(toArray())
+                .toPromise()
+                .then((result) => {
+                    expect(result).toEqual([expectedAction])
+                })
+        })
+
+        it('emits SUBMIT_CONTACT_FORM_ERR when firestore.addDoc() returns an error', () => {
+            const expectedAction = updateContactStatusErr("test")
+            firestore.updateDoc.mockReturnValue(throwError(expectedAction.err))
+
+            return updateContactStatusEpic(action$, state$, dependencies)
                 .pipe(toArray())
                 .toPromise()
                 .then((result) => {

@@ -32,6 +32,14 @@ const applyContacts = (state, action) => ({
     contacts: action.contacts
 })
 
+const updateContactStatus = (state, action) => ({
+    ...state,
+    contacts: state.contacts.map(contact => contact.id == action.contact.id ?
+        { ...action.contact } :
+        contact
+    )
+})
+
 function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
     switch(action.type) {
         case contactFormActions.SUBMIT_CONTACT_FORM : {
@@ -45,6 +53,9 @@ function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
         }
         case contactFormActions.GET_CONTACTS_SUCCESS : {
             return applyContacts(state, action)
+        }
+        case contactFormActions.UPDATE_CONTACT_STATUS_SUCCESS : {
+            return updateContactStatus(state, action)
         }
         default : return state;
     }
