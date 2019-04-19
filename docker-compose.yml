@@ -1,19 +1,18 @@
 version: '3'
-
 services:
     nginx:
         image: nginx:latest
         container_name: production_nginx
         volumes:
-            - ./productionConfig/nginx.conf:/etc/nginx/nginx.conf
-            - /etc/letsencrypt/:/etc/letsencrypt/
-        environment:
-            - ENV=production
-            - APPLICATION_URL=http://cgwebapp
+            - type: bind
+              source: ./productionConfig/nginx.conf
+              target: /etc/nginx/nginx.conf
+            - type: bind
+              source: /etc/letsencrypt/
+              target: /etc/letsencrypt/
         ports:
             - 80:80
             - 443:443
-
     cgwebapp:
         build:
             context: .
