@@ -1,11 +1,23 @@
-version: '3'
-
+version: '3.2'
 services:
+    nginx:
+        image: nginx:latest
+        container_name: production_nginx
+        volumes:
+            - type: bind
+              source: ./productionConfig/nginx.conf
+              target: /etc/nginx/nginx.conf
+            - type: bind
+              source: /etc/letsencrypt/
+              target: /etc/letsencrypt/
+        ports:
+            - 80:80
+            - 443:443
     cgwebapp:
         build:
             context: .
             dockerfile: Dockerfile
         ports:
-            - "80:3000"
+            - "3000"
         environment:
             - NODE_ENV=$NODE_ENV
