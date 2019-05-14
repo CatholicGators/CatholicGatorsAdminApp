@@ -148,13 +148,13 @@ export class Admin extends Component<Props, State> {
             <Table>
               <TableHead>
                 <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    indeterminate={selected.length > 0 && selected.length < users.length}
-                    checked={selected.length === users.length && users.length !== 0}
-                    onChange={event => this.handleSelectAllClick(event)}
-                  />
-                </TableCell>
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      indeterminate={selected.length > 0 && selected.length < users.length}
+                      checked={selected.length === users.length && users.length !== 0}
+                      onChange={event => this.handleSelectAllClick(event)}
+                    />
+                  </TableCell>
                   <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
                   <TableCell className={classes ? classes.hiddensm : null}>Name</TableCell>
                   <TableCell>Email</TableCell>

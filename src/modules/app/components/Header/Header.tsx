@@ -65,6 +65,8 @@ const styles = (theme: Theme) => createStyles({
 });
 
 type Props = {
+    location: any,
+    classes: any,
     user: any,
     signOut: () => any,
     googleSignIn: () => any
@@ -105,10 +107,6 @@ export class Header extends React.Component<Props, State> {
     state = {
         drawerOpen: false
     };
-
-    constructor(public props) {
-        super(props);
-    }
 
     toggleDrawer(isOpen: boolean){
       this.setState({

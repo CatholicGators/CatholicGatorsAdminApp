@@ -16,6 +16,7 @@ const styles = (theme: Theme) => createStyles({
 });
 
 type Props = {
+    classes: any,
     user: any,
     login: () => any,
     logout: () => any
@@ -29,10 +30,6 @@ export class ToolbarAvatar extends React.Component<Props, State> {
     state = {
         anchorEl: null
     };
-
-    constructor(public props) {
-        super(props);
-    }
 
     handleMenu(event) {
         this.setState({
