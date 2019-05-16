@@ -5,8 +5,7 @@ import { Admin } from './Admin'
 import {
     TableHead,
     Checkbox,
-    CircularProgress,
-    TableRow
+    CircularProgress
 } from '@material-ui/core';
 
 describe('Admin', () => {
@@ -15,6 +14,8 @@ describe('Admin', () => {
     beforeEach(() => {
         props = {
             getUsers: jest.fn(),
+            updateUser: jest.fn(),
+            batchDeleteUsers: jest.fn(),
             users: [
                 {
                     id: "1",
@@ -62,6 +63,16 @@ describe('Admin', () => {
                 expect(selected).toContain(props.users[i].id)
             }
         })
+
+        it('resets the selected array when unchecked', () => {
+            const header = wrapper.find(TableHead)
+            const checkbox = header.find(Checkbox)
+    
+            checkbox.simulate('change', { target: { checked: false } })
+    
+            const selected = wrapper.state().selected
+            expect(selected.length).toBe(0)
+        })
     })
 
     describe('handleSelect(id)', () => {
@@ -70,18 +81,144 @@ describe('Admin', () => {
             wrapper.instance().handleSelect(id)
             expect(wrapper.state().selected).toEqual([id])
         })
-    
-        it('removes the id from the selected field when id is at the end of the array', () => {
-            const instance = wrapper.instance()
-            const expectedArr = props.users.map(user => user.id)
-            expectedArr.splice(-1, 1)
 
-            for(var i = 0; i < props.users.length; i++) {
+        describe('when multiple users already selected', () => {
+            let instance, expectedArr
+
+            beforeEach(() => {
+                instance = wrapper.instance()
+                expectedArr = props.users.map(user => user.id)
+    
+                for(var i = 0; i < props.users.length; i++) {
+                    instance.handleSelect(props.users[i].id)
+                }
+            })
+    
+            it('removes the id from the selected field when id is at the end of the array', () => {
+                expectedArr.splice(-1, 1)
+                instance.handleSelect(props.users[props.users.length - 1].id)
+    
+                expect(wrapper.state().selected).toEqual(expectedArr)
+            })
+    
+            it('removes the id from the selected field when id is at the beginning of the array', () => {
+                expectedArr.splice(0, 1)
+    
+                instance.handleSelect(props.users[0].id)
+    
+                expect(wrapper.state().selected).toEqual(expectedArr)
+            })
+        
+            it('removes the id from the selected field when id is not at the beginning nor end of the array', () => {
+                expectedArr.splice(1, 1)
+    
+                instance.handleSelect(props.users[1].id)
+    
+                expect(wrapper.state().selected).toEqual(expectedArr)
+            })
+        })
+    })
+
+    describe('handleBatchApprove()', () => {
+        let instance, ammountToApprove
+
+        beforeEach(() => {
+            ammountToApprove = props.users.length - 1
+            instance = wrapper.instance()
+
+            for(var i = 0; i < ammountToApprove; i++) {
                 instance.handleSelect(props.users[i].id)
             }
-            instance.handleSelect(props.users[props.users.length - 1].id)
+        })
 
-            expect(wrapper.state().selected).toEqual(expectedArr)
+        it('approves all of the selected users', () => {
+            instance.handleBatchApprove()
+
+            for(var i = 0; i < ammountToApprove; i++) {
+                expect(props.updateUser).toHaveBeenCalledWith({
+                    ...props.users[i],
+                    isApproved: true
+                })
+            }
+            expect(props.updateUser).toHaveBeenCalledTimes(ammountToApprove)
+        })
+
+        it('clears the selected array', () => {
+            let selected = wrapper.state().selected
+            expect(selected.length).toBe(ammountToApprove)
+    
+            instance.handleBatchApprove()
+
+            selected = wrapper.state().selected
+            expect(selected.length).toBe(0)
+        })
+    })
+
+    describe('handleBatchAuthorize()', () => {
+        let instance, ammountToAuthorize
+
+        beforeEach(() => {
+            ammountToAuthorize = props.users.length - 1
+            instance = wrapper.instance()
+
+            for(var i = 0; i < ammountToAuthorize; i++) {
+                instance.handleSelect(props.users[i].id)
+            }
+        })
+
+        it('authorizes all of the selected users', () => {
+            instance.handleBatchAuthorize()
+
+            for(var i = 0; i < ammountToAuthorize; i++) {
+                expect(props.updateUser).toHaveBeenCalledWith({
+                    ...props.users[i],
+                    isApproved: true,
+                    isAdmin: true
+                })
+            }
+            expect(props.updateUser).toHaveBeenCalledTimes(ammountToAuthorize)
+        })
+
+        it('clears the selected array', () => {
+            let selected = wrapper.state().selected
+            expect(selected.length).toBe(ammountToAuthorize)
+    
+            instance.handleBatchApprove()
+
+            selected = wrapper.state().selected
+            expect(selected.length).toBe(0)
+        })
+    })
+
+    describe('handleBatchDelete()', () => {
+        let instance, ammountToDelete
+
+        beforeEach(() => {
+            ammountToDelete = props.users.length - 1
+            instance = wrapper.instance()
+
+            for(var i = 0; i < ammountToDelete; i++) {
+                instance.handleSelect(props.users[i].id)
+            }
+        })
+
+        it('deletes all of the selected users', () => {
+            const selected = wrapper.state().selected
+
+            instance.handleBatchDelete()
+
+            expect(props.batchDeleteUsers).toHaveBeenCalledWith(selected)
+            expect(props.batchDeleteUsers).toHaveBeenCalledTimes(1)
+        })
+
+        it('clears the selected array', () => {
+            let selected = wrapper.state().selected
+            expect(selected.length).toBe(ammountToDelete)
+    
+            instance.handleBatchDelete()
+
+            selected = wrapper.state().selected
+            expect(selected.length).toBe(0)
         })
     })
 })

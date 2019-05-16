@@ -55,7 +55,6 @@ type Props = {
   users: any
   getUsers: () => void,
   updateUser: (user) => void,
-  deleteUser: (id) => void,
   batchDeleteUsers: (ids) => void
 }
 
