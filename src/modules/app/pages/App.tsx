@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
-import { listenForUser } from '../../../redux/actions/auth/authActions';
-import Header from '../components/Header/Header';
-import Admin from '../../admin/pages/Admin';
-import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute';
+import { listenForUser } from '../../../redux/actions/auth/authActions'
+import Header from '../components/Header/Header'
+import Admin from '../../admin/pages/Admin'
+import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute'
 import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
-import MyContacts from '../../contactForm/pages/MyContacts/MyContacts';
+import MyContacts from '../../contactForm/pages/MyContacts/MyContacts'
 
 type Props = {
-  user: any;
-  listenForUser: () => any;
+  user: any
+  listenForUser: () => any
 }
 
 export class App extends Component<Props> {
   componentDidMount() {
-    this.props.listenForUser();
+    this.props.listenForUser()
   }
 
   render() {
@@ -42,7 +42,7 @@ export class App extends Component<Props> {
           </Switch>
         </div>
       </Router>
-    );
+    )
   }
 }
 
@@ -52,6 +52,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   listenForUser: () => dispatch(listenForUser())
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

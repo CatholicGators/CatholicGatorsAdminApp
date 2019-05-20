@@ -1,27 +1,27 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
 
-import { ToolbarAvatar } from './ToolbarAvatar';
+import { ToolbarAvatar } from './ToolbarAvatar'
 
 describe('ToolbarAvatar', () => {
-    let props, wrapper;
+    let props, wrapper
 
     beforeEach(() => {
         props = {
             user: {},
             login: jest.fn(),
             logout: jest.fn()
-        };
-        wrapper = shallow(<ToolbarAvatar {...props} />);
-    });
+        }
+        wrapper = shallow(<ToolbarAvatar {...props} />)
+    })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-    });
+        expect(wrapper).toMatchSnapshot()
+    })
     
     describe('user is loading', () => {
         beforeEach(() => {
-            wrapper.setProps({ user: undefined });
+            wrapper.setProps({ user: undefined })
         });
 
         it('should only show a spinner', () => {
@@ -33,8 +33,8 @@ describe('ToolbarAvatar', () => {
 
     describe('user is not logged in', () => {
         beforeEach(() => {
-            wrapper.setProps({ user: null });
-        });
+            wrapper.setProps({ user: null })
+        })
 
         it('should only show the login button', () => {
             expect(wrapper.exists('#spinner')).toBe(false)
@@ -43,18 +43,18 @@ describe('ToolbarAvatar', () => {
         });
 
         it('calls googleSignIn()', () => {
-            wrapper.find('#login-btn').simulate('click');
+            wrapper.find('#login-btn').simulate('click')
 
-            expect(props.login).toHaveBeenCalled();
-        });
-    });
+            expect(props.login).toHaveBeenCalled()
+        })
+    })
 
     describe('user is logged in', () => {
-        const testTarget = 'test';
+        const testTarget = 'test'
 
         beforeEach(() => {
-            wrapper.find('#avatar-btn').simulate('click', { currentTarget: testTarget });
-        });
+            wrapper.find('#avatar-btn').simulate('click', { currentTarget: testTarget })
+        })
 
         it('should only show the avatar', () => {
             expect(wrapper.exists('#spinner')).toBe(false)
@@ -63,21 +63,21 @@ describe('ToolbarAvatar', () => {
         })
 
         it('clicking avatar sets anchorEl', () => {
-            expect(wrapper.state('anchorEl')).toBe(testTarget);
-        });
+            expect(wrapper.state('anchorEl')).toBe(testTarget)
+        })
 
         describe('logout', () => {
             it('closes the menu', () => {
-                wrapper.find('#logout').simulate('click');
+                wrapper.find('#logout').simulate('click')
 
-                expect(wrapper.state('anchorEl')).toBe(null);
-            });
+                expect(wrapper.state('anchorEl')).toBe(null)
+            })
 
             it('calls signOut()', () => {
-                wrapper.find('#logout').simulate('click');
+                wrapper.find('#logout').simulate('click')
 
-                expect(props.logout).toHaveBeenCalled();
-            });
-        });
-    });
-});
+                expect(props.logout).toHaveBeenCalled()
+            })
+        })
+    })
+})
