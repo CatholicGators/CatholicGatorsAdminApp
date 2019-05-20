@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme';
+import { NavLink } from "react-router-dom";
 
 import { menuLinks } from '../Header/Header'
 import { MobileDrawer } from './MobileDrawer';
@@ -24,6 +25,14 @@ describe('MobileDrawer', () => {
 
     it('should match snapshot', () => {
         expect(wrapper).toMatchSnapshot();
+    })
+
+    it('closes the drawer when a NavLink is clicked on', () => {
+        const listItem = wrapper.find(NavLink).first()
+
+        listItem.simulate('click')
+
+        expect(props.closeDrawer).toHaveBeenCalled()
     })
 
     describe('user is loading', () => {
