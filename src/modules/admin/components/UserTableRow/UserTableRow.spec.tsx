@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 import { UserTableRow } from './UserTableRow';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, IconButton } from '@material-ui/core';
 
 describe('UserTableRow', () => {
     let wrapper, props;
@@ -25,6 +25,12 @@ describe('UserTableRow', () => {
 
     it('calls handleSelect with user.id when the checkbox is clicked', () => {
         wrapper.find(Checkbox).simulate('click')
+
+        expect(props.handleSelect).toHaveBeenCalledWith(props.user.id)
+    })
+
+    it('calls handleSelect with user.id when the Avatar is clicked', () => {
+        wrapper.find(IconButton).simulate('click')
 
         expect(props.handleSelect).toHaveBeenCalledWith(props.user.id)
     })

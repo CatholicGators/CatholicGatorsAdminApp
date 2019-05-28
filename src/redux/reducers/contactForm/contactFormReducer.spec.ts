@@ -1,5 +1,9 @@
 import {
-    submitContactForm, submitContactFormSuccess, submitContactFormErr, getContactsSuccess, updateContactStatusSuccess
+    submitContactForm,
+    submitContactFormSuccess,
+    submitContactFormErr,
+    getContactsSuccess,
+    updateContactStatusSuccess
 } from '../../actions/contactForm/contactFormActions'
 import contactFormReducer, { INITIAL_CONTACT_FORM_STATE } from './contactFormReducer'
 
@@ -19,6 +23,16 @@ describe('contactFormReducer', () => {
         ]
 
         form = {}
+    })
+
+    it('returns the state unmutated by default', () => {
+        const action = { type: 'foo' }
+        const state = {
+            ...INITIAL_CONTACT_FORM_STATE,
+            user: 'bar'
+        }
+
+        expect(contactFormReducer(state, action)).toEqual(state)
     })
 
     it('sets loading on SUBMIT_CONTACT_FORM', () => {

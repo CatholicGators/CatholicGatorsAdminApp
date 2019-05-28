@@ -1,21 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import { createStyles, withStyles, Theme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { createStyles, withStyles, Theme } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import Avatar from '@material-ui/core/Avatar'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = (theme: Theme) => createStyles({
     progress: {
         margin: 12,
         color: theme.palette.secondary.main
     }
-});
+})
 
 type Props = {
+    classes: any,
     user: any,
     login: () => any,
     logout: () => any
@@ -28,31 +29,27 @@ type State = {
 export class ToolbarAvatar extends React.Component<Props, State> {
     state = {
         anchorEl: null
-    };
-
-    constructor(public props) {
-        super(props);
     }
 
     handleMenu(event) {
         this.setState({
             anchorEl: event.currentTarget
-        });
+        })
     }
 
     handleClose() {
         this.setState({
             anchorEl: null
-        });
+        })
     }
 
     handleLogin() {
-        this.props.login();
+        this.props.login()
     }
 
     handleLogout() {
-        this.props.logout();
-        this.handleClose();
+        this.props.logout()
+        this.handleClose()
     }
 
     render() {
@@ -104,9 +101,9 @@ export class ToolbarAvatar extends React.Component<Props, State> {
                             <MenuItem id="logout" onClick={this.handleLogout.bind(this)}>Logout</MenuItem>
                         </Menu>
                     </div>
-                );
+                )
         }
     }
 }
 
-export default withStyles(styles)(ToolbarAvatar);
+export default withStyles(styles)(ToolbarAvatar)

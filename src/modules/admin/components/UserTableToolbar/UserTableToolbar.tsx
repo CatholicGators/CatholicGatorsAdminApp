@@ -38,11 +38,11 @@ export const UserTableToolbar = (props: Props) => {
         <Toolbar>
             <div className={classes ? classes.toolbarTitle : null}>
                 {numSelected > 0 ? (
-                    <Typography color="inherit" variant="subtitle1">
+                    <Typography id="num-selected" color="inherit" variant="subtitle1">
                         {numSelected} selected
                     </Typography>
                     ) : (
-                    <Typography variant="h6">
+                    <Typography id="title" variant="h6">
                         Users
                     </Typography>
                 )}

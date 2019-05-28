@@ -24,10 +24,22 @@ describe('UserTableToolbar', () => {
         expect(wrapper.exists(IconButton)).toBe(false)
     })
 
+    it('shows the title when nothing selected', () => {
+        expect(wrapper.find('#title').exists()).toBe(true)
+        expect(wrapper.find('#num-selected').exists()).toBe(false)
+    })
+
     it('shows the action buttons when something is selected', () => {
         wrapper.setProps({ numSelected: 1 })
 
         expect(wrapper.exists(IconButton)).toBe(true)
+    })
+
+    it('shows the numSelected when > 0', () => {
+        wrapper.setProps({ numSelected: 1 })
+
+        expect(wrapper.find('#title').exists()).toBe(false)
+        expect(wrapper.find('#num-selected').exists()).toBe(true)
     })
 
     it('calls handleBatchApprove() when the approve IconButton is clicked', () => {
