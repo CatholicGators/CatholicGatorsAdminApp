@@ -4,40 +4,12 @@ exports[`Admin should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Admin
-    batchDeleteUsers={[MockFunction]}
-    getUsers={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": Array [
-          Object {
-            "isThrow": false,
-            "value": undefined,
-          },
-        ],
+    location={
+      Object {
+        "pathname": "test/testing",
       }
     }
-    updateUser={[MockFunction]}
-    users={
-      Array [
-        Object {
-          "id": "1",
-          "isAdmin": false,
-          "name": "Joey",
-        },
-        Object {
-          "id": "2",
-          "isAdmin": false,
-          "name": "Ryan",
-        },
-        Object {
-          "id": "3",
-          "isAdmin": true,
-          "name": "Espresso Shot Capuccino",
-        },
-      ]
-    }
+    match="test/"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -54,99 +26,61 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <div
-          className={null}
-          style={
-            Object {
-              "background": "red",
-            }
-          }
-        >
-          Mini Nav!
-        </div>,
-        <div
+        <WithStyles(List)
           className={null}
         >
-          <WithStyles(Paper)
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
             className={null}
+            exact={true}
+            to="undefined/users"
           >
-            <WithStyles(UserTableToolbar)
-              handleBatchApprove={[Function]}
-              handleBatchAuthorize={[Function]}
-              handleBatchDelete={[Function]}
-              numSelected={0}
-            />
-            <WithStyles(Table)>
-              <WithStyles(TableHead)>
-                <WithStyles(TableRow)>
-                  <WithStyles(TableCell)
-                    padding="checkbox"
-                  >
-                    <WithStyles(Checkbox)
-                      checked={false}
-                      indeterminate={false}
-                      onChange={[Function]}
-                    />
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)
-                    className={null}
-                  >
-                    Profile Pic
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)
-                    className={null}
-                  >
-                    Name
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Email
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Approved
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Admin
-                  </WithStyles(TableCell)>
-                </WithStyles(TableRow)>
-              </WithStyles(TableHead)>
-              <WithStyles(TableBody)>
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "1",
-                      "isAdmin": false,
-                      "name": "Joey",
-                    }
-                  }
-                />
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "2",
-                      "isAdmin": false,
-                      "name": "Ryan",
-                    }
-                  }
-                />
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "3",
-                      "isAdmin": true,
-                      "name": "Espresso Shot Capuccino",
-                    }
-                  }
-                />
-              </WithStyles(TableBody)>
-            </WithStyles(Table)>
-          </WithStyles(Paper)>
-        </div>,
+            <WithStyles(ListItem)
+              button={true}
+              selected={false}
+            >
+              <WithStyles(ListItemIcon)>
+                <pure(GroupIcon) />
+              </WithStyles(ListItemIcon)>
+              <WithStyles(ListItemText)
+                primary="Users"
+              />
+            </WithStyles(ListItem)>
+          </NavLink>
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className={null}
+            exact={true}
+            to="undefined/permissions"
+          >
+            <WithStyles(ListItem)
+              button={true}
+              selected={false}
+            >
+              <WithStyles(ListItemIcon)>
+                <pure(VpnKeyIcon) />
+              </WithStyles(ListItemIcon)>
+              <WithStyles(ListItemText)
+                primary="Permissions"
+              />
+            </WithStyles(ListItem)>
+          </NavLink>
+        </WithStyles(List)>,
+        <Route
+          exact={true}
+          path="undefined"
+          render={[Function]}
+        />,
+        <Route
+          component={[Function]}
+          path="undefined/users"
+        />,
+        <Route
+          component={[Function]}
+          path="undefined/permissions"
+        />,
       ],
       "className": null,
     },
@@ -155,279 +89,90 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "class",
         "props": Object {
-          "children": "Mini Nav!",
-          "className": null,
-          "style": Object {
-            "background": "red",
-          },
-        },
-        "ref": null,
-        "rendered": "Mini Nav!",
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <WithStyles(Paper)
-            className={null}
-          >
-            <WithStyles(UserTableToolbar)
-              handleBatchApprove={[Function]}
-              handleBatchAuthorize={[Function]}
-              handleBatchDelete={[Function]}
-              numSelected={0}
-            />
-            <WithStyles(Table)>
-              <WithStyles(TableHead)>
-                <WithStyles(TableRow)>
-                  <WithStyles(TableCell)
-                    padding="checkbox"
-                  >
-                    <WithStyles(Checkbox)
-                      checked={false}
-                      indeterminate={false}
-                      onChange={[Function]}
-                    />
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)
-                    className={null}
-                  >
-                    Profile Pic
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)
-                    className={null}
-                  >
-                    Name
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Email
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Approved
-                  </WithStyles(TableCell)>
-                  <WithStyles(TableCell)>
-                    Admin
-                  </WithStyles(TableCell)>
-                </WithStyles(TableRow)>
-              </WithStyles(TableHead)>
-              <WithStyles(TableBody)>
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "1",
-                      "isAdmin": false,
-                      "name": "Joey",
-                    }
-                  }
+          "children": Array [
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="undefined/users"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
                 />
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "2",
-                      "isAdmin": false,
-                      "name": "Ryan",
-                    }
-                  }
+              </WithStyles(ListItem)>
+            </NavLink>,
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="undefined/permissions"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Permissions"
                 />
-                <Connect(WithStyles(UserTableRow))
-                  handleSelect={[Function]}
-                  isSelected={false}
-                  user={
-                    Object {
-                      "id": "3",
-                      "isAdmin": true,
-                      "name": "Espresso Shot Capuccino",
-                    }
-                  }
-                />
-              </WithStyles(TableBody)>
-            </WithStyles(Table)>
-          </WithStyles(Paper)>,
+              </WithStyles(ListItem)>
+            </NavLink>,
+          ],
           "className": null,
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <WithStyles(UserTableToolbar)
-                handleBatchApprove={[Function]}
-                handleBatchAuthorize={[Function]}
-                handleBatchDelete={[Function]}
-                numSelected={0}
-              />,
-              <WithStyles(Table)>
-                <WithStyles(TableHead)>
-                  <WithStyles(TableRow)>
-                    <WithStyles(TableCell)
-                      padding="checkbox"
-                    >
-                      <WithStyles(Checkbox)
-                        checked={false}
-                        indeterminate={false}
-                        onChange={[Function]}
-                      />
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Profile Pic
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Name
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>
-                  </WithStyles(TableRow)>
-                </WithStyles(TableHead)>
-                <WithStyles(TableBody)>
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "1",
-                        "isAdmin": false,
-                        "name": "Joey",
-                      }
-                    }
-                  />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "2",
-                        "isAdmin": false,
-                        "name": "Ryan",
-                      }
-                    }
-                  />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "3",
-                        "isAdmin": true,
-                        "name": "Espresso Shot Capuccino",
-                      }
-                    }
-                  />
-                </WithStyles(TableBody)>
-              </WithStyles(Table)>,
-            ],
-            "className": null,
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "handleBatchApprove": [Function],
-                "handleBatchAuthorize": [Function],
-                "handleBatchDelete": [Function],
-                "numSelected": 0,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "Users",
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "aria-current": "page",
+              "children": <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
+                />
+              </WithStyles(ListItem)>,
+              "className": null,
+              "exact": true,
+              "to": "undefined/users",
             },
-            Object {
+            "ref": null,
+            "rendered": Object {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
               "props": Object {
+                "button": true,
                 "children": Array [
-                  <WithStyles(TableHead)>
-                    <WithStyles(TableRow)>
-                      <WithStyles(TableCell)
-                        padding="checkbox"
-                      >
-                        <WithStyles(Checkbox)
-                          checked={false}
-                          indeterminate={false}
-                          onChange={[Function]}
-                        />
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Profile Pic
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Name
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Email
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Approved
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Admin
-                      </WithStyles(TableCell)>
-                    </WithStyles(TableRow)>
-                  </WithStyles(TableHead)>,
-                  <WithStyles(TableBody)>
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "1",
-                          "isAdmin": false,
-                          "name": "Joey",
-                        }
-                      }
-                    />
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "2",
-                          "isAdmin": false,
-                          "name": "Ryan",
-                        }
-                      }
-                    />
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "3",
-                          "isAdmin": true,
-                          "name": "Espresso Shot Capuccino",
-                        }
-                      }
-                    />
-                  </WithStyles(TableBody)>,
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>,
+                  <WithStyles(ListItemText)
+                    primary="Users"
+                  />,
                 ],
+                "selected": false,
               },
               "ref": null,
               "rendered": Array [
@@ -436,162 +181,16 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "children": <WithStyles(TableRow)>
-                      <WithStyles(TableCell)
-                        padding="checkbox"
-                      >
-                        <WithStyles(Checkbox)
-                          checked={false}
-                          indeterminate={false}
-                          onChange={[Function]}
-                        />
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Profile Pic
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Name
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Email
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Approved
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Admin
-                      </WithStyles(TableCell)>
-                    </WithStyles(TableRow)>,
+                    "children": <pure(GroupIcon) />,
                   },
                   "ref": null,
                   "rendered": Object {
                     "instance": null,
                     "key": undefined,
                     "nodeType": "class",
-                    "props": Object {
-                      "children": Array [
-                        <WithStyles(TableCell)
-                          padding="checkbox"
-                        >
-                          <WithStyles(Checkbox)
-                            checked={false}
-                            indeterminate={false}
-                            onChange={[Function]}
-                          />
-                        </WithStyles(TableCell)>,
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Profile Pic
-                        </WithStyles(TableCell)>,
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Name
-                        </WithStyles(TableCell)>,
-                        <WithStyles(TableCell)>
-                          Email
-                        </WithStyles(TableCell)>,
-                        <WithStyles(TableCell)>
-                          Approved
-                        </WithStyles(TableCell)>,
-                        <WithStyles(TableCell)>
-                          Admin
-                        </WithStyles(TableCell)>,
-                      ],
-                    },
+                    "props": Object {},
                     "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": <WithStyles(Checkbox)
-                            checked={false}
-                            indeterminate={false}
-                            onChange={[Function]}
-                          />,
-                          "padding": "checkbox",
-                        },
-                        "ref": null,
-                        "rendered": Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "checked": false,
-                            "indeterminate": false,
-                            "onChange": [Function],
-                          },
-                          "ref": null,
-                          "rendered": null,
-                          "type": [Function],
-                        },
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": "Profile Pic",
-                          "className": null,
-                        },
-                        "ref": null,
-                        "rendered": "Profile Pic",
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": "Name",
-                          "className": null,
-                        },
-                        "ref": null,
-                        "rendered": "Name",
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": "Email",
-                        },
-                        "ref": null,
-                        "rendered": "Email",
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": "Approved",
-                        },
-                        "ref": null,
-                        "rendered": "Approved",
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "children": "Admin",
-                        },
-                        "ref": null,
-                        "rendered": "Admin",
-                        "type": [Function],
-                      },
-                    ],
+                    "rendered": null,
                     "type": [Function],
                   },
                   "type": [Function],
@@ -601,105 +200,132 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "children": Array [
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "1",
-                            "isAdmin": false,
-                            "name": "Joey",
-                          }
-                        }
-                      />,
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "2",
-                            "isAdmin": false,
-                            "name": "Ryan",
-                          }
-                        }
-                      />,
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "3",
-                            "isAdmin": true,
-                            "name": "Espresso Shot Capuccino",
-                          }
-                        }
-                      />,
-                    ],
+                    "primary": "Users",
                   },
                   "ref": null,
-                  "rendered": Array [
-                    Object {
-                      "instance": null,
-                      "key": "1",
-                      "nodeType": "class",
-                      "props": Object {
-                        "handleSelect": [Function],
-                        "isSelected": false,
-                        "user": Object {
-                          "id": "1",
-                          "isAdmin": false,
-                          "name": "Joey",
-                        },
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "2",
-                      "nodeType": "class",
-                      "props": Object {
-                        "handleSelect": [Function],
-                        "isSelected": false,
-                        "user": Object {
-                          "id": "2",
-                          "isAdmin": false,
-                          "name": "Ryan",
-                        },
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                    Object {
-                      "instance": null,
-                      "key": "3",
-                      "nodeType": "class",
-                      "props": Object {
-                        "handleSelect": [Function],
-                        "isSelected": false,
-                        "user": Object {
-                          "id": "3",
-                          "isAdmin": true,
-                          "name": "Espresso Shot Capuccino",
-                        },
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                  ],
+                  "rendered": null,
                   "type": [Function],
                 },
               ],
               "type": [Function],
             },
-          ],
-          "type": [Function],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Permissions",
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "aria-current": "page",
+              "children": <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Permissions"
+                />
+              </WithStyles(ListItem)>,
+              "className": null,
+              "exact": true,
+              "to": "undefined/permissions",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "button": true,
+                "children": Array [
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>,
+                  <WithStyles(ListItemText)
+                    primary="Permissions"
+                  />,
+                ],
+                "selected": false,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <pure(VpnKeyIcon) />,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "primary": "Permissions",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "exact": true,
+          "path": "undefined",
+          "render": [Function],
         },
-        "type": "div",
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "undefined/users",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "undefined/permissions",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -711,99 +337,61 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <div
-            className={null}
-            style={
-              Object {
-                "background": "red",
-              }
-            }
-          >
-            Mini Nav!
-          </div>,
-          <div
+          <WithStyles(List)
             className={null}
           >
-            <WithStyles(Paper)
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
               className={null}
+              exact={true}
+              to="undefined/users"
             >
-              <WithStyles(UserTableToolbar)
-                handleBatchApprove={[Function]}
-                handleBatchAuthorize={[Function]}
-                handleBatchDelete={[Function]}
-                numSelected={0}
-              />
-              <WithStyles(Table)>
-                <WithStyles(TableHead)>
-                  <WithStyles(TableRow)>
-                    <WithStyles(TableCell)
-                      padding="checkbox"
-                    >
-                      <WithStyles(Checkbox)
-                        checked={false}
-                        indeterminate={false}
-                        onChange={[Function]}
-                      />
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Profile Pic
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Name
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>
-                  </WithStyles(TableRow)>
-                </WithStyles(TableHead)>
-                <WithStyles(TableBody)>
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "1",
-                        "isAdmin": false,
-                        "name": "Joey",
-                      }
-                    }
-                  />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "2",
-                        "isAdmin": false,
-                        "name": "Ryan",
-                      }
-                    }
-                  />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "3",
-                        "isAdmin": true,
-                        "name": "Espresso Shot Capuccino",
-                      }
-                    }
-                  />
-                </WithStyles(TableBody)>
-              </WithStyles(Table)>
-            </WithStyles(Paper)>
-          </div>,
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="undefined/permissions"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Permissions"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>
+          </WithStyles(List)>,
+          <Route
+            exact={true}
+            path="undefined"
+            render={[Function]}
+          />,
+          <Route
+            component={[Function]}
+            path="undefined/users"
+          />,
+          <Route
+            component={[Function]}
+            path="undefined/permissions"
+          />,
         ],
         "className": null,
       },
@@ -812,279 +400,90 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "class",
           "props": Object {
-            "children": "Mini Nav!",
-            "className": null,
-            "style": Object {
-              "background": "red",
-            },
-          },
-          "ref": null,
-          "rendered": "Mini Nav!",
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <WithStyles(Paper)
-              className={null}
-            >
-              <WithStyles(UserTableToolbar)
-                handleBatchApprove={[Function]}
-                handleBatchAuthorize={[Function]}
-                handleBatchDelete={[Function]}
-                numSelected={0}
-              />
-              <WithStyles(Table)>
-                <WithStyles(TableHead)>
-                  <WithStyles(TableRow)>
-                    <WithStyles(TableCell)
-                      padding="checkbox"
-                    >
-                      <WithStyles(Checkbox)
-                        checked={false}
-                        indeterminate={false}
-                        onChange={[Function]}
-                      />
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Profile Pic
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)
-                      className={null}
-                    >
-                      Name
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Email
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Approved
-                    </WithStyles(TableCell)>
-                    <WithStyles(TableCell)>
-                      Admin
-                    </WithStyles(TableCell)>
-                  </WithStyles(TableRow)>
-                </WithStyles(TableHead)>
-                <WithStyles(TableBody)>
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "1",
-                        "isAdmin": false,
-                        "name": "Joey",
-                      }
-                    }
+            "children": Array [
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                to="undefined/users"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Users"
                   />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "2",
-                        "isAdmin": false,
-                        "name": "Ryan",
-                      }
-                    }
+                </WithStyles(ListItem)>
+              </NavLink>,
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                to="undefined/permissions"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Permissions"
                   />
-                  <Connect(WithStyles(UserTableRow))
-                    handleSelect={[Function]}
-                    isSelected={false}
-                    user={
-                      Object {
-                        "id": "3",
-                        "isAdmin": true,
-                        "name": "Espresso Shot Capuccino",
-                      }
-                    }
-                  />
-                </WithStyles(TableBody)>
-              </WithStyles(Table)>
-            </WithStyles(Paper)>,
+                </WithStyles(ListItem)>
+              </NavLink>,
+            ],
             "className": null,
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": Array [
-                <WithStyles(UserTableToolbar)
-                  handleBatchApprove={[Function]}
-                  handleBatchAuthorize={[Function]}
-                  handleBatchDelete={[Function]}
-                  numSelected={0}
-                />,
-                <WithStyles(Table)>
-                  <WithStyles(TableHead)>
-                    <WithStyles(TableRow)>
-                      <WithStyles(TableCell)
-                        padding="checkbox"
-                      >
-                        <WithStyles(Checkbox)
-                          checked={false}
-                          indeterminate={false}
-                          onChange={[Function]}
-                        />
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Profile Pic
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)
-                        className={null}
-                      >
-                        Name
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Email
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Approved
-                      </WithStyles(TableCell)>
-                      <WithStyles(TableCell)>
-                        Admin
-                      </WithStyles(TableCell)>
-                    </WithStyles(TableRow)>
-                  </WithStyles(TableHead)>
-                  <WithStyles(TableBody)>
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "1",
-                          "isAdmin": false,
-                          "name": "Joey",
-                        }
-                      }
-                    />
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "2",
-                          "isAdmin": false,
-                          "name": "Ryan",
-                        }
-                      }
-                    />
-                    <Connect(WithStyles(UserTableRow))
-                      handleSelect={[Function]}
-                      isSelected={false}
-                      user={
-                        Object {
-                          "id": "3",
-                          "isAdmin": true,
-                          "name": "Espresso Shot Capuccino",
-                        }
-                      }
-                    />
-                  </WithStyles(TableBody)>
-                </WithStyles(Table)>,
-              ],
-              "className": null,
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "handleBatchApprove": [Function],
-                  "handleBatchAuthorize": [Function],
-                  "handleBatchDelete": [Function],
-                  "numSelected": 0,
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "Users",
+              "nodeType": "function",
+              "props": Object {
+                "activeClassName": "active",
+                "aria-current": "page",
+                "children": <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Users"
+                  />
+                </WithStyles(ListItem)>,
+                "className": null,
+                "exact": true,
+                "to": "undefined/users",
               },
-              Object {
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
+                  "button": true,
                   "children": Array [
-                    <WithStyles(TableHead)>
-                      <WithStyles(TableRow)>
-                        <WithStyles(TableCell)
-                          padding="checkbox"
-                        >
-                          <WithStyles(Checkbox)
-                            checked={false}
-                            indeterminate={false}
-                            onChange={[Function]}
-                          />
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Profile Pic
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Name
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Email
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Approved
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Admin
-                        </WithStyles(TableCell)>
-                      </WithStyles(TableRow)>
-                    </WithStyles(TableHead)>,
-                    <WithStyles(TableBody)>
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "1",
-                            "isAdmin": false,
-                            "name": "Joey",
-                          }
-                        }
-                      />
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "2",
-                            "isAdmin": false,
-                            "name": "Ryan",
-                          }
-                        }
-                      />
-                      <Connect(WithStyles(UserTableRow))
-                        handleSelect={[Function]}
-                        isSelected={false}
-                        user={
-                          Object {
-                            "id": "3",
-                            "isAdmin": true,
-                            "name": "Espresso Shot Capuccino",
-                          }
-                        }
-                      />
-                    </WithStyles(TableBody)>,
+                    <WithStyles(ListItemIcon)>
+                      <pure(GroupIcon) />
+                    </WithStyles(ListItemIcon)>,
+                    <WithStyles(ListItemText)
+                      primary="Users"
+                    />,
                   ],
+                  "selected": false,
                 },
                 "ref": null,
                 "rendered": Array [
@@ -1093,162 +492,16 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
-                      "children": <WithStyles(TableRow)>
-                        <WithStyles(TableCell)
-                          padding="checkbox"
-                        >
-                          <WithStyles(Checkbox)
-                            checked={false}
-                            indeterminate={false}
-                            onChange={[Function]}
-                          />
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Profile Pic
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)
-                          className={null}
-                        >
-                          Name
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Email
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Approved
-                        </WithStyles(TableCell)>
-                        <WithStyles(TableCell)>
-                          Admin
-                        </WithStyles(TableCell)>
-                      </WithStyles(TableRow)>,
+                      "children": <pure(GroupIcon) />,
                     },
                     "ref": null,
                     "rendered": Object {
                       "instance": null,
                       "key": undefined,
                       "nodeType": "class",
-                      "props": Object {
-                        "children": Array [
-                          <WithStyles(TableCell)
-                            padding="checkbox"
-                          >
-                            <WithStyles(Checkbox)
-                              checked={false}
-                              indeterminate={false}
-                              onChange={[Function]}
-                            />
-                          </WithStyles(TableCell)>,
-                          <WithStyles(TableCell)
-                            className={null}
-                          >
-                            Profile Pic
-                          </WithStyles(TableCell)>,
-                          <WithStyles(TableCell)
-                            className={null}
-                          >
-                            Name
-                          </WithStyles(TableCell)>,
-                          <WithStyles(TableCell)>
-                            Email
-                          </WithStyles(TableCell)>,
-                          <WithStyles(TableCell)>
-                            Approved
-                          </WithStyles(TableCell)>,
-                          <WithStyles(TableCell)>
-                            Admin
-                          </WithStyles(TableCell)>,
-                        ],
-                      },
+                      "props": Object {},
                       "ref": null,
-                      "rendered": Array [
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": <WithStyles(Checkbox)
-                              checked={false}
-                              indeterminate={false}
-                              onChange={[Function]}
-                            />,
-                            "padding": "checkbox",
-                          },
-                          "ref": null,
-                          "rendered": Object {
-                            "instance": null,
-                            "key": undefined,
-                            "nodeType": "class",
-                            "props": Object {
-                              "checked": false,
-                              "indeterminate": false,
-                              "onChange": [Function],
-                            },
-                            "ref": null,
-                            "rendered": null,
-                            "type": [Function],
-                          },
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Profile Pic",
-                            "className": null,
-                          },
-                          "ref": null,
-                          "rendered": "Profile Pic",
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Name",
-                            "className": null,
-                          },
-                          "ref": null,
-                          "rendered": "Name",
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Email",
-                          },
-                          "ref": null,
-                          "rendered": "Email",
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Approved",
-                          },
-                          "ref": null,
-                          "rendered": "Approved",
-                          "type": [Function],
-                        },
-                        Object {
-                          "instance": null,
-                          "key": undefined,
-                          "nodeType": "class",
-                          "props": Object {
-                            "children": "Admin",
-                          },
-                          "ref": null,
-                          "rendered": "Admin",
-                          "type": [Function],
-                        },
-                      ],
+                      "rendered": null,
                       "type": [Function],
                     },
                     "type": [Function],
@@ -1258,105 +511,132 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
-                      "children": Array [
-                        <Connect(WithStyles(UserTableRow))
-                          handleSelect={[Function]}
-                          isSelected={false}
-                          user={
-                            Object {
-                              "id": "1",
-                              "isAdmin": false,
-                              "name": "Joey",
-                            }
-                          }
-                        />,
-                        <Connect(WithStyles(UserTableRow))
-                          handleSelect={[Function]}
-                          isSelected={false}
-                          user={
-                            Object {
-                              "id": "2",
-                              "isAdmin": false,
-                              "name": "Ryan",
-                            }
-                          }
-                        />,
-                        <Connect(WithStyles(UserTableRow))
-                          handleSelect={[Function]}
-                          isSelected={false}
-                          user={
-                            Object {
-                              "id": "3",
-                              "isAdmin": true,
-                              "name": "Espresso Shot Capuccino",
-                            }
-                          }
-                        />,
-                      ],
+                      "primary": "Users",
                     },
                     "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": "1",
-                        "nodeType": "class",
-                        "props": Object {
-                          "handleSelect": [Function],
-                          "isSelected": false,
-                          "user": Object {
-                            "id": "1",
-                            "isAdmin": false,
-                            "name": "Joey",
-                          },
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": "2",
-                        "nodeType": "class",
-                        "props": Object {
-                          "handleSelect": [Function],
-                          "isSelected": false,
-                          "user": Object {
-                            "id": "2",
-                            "isAdmin": false,
-                            "name": "Ryan",
-                          },
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                      Object {
-                        "instance": null,
-                        "key": "3",
-                        "nodeType": "class",
-                        "props": Object {
-                          "handleSelect": [Function],
-                          "isSelected": false,
-                          "user": Object {
-                            "id": "3",
-                            "isAdmin": true,
-                            "name": "Espresso Shot Capuccino",
-                          },
-                        },
-                        "ref": null,
-                        "rendered": null,
-                        "type": [Function],
-                      },
-                    ],
+                    "rendered": null,
                     "type": [Function],
                   },
                 ],
                 "type": [Function],
               },
-            ],
-            "type": [Function],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Permissions",
+              "nodeType": "function",
+              "props": Object {
+                "activeClassName": "active",
+                "aria-current": "page",
+                "children": <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Permissions"
+                  />
+                </WithStyles(ListItem)>,
+                "className": null,
+                "exact": true,
+                "to": "undefined/permissions",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "button": true,
+                  "children": Array [
+                    <WithStyles(ListItemIcon)>
+                      <pure(VpnKeyIcon) />
+                    </WithStyles(ListItemIcon)>,
+                    <WithStyles(ListItemText)
+                      primary="Permissions"
+                    />,
+                  ],
+                  "selected": false,
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": <pure(VpnKeyIcon) />,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "primary": "Permissions",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "exact": true,
+            "path": "undefined",
+            "render": [Function],
           },
-          "type": "div",
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "undefined/users",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "undefined/permissions",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",

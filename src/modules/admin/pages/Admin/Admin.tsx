@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import {
+  Route,
+  Redirect,
+  NavLink
+} from 'react-router-dom'
 import {
   Theme,
   createStyles,
   withStyles,
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  CircularProgress,
-  Checkbox
-} from '@material-ui/core';
+  ListItem,
+  ListItemText,
+  List,
+  ListItemIcon
+} from '@material-ui/core'
+import { VpnKey, Group } from '@material-ui/icons'
 
-import {
-  getUsers,
-  updateUser,
-  batchDeleteUsers
-} from '../../../../redux/actions/admin/adminActions';
-import UserTableRow from '../../components/UserTableRow/UserTableRow';
-import UserTableToolbar from '../../components/UserTableToolbar/UserTableToolbar';
+import UserTable from '../../components/UserTable/UserTable'
+import Permissions from '../../components/Permissions/Permissions'
 
 const styles = (theme: Theme) => createStyles({
   pageWrapper: {
@@ -34,178 +30,73 @@ const styles = (theme: Theme) => createStyles({
     minWidth: 250,
     marginRight: `${theme.spacing.unit}px`,
   },
-  tableWrapper: {
-    width: '100%',
-  },
-  tableCard: {
-    overflowX: 'auto',
-  },
-  tableLoadingContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-  },
-  hiddensm: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
-  },
-  profilePicCol: {
-    paddingRight: theme.spacing.unit * 2,
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
+  navLink: {
+    textDecoration: 'none',
+    '&:visited': {
+      color: 'inherit'
     }
   }
 })
 
 type Props = {
-  classes: any
-  users: any
-  getUsers: () => void,
-  updateUser: (user) => void,
-  batchDeleteUsers: (ids) => void
+  classes: any,
+  match: any,
+  location: any
 }
 
-type State = {
-  selected: Array<any>
+export type MenuLink = {
+  text: string,
+  href: string,
+  icon: any
 }
-
-export class Admin extends Component<Props, State> {
-  state = {
-    selected: []
+export const menuLinks: Array<MenuLink> = [
+  {
+    text: 'Users',
+    href: '/users',
+    icon: Group
+  },
+  {
+    text: 'Permissions',
+    href: '/permissions',
+    icon: VpnKey
   }
+]
 
-  componentDidMount() {
-    this.props.getUsers()
-  }
-
-  handleSelectAllClick(event) {
-    if (event.target.checked) {
-      this.setState({ selected: this.props.users.map(n => n.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
-
-  handleSelect(id) {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    this.setState({ selected: newSelected });
-  };
-  
-  isSelected(id) {
-    return this.state.selected.indexOf(id) !== -1
-  }
-
-  handleBatchApprove() {
-    this.props.users
-      .filter(user => this.isSelected(user.id))
-      .map(user => this.props.updateUser({
-        ...user,
-        isApproved: true
-      }))
-    this.setState({ selected: [] })
-  }
-
-  handleBatchAuthorize() {
-    this.props.users
-      .filter(user => this.isSelected(user.id))
-      .map(user => this.props.updateUser({
-        ...user,
-        isApproved: true,
-        isAdmin: true
-      }))
-    this.setState({ selected: [] })
-  }
-
-  handleBatchDelete() {
-    this.props.batchDeleteUsers([...this.state.selected])
-    this.setState({ selected: [] })
-  }
-
+export class Admin extends Component<Props> {
   render() {
-    const { classes, users } = this.props;
-    const { selected } = this.state;
+    const { classes, match, location } = this.props
 
     return (
       <div className={classes ? classes.pageWrapper : null}>
-        <div className={classes ? classes.pageNav : null} style={{background: 'red'}}>Mini Nav!</div>
-        <div className={classes ? classes.tableWrapper : null}>
-          <Paper className={classes ? classes.tableCard : null}>
-            <UserTableToolbar
-              numSelected={selected.length}
-              handleBatchApprove={this.handleBatchApprove.bind(this)}
-              handleBatchAuthorize={this.handleBatchAuthorize.bind(this)}
-              handleBatchDelete={this.handleBatchDelete.bind(this)}
-            />
-            {users ?
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        indeterminate={selected.length > 0 && selected.length < users.length}
-                        checked={selected.length === users.length && users.length !== 0}
-                        onChange={event => this.handleSelectAllClick(event)}
-                      />
-                    </TableCell>
-                    <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
-                    <TableCell className={classes ? classes.hiddensm : null}>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Approved</TableCell>
-                    <TableCell>Admin</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {users.map(user => {
-                    const isSelected = this.isSelected(user.id);
-                    return (
-                      <UserTableRow
-                        key={user.id}
-                        user={user}
-                        isSelected={isSelected}
-                        handleSelect={this.handleSelect.bind(this)}
-                      />
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            :
-              <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
-                <CircularProgress size="60px" />
-              </div>
-            }
-          </Paper>
-        </div>
+        <List className={classes ? classes.pageNav : null}>
+          {
+            menuLinks
+              .map(link => 
+                <NavLink
+                  exact
+                  key={link.text}
+                  to={`${match.url}${link.href}`}
+                  className={classes ? classes.navLink : null}
+                >
+                  <ListItem
+                    button
+                    selected={location.pathname === `${match.url}${link.href}`}
+                  >
+                    <ListItemIcon>
+                      <link.icon/>
+                    </ListItemIcon>
+                    <ListItemText primary={link.text} />
+                  </ListItem>
+                </NavLink>
+              )
+          }
+        </List>
+        <Route exact path={`${match.url}`} render={() => <Redirect to={`${match.url}/users`} />} />
+        <Route path={`${match.url}/users`} component={UserTable}/>
+        <Route path={`${match.url}/permissions`} component={Permissions}/>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  users: state.admin.users
-})
-
-const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(getUsers()),
-  updateUser: user => dispatch(updateUser(user)),
-  batchDeleteUsers: ids => dispatch(batchDeleteUsers(ids))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Admin))
+export default withStyles(styles)(Admin)

@@ -1,19 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { Admin } from './Admin'
+import Permissions from './Permissions'
 
-describe('Admin', () => {
+describe('Permissions', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
-            match: 'test/',
-            location: {
-                pathname: 'test/testing'
-            }
         }
-        wrapper = shallow(<Admin {...props} />)
+        wrapper = shallow(<Permissions {...props} />)
     })
 
     it('should match snapshot', () => {
