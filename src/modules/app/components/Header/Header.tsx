@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from "react-router-dom";
 
-import { createStyles, withStyles, Theme } from '@material-ui/core';
+import { createStyles, withStyles, Theme, Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -58,6 +58,9 @@ const styles = (theme: Theme) => createStyles({
     },
     navLinkTextDesktop: {
         color: 'inherit'
+    },
+    Button: {
+        textTransform: 'none'
     },
     desktopSelected: {
         color: theme.palette.secondary.main
@@ -139,20 +142,27 @@ export class Header extends React.Component<Props, State> {
                             { user ?
                                 menuLinks
                                     .filter(link => !link.needsAuthorization || (user.isAdmin && user.isApproved))
-                                    .map(link => 
-                                            <NavLink
-                                                exact
-                                                key={link.text}
-                                                to={link.href}
-                                                className={classes ? classes.navLinkDesktop : null}
-                                                activeClassName={classes ? classes.desktopSelected : null}
+                                    .map(link =>
+                                        <NavLink
+                                            exact
+                                            key={link.text}
+                                            to={link.href}
+                                            className={classes ? classes.navLinkDesktop : null}
+                                            activeClassName={classes ? classes.desktopSelected : null}
+                                        >
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                className={classes ? classes.Button: null}
                                             >
                                                 <Typography
+                                                    color="inherit"
                                                     className={classes ? classes.navLinkTextDesktop : null}
                                                 >
                                                     {link.text}
                                                 </Typography>
-                                            </NavLink>
+                                            </Button>
+                                        </NavLink>
                                     )
                                 : null
                             }

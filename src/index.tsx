@@ -12,15 +12,15 @@ import {
 import './index.css';
 import App from './modules/app/pages/App';
 import * as serviceWorker from './utils/serviceWorker';
-import {
-    blue,
-    orange
-} from '@material-ui/core/colors';
 
 const theme: Theme = createMuiTheme({
     palette: {
-        primary: blue,
-        secondary: orange,
+        primary: {
+            main: '#0019E6',
+          },
+        secondary: {
+            main: '#F0400D',
+          },
     },
     typography: {
         useNextVariants: true,
