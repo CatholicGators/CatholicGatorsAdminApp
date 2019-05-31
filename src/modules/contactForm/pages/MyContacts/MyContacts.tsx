@@ -166,7 +166,7 @@ export class MyContacts extends Component<Props> {
             </div>
         ) : (
             <div className={classes ? classes.cardWrapper : null}>
-                <Card>
+                <Card id="redirect-card">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             You are not approved

@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { NavLink } from "react-router-dom";
 
 import { Header, menuLinks } from './Header'
 
@@ -29,6 +30,12 @@ describe('Header', () => {
         expect(wrapper.state('drawerOpen')).toBe(false)
     })
 
+    it('shows no links if the user is undefined', () => {
+        wrapper.setProps({ user: undefined })
+
+        expect(wrapper.exists(NavLink)).toBe(false)
+    })
+
     it('renders all links when user is an admin', () => {
         menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true))
     })
@@ -37,5 +44,15 @@ describe('Header', () => {
         wrapper.setProps({ user: { ...props.user, isAdmin: false }})
 
         menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
+    })
+
+    describe('toggleDrawer(isOpen)', () => {
+        it('toggles the drawerOpen value', () => {
+            const instance = wrapper.instance()
+
+            instance.toggleDrawer(true)
+
+            expect(wrapper.state().drawerOpen).toBe(true)
+        })
     })
 })

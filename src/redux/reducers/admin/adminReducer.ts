@@ -1,6 +1,6 @@
-import { adminActions } from '../../actions/admin/adminActions';
+import { adminActions } from '../../actions/admin/adminActions'
 
-export const INITIAL_AUTH_STATE = {
+export const INITIAL_ADMIN_STATE = {
     users: undefined
 }
 
@@ -17,7 +17,7 @@ const applyUpdatedUser = (state, action) => ({
     ) 
 })
 
-function adminReducer(state = INITIAL_AUTH_STATE, action) {
+function adminReducer(state = INITIAL_ADMIN_STATE, action) {
     switch(action.type) {
         case adminActions.GET_USERS_SUCCESS : {
             return applyUsersList(state, action)
@@ -25,7 +25,7 @@ function adminReducer(state = INITIAL_AUTH_STATE, action) {
         case adminActions.UPDATE_USER_SUCCESS : {
             return applyUpdatedUser(state, action)
         }
-        default : return state;
+        default : return state
     }
 }
 

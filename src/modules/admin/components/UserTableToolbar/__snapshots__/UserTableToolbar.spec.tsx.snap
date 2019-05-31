@@ -28,6 +28,7 @@ ShallowWrapper {
           className={null}
         >
           <WithStyles(Typography)
+            id="title"
             variant="h6"
           >
             Users
@@ -44,6 +45,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": <WithStyles(Typography)
+            id="title"
             variant="h6"
           >
             Users
@@ -57,6 +59,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": "Users",
+            "id": "title",
             "variant": "h6",
           },
           "ref": null,
@@ -80,6 +83,7 @@ ShallowWrapper {
             className={null}
           >
             <WithStyles(Typography)
+              id="title"
               variant="h6"
             >
               Users
@@ -96,6 +100,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": <WithStyles(Typography)
+              id="title"
               variant="h6"
             >
               Users
@@ -109,6 +114,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": "Users",
+              "id": "title",
               "variant": "h6",
             },
             "ref": null,
