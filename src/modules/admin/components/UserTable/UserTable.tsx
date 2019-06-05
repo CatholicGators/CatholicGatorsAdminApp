@@ -23,10 +23,8 @@ import UserTableRow from '../../components/UserTableRow/UserTableRow'
 import UserTableToolbar from '../../components/UserTableToolbar/UserTableToolbar'
 
 const styles = (theme: Theme) => createStyles({
-  tableWrapper: {
-    width: '100%',
-  },
   tableCard: {
+    width: '100%',
     overflowX: 'auto',
   },
   tableLoadingContainer: {
@@ -133,53 +131,51 @@ export class UserTable extends Component<Props, State> {
     const { selected } = this.state
 
     return (
-        <div className={classes ? classes.tableWrapper : null}>
-          <Paper className={classes ? classes.tableCard : null}>
-            <UserTableToolbar
-              numSelected={selected.length}
-              handleBatchApprove={this.handleBatchApprove.bind(this)}
-              handleBatchAuthorize={this.handleBatchAuthorize.bind(this)}
-              handleBatchDelete={this.handleBatchDelete.bind(this)}
-            />
-            {users ?
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        indeterminate={selected.length > 0 && selected.length < users.length}
-                        checked={selected.length === users.length && users.length !== 0}
-                        onChange={event => this.handleSelectAllClick(event)}
-                      />
-                    </TableCell>
-                    <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
-                    <TableCell className={classes ? classes.hiddensm : null}>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Approved</TableCell>
-                    <TableCell>Admin</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {users.map(user => {
-                    const isSelected = this.isSelected(user.id)
-                    return (
-                      <UserTableRow
-                        key={user.id}
-                        user={user}
-                        isSelected={isSelected}
-                        handleSelect={this.handleSelect.bind(this)}
-                      />
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            :
-              <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
-                <CircularProgress size="60px" />
-              </div>
-            }
-          </Paper>
-        </div>
+      <Paper className={classes ? classes.tableCard : null}>
+        <UserTableToolbar
+          numSelected={selected.length}
+          handleBatchApprove={this.handleBatchApprove.bind(this)}
+          handleBatchAuthorize={this.handleBatchAuthorize.bind(this)}
+          handleBatchDelete={this.handleBatchDelete.bind(this)}
+        />
+        {users ?
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    indeterminate={selected.length > 0 && selected.length < users.length}
+                    checked={selected.length === users.length && users.length !== 0}
+                    onChange={event => this.handleSelectAllClick(event)}
+                  />
+                </TableCell>
+                <TableCell className={classes ? classes.profilePicCol : null}>Profile Pic</TableCell>
+                <TableCell className={classes ? classes.hiddensm : null}>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Approved</TableCell>
+                <TableCell>Admin</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map(user => {
+                const isSelected = this.isSelected(user.id)
+                return (
+                  <UserTableRow
+                    key={user.id}
+                    user={user}
+                    isSelected={isSelected}
+                    handleSelect={this.handleSelect.bind(this)}
+                  />
+                )
+              })}
+            </TableBody>
+          </Table>
+        :
+          <div id='loading-spinner' className={classes ? classes.tableLoadingContainer : null}>
+            <CircularProgress size="60px" />
+          </div>
+        }
+      </Paper>
     )
   }
 }

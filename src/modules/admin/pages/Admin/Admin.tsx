@@ -28,7 +28,8 @@ const styles = (theme: Theme) => createStyles({
   pageNav: {
     width: 250,
     minWidth: 250,
-    marginRight: `${theme.spacing.unit}px`,
+    padding: 0,
+    marginRight: `${theme.spacing.unit}px`
   },
   navLink: {
     textDecoration: 'none',

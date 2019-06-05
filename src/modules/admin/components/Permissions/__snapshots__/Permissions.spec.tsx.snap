@@ -16,25 +16,1491 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "class",
     "props": Object {
-      "children": "Test!",
+      "children": Array [
+        <WithStyles(Toolbar)>
+          <WithStyles(Typography)
+            variant="h6"
+          >
+            Edit Interests step of form
+          </WithStyles(Typography)>
+        </WithStyles(Toolbar)>,
+        Array [
+          <div>
+            <WithStyles(Typography)>
+              I am interested in...
+            </WithStyles(Typography)>
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for Greek students"
+                />
+              }
+              label="events for Greek students"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for Latino/a students"
+                />
+              }
+              label="events for Latino/a students"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for graduate students"
+                />
+              }
+              label="events for graduate students"
+            />
+          </div>,
+          <div>
+            <WithStyles(Typography)>
+              I would like to...
+            </WithStyles(Typography)>
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="receive the monthly e-newsletter"
+                />
+              }
+              label="receive the monthly e-newsletter"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="register as a parishioner"
+                />
+              }
+              label="register as a parishioner"
+            />
+          </div>,
+          <div>
+            <WithStyles(Typography)>
+              I am interested in getting involved in...
+            </WithStyles(Typography)>
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="English Bible Studies"
+                />
+              }
+              label="English Bible Studies"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Spanish/Bilingual Bible Study"
+                />
+              }
+              label="Spanish/Bilingual Bible Study"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Free Food"
+                />
+              }
+              label="Free Food"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Guest Speakers"
+                />
+              }
+              label="Guest Speakers"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Music Ministry"
+                />
+              }
+              label="Music Ministry"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Socials"
+                />
+              }
+              label="Socials"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Retreats"
+                />
+              }
+              label="Retreats"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Intramural Sports"
+                />
+              }
+              label="Intramural Sports"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Pro-Life Club"
+                />
+              }
+              label="Pro-Life Club"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                />
+              }
+              label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Serving at Mass"
+                />
+              }
+              label="Serving at Mass"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Teach Religious Education"
+                />
+              }
+              label="Teach Religious Education"
+            />
+            <WithStyles(WithFormControlContext(FormControlLabel))
+              control={
+                <WithStyles(Checkbox)
+                  color="primary"
+                  value="Service Projects and Trips"
+                />
+              }
+              label="Service Projects and Trips"
+            />
+          </div>,
+        ],
+      ],
     },
     "ref": null,
-    "rendered": "Test!",
-    "type": "div",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <WithStyles(Typography)
+            variant="h6"
+          >
+            Edit Interests step of form
+          </WithStyles(Typography)>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Edit Interests step of form",
+            "variant": "h6",
+          },
+          "ref": null,
+          "rendered": "Edit Interests step of form",
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "I am interested in...",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <WithStyles(Typography)>
+              I am interested in...
+            </WithStyles(Typography)>,
+            Array [
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for Greek students"
+                  />
+                }
+                label="events for Greek students"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for Latino/a students"
+                  />
+                }
+                label="events for Latino/a students"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for graduate students"
+                  />
+                }
+                label="events for graduate students"
+              />,
+            ],
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "I am interested in...",
+            },
+            "ref": null,
+            "rendered": "I am interested in...",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "events for Greek students",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="events for Greek students"
+              />,
+              "label": "events for Greek students",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "events for Latino/a students",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="events for Latino/a students"
+              />,
+              "label": "events for Latino/a students",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "events for graduate students",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="events for graduate students"
+              />,
+              "label": "events for graduate students",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": "I would like to...",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <WithStyles(Typography)>
+              I would like to...
+            </WithStyles(Typography)>,
+            Array [
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="receive the monthly e-newsletter"
+                  />
+                }
+                label="receive the monthly e-newsletter"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="register as a parishioner"
+                  />
+                }
+                label="register as a parishioner"
+              />,
+            ],
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "I would like to...",
+            },
+            "ref": null,
+            "rendered": "I would like to...",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "receive the monthly e-newsletter",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="receive the monthly e-newsletter"
+              />,
+              "label": "receive the monthly e-newsletter",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "register as a parishioner",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="register as a parishioner"
+              />,
+              "label": "register as a parishioner",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": "I am interested in getting involved in...",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <WithStyles(Typography)>
+              I am interested in getting involved in...
+            </WithStyles(Typography)>,
+            Array [
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="English Bible Studies"
+                  />
+                }
+                label="English Bible Studies"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Spanish/Bilingual Bible Study"
+                  />
+                }
+                label="Spanish/Bilingual Bible Study"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Free Food"
+                  />
+                }
+                label="Free Food"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Guest Speakers"
+                  />
+                }
+                label="Guest Speakers"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Music Ministry"
+                  />
+                }
+                label="Music Ministry"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Socials"
+                  />
+                }
+                label="Socials"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Retreats"
+                  />
+                }
+                label="Retreats"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Intramural Sports"
+                  />
+                }
+                label="Intramural Sports"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Pro-Life Club"
+                  />
+                }
+                label="Pro-Life Club"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                  />
+                }
+                label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Serving at Mass"
+                  />
+                }
+                label="Serving at Mass"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Teach Religious Education"
+                  />
+                }
+                label="Teach Religious Education"
+              />,
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Service Projects and Trips"
+                  />
+                }
+                label="Service Projects and Trips"
+              />,
+            ],
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "I am interested in getting involved in...",
+            },
+            "ref": null,
+            "rendered": "I am interested in getting involved in...",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "English Bible Studies",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="English Bible Studies"
+              />,
+              "label": "English Bible Studies",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Spanish/Bilingual Bible Study",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Spanish/Bilingual Bible Study"
+              />,
+              "label": "Spanish/Bilingual Bible Study",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Free Food",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Free Food"
+              />,
+              "label": "Free Food",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Guest Speakers",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Guest Speakers"
+              />,
+              "label": "Guest Speakers",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Music Ministry",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Music Ministry"
+              />,
+              "label": "Music Ministry",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Socials",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Socials"
+              />,
+              "label": "Socials",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Retreats",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Retreats"
+              />,
+              "label": "Retreats",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Intramural Sports",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Intramural Sports"
+              />,
+              "label": "Intramural Sports",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Pro-Life Club",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Pro-Life Club"
+              />,
+              "label": "Pro-Life Club",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Communications (Photo, Print, Graphics, PR, Advertising, and Video)",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+              />,
+              "label": "Communications (Photo, Print, Graphics, PR, Advertising, and Video)",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Serving at Mass",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Serving at Mass"
+              />,
+              "label": "Serving at Mass",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Teach Religious Education",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Teach Religious Education"
+              />,
+              "label": "Teach Religious Education",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Service Projects and Trips",
+            "nodeType": "class",
+            "props": Object {
+              "control": <WithStyles(Checkbox)
+                color="primary"
+                value="Service Projects and Trips"
+              />,
+              "label": "Service Projects and Trips",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "class",
       "props": Object {
-        "children": "Test!",
+        "children": Array [
+          <WithStyles(Toolbar)>
+            <WithStyles(Typography)
+              variant="h6"
+            >
+              Edit Interests step of form
+            </WithStyles(Typography)>
+          </WithStyles(Toolbar)>,
+          Array [
+            <div>
+              <WithStyles(Typography)>
+                I am interested in...
+              </WithStyles(Typography)>
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for Greek students"
+                  />
+                }
+                label="events for Greek students"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for Latino/a students"
+                  />
+                }
+                label="events for Latino/a students"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="events for graduate students"
+                  />
+                }
+                label="events for graduate students"
+              />
+            </div>,
+            <div>
+              <WithStyles(Typography)>
+                I would like to...
+              </WithStyles(Typography)>
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="receive the monthly e-newsletter"
+                  />
+                }
+                label="receive the monthly e-newsletter"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="register as a parishioner"
+                  />
+                }
+                label="register as a parishioner"
+              />
+            </div>,
+            <div>
+              <WithStyles(Typography)>
+                I am interested in getting involved in...
+              </WithStyles(Typography)>
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="English Bible Studies"
+                  />
+                }
+                label="English Bible Studies"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Spanish/Bilingual Bible Study"
+                  />
+                }
+                label="Spanish/Bilingual Bible Study"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Free Food"
+                  />
+                }
+                label="Free Food"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Guest Speakers"
+                  />
+                }
+                label="Guest Speakers"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Music Ministry"
+                  />
+                }
+                label="Music Ministry"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Socials"
+                  />
+                }
+                label="Socials"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Retreats"
+                  />
+                }
+                label="Retreats"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Intramural Sports"
+                  />
+                }
+                label="Intramural Sports"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Pro-Life Club"
+                  />
+                }
+                label="Pro-Life Club"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                  />
+                }
+                label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Serving at Mass"
+                  />
+                }
+                label="Serving at Mass"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Teach Religious Education"
+                  />
+                }
+                label="Teach Religious Education"
+              />
+              <WithStyles(WithFormControlContext(FormControlLabel))
+                control={
+                  <WithStyles(Checkbox)
+                    color="primary"
+                    value="Service Projects and Trips"
+                  />
+                }
+                label="Service Projects and Trips"
+              />
+            </div>,
+          ],
+        ],
       },
       "ref": null,
-      "rendered": "Test!",
-      "type": "div",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Typography)
+              variant="h6"
+            >
+              Edit Interests step of form
+            </WithStyles(Typography)>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Edit Interests step of form",
+              "variant": "h6",
+            },
+            "ref": null,
+            "rendered": "Edit Interests step of form",
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "I am interested in...",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Typography)>
+                I am interested in...
+              </WithStyles(Typography)>,
+              Array [
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="events for Greek students"
+                    />
+                  }
+                  label="events for Greek students"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="events for Latino/a students"
+                    />
+                  }
+                  label="events for Latino/a students"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="events for graduate students"
+                    />
+                  }
+                  label="events for graduate students"
+                />,
+              ],
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "I am interested in...",
+              },
+              "ref": null,
+              "rendered": "I am interested in...",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "events for Greek students",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for Greek students"
+                />,
+                "label": "events for Greek students",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "events for Latino/a students",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for Latino/a students"
+                />,
+                "label": "events for Latino/a students",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "events for graduate students",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="events for graduate students"
+                />,
+                "label": "events for graduate students",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": "I would like to...",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Typography)>
+                I would like to...
+              </WithStyles(Typography)>,
+              Array [
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="receive the monthly e-newsletter"
+                    />
+                  }
+                  label="receive the monthly e-newsletter"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="register as a parishioner"
+                    />
+                  }
+                  label="register as a parishioner"
+                />,
+              ],
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "I would like to...",
+              },
+              "ref": null,
+              "rendered": "I would like to...",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "receive the monthly e-newsletter",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="receive the monthly e-newsletter"
+                />,
+                "label": "receive the monthly e-newsletter",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "register as a parishioner",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="register as a parishioner"
+                />,
+                "label": "register as a parishioner",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": "I am interested in getting involved in...",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <WithStyles(Typography)>
+                I am interested in getting involved in...
+              </WithStyles(Typography)>,
+              Array [
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="English Bible Studies"
+                    />
+                  }
+                  label="English Bible Studies"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Spanish/Bilingual Bible Study"
+                    />
+                  }
+                  label="Spanish/Bilingual Bible Study"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Free Food"
+                    />
+                  }
+                  label="Free Food"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Guest Speakers"
+                    />
+                  }
+                  label="Guest Speakers"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Music Ministry"
+                    />
+                  }
+                  label="Music Ministry"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Socials"
+                    />
+                  }
+                  label="Socials"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Retreats"
+                    />
+                  }
+                  label="Retreats"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Intramural Sports"
+                    />
+                  }
+                  label="Intramural Sports"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Pro-Life Club"
+                    />
+                  }
+                  label="Pro-Life Club"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                    />
+                  }
+                  label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Serving at Mass"
+                    />
+                  }
+                  label="Serving at Mass"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Teach Religious Education"
+                    />
+                  }
+                  label="Teach Religious Education"
+                />,
+                <WithStyles(WithFormControlContext(FormControlLabel))
+                  control={
+                    <WithStyles(Checkbox)
+                      color="primary"
+                      value="Service Projects and Trips"
+                    />
+                  }
+                  label="Service Projects and Trips"
+                />,
+              ],
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "I am interested in getting involved in...",
+              },
+              "ref": null,
+              "rendered": "I am interested in getting involved in...",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "English Bible Studies",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="English Bible Studies"
+                />,
+                "label": "English Bible Studies",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Spanish/Bilingual Bible Study",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Spanish/Bilingual Bible Study"
+                />,
+                "label": "Spanish/Bilingual Bible Study",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Free Food",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Free Food"
+                />,
+                "label": "Free Food",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Guest Speakers",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Guest Speakers"
+                />,
+                "label": "Guest Speakers",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Music Ministry",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Music Ministry"
+                />,
+                "label": "Music Ministry",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Socials",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Socials"
+                />,
+                "label": "Socials",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Retreats",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Retreats"
+                />,
+                "label": "Retreats",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Intramural Sports",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Intramural Sports"
+                />,
+                "label": "Intramural Sports",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Pro-Life Club",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Pro-Life Club"
+                />,
+                "label": "Pro-Life Club",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Communications (Photo, Print, Graphics, PR, Advertising, and Video)",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
+                />,
+                "label": "Communications (Photo, Print, Graphics, PR, Advertising, and Video)",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Serving at Mass",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Serving at Mass"
+                />,
+                "label": "Serving at Mass",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Teach Religious Education",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Teach Religious Education"
+                />,
+                "label": "Teach Religious Education",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Service Projects and Trips",
+              "nodeType": "class",
+              "props": Object {
+                "control": <WithStyles(Checkbox)
+                  color="primary"
+                  value="Service Projects and Trips"
+                />,
+                "label": "Service Projects and Trips",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
