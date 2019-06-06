@@ -4,10 +4,33 @@ import {
     Typography,
     Toolbar,
     Checkbox,
-    FormControlLabel
+    FormControlLabel,
+    Theme,
+    createStyles,
+    withStyles,
+    IconButton
 } from '@material-ui/core'
-// import { Delete, Edit } from '@material-ui/icons';
+import { Delete, Edit } from '@material-ui/icons'
 
+const styles = (theme: Theme) => createStyles({
+    form: {
+        margin: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
+    },
+    formCtrl: {
+        margin: 0
+    },
+    optionRow: {
+        display: 'flex',
+        '&:hover': {
+            '& div': {
+                display: 'block'
+            }
+        }
+    },
+    actions: {
+        display: 'none'
+    }
+})
 
 type Props = {
     classes: any
@@ -51,31 +74,45 @@ const interests = [
 
 export class Permissions extends Component<Props> {
     render() {
+        const { classes } = this.props
         return (
             <Paper>
                 <Toolbar>
                     <Typography variant="h6">Edit Interests step of form</Typography>
                 </Toolbar>
-                {interests.map(section => 
-                    <div key={section.name}>
-                        <Typography>{section.name}</Typography>
-                        {section.options.map(option =>
-                            <FormControlLabel
-                                key={option}
-                                control={
-                                    <Checkbox
-                                        color='primary'
-                                        value={option}
-                                    ></Checkbox>
-                                }
-                                label={option}
-                            />
-                        )}
-                    </div>
-                )}
+                <div className={classes ? classes.form : null}>
+                    {interests.map(section => 
+                        <div key={section.name}>
+                            <Typography>{section.name}</Typography>
+                            {section.options.map(option =>
+                                <div className={classes ? classes.optionRow : null}>
+                                    <FormControlLabel
+                                        key={option}
+                                        className={classes ? classes.formCtrl : null}
+                                        control={
+                                            <Checkbox
+                                                color='primary'
+                                                value={option}
+                                            ></Checkbox>
+                                        }
+                                        label={option}
+                                    />
+                                    <div className={classes ? classes.actions : null}>
+                                        <IconButton>
+                                            <Edit />
+                                        </IconButton>
+                                        <IconButton>
+                                            <Delete />
+                                        </IconButton>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </Paper>
         )
     }
 }
 
-export default Permissions
+export default withStyles(styles)(Permissions)
