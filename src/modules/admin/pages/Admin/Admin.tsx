@@ -16,7 +16,7 @@ import {
 import { VpnKey, Group } from '@material-ui/icons'
 
 import UserTable from '../../components/UserTable/UserTable'
-import Permissions from '../../components/Permissions/Permissions'
+import Interests from '../../components/Interests/Interests'
 
 const styles = (theme: Theme) => createStyles({
   pageWrapper: {
@@ -57,8 +57,8 @@ export const menuLinks: Array<MenuLink> = [
     icon: Group
   },
   {
-    text: 'Permissions',
-    href: '/permissions',
+    text: 'Interests',
+    href: '/interests',
     icon: VpnKey
   }
 ]
@@ -94,7 +94,7 @@ export class Admin extends Component<Props> {
         </List>
         <Route exact path={`${match.url}`} render={() => <Redirect to={`${match.url}/users`} />} />
         <Route path={`${match.url}/users`} component={UserTable}/>
-        <Route path={`${match.url}/permissions`} component={Permissions}/>
+        <Route path={`${match.url}/interests`} component={Interests}/>
       </div>
     )
   }

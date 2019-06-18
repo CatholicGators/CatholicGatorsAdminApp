@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Permissions should match snapshot 1`] = `
+exports[`Interests should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <WithStyles(Permissions) />,
+  Symbol(enzyme.__unrendered__): <WithStyles(Interests) />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -19,10 +19,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "classes": Object {
-        "actions": "Permissions-actions-4",
-        "form": "Permissions-form-1",
-        "formCtrl": "Permissions-formCtrl-2",
-        "optionRow": "Permissions-optionRow-3",
+        "form": "Interests-form-2",
+        "formWrapper": "Interests-formWrapper-1",
       },
     },
     "ref": null,
@@ -36,10 +34,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "classes": Object {
-          "actions": "Permissions-actions-4",
-          "form": "Permissions-form-1",
-          "formCtrl": "Permissions-formCtrl-2",
-          "optionRow": "Permissions-optionRow-3",
+          "form": "Interests-form-2",
+          "formWrapper": "Interests-formWrapper-1",
         },
       },
       "ref": null,

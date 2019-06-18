@@ -19,8 +19,8 @@ import {
   updateUser,
   batchDeleteUsers
 } from '../../../../redux/actions/admin/adminActions'
-import UserTableRow from '../../components/UserTableRow/UserTableRow'
-import UserTableToolbar from '../../components/UserTableToolbar/UserTableToolbar'
+import UserTableRow from './components/UserTableRow/UserTableRow'
+import UserTableToolbar from './components/UserTableToolbar/UserTableToolbar'
 
 const styles = (theme: Theme) => createStyles({
   tableCard: {

@@ -8,7 +8,9 @@ describe('Admin', () => {
 
     beforeEach(() => {
         props = {
-            match: 'test/',
+            match: { 
+                url: 'test'
+            },
             location: {
                 pathname: 'test/testing'
             }

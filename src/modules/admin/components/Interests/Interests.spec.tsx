@@ -1,15 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import Permissions from './Permissions'
+import Interests from './Interests'
 
-describe('Permissions', () => {
+describe('Interests', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
         }
-        wrapper = shallow(<Permissions {...props} />)
+        wrapper = shallow(<Interests {...props} />)
     })
 
     it('should match snapshot', () => {
