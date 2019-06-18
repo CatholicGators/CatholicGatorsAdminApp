@@ -39,7 +39,7 @@ const styles = (theme: Theme) => createStyles({
     },
     editActions: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     }
 })
 
@@ -57,7 +57,8 @@ type State = {
 
 export class EditableInterestOption extends Component<Props, State> {
     state = {
-        editedOptionText: this.props.option.text
+        editedOptionText: this.props.option.text,
+        isHovered: false
     }
 
     onEditOptionChange(newText: string) {
@@ -86,21 +87,23 @@ export class EditableInterestOption extends Component<Props, State> {
                 <Checkbox
                     className={classes ? classes.checkbox : null}
                     color='primary'
-                ></Checkbox>
+                />
                 {isEditing ? ([
-                    <Input key={1}
+                    <Input
+                        fullWidth
+                        key={1}
                         className={classes ? classes.input : null}
                         value={this.state.editedOptionText}
                         onChange={ev => this.onEditOptionChange(ev.target.value)}
                     />,
-                    <section key={2} className={classes ? classes.editActions : null}>
+                    <div key={2} className={classes ? classes.editActions : null}>
                         <IconButton onClick={() => this.onSave()}>
                             <Save />
                         </IconButton>
                         <IconButton onClick={() => this.onCancel()}>
                             <Close />
                         </IconButton>
-                    </section>
+                    </div>
                 ]) : ([
                     <Typography key={1}>{option.text}</Typography>,
                     <section key={2} className={classes ? classes.actions : null}>
