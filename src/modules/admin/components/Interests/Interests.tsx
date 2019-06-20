@@ -135,11 +135,21 @@ export class Interests extends Component<Props, State> {
         editingOptionId: null
     }
 
-    editOption(id: number) {
-        this.setState({ editingOptionId: id })
+    editOption(optionId: number) {
+        this.setState({ editingOptionId: optionId })
     }
 
-    deleteOption(id: number) {
+    deleteOption(optionId: number) {
+        this.setState({ editingOptionId: null })
+    }
+
+    onSave(sectionId: number, optionId: number, newText: string) {
+        console.log("saved", sectionId, optionId, newText)
+        this.setState({ editingOptionId: null })
+    }
+
+    onCancel(sectionId: number, optionId: number, newText: string) {
+        console.log("cancelled", sectionId, optionId, newText)
         this.setState({ editingOptionId: null })
     }
 
@@ -159,8 +169,10 @@ export class Interests extends Component<Props, State> {
                                     key={option.id}
                                     isEditing={option.id === this.state.editingOptionId}
                                     option={option}
-                                    editOption={id => this.editOption(id)}
-                                    deleteOption={id => this.deleteOption(id)}
+                                    editOption={optionId => this.editOption(optionId)}
+                                    deleteOption={optionId => this.deleteOption(optionId)}
+                                    onSave={(optionId, newText) => this.onSave(section.id, optionId, newText)}
+                                    onCancel={(optionId, newText) => this.onCancel(section.id, optionId, newText)}
                                 />
                             )}
                         </div>

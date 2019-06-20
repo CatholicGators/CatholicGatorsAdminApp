@@ -47,8 +47,10 @@ type Props = {
     isEditing: boolean,
     classes: any,
     option: Option,
-    editOption: (id: number) => void,
-    deleteOption: (id: number) => void
+    editOption: (optionId: number) => void,
+    deleteOption: (optionId: number) => void,
+    onSave: (optionId: number, newText: string) => void,
+    onCancel: (optionId: number, newText: string) => void
 }
 
 type State = {
@@ -57,20 +59,11 @@ type State = {
 
 export class EditableInterestOption extends Component<Props, State> {
     state = {
-        editedOptionText: this.props.option.text,
-        isHovered: false
+        editedOptionText: this.props.option.text
     }
 
     onEditOptionChange(newText: string) {
         this.setState({ editedOptionText: newText })
-    }
-
-    onSave() {
-        console.log("submitted")
-    }
-
-    onCancel() {
-        console.log('cancelled')
     }
 
     render() {
@@ -79,8 +72,14 @@ export class EditableInterestOption extends Component<Props, State> {
             classes,
             option,
             editOption,
-            deleteOption
+            deleteOption,
+            onSave,
+            onCancel
         } = this.props
+
+        const {
+            editedOptionText
+        } = this.state
 
         return (
             <div className={classes ? classes.optionRow : null}>
@@ -97,10 +96,10 @@ export class EditableInterestOption extends Component<Props, State> {
                         onChange={ev => this.onEditOptionChange(ev.target.value)}
                     />,
                     <div key={2} className={classes ? classes.editActions : null}>
-                        <IconButton onClick={() => this.onSave()}>
+                        <IconButton onClick={() => onSave(option.id, editedOptionText)}>
                             <Save />
                         </IconButton>
-                        <IconButton onClick={() => this.onCancel()}>
+                        <IconButton onClick={() => onCancel(option.id, editedOptionText)}>
                             <Close />
                         </IconButton>
                     </div>
