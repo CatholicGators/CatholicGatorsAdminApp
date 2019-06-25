@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import {
     Paper,
     Typography,
     Toolbar,
     Theme,
     createStyles,
-    withStyles
+    withStyles,
+    CircularProgress
 } from '@material-ui/core'
 import EditableInterestOption from './components/EditableInterestOption/EditableInterestOption';
+import {
+    getInterests,
+    updateInterests
+} from '../../../../redux/actions/contactForm/interestActions';
 
 const styles = (theme: Theme) => createStyles({
     formWrapper: {
@@ -15,11 +21,20 @@ const styles = (theme: Theme) => createStyles({
     },
     form: {
         margin: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
-    }
+    },
+    formLoadingContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '300px',
+    },
 })
 
 type Props = {
-    classes: any
+    classes: any,
+    interests: Section[]
+    getInterests: () => void,
+    updateInterests: (interests : Section[]) => void
 }
 
 type State = {
@@ -27,8 +42,8 @@ type State = {
 }
 
 type Section = {
-    id: number,
-    text: String,
+    id: string,
+    text: string,
     options: Option[]
 }
 
@@ -37,102 +52,13 @@ export type Option = {
     text: string
 }
 
-const interests: Section[] = [
-    {
-        id: 1,
-        text: 'I am interested in...',
-        options: [
-            {
-                id: 1,
-                text: 'events for Greek students'
-            },
-            {
-                id: 2,
-                text: 'events for Latino/a students'
-            },
-            {
-                id: 3,
-                text: 'events for graduate students'
-            }
-        ]
-    },
-    {
-        id: 2,
-        text: 'I would like to...',
-        options: [
-            {
-                id: 4,
-                text: 'receive the monthly e-newsletter'
-            },
-            {
-                id: 5,
-                text: 'register as a parishioner'
-            }
-        ]
-    },
-    {
-        id: 3,
-        text: 'I am interested in getting involved in...',
-        options: [
-            {
-                id: 6,
-                text: 'English Bible Studies'
-            },
-            {
-                id: 7,
-                text: 'Spanish/Bilingual Bible Study'
-            },
-            {
-                id: 8,
-                text: 'Free Food'
-            },
-            {
-                id: 9,
-                text: 'Guest Speakers'
-            },
-            {
-                id: 10,
-                text: 'Music Ministry'
-            },
-            {
-                id: 11,
-                text: 'Socials'
-            },
-            {
-                id: 12,
-                text: 'Retreats'
-            },
-            {
-                id: 13,
-                text: 'Intramural Sports'
-            },
-            {
-                id: 14,
-                text: 'Pro-Life Club'
-            },
-            {
-                id: 15,
-                text: 'Communications (Photo, Print, Graphics, PR, Advertising, and Video)'
-            },
-            {
-                id: 16,
-                text: 'Serving at Mass'
-            },
-            {
-                id: 17,
-                text: 'Teach Religious Education'
-            },
-            {
-                id: 18,
-                text: 'Service Projects and Trips'
-            }
-        ]
-    }
-]
-
 export class Interests extends Component<Props, State> {
     state = {
         editingOptionId: null
+    }
+
+    componentDidMount() {
+        this.props.getInterests()
     }
 
     editOption(optionId: number) {
@@ -143,44 +69,60 @@ export class Interests extends Component<Props, State> {
         this.setState({ editingOptionId: null })
     }
 
-    onSave(sectionId: number, optionId: number, newText: string) {
+    onSave(sectionId: string, optionId: number, newText: string) {
         console.log("saved", sectionId, optionId, newText)
+        this.props.updateInterests(this.props.interests)
         this.setState({ editingOptionId: null })
     }
 
-    onCancel(sectionId: number, optionId: number, newText: string) {
+    onCancel(sectionId: string, optionId: number, newText: string) {
         console.log("cancelled", sectionId, optionId, newText)
         this.setState({ editingOptionId: null })
     }
 
     render() {
-        const { classes } = this.props
+        const { classes, interests } = this.props
         return (
             <Paper className={classes ? classes.formWrapper : null}>
                 <Toolbar>
                     <Typography variant="h6">Edit Interests step of form</Typography>
                 </Toolbar>
-                <div className={classes ? classes.form : null}>
-                    {interests.map(section => 
-                        <div key={section.id}>
-                            <Typography>{section.text}</Typography>
-                            {section.options.map(option =>
-                                <EditableInterestOption
-                                    key={option.id}
-                                    isEditing={option.id === this.state.editingOptionId}
-                                    option={option}
-                                    editOption={optionId => this.editOption(optionId)}
-                                    deleteOption={optionId => this.deleteOption(optionId)}
-                                    onSave={(optionId, newText) => this.onSave(section.id, optionId, newText)}
-                                    onCancel={(optionId, newText) => this.onCancel(section.id, optionId, newText)}
-                                />
-                            )}
-                        </div>
-                    )}
-                </div>
+                {interests ? (
+                    <div className={classes ? classes.form : null}>
+                        {interests.map(section => 
+                            <div key={section.id}>
+                                <Typography>{section.text}</Typography>
+                                {section.options.map(option =>
+                                    <EditableInterestOption
+                                        key={option.id}
+                                        isEditing={option.id === this.state.editingOptionId}
+                                        option={option}
+                                        editOption={optionId => this.editOption(optionId)}
+                                        deleteOption={optionId => this.deleteOption(optionId)}
+                                        onSave={(optionId, newText) => this.onSave(section.id, optionId, newText)}
+                                        onCancel={(optionId, newText) => this.onCancel(section.id, optionId, newText)}
+                                    />
+                                )}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className={classes ? classes.formLoadingContainer : null}>
+                      <CircularProgress size="60px" />
+                    </div>
+                )}
             </Paper>
         )
     }
 }
 
-export default withStyles(styles)(Interests)
+const mapStateToProps = state => ({
+    interests: state.contactForm.interests
+})
+
+const mapDispatchToProps = dispatch => ({
+    getInterests: () => dispatch(getInterests()),
+    updateInterests: interests => dispatch(updateInterests(interests))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Interests))

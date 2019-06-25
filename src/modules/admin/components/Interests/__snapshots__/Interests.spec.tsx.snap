@@ -3,7 +3,36 @@
 exports[`Interests should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <WithStyles(Interests) />,
+  Symbol(enzyme.__unrendered__): <Interests
+    getInterests={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    interests={
+      Array [
+        Object {
+          "id": "test",
+          "options": Array [
+            Object {
+              "id": "testOption",
+              "text": "totally testing",
+            },
+          ],
+          "text": "testing",
+        },
+      ]
+    }
+    updateInterests={[MockFunction]}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -18,13 +47,161 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "classes": Object {
-        "form": "Interests-form-2",
-        "formWrapper": "Interests-formWrapper-1",
-      },
+      "children": Array [
+        <WithStyles(Toolbar)>
+          <WithStyles(Typography)
+            variant="h6"
+          >
+            Edit Interests step of form
+          </WithStyles(Typography)>
+        </WithStyles(Toolbar)>,
+        <div
+          className={null}
+        >
+          <div>
+            <WithStyles(Typography)>
+              testing
+            </WithStyles(Typography)>
+            <WithStyles(EditableInterestOption)
+              deleteOption={[Function]}
+              editOption={[Function]}
+              isEditing={false}
+              onCancel={[Function]}
+              onSave={[Function]}
+              option={
+                Object {
+                  "id": "testOption",
+                  "text": "totally testing",
+                }
+              }
+            />
+          </div>
+        </div>,
+      ],
+      "className": null,
     },
     "ref": null,
-    "rendered": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <WithStyles(Typography)
+            variant="h6"
+          >
+            Edit Interests step of form
+          </WithStyles(Typography)>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Edit Interests step of form",
+            "variant": "h6",
+          },
+          "ref": null,
+          "rendered": "Edit Interests step of form",
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div>
+              <WithStyles(Typography)>
+                testing
+              </WithStyles(Typography)>
+              <WithStyles(EditableInterestOption)
+                deleteOption={[Function]}
+                editOption={[Function]}
+                isEditing={false}
+                onCancel={[Function]}
+                onSave={[Function]}
+                option={
+                  Object {
+                    "id": "testOption",
+                    "text": "totally testing",
+                  }
+                }
+              />
+            </div>,
+          ],
+          "className": null,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "test",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <WithStyles(Typography)>
+                  testing
+                </WithStyles(Typography)>,
+                Array [
+                  <WithStyles(EditableInterestOption)
+                    deleteOption={[Function]}
+                    editOption={[Function]}
+                    isEditing={false}
+                    onCancel={[Function]}
+                    onSave={[Function]}
+                    option={
+                      Object {
+                        "id": "testOption",
+                        "text": "totally testing",
+                      }
+                    }
+                  />,
+                ],
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "testing",
+                },
+                "ref": null,
+                "rendered": "testing",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "testOption",
+                "nodeType": "class",
+                "props": Object {
+                  "deleteOption": [Function],
+                  "editOption": [Function],
+                  "isEditing": false,
+                  "onCancel": [Function],
+                  "onSave": [Function],
+                  "option": Object {
+                    "id": "testOption",
+                    "text": "totally testing",
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+    ],
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -33,13 +210,161 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "classes": Object {
-          "form": "Interests-form-2",
-          "formWrapper": "Interests-formWrapper-1",
-        },
+        "children": Array [
+          <WithStyles(Toolbar)>
+            <WithStyles(Typography)
+              variant="h6"
+            >
+              Edit Interests step of form
+            </WithStyles(Typography)>
+          </WithStyles(Toolbar)>,
+          <div
+            className={null}
+          >
+            <div>
+              <WithStyles(Typography)>
+                testing
+              </WithStyles(Typography)>
+              <WithStyles(EditableInterestOption)
+                deleteOption={[Function]}
+                editOption={[Function]}
+                isEditing={false}
+                onCancel={[Function]}
+                onSave={[Function]}
+                option={
+                  Object {
+                    "id": "testOption",
+                    "text": "totally testing",
+                  }
+                }
+              />
+            </div>
+          </div>,
+        ],
+        "className": null,
       },
       "ref": null,
-      "rendered": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <WithStyles(Typography)
+              variant="h6"
+            >
+              Edit Interests step of form
+            </WithStyles(Typography)>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Edit Interests step of form",
+              "variant": "h6",
+            },
+            "ref": null,
+            "rendered": "Edit Interests step of form",
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div>
+                <WithStyles(Typography)>
+                  testing
+                </WithStyles(Typography)>
+                <WithStyles(EditableInterestOption)
+                  deleteOption={[Function]}
+                  editOption={[Function]}
+                  isEditing={false}
+                  onCancel={[Function]}
+                  onSave={[Function]}
+                  option={
+                    Object {
+                      "id": "testOption",
+                      "text": "totally testing",
+                    }
+                  }
+                />
+              </div>,
+            ],
+            "className": null,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "test",
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <WithStyles(Typography)>
+                    testing
+                  </WithStyles(Typography)>,
+                  Array [
+                    <WithStyles(EditableInterestOption)
+                      deleteOption={[Function]}
+                      editOption={[Function]}
+                      isEditing={false}
+                      onCancel={[Function]}
+                      onSave={[Function]}
+                      option={
+                        Object {
+                          "id": "testOption",
+                          "text": "totally testing",
+                        }
+                      }
+                    />,
+                  ],
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "testing",
+                  },
+                  "ref": null,
+                  "rendered": "testing",
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": "testOption",
+                  "nodeType": "class",
+                  "props": Object {
+                    "deleteOption": [Function],
+                    "editOption": [Function],
+                    "isEditing": false,
+                    "onCancel": [Function],
+                    "onSave": [Function],
+                    "option": Object {
+                      "id": "testOption",
+                      "text": "totally testing",
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+      ],
       "type": [Function],
     },
   ],
