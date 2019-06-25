@@ -70,13 +70,21 @@ export class Interests extends Component<Props, State> {
     }
 
     onSave(sectionId: string, optionId: number, newText: string) {
-        console.log("saved", sectionId, optionId, newText)
-        this.props.updateInterests(this.props.interests)
+        this.props.updateInterests([
+            ...this.props.interests.map(section => section.id !== sectionId ? section : {
+                ...section,
+                options: [
+                    ...section.options.map(option => option.id !== optionId ? option : {
+                        ...option,
+                        text: newText
+                    })
+                ]
+            })
+        ])
         this.setState({ editingOptionId: null })
     }
 
     onCancel(sectionId: string, optionId: number, newText: string) {
-        console.log("cancelled", sectionId, optionId, newText)
         this.setState({ editingOptionId: null })
     }
 

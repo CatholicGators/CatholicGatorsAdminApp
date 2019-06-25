@@ -4,13 +4,13 @@ import { combineEpics } from 'redux-observable'
 
 import {
     interestActions,
-    updateInterestsSuccess,
     updateInterestsErr,
     getInterestsSuccess,
-    getInterestsErr
+    getInterestsErr,
+    getInterests
 } from '../../actions/contactForm/interestActions'
 
-export const getInterests = (action$, _, { firestore }) => {
+export const getInterestsEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(interestActions.GET_INTERESTS),
         mergeMap(() => 
@@ -22,12 +22,12 @@ export const getInterests = (action$, _, { firestore }) => {
     )
 }
 
-export const updateInterests = (action$, _, { firestore }) => {
+export const updateInterestsEpic = (action$, _, { firestore }) => {
     return action$.pipe(
         ofType(interestActions.UPDATE_INTERESTS),
         mergeMap((action: any) =>
             firestore.upsertDocs('interests', action.interests).pipe(
-                map(interests => updateInterestsSuccess(interests)),
+                map(() => getInterests()),
                 catchError(err => ActionsObservable.of(updateInterestsErr(err)))
             )
         )
@@ -35,6 +35,6 @@ export const updateInterests = (action$, _, { firestore }) => {
 }
 
 export default combineEpics(
-    getInterests,
-    updateInterests
+    getInterestsEpic,
+    updateInterestsEpic
 )
