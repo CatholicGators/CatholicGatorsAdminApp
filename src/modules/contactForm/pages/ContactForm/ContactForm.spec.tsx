@@ -8,12 +8,24 @@ describe('ContactForm', () => {
 
     beforeEach(() => {
         props = {
-            listenForUser: jest.fn()
+            listenForUser: jest.fn(),
+            submitContactForm: jest.fn()
         };
         wrapper = shallow(<ContactForm {...props} />);
     });
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot()
+    });
+
+    describe('handleBack()', () => {
+        it('should handle changes correctly', () => {
+            const instance = wrapper.instance()
+            wrapper.setState({ activeStep: 1 })
+
+            instance.handleBack()
+
+            expect(wrapper.find('activeStep')).toBe(0)
+        });
     });
 });

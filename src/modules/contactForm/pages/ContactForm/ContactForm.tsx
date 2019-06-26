@@ -76,18 +76,18 @@ class ContactForm extends React.Component<any, any> {
         }
     };
 
-    handleNext = () => {
+    handleNext() {
         if (this.state.activeStep === steps.length - 1) {
             this.props.submitContactForm(filterState(this.state));
         }
         this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep + 1,
+            activeStep: prevState.activeStep + 1
         }));
     };
 
-    handleBack = () => {
+    handleBack() {
         this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep - 1,
+            activeStep: prevState.activeStep - 1
         }));
     };
 
