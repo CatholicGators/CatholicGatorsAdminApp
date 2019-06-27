@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { Admin } from './Admin'
+import { Admin, menuLinks } from './Admin'
 
 describe('Admin', () => {
     let props, wrapper
@@ -20,5 +20,9 @@ describe('Admin', () => {
 
     it('should match snapshot', () => {
         expect(wrapper).toMatchSnapshot()
+    })
+
+    it('should render all of the sub nav links', () => {
+        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${props.match.url}${link.href}']`)).toBe(true))
     })
 })
