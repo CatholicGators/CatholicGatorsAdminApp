@@ -30,7 +30,7 @@ const styles = (theme: Theme) => createStyles({
     },
 })
 
-type Props = {
+export type Props = {
     classes: any,
     interests: Section[]
     getInterests: () => void,
@@ -61,15 +61,19 @@ export class Interests extends Component<Props, State> {
         this.props.getInterests()
     }
 
-    editOption(optionId: number) {
+    beginEditing(optionId: number) {
         this.setState({ editingOptionId: optionId })
     }
 
-    deleteOption(optionId: number) {
+    cancelEditing() {
         this.setState({ editingOptionId: null })
     }
 
-    onSave(sectionId: string, optionId: number, newText: string) {
+    deleteOption(sectionId: string, optionId: number) {
+        this.setState({ editingOptionId: null })
+    }
+
+    saveOption(sectionId: string, optionId: number, newText: string) {
         this.props.updateInterests([
             ...this.props.interests.map(section => section.id !== sectionId ? section : {
                 ...section,
@@ -84,19 +88,15 @@ export class Interests extends Component<Props, State> {
         this.setState({ editingOptionId: null })
     }
 
-    onCancel(sectionId: string, optionId: number, newText: string) {
-        this.setState({ editingOptionId: null })
-    }
-
     render() {
         const { classes, interests } = this.props
         return (
-            <Paper className={classes ? classes.formWrapper : null}>
+            <Paper className={classes.formWrapper}>
                 <Toolbar>
                     <Typography variant="h6">Edit Interests step of form</Typography>
                 </Toolbar>
                 {interests ? (
-                    <div className={classes ? classes.form : null}>
+                    <div className={classes.form}>
                         {interests.map(section => 
                             <div key={section.id}>
                                 <Typography>{section.text}</Typography>
@@ -105,18 +105,18 @@ export class Interests extends Component<Props, State> {
                                         key={option.id}
                                         isEditing={option.id === this.state.editingOptionId}
                                         option={option}
-                                        editOption={optionId => this.editOption(optionId)}
-                                        deleteOption={optionId => this.deleteOption(optionId)}
-                                        onSave={(optionId, newText) => this.onSave(section.id, optionId, newText)}
-                                        onCancel={(optionId, newText) => this.onCancel(section.id, optionId, newText)}
+                                        editOption={optionId => this.beginEditing(optionId)}
+                                        deleteOption={optionId => this.deleteOption(section.id, optionId)}
+                                        onSave={(optionId, newText) => this.saveOption(section.id, optionId, newText)}
+                                        onCancel={() => this.cancelEditing()}
                                     />
                                 )}
                             </div>
                         )}
                     </div>
                 ) : (
-                    <div className={classes ? classes.formLoadingContainer : null}>
-                      <CircularProgress size="60px" />
+                    <div className={classes.formLoadingContainer}>
+                        <CircularProgress size="60px" />
                     </div>
                 )}
             </Paper>

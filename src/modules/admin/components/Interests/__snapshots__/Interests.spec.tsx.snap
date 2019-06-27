@@ -4,6 +4,7 @@ exports[`Interests should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Interests
+    classes={Object {}}
     getInterests={
       [MockFunction] {
         "calls": Array [
@@ -23,7 +24,7 @@ ShallowWrapper {
           "id": "test",
           "options": Array [
             Object {
-              "id": "testOption",
+              "id": 1,
               "text": "totally testing",
             },
           ],
@@ -55,9 +56,7 @@ ShallowWrapper {
             Edit Interests step of form
           </WithStyles(Typography)>
         </WithStyles(Toolbar)>,
-        <div
-          className={null}
-        >
+        <div>
           <div>
             <WithStyles(Typography)>
               testing
@@ -70,7 +69,7 @@ ShallowWrapper {
               onSave={[Function]}
               option={
                 Object {
-                  "id": "testOption",
+                  "id": 1,
                   "text": "totally testing",
                 }
               }
@@ -78,7 +77,7 @@ ShallowWrapper {
           </div>
         </div>,
       ],
-      "className": null,
+      "className": undefined,
     },
     "ref": null,
     "rendered": Array [
@@ -126,14 +125,14 @@ ShallowWrapper {
                 onSave={[Function]}
                 option={
                   Object {
-                    "id": "testOption",
+                    "id": 1,
                     "text": "totally testing",
                   }
                 }
               />
             </div>,
           ],
-          "className": null,
+          "className": undefined,
         },
         "ref": null,
         "rendered": Array [
@@ -155,7 +154,7 @@ ShallowWrapper {
                     onSave={[Function]}
                     option={
                       Object {
-                        "id": "testOption",
+                        "id": 1,
                         "text": "totally testing",
                       }
                     }
@@ -178,7 +177,7 @@ ShallowWrapper {
               },
               Object {
                 "instance": null,
-                "key": "testOption",
+                "key": "1",
                 "nodeType": "class",
                 "props": Object {
                   "deleteOption": [Function],
@@ -187,7 +186,7 @@ ShallowWrapper {
                   "onCancel": [Function],
                   "onSave": [Function],
                   "option": Object {
-                    "id": "testOption",
+                    "id": 1,
                     "text": "totally testing",
                   },
                 },
@@ -218,9 +217,7 @@ ShallowWrapper {
               Edit Interests step of form
             </WithStyles(Typography)>
           </WithStyles(Toolbar)>,
-          <div
-            className={null}
-          >
+          <div>
             <div>
               <WithStyles(Typography)>
                 testing
@@ -233,7 +230,7 @@ ShallowWrapper {
                 onSave={[Function]}
                 option={
                   Object {
-                    "id": "testOption",
+                    "id": 1,
                     "text": "totally testing",
                   }
                 }
@@ -241,7 +238,7 @@ ShallowWrapper {
             </div>
           </div>,
         ],
-        "className": null,
+        "className": undefined,
       },
       "ref": null,
       "rendered": Array [
@@ -289,14 +286,14 @@ ShallowWrapper {
                   onSave={[Function]}
                   option={
                     Object {
-                      "id": "testOption",
+                      "id": 1,
                       "text": "totally testing",
                     }
                   }
                 />
               </div>,
             ],
-            "className": null,
+            "className": undefined,
           },
           "ref": null,
           "rendered": Array [
@@ -318,7 +315,7 @@ ShallowWrapper {
                       onSave={[Function]}
                       option={
                         Object {
-                          "id": "testOption",
+                          "id": 1,
                           "text": "totally testing",
                         }
                       }
@@ -341,7 +338,7 @@ ShallowWrapper {
                 },
                 Object {
                   "instance": null,
-                  "key": "testOption",
+                  "key": "1",
                   "nodeType": "class",
                   "props": Object {
                     "deleteOption": [Function],
@@ -350,7 +347,7 @@ ShallowWrapper {
                     "onCancel": [Function],
                     "onSave": [Function],
                     "option": Object {
-                      "id": "testOption",
+                      "id": 1,
                       "text": "totally testing",
                     },
                   },
