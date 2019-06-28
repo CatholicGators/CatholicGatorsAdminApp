@@ -43,14 +43,14 @@ const styles = (theme: Theme) => createStyles({
     }
 })
 
-type Props = {
+export type Props = {
     isEditing: boolean,
     classes: any,
     option: Option,
-    editOption: (optionId: number) => void,
+    beginEditing: (optionId: number) => void,
+    cancelEditing: () => void,
     deleteOption: (optionId: number) => void,
-    onSave: (optionId: number, newText: string) => void,
-    onCancel: (optionId: number, newText: string) => void
+    saveOption: (optionId: number, newText: string) => void
 }
 
 type State = {
@@ -71,10 +71,10 @@ export class EditableInterestOption extends Component<Props, State> {
             isEditing,
             classes,
             option,
-            editOption,
+            beginEditing,
             deleteOption,
-            onSave,
-            onCancel
+            saveOption,
+            cancelEditing
         } = this.props
 
         const {
@@ -96,20 +96,20 @@ export class EditableInterestOption extends Component<Props, State> {
                         onChange={ev => this.onEditOptionChange(ev.target.value)}
                     />,
                     <div key={2} className={classes ? classes.editActions : null}>
-                        <IconButton onClick={() => onSave(option.id, editedOptionText)}>
+                        <IconButton id="save" onClick={() => saveOption(option.id, editedOptionText)}>
                             <Save />
                         </IconButton>
-                        <IconButton onClick={() => onCancel(option.id, editedOptionText)}>
+                        <IconButton id="cancel" onClick={() => cancelEditing()}>
                             <Close />
                         </IconButton>
                     </div>
                 ]) : ([
                     <Typography key={1}>{option.text}</Typography>,
                     <section key={2} className={classes ? classes.actions : null}>
-                        <IconButton onClick={() => editOption(option.id)}>
+                        <IconButton id="edit" onClick={() => beginEditing(option.id)}>
                             <Edit />
                         </IconButton>
-                        <IconButton onClick={() => deleteOption(option.id)}>
+                        <IconButton id="delete" onClick={() => deleteOption(option.id)}>
                             <Delete />
                         </IconButton>
                     </section>

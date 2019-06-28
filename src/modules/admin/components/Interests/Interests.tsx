@@ -105,10 +105,10 @@ export class Interests extends Component<Props, State> {
                                         key={option.id}
                                         isEditing={option.id === this.state.editingOptionId}
                                         option={option}
-                                        editOption={optionId => this.beginEditing(optionId)}
+                                        beginEditing={optionId => this.beginEditing(optionId)}
                                         deleteOption={optionId => this.deleteOption(section.id, optionId)}
-                                        onSave={(optionId, newText) => this.saveOption(section.id, optionId, newText)}
-                                        onCancel={() => this.cancelEditing()}
+                                        saveOption={(optionId, newText) => this.saveOption(section.id, optionId, newText)}
+                                        cancelEditing={() => this.cancelEditing()}
                                     />
                                 )}
                             </div>

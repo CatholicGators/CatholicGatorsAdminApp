@@ -1,0 +1,310 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditableInterestOption should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <EditableInterestOption
+    beginEditing={[MockFunction]}
+    cancelEditing={[MockFunction]}
+    classes={Object {}}
+    deleteOption={[MockFunction]}
+    isEditing={false}
+    option={
+      Object {
+        "id": 1,
+        "text": "totally testing",
+      }
+    }
+    saveOption={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <WithStyles(Checkbox)
+          color="primary"
+        />,
+        Array [
+          <WithStyles(Typography)>
+            totally testing
+          </WithStyles(Typography)>,
+          <section>
+            <WithStyles(IconButton)
+              id="edit"
+              onClick={[Function]}
+            >
+              <pure(EditIcon) />
+            </WithStyles(IconButton)>
+            <WithStyles(IconButton)
+              id="delete"
+              onClick={[Function]}
+            >
+              <pure(DeleteIcon) />
+            </WithStyles(IconButton)>
+          </section>,
+        ],
+      ],
+      "className": undefined,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "className": undefined,
+          "color": "primary",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "1",
+        "nodeType": "class",
+        "props": Object {
+          "children": "totally testing",
+        },
+        "ref": null,
+        "rendered": "totally testing",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "2",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <WithStyles(IconButton)
+              id="edit"
+              onClick={[Function]}
+            >
+              <pure(EditIcon) />
+            </WithStyles(IconButton)>,
+            <WithStyles(IconButton)
+              id="delete"
+              onClick={[Function]}
+            >
+              <pure(DeleteIcon) />
+            </WithStyles(IconButton)>,
+          ],
+          "className": undefined,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <pure(EditIcon) />,
+              "id": "edit",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <pure(DeleteIcon) />,
+              "id": "delete",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "section",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <WithStyles(Checkbox)
+            color="primary"
+          />,
+          Array [
+            <WithStyles(Typography)>
+              totally testing
+            </WithStyles(Typography)>,
+            <section>
+              <WithStyles(IconButton)
+                id="edit"
+                onClick={[Function]}
+              >
+                <pure(EditIcon) />
+              </WithStyles(IconButton)>
+              <WithStyles(IconButton)
+                id="delete"
+                onClick={[Function]}
+              >
+                <pure(DeleteIcon) />
+              </WithStyles(IconButton)>
+            </section>,
+          ],
+        ],
+        "className": undefined,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "className": undefined,
+            "color": "primary",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "1",
+          "nodeType": "class",
+          "props": Object {
+            "children": "totally testing",
+          },
+          "ref": null,
+          "rendered": "totally testing",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "2",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <WithStyles(IconButton)
+                id="edit"
+                onClick={[Function]}
+              >
+                <pure(EditIcon) />
+              </WithStyles(IconButton)>,
+              <WithStyles(IconButton)
+                id="delete"
+                onClick={[Function]}
+              >
+                <pure(DeleteIcon) />
+              </WithStyles(IconButton)>,
+            ],
+            "className": undefined,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <pure(EditIcon) />,
+                "id": "edit",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <pure(DeleteIcon) />,
+                "id": "delete",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": "section",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+  Symbol(enzyme.__childContext__): null,
+}
+`;

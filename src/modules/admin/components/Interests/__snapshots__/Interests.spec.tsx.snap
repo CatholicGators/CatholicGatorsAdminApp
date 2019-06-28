@@ -62,17 +62,17 @@ ShallowWrapper {
               testing
             </WithStyles(Typography)>
             <WithStyles(EditableInterestOption)
+              beginEditing={[Function]}
+              cancelEditing={[Function]}
               deleteOption={[Function]}
-              editOption={[Function]}
               isEditing={false}
-              onCancel={[Function]}
-              onSave={[Function]}
               option={
                 Object {
                   "id": 1,
                   "text": "totally testing",
                 }
               }
+              saveOption={[Function]}
             />
           </div>
         </div>,
@@ -118,17 +118,17 @@ ShallowWrapper {
                 testing
               </WithStyles(Typography)>
               <WithStyles(EditableInterestOption)
+                beginEditing={[Function]}
+                cancelEditing={[Function]}
                 deleteOption={[Function]}
-                editOption={[Function]}
                 isEditing={false}
-                onCancel={[Function]}
-                onSave={[Function]}
                 option={
                   Object {
                     "id": 1,
                     "text": "totally testing",
                   }
                 }
+                saveOption={[Function]}
               />
             </div>,
           ],
@@ -147,17 +147,17 @@ ShallowWrapper {
                 </WithStyles(Typography)>,
                 Array [
                   <WithStyles(EditableInterestOption)
+                    beginEditing={[Function]}
+                    cancelEditing={[Function]}
                     deleteOption={[Function]}
-                    editOption={[Function]}
                     isEditing={false}
-                    onCancel={[Function]}
-                    onSave={[Function]}
                     option={
                       Object {
                         "id": 1,
                         "text": "totally testing",
                       }
                     }
+                    saveOption={[Function]}
                   />,
                 ],
               ],
@@ -180,15 +180,15 @@ ShallowWrapper {
                 "key": "1",
                 "nodeType": "class",
                 "props": Object {
+                  "beginEditing": [Function],
+                  "cancelEditing": [Function],
                   "deleteOption": [Function],
-                  "editOption": [Function],
                   "isEditing": false,
-                  "onCancel": [Function],
-                  "onSave": [Function],
                   "option": Object {
                     "id": 1,
                     "text": "totally testing",
                   },
+                  "saveOption": [Function],
                 },
                 "ref": null,
                 "rendered": null,
@@ -223,17 +223,17 @@ ShallowWrapper {
                 testing
               </WithStyles(Typography)>
               <WithStyles(EditableInterestOption)
+                beginEditing={[Function]}
+                cancelEditing={[Function]}
                 deleteOption={[Function]}
-                editOption={[Function]}
                 isEditing={false}
-                onCancel={[Function]}
-                onSave={[Function]}
                 option={
                   Object {
                     "id": 1,
                     "text": "totally testing",
                   }
                 }
+                saveOption={[Function]}
               />
             </div>
           </div>,
@@ -279,17 +279,17 @@ ShallowWrapper {
                   testing
                 </WithStyles(Typography)>
                 <WithStyles(EditableInterestOption)
+                  beginEditing={[Function]}
+                  cancelEditing={[Function]}
                   deleteOption={[Function]}
-                  editOption={[Function]}
                   isEditing={false}
-                  onCancel={[Function]}
-                  onSave={[Function]}
                   option={
                     Object {
                       "id": 1,
                       "text": "totally testing",
                     }
                   }
+                  saveOption={[Function]}
                 />
               </div>,
             ],
@@ -308,17 +308,17 @@ ShallowWrapper {
                   </WithStyles(Typography)>,
                   Array [
                     <WithStyles(EditableInterestOption)
+                      beginEditing={[Function]}
+                      cancelEditing={[Function]}
                       deleteOption={[Function]}
-                      editOption={[Function]}
                       isEditing={false}
-                      onCancel={[Function]}
-                      onSave={[Function]}
                       option={
                         Object {
                           "id": 1,
                           "text": "totally testing",
                         }
                       }
+                      saveOption={[Function]}
                     />,
                   ],
                 ],
@@ -341,15 +341,15 @@ ShallowWrapper {
                   "key": "1",
                   "nodeType": "class",
                   "props": Object {
+                    "beginEditing": [Function],
+                    "cancelEditing": [Function],
                     "deleteOption": [Function],
-                    "editOption": [Function],
                     "isEditing": false,
-                    "onCancel": [Function],
-                    "onSave": [Function],
                     "option": Object {
                       "id": 1,
                       "text": "totally testing",
                     },
+                    "saveOption": [Function],
                   },
                   "ref": null,
                   "rendered": null,
