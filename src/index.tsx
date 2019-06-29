@@ -19,8 +19,8 @@ import {
 
 const theme: Theme = createMuiTheme({
     palette: {
-        primary: blue,
-        secondary: orange,
+        primary: blue, //CG Blue: #0019E6
+        secondary: orange, //CG Orange: #F0400D
     },
     typography: {
         useNextVariants: true,
