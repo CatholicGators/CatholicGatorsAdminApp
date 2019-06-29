@@ -1,0 +1,677 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Admin
+    location={
+      Object {
+        "pathname": "test/testing",
+      }
+    }
+    match={
+      Object {
+        "url": "test",
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <WithStyles(List)
+          className={null}
+        >
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className={null}
+            exact={true}
+            to="test/users"
+          >
+            <WithStyles(ListItem)
+              button={true}
+              selected={false}
+            >
+              <WithStyles(ListItemIcon)>
+                <pure(GroupIcon) />
+              </WithStyles(ListItemIcon)>
+              <WithStyles(ListItemText)
+                primary="Users"
+              />
+            </WithStyles(ListItem)>
+          </NavLink>
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className={null}
+            exact={true}
+            to="test/interests"
+          >
+            <WithStyles(ListItem)
+              button={true}
+              selected={false}
+            >
+              <WithStyles(ListItemIcon)>
+                <pure(VpnKeyIcon) />
+              </WithStyles(ListItemIcon)>
+              <WithStyles(ListItemText)
+                primary="Interests"
+              />
+            </WithStyles(ListItem)>
+          </NavLink>
+        </WithStyles(List)>,
+        <Route
+          exact={true}
+          path="test"
+          render={[Function]}
+        />,
+        <Route
+          component={[Function]}
+          path="test/users"
+        />,
+        <Route
+          component={[Function]}
+          path="test/interests"
+        />,
+      ],
+      "className": null,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="test/users"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>,
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="test/interests"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Interests"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>,
+          ],
+          "className": null,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "Users",
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "aria-current": "page",
+              "children": <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
+                />
+              </WithStyles(ListItem)>,
+              "className": null,
+              "exact": true,
+              "to": "test/users",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "button": true,
+                "children": Array [
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>,
+                  <WithStyles(ListItemText)
+                    primary="Users"
+                  />,
+                ],
+                "selected": false,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <pure(GroupIcon) />,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "primary": "Users",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": "Interests",
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "aria-current": "page",
+              "children": <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Interests"
+                />
+              </WithStyles(ListItem)>,
+              "className": null,
+              "exact": true,
+              "to": "test/interests",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "button": true,
+                "children": Array [
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>,
+                  <WithStyles(ListItemText)
+                    primary="Interests"
+                  />,
+                ],
+                "selected": false,
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <pure(VpnKeyIcon) />,
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {},
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "primary": "Interests",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "exact": true,
+          "path": "test",
+          "render": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "test/users",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "test/interests",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <WithStyles(List)
+            className={null}
+          >
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="test/users"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(GroupIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Users"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>
+            <NavLink
+              activeClassName="active"
+              aria-current="page"
+              className={null}
+              exact={true}
+              to="test/interests"
+            >
+              <WithStyles(ListItem)
+                button={true}
+                selected={false}
+              >
+                <WithStyles(ListItemIcon)>
+                  <pure(VpnKeyIcon) />
+                </WithStyles(ListItemIcon)>
+                <WithStyles(ListItemText)
+                  primary="Interests"
+                />
+              </WithStyles(ListItem)>
+            </NavLink>
+          </WithStyles(List)>,
+          <Route
+            exact={true}
+            path="test"
+            render={[Function]}
+          />,
+          <Route
+            component={[Function]}
+            path="test/users"
+          />,
+          <Route
+            component={[Function]}
+            path="test/interests"
+          />,
+        ],
+        "className": null,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                to="test/users"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Users"
+                  />
+                </WithStyles(ListItem)>
+              </NavLink>,
+              <NavLink
+                activeClassName="active"
+                aria-current="page"
+                className={null}
+                exact={true}
+                to="test/interests"
+              >
+                <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Interests"
+                  />
+                </WithStyles(ListItem)>
+              </NavLink>,
+            ],
+            "className": null,
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "Users",
+              "nodeType": "function",
+              "props": Object {
+                "activeClassName": "active",
+                "aria-current": "page",
+                "children": <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(GroupIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Users"
+                  />
+                </WithStyles(ListItem)>,
+                "className": null,
+                "exact": true,
+                "to": "test/users",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "button": true,
+                  "children": Array [
+                    <WithStyles(ListItemIcon)>
+                      <pure(GroupIcon) />
+                    </WithStyles(ListItemIcon)>,
+                    <WithStyles(ListItemText)
+                      primary="Users"
+                    />,
+                  ],
+                  "selected": false,
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": <pure(GroupIcon) />,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "primary": "Users",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "Interests",
+              "nodeType": "function",
+              "props": Object {
+                "activeClassName": "active",
+                "aria-current": "page",
+                "children": <WithStyles(ListItem)
+                  button={true}
+                  selected={false}
+                >
+                  <WithStyles(ListItemIcon)>
+                    <pure(VpnKeyIcon) />
+                  </WithStyles(ListItemIcon)>
+                  <WithStyles(ListItemText)
+                    primary="Interests"
+                  />
+                </WithStyles(ListItem)>,
+                "className": null,
+                "exact": true,
+                "to": "test/interests",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "button": true,
+                  "children": Array [
+                    <WithStyles(ListItemIcon)>
+                      <pure(VpnKeyIcon) />
+                    </WithStyles(ListItemIcon)>,
+                    <WithStyles(ListItemText)
+                      primary="Interests"
+                    />,
+                  ],
+                  "selected": false,
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": <pure(VpnKeyIcon) />,
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {},
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "primary": "Interests",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "exact": true,
+            "path": "test",
+            "render": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "test/users",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "test/interests",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;

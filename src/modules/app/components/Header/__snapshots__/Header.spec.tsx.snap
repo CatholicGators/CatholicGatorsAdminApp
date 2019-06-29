@@ -75,7 +75,7 @@ ShallowWrapper {
                 activeClassName={null}
                 aria-current="page"
                 className={null}
-                exact={true}
+                exact={false}
                 to="/my-contacts"
               >
                 <WithStyles(Typography)
@@ -88,7 +88,7 @@ ShallowWrapper {
                 activeClassName={null}
                 aria-current="page"
                 className={null}
-                exact={true}
+                exact={false}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -194,7 +194,7 @@ ShallowWrapper {
                 activeClassName={null}
                 aria-current="page"
                 className={null}
-                exact={true}
+                exact={false}
                 to="/my-contacts"
               >
                 <WithStyles(Typography)
@@ -207,7 +207,7 @@ ShallowWrapper {
                 activeClassName={null}
                 aria-current="page"
                 className={null}
-                exact={true}
+                exact={false}
                 to="/admin"
               >
                 <WithStyles(Typography)
@@ -273,7 +273,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/my-contacts"
                 >
                   <WithStyles(Typography)
@@ -286,7 +286,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -373,7 +373,7 @@ ShallowWrapper {
                       activeClassName={null}
                       aria-current="page"
                       className={null}
-                      exact={true}
+                      exact={false}
                       to="/my-contacts"
                     >
                       <WithStyles(Typography)
@@ -386,7 +386,7 @@ ShallowWrapper {
                       activeClassName={null}
                       aria-current="page"
                       className={null}
-                      exact={true}
+                      exact={false}
                       to="/admin"
                     >
                       <WithStyles(Typography)
@@ -455,7 +455,7 @@ ShallowWrapper {
                       My Contacts
                     </WithStyles(Typography)>,
                     "className": null,
-                    "exact": true,
+                    "exact": false,
                     "to": "/my-contacts",
                   },
                   "ref": null,
@@ -486,7 +486,7 @@ ShallowWrapper {
                       Admin
                     </WithStyles(Typography)>,
                     "className": null,
-                    "exact": true,
+                    "exact": false,
                     "to": "/admin",
                   },
                   "ref": null,
@@ -619,7 +619,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/my-contacts"
                 >
                   <WithStyles(Typography)
@@ -632,7 +632,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -738,7 +738,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/my-contacts"
                 >
                   <WithStyles(Typography)
@@ -751,7 +751,7 @@ ShallowWrapper {
                   activeClassName={null}
                   aria-current="page"
                   className={null}
-                  exact={true}
+                  exact={false}
                   to="/admin"
                 >
                   <WithStyles(Typography)
@@ -817,7 +817,7 @@ ShallowWrapper {
                     activeClassName={null}
                     aria-current="page"
                     className={null}
-                    exact={true}
+                    exact={false}
                     to="/my-contacts"
                   >
                     <WithStyles(Typography)
@@ -830,7 +830,7 @@ ShallowWrapper {
                     activeClassName={null}
                     aria-current="page"
                     className={null}
-                    exact={true}
+                    exact={false}
                     to="/admin"
                   >
                     <WithStyles(Typography)
@@ -917,7 +917,7 @@ ShallowWrapper {
                         activeClassName={null}
                         aria-current="page"
                         className={null}
-                        exact={true}
+                        exact={false}
                         to="/my-contacts"
                       >
                         <WithStyles(Typography)
@@ -930,7 +930,7 @@ ShallowWrapper {
                         activeClassName={null}
                         aria-current="page"
                         className={null}
-                        exact={true}
+                        exact={false}
                         to="/admin"
                       >
                         <WithStyles(Typography)
@@ -999,7 +999,7 @@ ShallowWrapper {
                         My Contacts
                       </WithStyles(Typography)>,
                       "className": null,
-                      "exact": true,
+                      "exact": false,
                       "to": "/my-contacts",
                     },
                     "ref": null,
@@ -1030,7 +1030,7 @@ ShallowWrapper {
                         Admin
                       </WithStyles(Typography)>,
                       "className": null,
-                      "exact": true,
+                      "exact": false,
                       "to": "/admin",
                     },
                     "ref": null,

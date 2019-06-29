@@ -1,10 +1,12 @@
 import { contactFormActions } from "../../actions/contactForm/contactFormActions"
+import { interestActions } from "../../actions/contactForm/interestActions";
 
 export const INITIAL_CONTACT_FORM_STATE = {
     errorMessage: null,
     success: null,
     loading: false,
     contacts: undefined,
+    interests: undefined
 };
 
 const setLoading = (state) => ({
@@ -40,22 +42,33 @@ const updateContactStatus = (state, action) => ({
     )
 })
 
+const setInterests = (state, action) => ({
+    ...state,
+    interests: action.interests
+})
+
 function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
     switch(action.type) {
         case contactFormActions.SUBMIT_CONTACT_FORM : {
-            return setLoading(state);
+            return setLoading(state)
         }
         case contactFormActions.SUBMIT_CONTACT_FORM_SUCCESS : {
-            return setSuccess(state);
+            return setSuccess(state)
         }
         case contactFormActions.SUBMIT_CONTACT_FORM_ERR : {
-            return setError(state, action);
+            return setError(state, action)
         }
         case contactFormActions.GET_CONTACTS_SUCCESS : {
             return applyContacts(state, action)
         }
         case contactFormActions.UPDATE_CONTACT_STATUS_SUCCESS : {
             return updateContactStatus(state, action)
+        }
+        case interestActions.GET_INTERESTS_SUCCESS: {
+            return setInterests(state, action)
+        }
+        case interestActions.UPDATE_INTERESTS_SUCCESS: {
+            return setInterests(state, action)
         }
         default : return state;
     }

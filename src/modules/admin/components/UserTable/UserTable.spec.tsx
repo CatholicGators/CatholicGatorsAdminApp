@@ -1,14 +1,14 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { Admin } from './Admin'
+import { UserTable } from './UserTable'
 import {
     TableHead,
     Checkbox,
     CircularProgress
 } from '@material-ui/core';
 
-describe('Admin', () => {
+describe('UserTable', () => {
     let props, wrapper
 
     beforeEach(() => {
@@ -34,7 +34,7 @@ describe('Admin', () => {
                 }
             ]
         }
-        wrapper = shallow(<Admin {...props} />)
+        wrapper = shallow(<UserTable {...props} />)
     })
 
     it('should match snapshot', () => {
