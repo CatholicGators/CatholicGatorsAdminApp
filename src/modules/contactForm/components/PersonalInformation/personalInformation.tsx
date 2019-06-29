@@ -69,35 +69,35 @@ class PersonalInformation extends React.Component {
       <React.Fragment>
         <form onSubmit={this.props.handleNext}>
             <TextField
-            id="first-name"
-            label="First Name"
-            className={classes.field}
-            value={this.props.data.firstName}
-            onChange={handleChange('firstName')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="first-name"
+                label="First Name"
+                className={classes.field}
+                value={this.props.data.firstName}
+                onChange={handleChange('firstName')}
+                margin="normal"
+                variant="outlined"
+                required
             ></TextField>
             <TextField
-            id="last-name"
-            label="Last Name"
-            className={classes.field}
-            value={this.props.data.lastName}
-            onChange={handleChange('lastName')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="last-name"
+                label="Last Name"
+                className={classes.field}
+                value={this.props.data.lastName}
+                onChange={handleChange('lastName')}
+                margin="normal"
+                variant="outlined"
+                required
             ></TextField>
             <TextField
-            id="gender"
-            select
-            label="Gender"
-            className={classes.fieldSmaller}
-            value={this.props.data.gender}
-            onChange={handleChange('gender')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="gender"
+                select
+                label="Gender"
+                className={classes.fieldSmaller}
+                value={this.props.data.gender}
+                onChange={handleChange('gender')}
+                margin="normal"
+                variant="outlined"
+                required
             >
                 {genders.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -106,15 +106,15 @@ class PersonalInformation extends React.Component {
                 ))}
             </TextField>
             <TextField
-            id="school"
-            select
-            label="School"
-            className={classes.fieldSmaller}
-            value={this.props.data.school}
-            onChange={handleChange('school')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="school"
+                select
+                label="School"
+                className={classes.fieldSmaller}
+                value={this.props.data.school}
+                onChange={handleChange('school')}
+                margin="normal"
+                variant="outlined"
+                required
             >
                 {schools.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -123,85 +123,85 @@ class PersonalInformation extends React.Component {
                 ))}
             </TextField>
             <FormControl
-            id="phone-number"
-            className={classes.field}
-            variant="outlined"
-            margin="normal"
-            required
+                id="phone-number"
+                className={classes.field}
+                variant="outlined"
+                margin="normal"
+                required
             >
                 <InputLabel htmlFor="phone-number">
                     Phone number
                 </InputLabel>
                 <OutlinedInput
-                id="phone-number"
-                value={this.props.data.phoneNumber}
-                onChange={handleChange('phoneNumber')}
-                inputComponent={PhoneNumberTextMask as any}
-                labelWidth={this.state.phoneNumberWidth}
-                required
+                    id="phone-number"
+                    value={this.props.data.phoneNumber}
+                    onChange={handleChange('phoneNumber')}
+                    inputComponent={PhoneNumberTextMask as any}
+                    labelWidth={this.state.phoneNumberWidth}
+                    required
                 />
             </FormControl>
             <TextField
-            id="email"
-            label="Email"
-            className={classes.fieldLarger}
-            value={this.props.data.email}
-            onChange={handleChange('email')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="email"
+                label="Email"
+                className={classes.fieldLarger}
+                value={this.props.data.email}
+                onChange={handleChange('email')}
+                margin="normal"
+                variant="outlined"
+                required
             ></TextField>
             <TextField
-            id="housing-complex"
-            label="Name of Dorm/Complex"
-            className={classes.fieldLarger}
-            value={this.props.data.housingComplex}
-            onChange={handleChange('housingComplex')}
-            margin="normal"
-            variant="outlined"
+                id="housing-complex"
+                label="Name of Dorm/Complex"
+                className={classes.fieldLarger}
+                value={this.props.data.housingComplex}
+                onChange={handleChange('housingComplex')}
+                margin="normal"
+                variant="outlined"
             ></TextField>
             <FormControl
-            id="graduation-year"
-            className={classes.field}
-            variant="outlined"
-            margin="normal"
-            required
-            >
-                <InputLabel
-                htmlFor="graduation-year"
-                >Graduation Year</InputLabel>
-                <OutlinedInput
-                id="graduationYear"
-                value={this.props.data.graduationYear}
-                onChange={handleChange('graduationYear')}
-                inputComponent={YearTextMask as any}
-                labelWidth={this.state.yearWidth}
+                id="graduation-year"
+                className={classes.field}
+                variant="outlined"
+                margin="normal"
                 required
+            >
+                <InputLabel htmlFor="graduation-year">
+                    Graduation Year
+                </InputLabel>
+                <OutlinedInput
+                    id="graduationYear"
+                    value={this.props.data.graduationYear}
+                    onChange={handleChange('graduationYear')}
+                    inputComponent={YearTextMask as any}
+                    labelWidth={this.state.yearWidth}
+                    required
                 />
             </FormControl>
             <TextField
-            id="graduationSemester"
-            select
-            label="Graduation Semester"
-            className={classes.field}
-            value={this.props.data.graduationSemester}
-            onChange={handleChange('graduationSemester')}
-            margin="normal"
-            variant="outlined"
-            required
+                id="graduationSemester"
+                select
+                label="Graduation Semester"
+                className={classes.field}
+                value={this.props.data.graduationSemester}
+                onChange={handleChange('graduationSemester')}
+                margin="normal"
+                variant="outlined"
+                required
             >
-            {semester.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
+                {semester.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                </MenuItem>
+                ))}
             </TextField>
             <div className={classes.buttons}>
                 <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.button}
                 > Next </Button>
             </div>
         </form>

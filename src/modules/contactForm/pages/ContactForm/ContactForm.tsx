@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import PersonalInformation from '../../components/PersonalInformation/personalInformation'
@@ -57,7 +57,7 @@ const initState = {
     activeStep: 0
 };
 
-class ContactForm extends React.Component<any, any> {
+export class ContactForm extends Component<any, any> {
 
     constructor(public props: any) {
         super(props)
@@ -77,12 +77,13 @@ class ContactForm extends React.Component<any, any> {
     };
 
     handleNext() {
-        if (this.state.activeStep === steps.length - 1) {
+        if (this.state.activeStep === (steps.length - 1)) {
             this.props.submitContactForm(filterState(this.state));
+        } else {
+            this.setState((prevState: any) => ({
+                activeStep: prevState.activeStep + 1
+            }));
         }
-        this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep + 1
-        }));
     };
 
     handleBack() {
@@ -153,7 +154,7 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
     } else {
         switch (step) {
             case 0:
-                return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+                return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} />;
             case 1:
                 return <ParentsInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             case 2:
