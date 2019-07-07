@@ -44,22 +44,22 @@ describe('Interests', () => {
         expect(wrapper.state().editingOptionId).toBe(null)
     })
 
-    describe('beginEditing', () => {
+    describe('beginEditingOption', () => {
         it('sets editingOptionId to the optionId passed in', () => {
             const id = props.interests[0].options[0].id
-            instance.beginEditing(id)
+            instance.beginEditingOption(id)
             expect(wrapper.state().editingOptionId).toBe(id)
         })
     })
 
-    describe('cancelEditing', () => {
+    describe('cancelEditingOption', () => {
         it('resets the editing state to default', () => {
             const optionId = props.interests[0].options[0].id
 
-            instance.beginEditing(optionId)
+            instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
-            instance.cancelEditing()
+            instance.cancelEditingOption()
             expect(wrapper.state().editingOptionId).toBe(null)
         })
     })
@@ -69,7 +69,7 @@ describe('Interests', () => {
             const sectionId = props.interests[0].id
             const optionId = props.interests[0].options[0].id
 
-            instance.beginEditing(optionId)
+            instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
             instance.deleteOption(sectionId, optionId)
@@ -83,7 +83,7 @@ describe('Interests', () => {
             const optionId = props.interests[0].options[0].id
             const newText = "newText"
 
-            instance.beginEditing(optionId)
+            instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
             instance.saveOption(sectionId, optionId, newText)
@@ -106,7 +106,7 @@ describe('Interests', () => {
                 })
             ]
 
-            instance.beginEditing(optionId)
+            instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
             instance.saveOption(sectionId, optionId, newText)

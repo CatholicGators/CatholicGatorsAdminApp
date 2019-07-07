@@ -14,6 +14,7 @@ import {
     getInterests,
     updateInterests
 } from '../../../../redux/actions/contactForm/interestActions';
+import AddOptionButton from './components/AddOptionButton/AddOptionButton';
 
 const styles = (theme: Theme) => createStyles({
     formWrapper: {
@@ -39,33 +40,35 @@ export type Props = {
 
 type State = {
     editingOptionId: number | null
+    addingSectionId: string
 }
 
 type Section = {
-    id: string,
-    text: string,
+    id: string
+    text: string
     options: Option[]
 }
 
 export type Option = {
-    id: number,
+    id: number
     text: string
 }
 
 export class Interests extends Component<Props, State> {
     state = {
-        editingOptionId: null
+        editingOptionId: null,
+        addingSectionId: null
     }
 
     componentDidMount() {
         this.props.getInterests()
     }
 
-    beginEditing(optionId: number) {
-        this.setState({ editingOptionId: optionId })
+    beginEditingOption(optionId: number) {
+        this.setState({ editingOptionId: optionId, addingSectionId: null })
     }
 
-    cancelEditing() {
+    cancelEditingOption() {
         this.setState({ editingOptionId: null })
     }
 
@@ -88,8 +91,23 @@ export class Interests extends Component<Props, State> {
         this.setState({ editingOptionId: null })
     }
 
+    beginAddingOption(sectionId: string) {
+        this.setState({ addingSectionId: sectionId, editingOptionId: null })
+    }   
+
+    cancelAddingOption() {
+        this.setState({ addingSectionId: null })
+    }
+
+    addOption(sectionId: string, text: string) {
+        console.log(sectionId, text)
+        this.setState({ addingSectionId: null })
+    }
+
     render() {
         const { classes, interests } = this.props
+        const { addingSectionId, editingOptionId } = this.state
+        
         return (
             <Paper className={classes.formWrapper}>
                 <Toolbar>
@@ -103,14 +121,20 @@ export class Interests extends Component<Props, State> {
                                 {section.options.map(option =>
                                     <EditableInterestOption
                                         key={option.id}
-                                        isEditing={option.id === this.state.editingOptionId}
+                                        isEditing={option.id === editingOptionId}
                                         option={option}
-                                        beginEditing={optionId => this.beginEditing(optionId)}
+                                        beginEditing={optionId => this.beginEditingOption(optionId)}
                                         deleteOption={optionId => this.deleteOption(section.id, optionId)}
                                         saveOption={(optionId, newText) => this.saveOption(section.id, optionId, newText)}
-                                        cancelEditing={() => this.cancelEditing()}
+                                        cancelEditing={() => this.cancelEditingOption()}
                                     />
                                 )}
+                                <AddOptionButton
+                                    isAdding={addingSectionId === section.id}
+                                    beginAddingOption={() => this.beginAddingOption(section.id)}
+                                    cancelAddingOption={() => this.cancelAddingOption()}
+                                    addOption={text => this.addOption(section.id, text)}
+                                />
                             </div>
                         )}
                     </div>

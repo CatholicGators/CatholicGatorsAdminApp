@@ -74,6 +74,12 @@ ShallowWrapper {
               }
               saveOption={[Function]}
             />
+            <WithStyles(AddOptionButton)
+              addOption={[Function]}
+              beginAddingOption={[Function]}
+              cancelAddingOption={[Function]}
+              isAdding={false}
+            />
           </div>
         </div>,
       ],
@@ -130,6 +136,12 @@ ShallowWrapper {
                 }
                 saveOption={[Function]}
               />
+              <WithStyles(AddOptionButton)
+                addOption={[Function]}
+                beginAddingOption={[Function]}
+                cancelAddingOption={[Function]}
+                isAdding={false}
+              />
             </div>,
           ],
           "className": undefined,
@@ -160,6 +172,12 @@ ShallowWrapper {
                     saveOption={[Function]}
                   />,
                 ],
+                <WithStyles(AddOptionButton)
+                  addOption={[Function]}
+                  beginAddingOption={[Function]}
+                  cancelAddingOption={[Function]}
+                  isAdding={false}
+                />,
               ],
             },
             "ref": null,
@@ -189,6 +207,20 @@ ShallowWrapper {
                     "text": "totally testing",
                   },
                   "saveOption": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "addOption": [Function],
+                  "beginAddingOption": [Function],
+                  "cancelAddingOption": [Function],
+                  "isAdding": false,
                 },
                 "ref": null,
                 "rendered": null,
@@ -234,6 +266,12 @@ ShallowWrapper {
                   }
                 }
                 saveOption={[Function]}
+              />
+              <WithStyles(AddOptionButton)
+                addOption={[Function]}
+                beginAddingOption={[Function]}
+                cancelAddingOption={[Function]}
+                isAdding={false}
               />
             </div>
           </div>,
@@ -291,6 +329,12 @@ ShallowWrapper {
                   }
                   saveOption={[Function]}
                 />
+                <WithStyles(AddOptionButton)
+                  addOption={[Function]}
+                  beginAddingOption={[Function]}
+                  cancelAddingOption={[Function]}
+                  isAdding={false}
+                />
               </div>,
             ],
             "className": undefined,
@@ -321,6 +365,12 @@ ShallowWrapper {
                       saveOption={[Function]}
                     />,
                   ],
+                  <WithStyles(AddOptionButton)
+                    addOption={[Function]}
+                    beginAddingOption={[Function]}
+                    cancelAddingOption={[Function]}
+                    isAdding={false}
+                  />,
                 ],
               },
               "ref": null,
@@ -350,6 +400,20 @@ ShallowWrapper {
                       "text": "totally testing",
                     },
                     "saveOption": [Function],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "addOption": [Function],
+                    "beginAddingOption": [Function],
+                    "cancelAddingOption": [Function],
+                    "isAdding": false,
                   },
                   "ref": null,
                   "rendered": null,
