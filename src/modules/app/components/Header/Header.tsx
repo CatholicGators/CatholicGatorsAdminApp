@@ -139,7 +139,7 @@ export class Header extends React.Component<Props, State> {
                                     .filter(link => !link.needsAuthorization || (user.isAdmin && user.isApproved))
                                     .map(link => 
                                             <NavLink
-                                                exact
+                                                exact={link.href === '/'}
                                                 key={link.text}
                                                 to={link.href}
                                                 className={classes ? classes.navLinkDesktop : null}
