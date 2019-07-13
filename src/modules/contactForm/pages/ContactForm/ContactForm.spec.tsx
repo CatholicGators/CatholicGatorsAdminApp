@@ -43,5 +43,12 @@ describe('ContactForm', () => {
 
             expect(wrapper.state('activeStep')).toBe(0)
         });
+
+        it('should do nothing on back when on step 0', () => {
+            wrapper.setState({ activeStep: 0 })
+            wrapper.instance().handleBack()
+
+            expect(wrapper.state('activeStep')).toBe(0)
+        });
     });
 });

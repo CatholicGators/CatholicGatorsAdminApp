@@ -87,9 +87,11 @@ export class ContactForm extends Component<any, any> {
     };
 
     handleBack() {
-        this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep - 1
-        }));
+        if(this.state.activeStep > 0){
+            this.setState((prevState: any) => ({
+                activeStep: prevState.activeStep - 1
+            }));
+        }
     };
 
     render() {
@@ -160,7 +162,7 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
             case 2:
                 return <Interests data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             default:
-                throw new Error('Unknown step');
+                return <p></p>
         }
     }
 }
