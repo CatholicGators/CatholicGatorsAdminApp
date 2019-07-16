@@ -1,4 +1,4 @@
-import { app, auth } from 'firebase/app';
+import { auth } from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { Observable, from } from 'rxjs';
@@ -8,15 +8,7 @@ import Document from '../models/document';
 import DocumentNotFoundError from '../models/documentNotFoundError';
 
 export default class Firestore {
-    private app: app.App;
-    private db: firebase.firestore.Firestore;
-
-    constructor(private firebase, private clientConfig) {
-        this.app = !this.firebase.apps.length ?
-                        this.firebase.initializeApp(this.clientConfig) :
-                        this.firebase.app();
-        this.db = this.app.firestore();
-    };
+    constructor(private app: firebase.app.App, private db: firebase.firestore.Firestore) {}
 
     getAuth(): auth.Auth {
         return this.app.auth();

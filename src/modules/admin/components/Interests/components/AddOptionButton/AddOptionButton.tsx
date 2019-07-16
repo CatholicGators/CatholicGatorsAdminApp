@@ -91,7 +91,6 @@ export class AddOptionButton extends Component<Props, State> {
                         />
                         <Input
                             fullWidth
-                            key={1}
                             className={classes.input}
                             value={text}
                             onChange={ev => this.onAddOptionChange(ev.target.value)}

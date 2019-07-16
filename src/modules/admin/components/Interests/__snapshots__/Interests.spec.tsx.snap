@@ -55,6 +55,12 @@ ShallowWrapper {
           >
             Edit Interests step of form
           </WithStyles(Typography)>
+          <WithStyles(Button)
+            color="primary"
+            variant="outlined"
+          >
+            Add Section
+          </WithStyles(Button)>
         </WithStyles(Toolbar)>,
         <div>
           <div>
@@ -92,25 +98,49 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <WithStyles(Typography)
-            variant="h6"
-          >
-            Edit Interests step of form
-          </WithStyles(Typography)>,
+          "children": Array [
+            <WithStyles(Typography)
+              variant="h6"
+            >
+              Edit Interests step of form
+            </WithStyles(Typography)>,
+            <WithStyles(Button)
+              color="primary"
+              variant="outlined"
+            >
+              Add Section
+            </WithStyles(Button)>,
+          ],
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": "Edit Interests step of form",
-            "variant": "h6",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Edit Interests step of form",
+              "variant": "h6",
+            },
+            "ref": null,
+            "rendered": "Edit Interests step of form",
+            "type": [Function],
           },
-          "ref": null,
-          "rendered": "Edit Interests step of form",
-          "type": [Function],
-        },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Add Section",
+              "className": undefined,
+              "color": "primary",
+              "variant": "outlined",
+            },
+            "ref": null,
+            "rendered": "Add Section",
+            "type": [Function],
+          },
+        ],
         "type": [Function],
       },
       Object {
@@ -248,6 +278,12 @@ ShallowWrapper {
             >
               Edit Interests step of form
             </WithStyles(Typography)>
+            <WithStyles(Button)
+              color="primary"
+              variant="outlined"
+            >
+              Add Section
+            </WithStyles(Button)>
           </WithStyles(Toolbar)>,
           <div>
             <div>
@@ -285,25 +321,49 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <WithStyles(Typography)
-              variant="h6"
-            >
-              Edit Interests step of form
-            </WithStyles(Typography)>,
+            "children": Array [
+              <WithStyles(Typography)
+                variant="h6"
+              >
+                Edit Interests step of form
+              </WithStyles(Typography)>,
+              <WithStyles(Button)
+                color="primary"
+                variant="outlined"
+              >
+                Add Section
+              </WithStyles(Button)>,
+            ],
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Edit Interests step of form",
-              "variant": "h6",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Edit Interests step of form",
+                "variant": "h6",
+              },
+              "ref": null,
+              "rendered": "Edit Interests step of form",
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": "Edit Interests step of form",
-            "type": [Function],
-          },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Add Section",
+                "className": undefined,
+                "color": "primary",
+                "variant": "outlined",
+              },
+              "ref": null,
+              "rendered": "Add Section",
+              "type": [Function],
+            },
+          ],
           "type": [Function],
         },
         Object {

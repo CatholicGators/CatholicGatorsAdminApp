@@ -7,12 +7,14 @@ import {
     Theme,
     createStyles,
     withStyles,
-    CircularProgress
+    CircularProgress,
+    Button
 } from '@material-ui/core'
 import EditableInterestOption from './components/EditableInterestOption/EditableInterestOption';
 import {
     getInterests,
-    updateInterests
+    updateInterests,
+    addOption
 } from '../../../../redux/actions/contactForm/interestActions';
 import AddOptionButton from './components/AddOptionButton/AddOptionButton';
 
@@ -29,13 +31,17 @@ const styles = (theme: Theme) => createStyles({
         justifyContent: 'center',
         minHeight: '300px',
     },
+    addSectionBtn: {
+        marginLeft: 'auto'
+    }
 })
 
 export type Props = {
     classes: any,
     interests: Section[]
     getInterests: () => void,
-    updateInterests: (interests : Section[]) => void
+    updateInterests: (interests : Section[]) => void,
+    addOption: (sectionId: string, option: Option) => void
 }
 
 type State = {
@@ -43,14 +49,15 @@ type State = {
     addingSectionId: string
 }
 
-type Section = {
+export type Section = {
     id: string
     text: string
     options: Option[]
 }
 
 export type Option = {
-    id: number
+    id?: number
+    sectionId: string
     text: string
 }
 
@@ -100,18 +107,20 @@ export class Interests extends Component<Props, State> {
     }
 
     addOption(sectionId: string, text: string) {
-        console.log(sectionId, text)
+        this.props.addOption(sectionId, { sectionId, text })
         this.setState({ addingSectionId: null })
     }
 
     render() {
         const { classes, interests } = this.props
         const { addingSectionId, editingOptionId } = this.state
-        
         return (
             <Paper className={classes.formWrapper}>
                 <Toolbar>
                     <Typography variant="h6">Edit Interests step of form</Typography>
+                    <Button variant="outlined" color="primary" className={classes.addSectionBtn}>
+                        Add Section
+                    </Button>
                 </Toolbar>
                 {interests ? (
                     <div className={classes.form}>
@@ -154,7 +163,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
-    updateInterests: interests => dispatch(updateInterests(interests))
+    updateInterests: interests => dispatch(updateInterests(interests)),
+    addOption: (sectionId: string, option: Option) => dispatch(addOption(sectionId, option))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Interests))
