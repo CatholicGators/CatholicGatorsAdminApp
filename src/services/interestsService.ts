@@ -4,6 +4,7 @@ import { Option, Section } from '../modules/admin/components/Interests/Interests
 export default class InterestsService {
     private readonly OPTIONS: string = 'options'
     private readonly INTERESTS: string = 'interests'
+    private readonly SECTIONS: string = 'sections'
 
     constructor(private db: firebase.firestore.Firestore) {}
 
@@ -20,5 +21,9 @@ export default class InterestsService {
 
     addOption(option: Option) {
         return this.db.collection(this.OPTIONS).add(option)
+    }
+
+    addSection(section: Section) {
+        return this.db.collection(this.SECTIONS).add(section)
     }
 }

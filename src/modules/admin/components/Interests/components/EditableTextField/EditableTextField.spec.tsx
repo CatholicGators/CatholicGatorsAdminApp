@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { EditableInterestOption, Props } from './EditableInterestOption'
+import { EditableTextField, Props } from './EditableTextField'
 import {
     Edit,
     Delete,
@@ -10,32 +10,30 @@ import {
 } from '@material-ui/icons';
 import { Input } from '@material-ui/core';
 
-describe('EditableInterestOption', () => {
-    let props: Props, wrapper, instance: EditableInterestOption
+describe('EditableTextField', () => {
+    let props: Props, wrapper
 
     beforeEach(() => {
         props = {
             classes: {},
             isEditing: false,
-            option: {
-                id: 1,
-                text: "totally testing"
-            },
+            isHovered: false,
+            id: 1,
+            text: "totally testing",
             beginEditing: jest.fn(),
             cancelEditing: jest.fn(),
-            deleteOption: jest.fn(),
-            saveOption: jest.fn()
+            deleteText: jest.fn(),
+            save: jest.fn()
         }
-        wrapper = shallow(<EditableInterestOption {...props} />)
-        instance = wrapper.instance()
+        wrapper = shallow(<EditableTextField {...props} />)
     })
 
     it('should match snapshot', () => {
         expect(wrapper).toMatchSnapshot()
     })
 
-    it('defaults the editedOptionText to the text of the option that is passed in', () => {
-        expect(wrapper.state().editedOptionText).toBe(props.option.text)
+    it('defaults the editedText to the text of the option that is passed in', () => {
+        expect(wrapper.state().editedText).toBe(props.text)
     })
 
     describe('when not editing', () => {
@@ -51,14 +49,14 @@ describe('EditableInterestOption', () => {
             const edit = wrapper.find('#edit')
             edit.simulate('click')
 
-            expect(props.beginEditing).toHaveBeenCalledWith(props.option.id)
+            expect(props.beginEditing).toHaveBeenCalledWith(props.id)
         })
 
         it('cancelEdit is called when cancel clicked', () => {
             const deleteButton = wrapper.find('#delete')
             deleteButton.simulate('click')
 
-            expect(props.deleteOption).toHaveBeenCalledWith(props.option.id)
+            expect(props.deleteText).toHaveBeenCalledWith(props.id)
         })
     })
 
@@ -75,14 +73,14 @@ describe('EditableInterestOption', () => {
             expect(wrapper.exists(Input)).toBe(true)
         })
 
-        it('saveOption is called when save clicked', () => {
+        it('save is called when save clicked', () => {
             const newText = 'test'
             const input = wrapper.find(Input)
             input.simulate("change", { target: { value: newText } });
             const save = wrapper.find('#save')
             save.simulate('click')
 
-            expect(props.saveOption).toHaveBeenCalledWith(props.option.id, newText)
+            expect(props.save).toHaveBeenCalledWith(props.id, newText)
         })
 
         it('cancelEdit is called when cancel clicked', () => {

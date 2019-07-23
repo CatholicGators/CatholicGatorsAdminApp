@@ -100,6 +100,7 @@ describe('Interests', () => {
                     options: [
                         ...section.options.map(option => option.id !== optionId ? option : {
                             ...option,
+                            sectionId,
                             text: newText
                         })
                     ]

@@ -57,6 +57,7 @@ ShallowWrapper {
           </WithStyles(Typography)>
           <WithStyles(Button)
             color="primary"
+            onClick={[Function]}
             variant="outlined"
           >
             Add Section
@@ -67,11 +68,11 @@ ShallowWrapper {
             <WithStyles(Typography)>
               testing
             </WithStyles(Typography)>
-            <WithStyles(EditableInterestOption)
-              beginEditing={[Function]}
-              cancelEditing={[Function]}
+            <WithStyles(EditableOptionRow)
+              beginEditingOption={[Function]}
+              cancelEditingOption={[Function]}
               deleteOption={[Function]}
-              isEditing={false}
+              editingOptionId={null}
               option={
                 Object {
                   "id": 1,
@@ -88,6 +89,7 @@ ShallowWrapper {
             />
           </div>
         </div>,
+        null,
       ],
       "className": undefined,
     },
@@ -106,6 +108,7 @@ ShallowWrapper {
             </WithStyles(Typography)>,
             <WithStyles(Button)
               color="primary"
+              onClick={[Function]}
               variant="outlined"
             >
               Add Section
@@ -134,6 +137,7 @@ ShallowWrapper {
               "children": "Add Section",
               "className": undefined,
               "color": "primary",
+              "onClick": [Function],
               "variant": "outlined",
             },
             "ref": null,
@@ -153,11 +157,11 @@ ShallowWrapper {
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
-              <WithStyles(EditableInterestOption)
-                beginEditing={[Function]}
-                cancelEditing={[Function]}
+              <WithStyles(EditableOptionRow)
+                beginEditingOption={[Function]}
+                cancelEditingOption={[Function]}
                 deleteOption={[Function]}
-                isEditing={false}
+                editingOptionId={null}
                 option={
                   Object {
                     "id": 1,
@@ -188,11 +192,11 @@ ShallowWrapper {
                   testing
                 </WithStyles(Typography)>,
                 Array [
-                  <WithStyles(EditableInterestOption)
-                    beginEditing={[Function]}
-                    cancelEditing={[Function]}
+                  <WithStyles(EditableOptionRow)
+                    beginEditingOption={[Function]}
+                    cancelEditingOption={[Function]}
                     deleteOption={[Function]}
-                    isEditing={false}
+                    editingOptionId={null}
                     option={
                       Object {
                         "id": 1,
@@ -228,10 +232,10 @@ ShallowWrapper {
                 "key": "1",
                 "nodeType": "class",
                 "props": Object {
-                  "beginEditing": [Function],
-                  "cancelEditing": [Function],
+                  "beginEditingOption": [Function],
+                  "cancelEditingOption": [Function],
                   "deleteOption": [Function],
-                  "isEditing": false,
+                  "editingOptionId": null,
                   "option": Object {
                     "id": 1,
                     "text": "totally testing",
@@ -262,6 +266,7 @@ ShallowWrapper {
         ],
         "type": "div",
       },
+      null,
     ],
     "type": [Function],
   },
@@ -280,6 +285,7 @@ ShallowWrapper {
             </WithStyles(Typography)>
             <WithStyles(Button)
               color="primary"
+              onClick={[Function]}
               variant="outlined"
             >
               Add Section
@@ -290,11 +296,11 @@ ShallowWrapper {
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
-              <WithStyles(EditableInterestOption)
-                beginEditing={[Function]}
-                cancelEditing={[Function]}
+              <WithStyles(EditableOptionRow)
+                beginEditingOption={[Function]}
+                cancelEditingOption={[Function]}
                 deleteOption={[Function]}
-                isEditing={false}
+                editingOptionId={null}
                 option={
                   Object {
                     "id": 1,
@@ -311,6 +317,7 @@ ShallowWrapper {
               />
             </div>
           </div>,
+          null,
         ],
         "className": undefined,
       },
@@ -329,6 +336,7 @@ ShallowWrapper {
               </WithStyles(Typography)>,
               <WithStyles(Button)
                 color="primary"
+                onClick={[Function]}
                 variant="outlined"
               >
                 Add Section
@@ -357,6 +365,7 @@ ShallowWrapper {
                 "children": "Add Section",
                 "className": undefined,
                 "color": "primary",
+                "onClick": [Function],
                 "variant": "outlined",
               },
               "ref": null,
@@ -376,11 +385,11 @@ ShallowWrapper {
                 <WithStyles(Typography)>
                   testing
                 </WithStyles(Typography)>
-                <WithStyles(EditableInterestOption)
-                  beginEditing={[Function]}
-                  cancelEditing={[Function]}
+                <WithStyles(EditableOptionRow)
+                  beginEditingOption={[Function]}
+                  cancelEditingOption={[Function]}
                   deleteOption={[Function]}
-                  isEditing={false}
+                  editingOptionId={null}
                   option={
                     Object {
                       "id": 1,
@@ -411,11 +420,11 @@ ShallowWrapper {
                     testing
                   </WithStyles(Typography)>,
                   Array [
-                    <WithStyles(EditableInterestOption)
-                      beginEditing={[Function]}
-                      cancelEditing={[Function]}
+                    <WithStyles(EditableOptionRow)
+                      beginEditingOption={[Function]}
+                      cancelEditingOption={[Function]}
                       deleteOption={[Function]}
-                      isEditing={false}
+                      editingOptionId={null}
                       option={
                         Object {
                           "id": 1,
@@ -451,10 +460,10 @@ ShallowWrapper {
                   "key": "1",
                   "nodeType": "class",
                   "props": Object {
-                    "beginEditing": [Function],
-                    "cancelEditing": [Function],
+                    "beginEditingOption": [Function],
+                    "cancelEditingOption": [Function],
                     "deleteOption": [Function],
-                    "isEditing": false,
+                    "editingOptionId": null,
                     "option": Object {
                       "id": 1,
                       "text": "totally testing",
@@ -485,6 +494,7 @@ ShallowWrapper {
           ],
           "type": "div",
         },
+        null,
       ],
       "type": [Function],
     },

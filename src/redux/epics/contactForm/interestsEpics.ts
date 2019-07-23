@@ -10,7 +10,8 @@ import {
     getInterestsErr,
     getInterests,
     addOptionSuccess,
-    addOptionErr
+    addOptionErr,
+    addSectionErr
 } from '../../actions/contactForm/interestActions'
 
 export const getInterestsEpic = (action$, _, { interestsService }) => {
@@ -38,7 +39,7 @@ export const updateInterestsEpic = (action$, _, { firestore }) => {
 }
 
 export const addOptionEpic = (action$, _, { interestsService }) => action$.pipe(
-    ofType(interestActions.ADD_INTERESTS),
+    ofType(interestActions.ADD_OPTION),
     mergeMap((action: any) =>
         from(interestsService.addOption(action.option)).pipe(
             map(() => addOptionSuccess(action.option)),
@@ -47,8 +48,19 @@ export const addOptionEpic = (action$, _, { interestsService }) => action$.pipe(
     )
 )
 
+export const addSectionEpic = (action$, _, { interestsService }) => action$.pipe(
+    ofType(interestActions.ADD_SECTION),
+    mergeMap((action: any) =>
+        from(interestsService.addSection(action.section)).pipe(
+            map(() => getInterests()),
+            catchError(err => ActionsObservable.of(addSectionErr(err)))
+        )
+    )
+)
+
 export default combineEpics(
     getInterestsEpic,
     updateInterestsEpic,
-    addOptionEpic
+    addOptionEpic,
+    addSectionEpic
 )
