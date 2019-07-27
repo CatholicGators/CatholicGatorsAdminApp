@@ -62,6 +62,7 @@ export class ContactForm extends Component<any, any> {
     constructor(public props: any) {
         super(props)
         this.state = initState;
+        this.resetStep = this.resetStep.bind(this);
     }
 
     handleChange = (name: string) => event => {
@@ -94,6 +95,12 @@ export class ContactForm extends Component<any, any> {
         }
     };
 
+    resetStep() {
+        this.setState({
+            activeStep: 0
+        });
+    }
+
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
@@ -113,7 +120,7 @@ export class ContactForm extends Component<any, any> {
                             ))}
                         </Stepper>
                         <React.Fragment>
-                            {getStepContent(activeStep, this.state, this.props, this.handleChange, this.handleNext, this.handleBack)}
+                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext, this.handleBack, this.resetStep)}
                         </React.Fragment>
                     </Paper>
                 </main>
@@ -122,7 +129,7 @@ export class ContactForm extends Component<any, any> {
     }
 }
 
-function getStepContent(step, state, props, handleChange, handleNext, handleBack) {
+function getStepContent(state, props, handleChange, handleNext, handleBack, resetStep) {
     if(props.loading) {
         return <CircularProgress id='spinner' className={props.classes.spinner} />
     } else if (props.success === true) {
@@ -154,7 +161,7 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
             </React.Fragment>
         )
     } else {
-        switch (step) {
+        switch (state.activeStep) {
             case 0:
                 return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} />;
             case 1:
@@ -162,7 +169,7 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
             case 2:
                 return <Interests data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             default:
-                return <p></p>
+                resetStep();
         }
     }
 }

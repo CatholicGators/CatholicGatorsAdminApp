@@ -50,5 +50,12 @@ describe('ContactForm', () => {
 
             expect(wrapper.state('activeStep')).toBe(0)
         });
+
+        it('should reset step on invalid step', () => {
+            wrapper.setState({ activeStep: 1234 })
+            wrapper.instance().resetStep()
+
+            expect(wrapper.state('activeStep')).toBe(0)
+        });
     });
 });
