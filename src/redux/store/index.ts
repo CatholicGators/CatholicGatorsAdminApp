@@ -9,14 +9,22 @@ import Firestore from '../../database/firestore';
 import UserService from '../../services/userService';
 import devClientConfig from '../../config/clientConfig';
 import prodClientConfig from '../../config/prodClientConfig'
+import InterestsService from '../../services/interestsService';
 
-const firestore = ((JSON.stringify(process.env.NODE_ENV) === JSON.stringify("production")) ? new Firestore(firebase, prodClientConfig) : new Firestore(firebase, devClientConfig));
+const config = (JSON.stringify(process.env.NODE_ENV) === JSON.stringify("production")) ? prodClientConfig : devClientConfig
+
+const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
+const db = app.firestore()
+
+const firestore = new Firestore(app, db)
 const userService = new UserService(firestore);
+const interestsService = new InterestsService(db)
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
     firestore,
-    userService
+    userService,
+    interestsService
   }
 });
 

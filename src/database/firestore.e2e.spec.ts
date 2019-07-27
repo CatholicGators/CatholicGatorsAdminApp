@@ -6,7 +6,7 @@ import * as firebase from 'firebase/app';
 import clientConfig from '../config/testClientConfig';
 import DocumentNotFoundError from '../models/documentNotFoundError'
 
-describe('firestore', () => {
+describe('firestore e2e', () => {
     let firestore: Firestore
     const collection = 'collection';
     const testDoc = {testData: 'data'};
@@ -26,7 +26,9 @@ describe('firestore', () => {
     ];
 
     beforeEach(() => {
-        firestore = new Firestore(firebase, clientConfig);
+        const app = !firebase.apps.length ? firebase.initializeApp(clientConfig) : firebase.app()
+        const db = app.firestore()
+        firestore = new Firestore(app, db);
     });
 
 
