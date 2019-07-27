@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import PersonalInformation from '../../components/PersonalInformation/personalInformation'
@@ -57,11 +57,12 @@ const initState = {
     activeStep: 0
 };
 
-class ContactForm extends React.Component<any, any> {
+export class ContactForm extends Component<any, any> {
 
     constructor(public props: any) {
         super(props)
         this.state = initState;
+        this.resetStep = this.resetStep.bind(this);
     }
 
     handleChange = (name: string) => event => {
@@ -76,20 +77,29 @@ class ContactForm extends React.Component<any, any> {
         }
     };
 
-    handleNext = () => {
-        if (this.state.activeStep === steps.length - 1) {
+    handleNext() {
+        if (this.state.activeStep === (steps.length - 1)) {
             this.props.submitContactForm(filterState(this.state));
+        } else {
+            this.setState((prevState: any) => ({
+                activeStep: prevState.activeStep + 1
+            }));
         }
-        this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep + 1,
-        }));
     };
 
-    handleBack = () => {
-        this.setState((prevState: any) => ({
-            activeStep: prevState.activeStep - 1,
-        }));
+    handleBack() {
+        if(this.state.activeStep > 0){
+            this.setState((prevState: any) => ({
+                activeStep: prevState.activeStep - 1
+            }));
+        }
     };
+
+    resetStep() {
+        this.setState({
+            activeStep: 0
+        });
+    }
 
     render() {
         const { classes } = this.props;
@@ -110,7 +120,7 @@ class ContactForm extends React.Component<any, any> {
                             ))}
                         </Stepper>
                         <React.Fragment>
-                            {getStepContent(activeStep, this.state, this.props, this.handleChange, this.handleNext, this.handleBack)}
+                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext, this.handleBack, this.resetStep)}
                         </React.Fragment>
                     </Paper>
                 </main>
@@ -119,7 +129,7 @@ class ContactForm extends React.Component<any, any> {
     }
 }
 
-function getStepContent(step, state, props, handleChange, handleNext, handleBack) {
+function getStepContent(state, props, handleChange, handleNext, handleBack, resetStep) {
     if(props.loading) {
         return <CircularProgress id='spinner' className={props.classes.spinner} />
     } else if (props.success === true) {
@@ -151,15 +161,15 @@ function getStepContent(step, state, props, handleChange, handleNext, handleBack
             </React.Fragment>
         )
     } else {
-        switch (step) {
+        switch (state.activeStep) {
             case 0:
-                return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+                return <PersonalInformation data={state} handleChange={handleChange} handleNext={handleNext} />;
             case 1:
                 return <ParentsInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             case 2:
                 return <Interests data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             default:
-                throw new Error('Unknown step');
+                resetStep();
         }
     }
 }

@@ -40,11 +40,11 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
-                className={classes.Checkbox}
-                color='primary'
-                checked={this.props.data.eventsLatinoStudents}
-                onChange={handleChange('eventsLatinoStudents')}
-                value="eventsLatinoStudents"
+                    className={classes.Checkbox}
+                    color='primary'
+                    checked={this.props.data.eventsLatinoStudents}
+                    onChange={handleChange('eventsLatinoStudents')}
+                    value="eventsLatinoStudents"
                 ></Checkbox>
                 }
                 label="events for Latino/a students"
@@ -52,11 +52,11 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
-                className={classes.Checkbox}
-                color='primary'
-                checked={this.props.data.eventsGraduateStudents}
-                onChange={handleChange('eventsGraduateStudents')}
-                value="eventsGraduateStudents"
+                    className={classes.Checkbox}
+                    color='primary'
+                    checked={this.props.data.eventsGraduateStudents}
+                    onChange={handleChange('eventsGraduateStudents')}
+                    value="eventsGraduateStudents"
                 ></Checkbox>
                 }
                 label="events for graduate students"
@@ -68,24 +68,24 @@ class Interests extends React.Component {
             <FormControlLabel
                 control={
                 <Checkbox
-                className={classes.Checkbox}
-                color='primary'
-                checked={this.props.data.receiveMonthlyNewsletter}
-                onChange={handleChange('receiveMonthlyNewsletter')}
-                value="receiveMonthlyNewsletter"
-                ></Checkbox>
+                    className={classes.Checkbox}
+                    color='primary'
+                    checked={this.props.data.receiveMonthlyNewsletter}
+                    onChange={handleChange('receiveMonthlyNewsletter')}
+                    value="receiveMonthlyNewsletter"
+                    ></Checkbox>
                 }
                 label="receive the monthly e-newsletter"
             />
             <FormControlLabel
                 control={
                 <Checkbox
-                className={classes.Checkbox}
-                color='primary'
-                checked={this.props.data.registerAsParishioner}
-                onChange={handleChange('registerAsParishioner')}
-                value="registerAsParishioner"
-                ></Checkbox>
+                    className={classes.Checkbox}
+                    color='primary'
+                    checked={this.props.data.registerAsParishioner}
+                    onChange={handleChange('registerAsParishioner')}
+                    value="registerAsParishioner"
+                    ></Checkbox>
                 }
                 label="register as a parishioner"
             />
@@ -101,11 +101,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-					        color='primary'
-                            checked={this.props.data.englishBibleStudy}
-                            onChange={handleChange('englishBibleStudy')}
-                            value="englishBibleStudy"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.englishBibleStudy}
+                                onChange={handleChange('englishBibleStudy')}
+                                value="englishBibleStudy"
                             ></Checkbox>
                         }
                         label="English Bible Studys"
@@ -113,11 +113,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-					        color='primary'
-                            checked={this.props.data.spanishBibleStudy}
-                            onChange={handleChange('spanishBibleStudy')}
-                            value="spanishBibleStudy"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.spanishBibleStudy}
+                                onChange={handleChange('spanishBibleStudy')}
+                                value="spanishBibleStudy"
                             ></Checkbox>
                         }
                         label="Spanish/Bilingual Bible Study"
@@ -125,11 +125,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.freeFood}
-                            onChange={handleChange('freeFood')}
-                            value="freeFood"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.freeFood}
+                                onChange={handleChange('freeFood')}
+                                value="freeFood"
                             ></Checkbox>
                         }
                         label="Free Food"
@@ -137,11 +137,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.guestSpeakers}
-                            onChange={handleChange('guestSpeakers')}
-                            value="guestSpeakers"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.guestSpeakers}
+                                onChange={handleChange('guestSpeakers')}
+                                value="guestSpeakers"
                             ></Checkbox>
                         }
                         label="Guest Speakers"
@@ -149,11 +149,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.musicMinistry}
-                            onChange={handleChange('musicMinistry')}
-                            value="musicMinistry"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.musicMinistry}
+                                onChange={handleChange('musicMinistry')}
+                                value="musicMinistry"
                             ></Checkbox>
                         }
                         label="Music Ministry"
@@ -161,11 +161,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.socials}
-                            onChange={handleChange('socials')}
-                            value="socials"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.socials}
+                                onChange={handleChange('socials')}
+                                value="socials"
                             ></Checkbox>
                         }
                         label="Socials"
@@ -173,11 +173,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.retreats}
-                            onChange={handleChange('retreats')}
-                            value="retreats"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.retreats}
+                                onChange={handleChange('retreats')}
+                                value="retreats"
                             ></Checkbox>
                         }
                         label="Retreats"
@@ -189,11 +189,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.intramuralSports}
-                            onChange={handleChange('intramuralSports')}
-                            value="intramuralSports"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.intramuralSports}
+                                onChange={handleChange('intramuralSports')}
+                                value="intramuralSports"
                             ></Checkbox>
                         }
                         label="Intramural Sports"
@@ -201,11 +201,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.proLifeClub}
-                            onChange={handleChange('proLifeClub')}
-                            value="proLifeClub"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.proLifeClub}
+                                onChange={handleChange('proLifeClub')}
+                                value="proLifeClub"
                             ></Checkbox>
                         }
                         label="Pro-Life Club"
@@ -213,11 +213,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.RHC}
-                            onChange={handleChange('RHC')}
-                            value="RHC"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.RHC}
+                                onChange={handleChange('RHC')}
+                                value="RHC"
                             ></Checkbox>
                         }
                         label="Communications (Photo, Print, Graphics, PR, Advertising, and Video)"
@@ -225,11 +225,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.servingAtMass}
-                            onChange={handleChange('servingAtMass')}
-                            value="servingAtMass"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.servingAtMass}
+                                onChange={handleChange('servingAtMass')}
+                                value="servingAtMass"
                             ></Checkbox>
                         }
                         label="Serving at Mass"
@@ -237,11 +237,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-                            color='primary'
-                            checked={this.props.data.teachReligiousEd}
-                            onChange={handleChange('teachReligiousEd')}
-                            value="teachReligiousEd"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.teachReligiousEd}
+                                onChange={handleChange('teachReligiousEd')}
+                                value="teachReligiousEd"
                             ></Checkbox>
                         }
                         label="Teach Religious Education"
@@ -249,11 +249,11 @@ class Interests extends React.Component {
                         <FormControlLabel
                         control={
                             <Checkbox
-                            className={classes.Checkbox}
-							color='primary'
-                            checked={this.props.data.serviceProjects}
-                            onChange={handleChange('serviceProjects')}
-                            value="serviceProjects"
+                                className={classes.Checkbox}
+                                color='primary'
+                                checked={this.props.data.serviceProjects}
+                                onChange={handleChange('serviceProjects')}
+                                value="serviceProjects"
                             ></Checkbox>
                         }
                         label="Service Projects and Trips"
