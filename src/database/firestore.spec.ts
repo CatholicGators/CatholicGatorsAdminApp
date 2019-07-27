@@ -8,26 +8,9 @@ describe('firestore', () => {
     let firestore: Firestore
 
     beforeEach(() => {
-        firestore = new Firestore(firebase, clientConfig);
-    });
-
-    describe('constructor', () => {
-        it('initializes firebase app only once', () => {
-            expect(firebase.initializeApp).toHaveBeenCalledTimes(1);
-            expect(firebase.initializeApp).toHaveBeenLastCalledWith(clientConfig);
-            expect(firebase.app).not.toHaveBeenCalled();
-
-            new Firestore(firebase, clientConfig);
-
-            expect(firebase.initializeApp).toHaveBeenCalledTimes(1);
-            expect(firebase.app).toHaveBeenCalledTimes(1);
-        });
-
-        it('initializes the app\'s Firestore', () => {
-            new Firestore(firebase, clientConfig);
-
-            expect(app.firestore).toHaveBeenCalled();
-        });
+        const app = !firebase.apps.length ? firebase.initializeApp(clientConfig) : firebase.app()
+        const db = app.firestore()  
+        firestore = new Firestore(app, db);
     });
 
     describe('getAuth()', () => {

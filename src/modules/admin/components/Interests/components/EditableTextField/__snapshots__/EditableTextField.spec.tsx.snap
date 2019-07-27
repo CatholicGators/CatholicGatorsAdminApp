@@ -1,21 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditableInterestOption should match snapshot 1`] = `
+exports[`EditableTextField should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <EditableInterestOption
+  Symbol(enzyme.__unrendered__): <EditableTextField
     beginEditing={[MockFunction]}
     cancelEditing={[MockFunction]}
     classes={Object {}}
-    deleteOption={[MockFunction]}
+    deleteText={[MockFunction]}
+    id={1}
     isEditing={false}
-    option={
-      Object {
-        "id": 1,
-        "text": "totally testing",
-      }
-    }
-    saveOption={[MockFunction]}
+    isHovered={false}
+    save={[MockFunction]}
+    text="totally testing"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -32,28 +29,25 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <WithStyles(Checkbox)
-          color="primary"
-        />,
-        Array [
-          <WithStyles(Typography)>
-            totally testing
-          </WithStyles(Typography)>,
-          <section>
-            <WithStyles(IconButton)
-              id="edit"
-              onClick={[Function]}
-            >
-              <pure(EditIcon) />
-            </WithStyles(IconButton)>
-            <WithStyles(IconButton)
-              id="delete"
-              onClick={[Function]}
-            >
-              <pure(DeleteIcon) />
-            </WithStyles(IconButton)>
-          </section>,
-        ],
+        <WithStyles(Typography)>
+          totally testing
+        </WithStyles(Typography)>,
+        <div
+          className=""
+        >
+          <WithStyles(IconButton)
+            id="edit"
+            onClick={[Function]}
+          >
+            <pure(EditIcon) />
+          </WithStyles(IconButton)>
+          <WithStyles(IconButton)
+            id="delete"
+            onClick={[Function]}
+          >
+            <pure(DeleteIcon) />
+          </WithStyles(IconButton)>
+        </div>,
       ],
       "className": undefined,
     },
@@ -64,18 +58,6 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "className": undefined,
-          "color": "primary",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": "1",
-        "nodeType": "class",
-        "props": Object {
           "children": "totally testing",
         },
         "ref": null,
@@ -84,7 +66,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": "2",
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
           "children": Array [
@@ -101,7 +83,7 @@ ShallowWrapper {
               <pure(DeleteIcon) />
             </WithStyles(IconButton)>,
           ],
-          "className": undefined,
+          "className": "",
         },
         "ref": null,
         "rendered": Array [
@@ -148,7 +130,7 @@ ShallowWrapper {
             "type": [Function],
           },
         ],
-        "type": "section",
+        "type": "div",
       },
     ],
     "type": "div",
@@ -160,28 +142,25 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <WithStyles(Checkbox)
-            color="primary"
-          />,
-          Array [
-            <WithStyles(Typography)>
-              totally testing
-            </WithStyles(Typography)>,
-            <section>
-              <WithStyles(IconButton)
-                id="edit"
-                onClick={[Function]}
-              >
-                <pure(EditIcon) />
-              </WithStyles(IconButton)>
-              <WithStyles(IconButton)
-                id="delete"
-                onClick={[Function]}
-              >
-                <pure(DeleteIcon) />
-              </WithStyles(IconButton)>
-            </section>,
-          ],
+          <WithStyles(Typography)>
+            totally testing
+          </WithStyles(Typography)>,
+          <div
+            className=""
+          >
+            <WithStyles(IconButton)
+              id="edit"
+              onClick={[Function]}
+            >
+              <pure(EditIcon) />
+            </WithStyles(IconButton)>
+            <WithStyles(IconButton)
+              id="delete"
+              onClick={[Function]}
+            >
+              <pure(DeleteIcon) />
+            </WithStyles(IconButton)>
+          </div>,
         ],
         "className": undefined,
       },
@@ -192,18 +171,6 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "className": undefined,
-            "color": "primary",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": "1",
-          "nodeType": "class",
-          "props": Object {
             "children": "totally testing",
           },
           "ref": null,
@@ -212,7 +179,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": "2",
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
             "children": Array [
@@ -229,7 +196,7 @@ ShallowWrapper {
                 <pure(DeleteIcon) />
               </WithStyles(IconButton)>,
             ],
-            "className": undefined,
+            "className": "",
           },
           "ref": null,
           "rendered": Array [
@@ -276,7 +243,7 @@ ShallowWrapper {
               "type": [Function],
             },
           ],
-          "type": "section",
+          "type": "div",
         },
       ],
       "type": "div",
