@@ -6,7 +6,7 @@ import {
     Theme
 } from '@material-ui/core';
 import EditableTextField from '../EditableTextField/EditableTextField';
-import { Option } from '../../Interests';
+import { Option } from '../../../../../../services/interestsService';
 
 const styles = (theme: Theme) => createStyles({
     checkbox: {

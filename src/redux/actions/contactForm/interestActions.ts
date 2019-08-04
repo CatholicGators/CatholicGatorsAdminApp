@@ -1,4 +1,4 @@
-import { Option, Section } from '../../../../src/modules/admin/components/Interests/Interests'
+import { Option, Section } from '../../../services/interestsService'
 
 export const interestActions = {
     GET_INTERESTS: 'GET_INTERESTS',
@@ -27,12 +27,17 @@ export function getInterestsErr(err) {
     return { type: interestActions.GET_INTERESTS_ERR, err }
 }
 
-export const addOption = (option: Option) => ({
+export type OptionReq = {
+    text: string
+}
+export const addOption = (sectionId: string, option: OptionReq) => ({
     type: interestActions.ADD_OPTION,
+    sectionId,
     option
 })
-export const addOptionSuccess = (option: Option) => ({
+export const addOptionSuccess = (sectionId: string, option: Option) => ({
     type: interestActions.ADD_OPTION_SUCCESS,
+    sectionId,
     option 
 })
 export const addOptionErr = (err) => ({
@@ -40,7 +45,12 @@ export const addOptionErr = (err) => ({
     err
 })
 
-export const addSection = (section: Section) => ({
+export type SectionReq = {
+    text: string
+    position: number
+    options: Option[]
+}
+export const addSection = (section: SectionReq) => ({
     type: interestActions.ADD_SECTION,
     section
 })

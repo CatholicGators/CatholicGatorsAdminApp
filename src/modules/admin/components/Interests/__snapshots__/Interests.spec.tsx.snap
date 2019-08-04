@@ -4,6 +4,8 @@ exports[`Interests should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Interests
+    addOption={[MockFunction]}
+    addSection={[MockFunction]}
     classes={Object {}}
     getInterests={
       [MockFunction] {
@@ -25,6 +27,7 @@ ShallowWrapper {
           "options": Array [
             Object {
               "id": 1,
+              "sectionId": "test",
               "text": "totally testing",
             },
           ],
@@ -76,17 +79,20 @@ ShallowWrapper {
               option={
                 Object {
                   "id": 1,
+                  "sectionId": "test",
                   "text": "totally testing",
                 }
               }
               saveOption={[Function]}
             />
-            <WithStyles(AddOptionButton)
-              addOption={[Function]}
-              beginAddingOption={[Function]}
-              cancelAddingOption={[Function]}
-              isAdding={false}
-            />
+            <div>
+              <WithStyles(AddableTextField)
+                beginAdding={[Function]}
+                cancelAdding={[Function]}
+                isAdding={false}
+                onAdd={[Function]}
+              />
+            </div>
           </div>
         </div>,
         null,
@@ -165,17 +171,20 @@ ShallowWrapper {
                 option={
                   Object {
                     "id": 1,
+                    "sectionId": "test",
                     "text": "totally testing",
                   }
                 }
                 saveOption={[Function]}
               />
-              <WithStyles(AddOptionButton)
-                addOption={[Function]}
-                beginAddingOption={[Function]}
-                cancelAddingOption={[Function]}
-                isAdding={false}
-              />
+              <div>
+                <WithStyles(AddableTextField)
+                  beginAdding={[Function]}
+                  cancelAdding={[Function]}
+                  isAdding={false}
+                  onAdd={[Function]}
+                />
+              </div>
             </div>,
           ],
           "className": undefined,
@@ -200,18 +209,21 @@ ShallowWrapper {
                     option={
                       Object {
                         "id": 1,
+                        "sectionId": "test",
                         "text": "totally testing",
                       }
                     }
                     saveOption={[Function]}
                   />,
                 ],
-                <WithStyles(AddOptionButton)
-                  addOption={[Function]}
-                  beginAddingOption={[Function]}
-                  cancelAddingOption={[Function]}
-                  isAdding={false}
-                />,
+                <div>
+                  <WithStyles(AddableTextField)
+                    beginAdding={[Function]}
+                    cancelAdding={[Function]}
+                    isAdding={false}
+                    onAdd={[Function]}
+                  />
+                </div>,
               ],
             },
             "ref": null,
@@ -238,6 +250,7 @@ ShallowWrapper {
                   "editingOptionId": null,
                   "option": Object {
                     "id": 1,
+                    "sectionId": "test",
                     "text": "totally testing",
                   },
                   "saveOption": [Function],
@@ -249,16 +262,38 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "class",
+                "nodeType": "host",
                 "props": Object {
-                  "addOption": [Function],
-                  "beginAddingOption": [Function],
-                  "cancelAddingOption": [Function],
-                  "isAdding": false,
+                  "children": Array [
+                    null,
+                    <WithStyles(AddableTextField)
+                      beginAdding={[Function]}
+                      cancelAdding={[Function]}
+                      isAdding={false}
+                      onAdd={[Function]}
+                    />,
+                  ],
+                  "className": undefined,
                 },
                 "ref": null,
-                "rendered": null,
-                "type": [Function],
+                "rendered": Array [
+                  null,
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "beginAdding": [Function],
+                      "cancelAdding": [Function],
+                      "isAdding": false,
+                      "onAdd": [Function],
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": "div",
               },
             ],
             "type": "div",
@@ -304,17 +339,20 @@ ShallowWrapper {
                 option={
                   Object {
                     "id": 1,
+                    "sectionId": "test",
                     "text": "totally testing",
                   }
                 }
                 saveOption={[Function]}
               />
-              <WithStyles(AddOptionButton)
-                addOption={[Function]}
-                beginAddingOption={[Function]}
-                cancelAddingOption={[Function]}
-                isAdding={false}
-              />
+              <div>
+                <WithStyles(AddableTextField)
+                  beginAdding={[Function]}
+                  cancelAdding={[Function]}
+                  isAdding={false}
+                  onAdd={[Function]}
+                />
+              </div>
             </div>
           </div>,
           null,
@@ -393,17 +431,20 @@ ShallowWrapper {
                   option={
                     Object {
                       "id": 1,
+                      "sectionId": "test",
                       "text": "totally testing",
                     }
                   }
                   saveOption={[Function]}
                 />
-                <WithStyles(AddOptionButton)
-                  addOption={[Function]}
-                  beginAddingOption={[Function]}
-                  cancelAddingOption={[Function]}
-                  isAdding={false}
-                />
+                <div>
+                  <WithStyles(AddableTextField)
+                    beginAdding={[Function]}
+                    cancelAdding={[Function]}
+                    isAdding={false}
+                    onAdd={[Function]}
+                  />
+                </div>
               </div>,
             ],
             "className": undefined,
@@ -428,18 +469,21 @@ ShallowWrapper {
                       option={
                         Object {
                           "id": 1,
+                          "sectionId": "test",
                           "text": "totally testing",
                         }
                       }
                       saveOption={[Function]}
                     />,
                   ],
-                  <WithStyles(AddOptionButton)
-                    addOption={[Function]}
-                    beginAddingOption={[Function]}
-                    cancelAddingOption={[Function]}
-                    isAdding={false}
-                  />,
+                  <div>
+                    <WithStyles(AddableTextField)
+                      beginAdding={[Function]}
+                      cancelAdding={[Function]}
+                      isAdding={false}
+                      onAdd={[Function]}
+                    />
+                  </div>,
                 ],
               },
               "ref": null,
@@ -466,6 +510,7 @@ ShallowWrapper {
                     "editingOptionId": null,
                     "option": Object {
                       "id": 1,
+                      "sectionId": "test",
                       "text": "totally testing",
                     },
                     "saveOption": [Function],
@@ -477,16 +522,38 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
-                    "addOption": [Function],
-                    "beginAddingOption": [Function],
-                    "cancelAddingOption": [Function],
-                    "isAdding": false,
+                    "children": Array [
+                      null,
+                      <WithStyles(AddableTextField)
+                        beginAdding={[Function]}
+                        cancelAdding={[Function]}
+                        isAdding={false}
+                        onAdd={[Function]}
+                      />,
+                    ],
+                    "className": undefined,
                   },
                   "ref": null,
-                  "rendered": null,
-                  "type": [Function],
+                  "rendered": Array [
+                    null,
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "beginAdding": [Function],
+                        "cancelAdding": [Function],
+                        "isAdding": false,
+                        "onAdd": [Function],
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": "div",
                 },
               ],
               "type": "div",

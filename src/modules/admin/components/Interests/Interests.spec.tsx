@@ -16,12 +16,15 @@ describe('Interests', () => {
                 options: [
                     {
                         id: 1,
+                        sectionId: "test",
                         text: "totally testing"
                     }
                 ]
             }],
             getInterests: jest.fn(),
-            updateInterests: jest.fn()
+            updateInterests: jest.fn(),
+            addOption: jest.fn(),
+            addSection: jest.fn()
         }
         wrapper = shallow(<Interests {...props} />)
         instance = wrapper.instance()

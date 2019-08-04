@@ -8,17 +8,20 @@ import {
     createStyles,
     withStyles,
     CircularProgress,
-    Button
+    Button,
+    Checkbox
 } from '@material-ui/core'
 import {
     getInterests,
     updateInterests,
     addOption,
-    addSection
+    addSection,
+    OptionReq,
+    SectionReq
 } from '../../../../redux/actions/contactForm/interestActions';
-import AddOptionButton from './components/AddOptionButton/AddOptionButton';
+import AddableTextField from './components/AddableTextField/AddableTextField';
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow';
-import EditableTextField from './components/EditableTextField/EditableTextField';
+import { Section } from '../../../../services/interestsService';
 
 const styles = (theme: Theme) => createStyles({
     formWrapper: {
@@ -35,6 +38,13 @@ const styles = (theme: Theme) => createStyles({
     },
     addSectionBtn: {
         marginLeft: 'auto'
+    },
+    row: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    addSectionWrapper: {
+        margin: `${theme.spacing.unit * 3}px`
     }
 })
 
@@ -43,26 +53,14 @@ export type Props = {
     interests: Section[]
     getInterests: () => void,
     updateInterests: (interests : Section[]) => void,
-    addOption: (option: Option) => void,
-    addSection: (section: Section) => void
+    addOption: (sectionId: string, option: OptionReq) => void,
+    addSection: (section: SectionReq) => void
 }
 
 type State = {
     editingOptionId: any
     addingSectionId: string
     isAddingSection: boolean
-}
-
-export type Section = {
-    id?: string
-    text: string
-    options: Option[]
-}
-
-export type Option = {
-    id?: any
-    sectionId: string
-    text: string
 }
 
 export class Interests extends Component<Props, State> {
@@ -87,6 +85,7 @@ export class Interests extends Component<Props, State> {
     addSection(text: string) {
         this.props.addSection({
             text,
+            position: this.props.interests.length,
             options: []
         })
         this.setState({ isAddingSection: false })
@@ -137,7 +136,9 @@ export class Interests extends Component<Props, State> {
     }
 
     addOption(sectionId: string, text: string) {
-        this.props.addOption({ sectionId, text })
+        this.props.addOption(sectionId, {
+            text
+        })
         this.setState({ addingSectionId: null })
     }
 
@@ -176,12 +177,20 @@ export class Interests extends Component<Props, State> {
                                         cancelEditingOption={() => this.cancelEditingOption()}
                                     />
                                 )}
-                                <AddOptionButton
-                                    isAdding={addingSectionId === section.id}
-                                    beginAddingOption={() => this.beginAddingOption(section.id)}
-                                    cancelAddingOption={() => this.cancelAddingOption()}
-                                    addOption={text => this.addOption(section.id, text)}
-                                />
+                                <div className={classes.row}>
+                                    {addingSectionId === section.id ? (
+                                        <Checkbox
+                                            className={classes.checkbox}
+                                            color='primary'
+                                        />
+                                    ) : null}
+                                    <AddableTextField
+                                        isAdding={addingSectionId === section.id}
+                                        beginAdding={() => this.beginAddingOption(section.id)}
+                                        cancelAdding={() => this.cancelAddingOption()}
+                                        onAdd={text => this.addOption(section.id, text)}
+                                    />
+                                </div>
                             </div>
                         )}
                     </div>
@@ -191,15 +200,14 @@ export class Interests extends Component<Props, State> {
                     </div>
                 )}
                 {isAddingSection ? (
-                    <EditableTextField
-                        isEditing={true}
-                        isHovered={false}
-                        text={""}
-                        beginEditing={() => {}}
-                        cancelEditing={() => {}}
-                        save={(_, text: string) => this.addSection(text)}
-                        deleteText={() => {}}
-                    />
+                    <div className={classes.addSectionWrapper}>
+                        <AddableTextField
+                            isAdding={true}
+                            beginAdding={() => {}}
+                            cancelAdding={() => {}}
+                            onAdd={text => this.addSection(text)}
+                        />
+                    </div>
                 ) : null}
             </Paper>
         )
@@ -213,8 +221,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
     updateInterests: interests => dispatch(updateInterests(interests)),
-    addOption: (option: Option) => dispatch(addOption(option)),
-    addSection: (section: Section) => dispatch(addSection(section))
+    addOption: (sectionId: string, option: OptionReq) => dispatch(addOption(sectionId, option)),
+    addSection: (section: SectionReq) => dispatch(addSection(section))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Interests))
