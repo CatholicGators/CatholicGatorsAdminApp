@@ -1,5 +1,5 @@
 import 'firebase/firestore'
-import { OptionReq, SectionReq } from '../redux/actions/contactForm/interestActions';
+import { NewOptionReq, SectionReq } from '../redux/actions/contactForm/interestActions';
 
 export type SectionDoc = {
     id: string
@@ -43,7 +43,7 @@ export default class InterestsService {
         )).then(sections => sections.sort((a, b) => a.position - b.position))
     }
 
-    addOption(sectionId: string, optionReq: OptionReq) : Promise<Option> {
+    addOption(sectionId: string, optionReq: NewOptionReq) : Promise<Option> {
         return this.db.runTransaction(async transaction => {
             const optionDoc = await transaction.get(this.db.collection(this.OPTIONS).doc())
             const sectionDoc = await transaction.get(this.db.collection(this.SECTIONS).doc(sectionId))
@@ -58,6 +58,22 @@ export default class InterestsService {
             return {
                 id: optionDoc.id,
                 ...optionReq
+            }
+        })
+    }
+
+    updateOptionText(optionId: string, newText: string) : Promise<Option> {
+        return this.db.runTransaction(async transaction => {
+            const optionDoc = await transaction.get(this.db.collection(this.OPTIONS).doc(optionId))
+            const updatedOption = {
+                ...optionDoc.data(),
+                text: newText
+            }
+            transaction.set(optionDoc.ref, updatedOption)
+
+            return {
+                id: optionId,
+                ...updatedOption,
             }
         })
     }

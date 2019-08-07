@@ -5,14 +5,14 @@ import { from } from 'rxjs/internal/observable/from';
 
 import {
     interestActions,
-    updateInterestsErr,
     getInterestsSuccess,
     getInterestsErr,
-    getInterests,
     addOptionSuccess,
     addOptionErr,
     addSectionErr,
-    addSectionSuccess
+    addSectionSuccess,
+    updateOptionTextSuccess,
+    updateOptionTextErr
 } from '../../actions/contactForm/interestActions'
 
 export const getInterestsEpic = (action$, _, { interestsService }) => {
@@ -27,24 +27,22 @@ export const getInterestsEpic = (action$, _, { interestsService }) => {
     )
 }
 
-export const updateInterestsEpic = (action$, _, { firestore }) => {
-    return action$.pipe(
-        ofType(interestActions.UPDATE_INTERESTS),
-        mergeMap((action: any) =>
-            firestore.upsertDocs('interests', action.interests).pipe(
-                map(() => getInterests()),
-                catchError(err => ActionsObservable.of(updateInterestsErr(err)))
-            )
-        )
-    )
-}
-
 export const addOptionEpic = (action$, _, { interestsService }) => action$.pipe(
     ofType(interestActions.ADD_OPTION),
     mergeMap((action: any) =>
         from(interestsService.addOption(action.sectionId, action.option)).pipe(
             map((option: any) => addOptionSuccess(action.sectionId, option)),
             catchError(err => ActionsObservable.of(addOptionErr(err)))
+        )
+    )
+)
+
+export const updateOptionTextEpic = (action$, _, { interestsService }) => action$.pipe(
+    ofType(interestActions.UPDATE_OPTION_TEXT),
+    mergeMap((action: any) => 
+        from(interestsService.updateOptionText(action.optionId, action.newText)).pipe(
+            map((option: any) => updateOptionTextSuccess(option)),
+            catchError(err => ActionsObservable.of(updateOptionTextErr(err)))
         )
     )
 )
@@ -61,7 +59,7 @@ export const addSectionEpic = (action$, _, { interestsService }) => action$.pipe
 
 export default combineEpics(
     getInterestsEpic,
-    updateInterestsEpic,
     addOptionEpic,
+    updateOptionTextEpic,
     addSectionEpic
 )

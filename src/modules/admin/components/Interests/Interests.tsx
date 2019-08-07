@@ -13,11 +13,11 @@ import {
 } from '@material-ui/core'
 import {
     getInterests,
-    updateInterests,
     addOption,
     addSection,
-    OptionReq,
-    SectionReq
+    NewOptionReq,
+    SectionReq,
+    updateOptionText
 } from '../../../../redux/actions/contactForm/interestActions';
 import AddableTextField from './components/AddableTextField/AddableTextField';
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow';
@@ -52,8 +52,8 @@ export type Props = {
     classes: any,
     interests: Section[]
     getInterests: () => void,
-    updateInterests: (interests : Section[]) => void,
-    addOption: (sectionId: string, option: OptionReq) => void,
+    updateOptionText: (optionId: string, newText: string) => void,
+    addOption: (sectionId: string, option: NewOptionReq) => void,
     addSection: (section: SectionReq) => void
 }
 
@@ -107,19 +107,8 @@ export class Interests extends Component<Props, State> {
         this.setState({ editingOptionId: null })
     }
 
-    saveOption(sectionId: string, optionId: any, newText: string) {
-        this.props.updateInterests([
-            ...this.props.interests.map(section => section.id !== sectionId ? section : {
-                ...section,
-                options: [
-                    ...section.options.map(option => option.id !== optionId ? option : {
-                        ...option,
-                        sectionId,
-                        text: newText
-                    })
-                ]
-            })
-        ])
+    saveOption(optionId: string, newText: string) {
+        this.props.updateOptionText(optionId, newText)
         this.setState({ editingOptionId: null })
     }
 
@@ -173,7 +162,7 @@ export class Interests extends Component<Props, State> {
                                         editingOptionId={editingOptionId}
                                         beginEditingOption={optionId => this.beginEditingOption(optionId)}
                                         deleteOption={optionId => this.deleteOption(section.id, optionId)}
-                                        saveOption={(optionId, newText) => this.saveOption(section.id, optionId, newText)}
+                                        saveOption={(optionId, newText) => this.saveOption(optionId, newText)}
                                         cancelEditingOption={() => this.cancelEditingOption()}
                                     />
                                 )}
@@ -220,8 +209,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
-    updateInterests: interests => dispatch(updateInterests(interests)),
-    addOption: (sectionId: string, option: OptionReq) => dispatch(addOption(sectionId, option)),
+    updateOptionText: (optionId: string, newText: string) => dispatch(updateOptionText(optionId, newText)),
+    addOption: (sectionId: string, option: NewOptionReq) => dispatch(addOption(sectionId, option)),
     addSection: (section: SectionReq) => dispatch(addSection(section))
 })
 

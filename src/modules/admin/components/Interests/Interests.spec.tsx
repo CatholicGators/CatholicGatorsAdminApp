@@ -12,17 +12,17 @@ describe('Interests', () => {
             classes: {},
             interests: [{
                 id: "test",
+                position: 0,
                 text: "testing",
                 options: [
                     {
-                        id: 1,
-                        sectionId: "test",
+                        id: "1",
                         text: "totally testing"
                     }
                 ]
             }],
             getInterests: jest.fn(),
-            updateInterests: jest.fn(),
+            updateOptionText: jest.fn(),
             addOption: jest.fn(),
             addSection: jest.fn()
         }
@@ -82,39 +82,25 @@ describe('Interests', () => {
 
     describe('saveOption', () => {
         it('resets the editing state to default', () => {
-            const sectionId = props.interests[0].id
             const optionId = props.interests[0].options[0].id
             const newText = "newText"
 
             instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
-            instance.saveOption(sectionId, optionId, newText)
+            instance.saveOption(optionId, newText)
             expect(wrapper.state().editingOptionId).toBe(null)
         })
 
         it('calls updateInterests with the field updated', () => {
-            const sectionId = props.interests[0].id
             const optionId = props.interests[0].options[0].id
             const newText = "newText"
-            const newInterests = [
-                ...props.interests.map(section => section.id !== sectionId ? section : {
-                    ...section,
-                    options: [
-                        ...section.options.map(option => option.id !== optionId ? option : {
-                            ...option,
-                            sectionId,
-                            text: newText
-                        })
-                    ]
-                })
-            ]
 
             instance.beginEditingOption(optionId)
             expect(wrapper.state().editingOptionId).toBe(optionId)
 
-            instance.saveOption(sectionId, optionId, newText)
-            expect(props.updateInterests).toHaveBeenCalledWith(newInterests)
+            instance.saveOption(optionId, newText)
+            expect(props.updateOptionText).toHaveBeenCalledWith(optionId, newText)
         })
     })
 })

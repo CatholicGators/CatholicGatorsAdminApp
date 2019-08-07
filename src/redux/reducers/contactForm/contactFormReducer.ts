@@ -85,17 +85,14 @@ function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
         case contactFormActions.UPDATE_CONTACT_STATUS_SUCCESS : {
             return updateContactStatus(state, action)
         }
-        case interestActions.GET_INTERESTS_SUCCESS: {
+        case interestActions.GET_INTERESTS_SUCCESS : {
             return setInterests(state, action)
         }
-        case interestActions.ADD_OPTION_SUCCESS: {
+        case interestActions.ADD_OPTION_SUCCESS : {
             return addOption(state, action)
         }
-        case interestActions.ADD_SECTION_SUCCESS: {
+        case interestActions.ADD_SECTION_SUCCESS : {
             return addSection(state, action)
-        }
-        case interestActions.UPDATE_INTERESTS_SUCCESS: {
-            return setInterests(state, action)
         }
         default : return state;
     }

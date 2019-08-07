@@ -26,16 +26,16 @@ ShallowWrapper {
           "id": "test",
           "options": Array [
             Object {
-              "id": 1,
-              "sectionId": "test",
+              "id": "1",
               "text": "totally testing",
             },
           ],
+          "position": 0,
           "text": "testing",
         },
       ]
     }
-    updateInterests={[MockFunction]}
+    updateOptionText={[MockFunction]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -78,8 +78,7 @@ ShallowWrapper {
               editingOptionId={null}
               option={
                 Object {
-                  "id": 1,
-                  "sectionId": "test",
+                  "id": "1",
                   "text": "totally testing",
                 }
               }
@@ -170,8 +169,7 @@ ShallowWrapper {
                 editingOptionId={null}
                 option={
                   Object {
-                    "id": 1,
-                    "sectionId": "test",
+                    "id": "1",
                     "text": "totally testing",
                   }
                 }
@@ -208,8 +206,7 @@ ShallowWrapper {
                     editingOptionId={null}
                     option={
                       Object {
-                        "id": 1,
-                        "sectionId": "test",
+                        "id": "1",
                         "text": "totally testing",
                       }
                     }
@@ -249,8 +246,7 @@ ShallowWrapper {
                   "deleteOption": [Function],
                   "editingOptionId": null,
                   "option": Object {
-                    "id": 1,
-                    "sectionId": "test",
+                    "id": "1",
                     "text": "totally testing",
                   },
                   "saveOption": [Function],
@@ -338,8 +334,7 @@ ShallowWrapper {
                 editingOptionId={null}
                 option={
                   Object {
-                    "id": 1,
-                    "sectionId": "test",
+                    "id": "1",
                     "text": "totally testing",
                   }
                 }
@@ -430,8 +425,7 @@ ShallowWrapper {
                   editingOptionId={null}
                   option={
                     Object {
-                      "id": 1,
-                      "sectionId": "test",
+                      "id": "1",
                       "text": "totally testing",
                     }
                   }
@@ -468,8 +462,7 @@ ShallowWrapper {
                       editingOptionId={null}
                       option={
                         Object {
-                          "id": 1,
-                          "sectionId": "test",
+                          "id": "1",
                           "text": "totally testing",
                         }
                       }
@@ -509,8 +502,7 @@ ShallowWrapper {
                     "deleteOption": [Function],
                     "editingOptionId": null,
                     "option": Object {
-                      "id": 1,
-                      "sectionId": "test",
+                      "id": "1",
                       "text": "totally testing",
                     },
                     "saveOption": [Function],

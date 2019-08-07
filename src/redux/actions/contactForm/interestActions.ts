@@ -7,9 +7,9 @@ export const interestActions = {
     ADD_OPTION: 'ADD_OPTION',
     ADD_OPTION_SUCCESS: 'ADD_OPTION_SUCCESS',
     ADD_OPTION_ERR: 'ADD_OPTION_ERR',
-    UPDATE_INTERESTS: 'UPDATE_INTERESTS',
-    UPDATE_INTERESTS_SUCCESS: 'UPDATE_INTERESTS_SUCCESS',
-    UPDATE_INTERESTS_ERR: 'UPDATE_INTERESTS_ERR',
+    UPDATE_OPTION_TEXT: 'UPDATE_OPTION_TEXT',
+    UPDATE_OPTION_TEXT_SUCCESS: 'UPDATE_OPTION_TEXT_SUCCESS',
+    UPDATE_OPTION_TEXT_ERR: 'UPDATE_OPTION_TEXT_ERR',
     ADD_SECTION: 'ADD_SECTION',
     ADD_SECTION_SUCCESS: 'ADD_SECTION_SUCCESS',
     ADD_SECTION_ERR: 'ADD_SECTION_ERR'
@@ -27,10 +27,10 @@ export function getInterestsErr(err) {
     return { type: interestActions.GET_INTERESTS_ERR, err }
 }
 
-export type OptionReq = {
+export type NewOptionReq = {
     text: string
 }
-export const addOption = (sectionId: string, option: OptionReq) => ({
+export const addOption = (sectionId: string, option: NewOptionReq) => ({
     type: interestActions.ADD_OPTION,
     sectionId,
     option
@@ -63,15 +63,16 @@ export const addSectionErr = (err) => ({
     err
 })
 
-export const updateInterests = (interests) => ({
-    type: interestActions.UPDATE_INTERESTS,
-    interests
+export const updateOptionText = (optionId: string, newText: string) => ({
+    type: interestActions.UPDATE_OPTION_TEXT,
+    optionId,
+    newText
 })
-
-export function updateInterestsSuccess(interests) {
-    return { type: interestActions.UPDATE_INTERESTS_SUCCESS, interests }
-}
-
-export function updateInterestsErr(err) {
-    return { type: interestActions.UPDATE_INTERESTS_ERR, err }
-}
+export const updateOptionTextSuccess = (option: Option) => ({
+    type: interestActions.UPDATE_OPTION_TEXT_SUCCESS,
+    option
+})
+export const updateOptionTextErr = (err) => ({
+    type: interestActions.UPDATE_OPTION_TEXT_ERR,
+    err
+})
