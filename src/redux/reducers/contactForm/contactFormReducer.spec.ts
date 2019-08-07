@@ -6,9 +6,11 @@ import {
     updateContactStatusSuccess
 } from '../../actions/contactForm/contactFormActions'
 import contactFormReducer, { INITIAL_CONTACT_FORM_STATE } from './contactFormReducer'
+import { getInterestsSuccess, addOptionSuccess, addSectionSuccess } from '../../actions/contactForm/interestActions';
+import { Section, Option } from '../../../services/interestsService';
 
 describe('contactFormReducer', () => {
-    let form, contacts;
+    let form, contacts, interests: Section[];
 
     beforeAll(() => {
         contacts = [
@@ -23,6 +25,18 @@ describe('contactFormReducer', () => {
         ]
 
         form = {}
+
+        interests = [{
+            id: "1",
+            position: 0,
+            text: "section1",
+            options: []
+        }, {
+            id: "2",
+            position: 1,
+            text: "section2",
+            options: []
+        }]
     })
 
     it('returns the state unmutated by default', () => {
@@ -93,5 +107,44 @@ describe('contactFormReducer', () => {
             ...state,
             contacts: newContacts
         })
+    })
+
+    it('updates the interests field on GET_INTERESTS_SUCCESS', () => {
+        const action = getInterestsSuccess(interests)
+
+        expect(contactFormReducer(INITIAL_CONTACT_FORM_STATE, action)).toEqual({
+            ...INITIAL_CONTACT_FORM_STATE,
+            interests
+        })
+    })
+
+    it('updates the interests field with the new option on ADD_OPTION_SUCCESS', () => {
+        const newOption: Option = {
+            id: "1",
+            text: "test"
+        }
+        const action = addOptionSuccess(interests[0].id, newOption)
+        const state = {
+            ...INITIAL_CONTACT_FORM_STATE,
+            interests
+        }
+
+        expect(contactFormReducer(state, action).interests[0].options[0]).toEqual(newOption)
+    })
+
+    it('updates the interests field with the new section on ADD_SECTION_SUCCESS', () => {
+        const newSection: Section = {
+            id: "3",
+            position: interests.length,
+            text: "section3",
+            options: []
+        }
+        const action = addSectionSuccess(newSection)
+        const state = {
+            ...INITIAL_CONTACT_FORM_STATE,
+            interests
+        }
+
+        expect(contactFormReducer(state, action).interests[newSection.position]).toBe(newSection)
     })
 })
