@@ -14,8 +14,9 @@ import {
     updateOptionTextSuccess,
     updateOptionTextErr
 } from '../../actions/contactForm/interestActions'
+import { Dependencies } from '../../store';
 
-export const getInterestsEpic = (action$, _, { interestsService }) => {
+export const getInterestsEpic = (action$, _, { interestsService } : Dependencies) => {
     return action$.pipe(
         ofType(interestActions.GET_INTERESTS),
         mergeMap(() =>
@@ -27,7 +28,7 @@ export const getInterestsEpic = (action$, _, { interestsService }) => {
     )
 }
 
-export const addOptionEpic = (action$, _, { interestsService }) => action$.pipe(
+export const addOptionEpic = (action$, _, { interestsService } : Dependencies) => action$.pipe(
     ofType(interestActions.ADD_OPTION),
     mergeMap((action: any) =>
         from(interestsService.addOption(action.sectionId, action.option)).pipe(
@@ -37,7 +38,7 @@ export const addOptionEpic = (action$, _, { interestsService }) => action$.pipe(
     )
 )
 
-export const updateOptionTextEpic = (action$, _, { interestsService }) => action$.pipe(
+export const updateOptionTextEpic = (action$, _, { interestsService } : Dependencies) => action$.pipe(
     ofType(interestActions.UPDATE_OPTION_TEXT),
     mergeMap((action: any) => 
         from(interestsService.updateOptionText(action.optionId, action.newText)).pipe(
@@ -47,7 +48,7 @@ export const updateOptionTextEpic = (action$, _, { interestsService }) => action
     )
 )
 
-export const addSectionEpic = (action$, _, { interestsService }) => action$.pipe(
+export const addSectionEpic = (action$, _, { interestsService } : Dependencies) => action$.pipe(
     ofType(interestActions.ADD_SECTION),
     mergeMap((action: any) =>
         from(interestsService.addSection(action.section)).pipe(
