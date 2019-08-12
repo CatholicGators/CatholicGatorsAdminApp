@@ -1,5 +1,5 @@
 import 'firebase/firestore'
-import { NewOptionReq, SectionReq } from '../redux/actions/contactForm/interestActions';
+import { NewOptionReq, NewSectionReq } from '../redux/actions/contactForm/interestActions';
 
 export type SectionDoc = {
     id: string
@@ -78,7 +78,7 @@ export default class InterestsService {
         })
     }
 
-    addSection(sectionReq: SectionReq) : Promise<Section> {
+    addSection(sectionReq: NewSectionReq) : Promise<Section> {
         return this.db.collection(this.SECTIONS).add(sectionReq).then(sectionRef => ({
             id: sectionRef.id,
             ...sectionReq

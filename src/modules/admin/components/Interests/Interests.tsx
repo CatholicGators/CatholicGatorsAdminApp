@@ -16,7 +16,7 @@ import {
     addOption,
     addSection,
     NewOptionReq,
-    SectionReq,
+    NewSectionReq,
     updateOptionText
 } from '../../../../redux/actions/contactForm/interestActions';
 import AddableTextField from './components/AddableTextField/AddableTextField';
@@ -54,7 +54,7 @@ export type Props = {
     getInterests: () => void,
     updateOptionText: (optionId: string, newText: string) => void,
     addOption: (sectionId: string, option: NewOptionReq) => void,
-    addSection: (section: SectionReq) => void
+    addSection: (section: NewSectionReq) => void
 }
 
 type State = {
@@ -211,7 +211,7 @@ const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
     updateOptionText: (optionId: string, newText: string) => dispatch(updateOptionText(optionId, newText)),
     addOption: (sectionId: string, option: NewOptionReq) => dispatch(addOption(sectionId, option)),
-    addSection: (section: SectionReq) => dispatch(addSection(section))
+    addSection: (section: NewSectionReq) => dispatch(addSection(section))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Interests))

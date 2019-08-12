@@ -15,7 +15,7 @@ import {
     updateOptionText,
     updateOptionTextSuccess,
     updateOptionTextErr,
-    SectionReq,
+    NewSectionReq,
     addSection,
     addSectionSuccess,
     addSectionErr
@@ -163,7 +163,7 @@ describe('interestEpics', () => {
     })
 
     describe('addSectionEpic', () => {
-        let action$, state$, sectionReq: SectionReq
+        let action$, state$, sectionReq: NewSectionReq
 
         beforeAll(() => {
             sectionReq = {

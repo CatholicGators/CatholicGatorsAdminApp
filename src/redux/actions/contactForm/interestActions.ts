@@ -45,12 +45,12 @@ export const addOptionErr = (err) => ({
     err
 })
 
-export type SectionReq = {
+export type NewSectionReq = {
     text: string
     position: number
     options: Option[]
 }
-export const addSection = (section: SectionReq) => ({
+export const addSection = (section: NewSectionReq) => ({
     type: interestActions.ADD_SECTION,
     section
 })
