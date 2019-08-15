@@ -25,15 +25,15 @@ interface Doc {
 }
 
 export default class InterestsService {
-    private readonly OPTIONS: string = 'options'
-    private readonly SECTIONS: string = 'sections'
+    public static readonly OPTIONS: string = 'options'
+    public static readonly SECTIONS: string = 'sections'
 
     constructor(private db: firebase.firestore.Firestore) {}
 
     getInterests() : Promise<Section[]> {
         return Promise.all([
-            this.getAllAndFlatten<SectionDoc>(this.SECTIONS),
-            this.getAllAndFlatten<Option>(this.OPTIONS)
+            this.getAllAndFlatten<SectionDoc>(InterestsService.SECTIONS),
+            this.getAllAndFlatten<Option>(InterestsService.OPTIONS)
         ]).then(([sectionDocs, optionDocs]) => sectionDocs.map(section => ({
                 ...section,
                 options: section.options.map(optionId => 
@@ -45,13 +45,13 @@ export default class InterestsService {
 
     addOption(sectionId: string, optionReq: NewOptionReq) : Promise<Option> {
         return this.db.runTransaction(async transaction => {
-            const optionDoc = await transaction.get(this.db.collection(this.OPTIONS).doc())
-            const sectionDoc = await transaction.get(this.db.collection(this.SECTIONS).doc(sectionId))
+            const optionDoc = await transaction.get(this.db.collection(InterestsService.OPTIONS).doc())
+            const sectionDoc = await transaction.get(this.db.collection(InterestsService.SECTIONS).doc(sectionId))
 
             const options = sectionDoc.data().options
             options.push(optionDoc.id)
             transaction.update(sectionDoc.ref, {
-                options: options
+                options
             })
             transaction.set(optionDoc.ref, optionReq)
 
@@ -64,11 +64,12 @@ export default class InterestsService {
 
     updateOptionText(optionId: string, newText: string) : Promise<Option> {
         return this.db.runTransaction(async transaction => {
-            const optionDoc = await transaction.get(this.db.collection(this.OPTIONS).doc(optionId))
+            const optionDoc = await transaction.get(this.db.collection(InterestsService.OPTIONS).doc(optionId))
             const updatedOption = {
                 ...optionDoc.data(),
                 text: newText
             }
+
             transaction.set(optionDoc.ref, updatedOption)
 
             return {
@@ -79,21 +80,17 @@ export default class InterestsService {
     }
 
     addSection(sectionReq: NewSectionReq) : Promise<Section> {
-        return this.db.collection(this.SECTIONS).add(sectionReq).then(sectionRef => ({
+        return this.db.collection(InterestsService.SECTIONS).add(sectionReq).then(sectionRef => ({
             id: sectionRef.id,
             ...sectionReq
         }))
     }
 
-    private flatten<T extends Doc>(doc) : T {
-        return {
-            id: doc.id,
-            ...doc.data()
-        } as T
-    }
-
     private getAllAndFlatten<T extends Doc>(collection: string) : Promise<T[]> {
         return this.db.collection(collection).get()
-            .then(snapshot => snapshot.docs.map(doc => this.flatten<T>(doc)))
+            .then(snapshot => snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            } as T)))
     }
 }

@@ -28,6 +28,7 @@
     "@types/react-text-mask": "^5.4.4",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
+    "jest-when": "^2.6.0",
     "typescript": "^3.3.3"
   },
   "scripts": {
