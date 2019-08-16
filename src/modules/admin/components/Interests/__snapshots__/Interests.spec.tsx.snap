@@ -4,6 +4,8 @@ exports[`Interests should match snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Interests
+    addOption={[MockFunction]}
+    addSection={[MockFunction]}
     classes={Object {}}
     getInterests={
       [MockFunction] {
@@ -24,15 +26,16 @@ ShallowWrapper {
           "id": "test",
           "options": Array [
             Object {
-              "id": 1,
+              "id": "1",
               "text": "totally testing",
             },
           ],
+          "position": 0,
           "text": "testing",
         },
       ]
     }
-    updateInterests={[MockFunction]}
+    updateOptionText={[MockFunction]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -57,6 +60,7 @@ ShallowWrapper {
           </WithStyles(Typography)>
           <WithStyles(Button)
             color="primary"
+            id="add-section-btn"
             onClick={[Function]}
             variant="outlined"
           >
@@ -64,7 +68,9 @@ ShallowWrapper {
           </WithStyles(Button)>
         </WithStyles(Toolbar)>,
         <div>
-          <div>
+          <div
+            id="section"
+          >
             <WithStyles(Typography)>
               testing
             </WithStyles(Typography)>
@@ -75,18 +81,22 @@ ShallowWrapper {
               editingOptionId={null}
               option={
                 Object {
-                  "id": 1,
+                  "id": "1",
                   "text": "totally testing",
                 }
               }
               saveOption={[Function]}
             />
-            <WithStyles(AddOptionButton)
-              addOption={[Function]}
-              beginAddingOption={[Function]}
-              cancelAddingOption={[Function]}
-              isAdding={false}
-            />
+            <div
+              id="add-option"
+            >
+              <WithStyles(AddableTextField)
+                beginAdding={[Function]}
+                cancelAdding={[Function]}
+                isAdding={false}
+                onAdd={[Function]}
+              />
+            </div>
           </div>
         </div>,
         null,
@@ -108,6 +118,7 @@ ShallowWrapper {
             </WithStyles(Typography)>,
             <WithStyles(Button)
               color="primary"
+              id="add-section-btn"
               onClick={[Function]}
               variant="outlined"
             >
@@ -137,6 +148,7 @@ ShallowWrapper {
               "children": "Add Section",
               "className": undefined,
               "color": "primary",
+              "id": "add-section-btn",
               "onClick": [Function],
               "variant": "outlined",
             },
@@ -153,7 +165,9 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <div>
+            <div
+              id="section"
+            >
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
@@ -164,18 +178,22 @@ ShallowWrapper {
                 editingOptionId={null}
                 option={
                   Object {
-                    "id": 1,
+                    "id": "1",
                     "text": "totally testing",
                   }
                 }
                 saveOption={[Function]}
               />
-              <WithStyles(AddOptionButton)
-                addOption={[Function]}
-                beginAddingOption={[Function]}
-                cancelAddingOption={[Function]}
-                isAdding={false}
-              />
+              <div
+                id="add-option"
+              >
+                <WithStyles(AddableTextField)
+                  beginAdding={[Function]}
+                  cancelAdding={[Function]}
+                  isAdding={false}
+                  onAdd={[Function]}
+                />
+              </div>
             </div>,
           ],
           "className": undefined,
@@ -199,20 +217,25 @@ ShallowWrapper {
                     editingOptionId={null}
                     option={
                       Object {
-                        "id": 1,
+                        "id": "1",
                         "text": "totally testing",
                       }
                     }
                     saveOption={[Function]}
                   />,
                 ],
-                <WithStyles(AddOptionButton)
-                  addOption={[Function]}
-                  beginAddingOption={[Function]}
-                  cancelAddingOption={[Function]}
-                  isAdding={false}
-                />,
+                <div
+                  id="add-option"
+                >
+                  <WithStyles(AddableTextField)
+                    beginAdding={[Function]}
+                    cancelAdding={[Function]}
+                    isAdding={false}
+                    onAdd={[Function]}
+                  />
+                </div>,
               ],
+              "id": "section",
             },
             "ref": null,
             "rendered": Array [
@@ -237,7 +260,7 @@ ShallowWrapper {
                   "deleteOption": [Function],
                   "editingOptionId": null,
                   "option": Object {
-                    "id": 1,
+                    "id": "1",
                     "text": "totally testing",
                   },
                   "saveOption": [Function],
@@ -249,16 +272,39 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "class",
+                "nodeType": "host",
                 "props": Object {
-                  "addOption": [Function],
-                  "beginAddingOption": [Function],
-                  "cancelAddingOption": [Function],
-                  "isAdding": false,
+                  "children": Array [
+                    null,
+                    <WithStyles(AddableTextField)
+                      beginAdding={[Function]}
+                      cancelAdding={[Function]}
+                      isAdding={false}
+                      onAdd={[Function]}
+                    />,
+                  ],
+                  "className": undefined,
+                  "id": "add-option",
                 },
                 "ref": null,
-                "rendered": null,
-                "type": [Function],
+                "rendered": Array [
+                  null,
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "beginAdding": [Function],
+                      "cancelAdding": [Function],
+                      "isAdding": false,
+                      "onAdd": [Function],
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": "div",
               },
             ],
             "type": "div",
@@ -285,6 +331,7 @@ ShallowWrapper {
             </WithStyles(Typography)>
             <WithStyles(Button)
               color="primary"
+              id="add-section-btn"
               onClick={[Function]}
               variant="outlined"
             >
@@ -292,7 +339,9 @@ ShallowWrapper {
             </WithStyles(Button)>
           </WithStyles(Toolbar)>,
           <div>
-            <div>
+            <div
+              id="section"
+            >
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
@@ -303,18 +352,22 @@ ShallowWrapper {
                 editingOptionId={null}
                 option={
                   Object {
-                    "id": 1,
+                    "id": "1",
                     "text": "totally testing",
                   }
                 }
                 saveOption={[Function]}
               />
-              <WithStyles(AddOptionButton)
-                addOption={[Function]}
-                beginAddingOption={[Function]}
-                cancelAddingOption={[Function]}
-                isAdding={false}
-              />
+              <div
+                id="add-option"
+              >
+                <WithStyles(AddableTextField)
+                  beginAdding={[Function]}
+                  cancelAdding={[Function]}
+                  isAdding={false}
+                  onAdd={[Function]}
+                />
+              </div>
             </div>
           </div>,
           null,
@@ -336,6 +389,7 @@ ShallowWrapper {
               </WithStyles(Typography)>,
               <WithStyles(Button)
                 color="primary"
+                id="add-section-btn"
                 onClick={[Function]}
                 variant="outlined"
               >
@@ -365,6 +419,7 @@ ShallowWrapper {
                 "children": "Add Section",
                 "className": undefined,
                 "color": "primary",
+                "id": "add-section-btn",
                 "onClick": [Function],
                 "variant": "outlined",
               },
@@ -381,7 +436,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div>
+              <div
+                id="section"
+              >
                 <WithStyles(Typography)>
                   testing
                 </WithStyles(Typography)>
@@ -392,18 +449,22 @@ ShallowWrapper {
                   editingOptionId={null}
                   option={
                     Object {
-                      "id": 1,
+                      "id": "1",
                       "text": "totally testing",
                     }
                   }
                   saveOption={[Function]}
                 />
-                <WithStyles(AddOptionButton)
-                  addOption={[Function]}
-                  beginAddingOption={[Function]}
-                  cancelAddingOption={[Function]}
-                  isAdding={false}
-                />
+                <div
+                  id="add-option"
+                >
+                  <WithStyles(AddableTextField)
+                    beginAdding={[Function]}
+                    cancelAdding={[Function]}
+                    isAdding={false}
+                    onAdd={[Function]}
+                  />
+                </div>
               </div>,
             ],
             "className": undefined,
@@ -427,20 +488,25 @@ ShallowWrapper {
                       editingOptionId={null}
                       option={
                         Object {
-                          "id": 1,
+                          "id": "1",
                           "text": "totally testing",
                         }
                       }
                       saveOption={[Function]}
                     />,
                   ],
-                  <WithStyles(AddOptionButton)
-                    addOption={[Function]}
-                    beginAddingOption={[Function]}
-                    cancelAddingOption={[Function]}
-                    isAdding={false}
-                  />,
+                  <div
+                    id="add-option"
+                  >
+                    <WithStyles(AddableTextField)
+                      beginAdding={[Function]}
+                      cancelAdding={[Function]}
+                      isAdding={false}
+                      onAdd={[Function]}
+                    />
+                  </div>,
                 ],
+                "id": "section",
               },
               "ref": null,
               "rendered": Array [
@@ -465,7 +531,7 @@ ShallowWrapper {
                     "deleteOption": [Function],
                     "editingOptionId": null,
                     "option": Object {
-                      "id": 1,
+                      "id": "1",
                       "text": "totally testing",
                     },
                     "saveOption": [Function],
@@ -477,16 +543,39 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
-                    "addOption": [Function],
-                    "beginAddingOption": [Function],
-                    "cancelAddingOption": [Function],
-                    "isAdding": false,
+                    "children": Array [
+                      null,
+                      <WithStyles(AddableTextField)
+                        beginAdding={[Function]}
+                        cancelAdding={[Function]}
+                        isAdding={false}
+                        onAdd={[Function]}
+                      />,
+                    ],
+                    "className": undefined,
+                    "id": "add-option",
                   },
                   "ref": null,
-                  "rendered": null,
-                  "type": [Function],
+                  "rendered": Array [
+                    null,
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "beginAdding": [Function],
+                        "cancelAdding": [Function],
+                        "isAdding": false,
+                        "onAdd": [Function],
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": "div",
                 },
               ],
               "type": "div",

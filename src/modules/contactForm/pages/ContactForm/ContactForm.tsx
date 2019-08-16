@@ -58,12 +58,7 @@ const initState = {
 };
 
 export class ContactForm extends Component<any, any> {
-
-    constructor(public props: any) {
-        super(props)
-        this.state = initState;
-        this.resetStep = this.resetStep.bind(this);
-    }
+    state = initState
 
     handleChange = (name: string) => event => {
         if (event.target.type === "checkbox") {
@@ -120,7 +115,7 @@ export class ContactForm extends Component<any, any> {
                             ))}
                         </Stepper>
                         <React.Fragment>
-                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext, this.handleBack, this.resetStep)}
+                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext, this.handleBack, this.resetStep.bind(this))}
                         </React.Fragment>
                     </Paper>
                 </main>

@@ -17,9 +17,14 @@ const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.ap
 const db = app.firestore()
 
 const firestore = new Firestore(app, db)
-const userService = new UserService(firestore);
+const userService = new UserService(firestore)
 const interestsService = new InterestsService(db)
 
+export type Dependencies = {
+  firestore: Firestore
+  userService: UserService
+  interestsService: InterestsService
+}
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
     firestore,
