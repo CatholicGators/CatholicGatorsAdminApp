@@ -6,45 +6,42 @@ import {
     IconButton,
     Input
 } from '@material-ui/core'
-import {
-    Save,
-    Close,
-    Add
-} from '@material-ui/icons'
+import { Save, Close, Add } from '@material-ui/icons'
 
-const styles = (theme: Theme) => createStyles({
-    checkbox: {
-        margin: 0,
-        pointerEvents: 'none'
-    },
-    input: {
-        margin: 0
-    },
-    row: {
-        display: 'flex',
-        alignItems: 'center',
-        '&:hover': {
-            '& section': {
-                display: 'block'
-            }
+export const styles = (theme: Theme) =>
+    createStyles({
+        checkbox: {
+            margin: 0,
+            pointerEvents: 'none'
         },
-        width: '100%'
-    },
-    actions: {
-        display: 'none',
-        marginLeft: `${theme.spacing.unit}px`
-    },
-    editActions: {
-        display: 'flex',
-        alignItems: 'center'
-    }
-})
+        input: {
+            margin: 0
+        },
+        row: {
+            display: 'flex',
+            alignItems: 'center',
+            '&:hover': {
+                '& section': {
+                    display: 'block'
+                }
+            },
+            width: '100%'
+        },
+        actions: {
+            display: 'none',
+            marginLeft: `${theme.spacing.unit}px`
+        },
+        editActions: {
+            display: 'flex',
+            alignItems: 'center'
+        }
+    })
 
-type Props = {
-    isAdding: boolean,
-    classes: any,
-    beginAdding: () => void,
-    onAdd: (text: string) => void,
+export type Props = {
+    isAdding: boolean
+    classes: any
+    beginAdding: () => void
+    onAdd: (text: string) => void
     cancelAdding: () => void
 }
 
@@ -63,23 +60,16 @@ export class AddableTextField extends Component<Props, State> {
 
     add() {
         const { text } = this.state
-        if(text) {
+        if (text) {
             this.props.onAdd(text)
             this.setState({ text: '' })
         }
     }
 
     render() {
-        const {
-            isAdding,
-            classes,
-            beginAdding,
-            cancelAdding
-        } = this.props
+        const { isAdding, classes, beginAdding, cancelAdding } = this.props
 
-        const {
-            text
-        } = this.state
+        const { text } = this.state
 
         return isAdding ? (
             <div className={classes.row}>
@@ -91,18 +81,19 @@ export class AddableTextField extends Component<Props, State> {
                 />
                 <div className={classes.editActions}>
                     <IconButton
+                        id="save-btn"
                         disabled={!text}
                         onClick={() => this.add()}
                     >
                         <Save />
                     </IconButton>
-                    <IconButton onClick={() => cancelAdding()}>
+                    <IconButton id="close-btn" onClick={cancelAdding}>
                         <Close />
                     </IconButton>
                 </div>
             </div>
         ) : (
-            <IconButton onClick={() => beginAdding()}>
+            <IconButton onClick={beginAdding}>
                 <Add />
             </IconButton>
         )
