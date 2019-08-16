@@ -60,6 +60,7 @@ ShallowWrapper {
           </WithStyles(Typography)>
           <WithStyles(Button)
             color="primary"
+            id="add-section-btn"
             onClick={[Function]}
             variant="outlined"
           >
@@ -67,7 +68,9 @@ ShallowWrapper {
           </WithStyles(Button)>
         </WithStyles(Toolbar)>,
         <div>
-          <div>
+          <div
+            id="section"
+          >
             <WithStyles(Typography)>
               testing
             </WithStyles(Typography)>
@@ -84,7 +87,9 @@ ShallowWrapper {
               }
               saveOption={[Function]}
             />
-            <div>
+            <div
+              id="add-option"
+            >
               <WithStyles(AddableTextField)
                 beginAdding={[Function]}
                 cancelAdding={[Function]}
@@ -113,6 +118,7 @@ ShallowWrapper {
             </WithStyles(Typography)>,
             <WithStyles(Button)
               color="primary"
+              id="add-section-btn"
               onClick={[Function]}
               variant="outlined"
             >
@@ -142,6 +148,7 @@ ShallowWrapper {
               "children": "Add Section",
               "className": undefined,
               "color": "primary",
+              "id": "add-section-btn",
               "onClick": [Function],
               "variant": "outlined",
             },
@@ -158,7 +165,9 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <div>
+            <div
+              id="section"
+            >
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
@@ -175,7 +184,9 @@ ShallowWrapper {
                 }
                 saveOption={[Function]}
               />
-              <div>
+              <div
+                id="add-option"
+              >
                 <WithStyles(AddableTextField)
                   beginAdding={[Function]}
                   cancelAdding={[Function]}
@@ -213,7 +224,9 @@ ShallowWrapper {
                     saveOption={[Function]}
                   />,
                 ],
-                <div>
+                <div
+                  id="add-option"
+                >
                   <WithStyles(AddableTextField)
                     beginAdding={[Function]}
                     cancelAdding={[Function]}
@@ -222,6 +235,7 @@ ShallowWrapper {
                   />
                 </div>,
               ],
+              "id": "section",
             },
             "ref": null,
             "rendered": Array [
@@ -270,6 +284,7 @@ ShallowWrapper {
                     />,
                   ],
                   "className": undefined,
+                  "id": "add-option",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -316,6 +331,7 @@ ShallowWrapper {
             </WithStyles(Typography)>
             <WithStyles(Button)
               color="primary"
+              id="add-section-btn"
               onClick={[Function]}
               variant="outlined"
             >
@@ -323,7 +339,9 @@ ShallowWrapper {
             </WithStyles(Button)>
           </WithStyles(Toolbar)>,
           <div>
-            <div>
+            <div
+              id="section"
+            >
               <WithStyles(Typography)>
                 testing
               </WithStyles(Typography)>
@@ -340,7 +358,9 @@ ShallowWrapper {
                 }
                 saveOption={[Function]}
               />
-              <div>
+              <div
+                id="add-option"
+              >
                 <WithStyles(AddableTextField)
                   beginAdding={[Function]}
                   cancelAdding={[Function]}
@@ -369,6 +389,7 @@ ShallowWrapper {
               </WithStyles(Typography)>,
               <WithStyles(Button)
                 color="primary"
+                id="add-section-btn"
                 onClick={[Function]}
                 variant="outlined"
               >
@@ -398,6 +419,7 @@ ShallowWrapper {
                 "children": "Add Section",
                 "className": undefined,
                 "color": "primary",
+                "id": "add-section-btn",
                 "onClick": [Function],
                 "variant": "outlined",
               },
@@ -414,7 +436,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <div>
+              <div
+                id="section"
+              >
                 <WithStyles(Typography)>
                   testing
                 </WithStyles(Typography)>
@@ -431,7 +455,9 @@ ShallowWrapper {
                   }
                   saveOption={[Function]}
                 />
-                <div>
+                <div
+                  id="add-option"
+                >
                   <WithStyles(AddableTextField)
                     beginAdding={[Function]}
                     cancelAdding={[Function]}
@@ -469,7 +495,9 @@ ShallowWrapper {
                       saveOption={[Function]}
                     />,
                   ],
-                  <div>
+                  <div
+                    id="add-option"
+                  >
                     <WithStyles(AddableTextField)
                       beginAdding={[Function]}
                       cancelAdding={[Function]}
@@ -478,6 +506,7 @@ ShallowWrapper {
                     />
                   </div>,
                 ],
+                "id": "section",
               },
               "ref": null,
               "rendered": Array [
@@ -526,6 +555,7 @@ ShallowWrapper {
                       />,
                     ],
                     "className": undefined,
+                    "id": "add-option",
                   },
                   "ref": null,
                   "rendered": Array [

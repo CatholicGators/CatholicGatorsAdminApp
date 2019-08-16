@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import {
     Paper,
     Typography,
@@ -18,42 +18,44 @@ import {
     NewOptionReq,
     NewSectionReq,
     updateOptionText
-} from '../../../../redux/actions/contactForm/interestActions';
-import AddableTextField from './components/AddableTextField/AddableTextField';
-import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow';
-import { Section } from '../../../../services/interestsService';
+} from '../../../../redux/actions/contactForm/interestActions'
+import AddableTextField from './components/AddableTextField/AddableTextField'
+import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
+import { Section } from '../../../../services/interestsService'
 
-const styles = (theme: Theme) => createStyles({
-    formWrapper: {
-        width: 600
-    },
-    form: {
-        margin: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
-    },
-    formLoadingContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '300px',
-    },
-    addSectionBtn: {
-        marginLeft: 'auto'
-    },
-    row: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    addSectionWrapper: {
-        margin: `${theme.spacing.unit * 3}px`
-    }
-})
+const styles = (theme: Theme) =>
+    createStyles({
+        formWrapper: {
+            width: 600
+        },
+        form: {
+            margin: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit *
+                3}px ${theme.spacing.unit * 3}px`
+        },
+        formLoadingContainer: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '300px'
+        },
+        addSectionBtn: {
+            marginLeft: 'auto'
+        },
+        row: {
+            display: 'flex',
+            alignItems: 'center'
+        },
+        addSectionWrapper: {
+            margin: `${theme.spacing.unit * 3}px`
+        }
+    })
 
 export type Props = {
-    classes: any,
+    classes: any
     interests: Section[]
-    getInterests: () => void,
-    updateOptionText: (optionId: string, newText: string) => void,
-    addOption: (sectionId: string, option: NewOptionReq) => void,
+    getInterests: () => void
+    updateOptionText: (optionId: string, newText: string) => void
+    addOption: (sectionId: string, option: NewOptionReq) => void
     addSection: (section: NewSectionReq) => void
 }
 
@@ -63,12 +65,14 @@ type State = {
     isAddingSection: boolean
 }
 
+export const defaultState = {
+    editingOptionId: null,
+    addingSectionId: null,
+    isAddingSection: false
+}
+
 export class Interests extends Component<Props, State> {
-    state = {
-        editingOptionId: null,
-        addingSectionId: null,
-        isAddingSection: false
-    }
+    state = defaultState
 
     componentDidMount() {
         this.props.getInterests()
@@ -76,9 +80,8 @@ export class Interests extends Component<Props, State> {
 
     beginAddingSection() {
         this.setState({
-            isAddingSection: true,
-            addingSectionId: null,
-            editingOptionId: null
+            ...defaultState,
+            isAddingSection: true
         })
     }
 
@@ -93,95 +96,112 @@ export class Interests extends Component<Props, State> {
 
     beginEditingOption(optionId: any) {
         this.setState({
-            editingOptionId: optionId,
-            addingSectionId: null,
-            isAddingSection: false
+            ...defaultState,
+            editingOptionId: optionId
         })
     }
 
     cancelEditingOption() {
-        this.setState({ editingOptionId: null })
+        this.setState(defaultState)
     }
 
     deleteOption(sectionId: string, optionId: any) {
-        this.setState({ editingOptionId: null })
+        this.setState(defaultState)
     }
 
     saveOption(optionId: string, newText: string) {
         this.props.updateOptionText(optionId, newText)
-        this.setState({ editingOptionId: null })
+        this.setState(defaultState)
     }
 
     beginAddingOption(sectionId: string) {
         this.setState({
-            addingSectionId: sectionId,
-            editingOptionId: null,
-            isAddingSection: false
+            ...defaultState,
+            addingSectionId: sectionId
         })
-    }   
+    }
 
     cancelAddingOption() {
-        this.setState({ addingSectionId: null })
+        this.setState(defaultState)
     }
 
     addOption(sectionId: string, text: string) {
         this.props.addOption(sectionId, {
             text
         })
-        this.setState({ addingSectionId: null })
+        this.setState(defaultState)
     }
 
     render() {
         const { classes, interests } = this.props
-        const {
-            addingSectionId,
-            editingOptionId,
-            isAddingSection
-        } = this.state
+        const { addingSectionId, editingOptionId, isAddingSection } = this.state
         return (
             <Paper className={classes.formWrapper}>
                 <Toolbar>
-                    <Typography variant="h6">Edit Interests step of form</Typography>
+                    <Typography variant="h6">
+                        Edit Interests step of form
+                    </Typography>
                     <Button
+                        id="add-section-btn"
                         variant="outlined"
                         color="primary"
                         className={classes.addSectionBtn}
-                        onClick={() => this.beginAddingSection()}>
+                        onClick={() => this.beginAddingSection()}
+                    >
                         Add Section
                     </Button>
                 </Toolbar>
                 {interests ? (
                     <div className={classes.form}>
-                        {interests.map(section => 
-                            <div key={section.id}>
+                        {interests.map(section => (
+                            <div id="section" key={section.id}>
                                 <Typography>{section.text}</Typography>
-                                {section.options.map(option =>
+                                {section.options.map(option => (
                                     <EditableOptionRow
                                         key={option.id}
                                         option={option}
                                         editingOptionId={editingOptionId}
-                                        beginEditingOption={optionId => this.beginEditingOption(optionId)}
-                                        deleteOption={optionId => this.deleteOption(section.id, optionId)}
-                                        saveOption={(optionId, newText) => this.saveOption(optionId, newText)}
-                                        cancelEditingOption={() => this.cancelEditingOption()}
+                                        beginEditingOption={optionId =>
+                                            this.beginEditingOption(optionId)
+                                        }
+                                        deleteOption={optionId =>
+                                            this.deleteOption(
+                                                section.id,
+                                                optionId
+                                            )
+                                        }
+                                        saveOption={(optionId, newText) =>
+                                            this.saveOption(optionId, newText)
+                                        }
+                                        cancelEditingOption={() =>
+                                            this.cancelEditingOption()
+                                        }
                                     />
-                                )}
-                                <div className={classes.row}>
+                                ))}
+                                <div id="add-option" className={classes.row}>
                                     {addingSectionId === section.id ? (
                                         <Checkbox
                                             className={classes.checkbox}
-                                            color='primary'
+                                            color="primary"
                                         />
                                     ) : null}
                                     <AddableTextField
-                                        isAdding={addingSectionId === section.id}
-                                        beginAdding={() => this.beginAddingOption(section.id)}
-                                        cancelAdding={() => this.cancelAddingOption()}
-                                        onAdd={text => this.addOption(section.id, text)}
+                                        isAdding={
+                                            addingSectionId === section.id
+                                        }
+                                        beginAdding={() =>
+                                            this.beginAddingOption(section.id)
+                                        }
+                                        cancelAdding={() =>
+                                            this.cancelAddingOption()
+                                        }
+                                        onAdd={text =>
+                                            this.addOption(section.id, text)
+                                        }
                                     />
                                 </div>
                             </div>
-                        )}
+                        ))}
                     </div>
                 ) : (
                     <div className={classes.formLoadingContainer}>
@@ -189,7 +209,10 @@ export class Interests extends Component<Props, State> {
                     </div>
                 )}
                 {isAddingSection ? (
-                    <div className={classes.addSectionWrapper}>
+                    <div
+                        id="add-section-input"
+                        className={classes.addSectionWrapper}
+                    >
                         <AddableTextField
                             isAdding={true}
                             beginAdding={() => {}}
@@ -209,9 +232,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
-    updateOptionText: (optionId: string, newText: string) => dispatch(updateOptionText(optionId, newText)),
-    addOption: (sectionId: string, option: NewOptionReq) => dispatch(addOption(sectionId, option)),
+    updateOptionText: (optionId: string, newText: string) =>
+        dispatch(updateOptionText(optionId, newText)),
+    addOption: (sectionId: string, option: NewOptionReq) =>
+        dispatch(addOption(sectionId, option)),
     addSection: (section: NewSectionReq) => dispatch(addSection(section))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Interests))
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withStyles(styles)(Interests))
