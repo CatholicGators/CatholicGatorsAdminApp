@@ -3,14 +3,15 @@ import { shallow } from 'enzyme'
 
 import { AddableTextField, Props, styles } from './AddableTextField'
 import { Add, Save, Close } from '@material-ui/icons'
-import { Input, createMuiTheme } from '@material-ui/core'
+import { Input } from '@material-ui/core'
+import mockStyles from '../../../../../../utils/mockStyles';
 
 describe('AddableTextField', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: styles(createMuiTheme()),
+            classes: mockStyles(styles),
             isAdding: false,
             beginAdding: jest.fn(),
             onAdd: jest.fn(),

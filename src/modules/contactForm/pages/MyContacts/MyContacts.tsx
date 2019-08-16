@@ -38,8 +38,8 @@ const styles = (theme: Theme) => createStyles({
         display: 'flex',
         justifyContent: 'center',
         marginTop: '50px',
-        paddingLeft: theme.spacing.unit,
-        paddingRight: theme.spacing.unit
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1)
     },
     tableCard: {
         overflowX: 'auto'
@@ -55,8 +55,8 @@ const styles = (theme: Theme) => createStyles({
         borderRadius: 4
     },
     outlinedInput: {
-        paddingTop: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1)
     },
     notCalled: {
         background: 'rgb(234, 153, 153, 0.5)'

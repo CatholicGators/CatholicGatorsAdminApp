@@ -1,18 +1,20 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { UserTable } from './UserTable'
+import { UserTable, styles } from './UserTable'
 import {
     TableHead,
     Checkbox,
     CircularProgress
 } from '@material-ui/core';
+import mockStyles from '../../../../utils/mockStyles';
 
 describe('UserTable', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             getUsers: jest.fn(),
             updateUser: jest.fn(),
             batchDeleteUsers: jest.fn(),

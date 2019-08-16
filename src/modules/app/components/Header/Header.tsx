@@ -16,7 +16,7 @@ import { googleSignIn, signOut } from '../../../../redux/actions/auth/authAction
 import MobileDrawer from '../MobileDrawer/MobileDrawer'
 import ToolbarAvatar from '../ToolbarAvatar/ToolbarAvatar'
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
     root: {
         flexGrow: 1
     },

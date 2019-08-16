@@ -1,13 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import { UserTableRow } from './UserTableRow';
+import { UserTableRow, styles} from './UserTableRow';
 import { Checkbox, IconButton } from '@material-ui/core';
+import mockStyles from '../../../../../../utils/mockStyles';
 
 describe('UserTableRow', () => {
     let wrapper, props;
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             user: {
                 id: 'test',
                 photoUrl: ''

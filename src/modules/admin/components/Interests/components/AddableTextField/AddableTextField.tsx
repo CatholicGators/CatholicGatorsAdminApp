@@ -29,7 +29,7 @@ export const styles = (theme: Theme) =>
         },
         actions: {
             display: 'none',
-            marginLeft: `${theme.spacing.unit}px`
+            marginLeft: `${theme.spacing(1)}px`
         },
         editActions: {
             display: 'flex',

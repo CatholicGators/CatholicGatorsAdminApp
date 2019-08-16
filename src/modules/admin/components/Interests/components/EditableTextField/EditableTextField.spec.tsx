@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 
-import { EditableTextField, Props } from './EditableTextField'
+import { EditableTextField, Props, styles } from './EditableTextField'
 import {
     Edit,
     Delete,
@@ -9,16 +9,17 @@ import {
     Close
 } from '@material-ui/icons';
 import { Input } from '@material-ui/core';
+import mockStyles from '../../../../../../utils/mockStyles';
 
 describe('EditableTextField', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: {},
+            classes: mockStyles(styles),
             isEditing: false,
             isHovered: false,
-            id: 1,
+            id: "1",
             text: "totally testing",
             beginEditing: jest.fn(),
             cancelEditing: jest.fn(),

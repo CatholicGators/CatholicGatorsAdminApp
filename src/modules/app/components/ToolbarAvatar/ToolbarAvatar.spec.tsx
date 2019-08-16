@@ -1,13 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { ToolbarAvatar } from './ToolbarAvatar'
+import { ToolbarAvatar, styles } from './ToolbarAvatar'
+import mockStyles from '../../../../utils/mockStyles';
 
 describe('ToolbarAvatar', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             user: {},
             login: jest.fn(),
             logout: jest.fn()

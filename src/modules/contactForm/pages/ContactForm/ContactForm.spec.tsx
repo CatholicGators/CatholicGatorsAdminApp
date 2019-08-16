@@ -3,15 +3,17 @@ import { shallow } from 'enzyme';
 
 import { ContactForm } from './ContactForm';
 import { steps } from '../../utils/ContactFormUtils'
+import mockStyles from '../../../../utils/mockStyles';
+import { styles } from '../../utils/ContactFormStyles'
 
 describe('ContactForm', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             listenForUser: jest.fn(),
-            submitContactForm: jest.fn(),
-            classes: jest.enableAutomock()
+            submitContactForm: jest.fn()
         };
         wrapper = shallow(<ContactForm {...props} />);
     });

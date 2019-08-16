@@ -14,7 +14,7 @@ import {
 import CheckIcon from '@material-ui/icons/Check';
 import { updateUser } from "../../../../../../redux/actions/admin/adminActions";
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
   hiddenxs: {
     [theme.breakpoints.down('xs')]: {
       display: 'none'
@@ -32,7 +32,7 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   profilePicCol: {
-    paddingRight: theme.spacing.unit * 2
+    paddingRight: theme.spacing(2)
   }
 })
 

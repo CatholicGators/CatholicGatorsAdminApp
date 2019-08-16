@@ -15,7 +15,7 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { MenuLink } from '../Header/Header';
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
     menuItems: {
         width: 250,
         marginBottom: 'auto'
@@ -25,14 +25,14 @@ const styles = (theme: Theme) => createStyles({
         display: 'flex',
         alignItems: 'center',
         minHeight: '64px',
-        padding: theme.spacing.unit
+        padding: theme.spacing(1)
     },
     profileWrapper: {
         display: 'flex',
         alignItems: 'center',
     },
     avatar: {
-        marginRight: theme.spacing.unit * 2
+        marginRight: theme.spacing(2)
     },
     headerName: {
         fontSize: '1rem',

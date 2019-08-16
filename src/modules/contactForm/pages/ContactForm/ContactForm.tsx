@@ -115,7 +115,7 @@ export class ContactForm extends Component<any, any> {
                             ))}
                         </Stepper>
                         <React.Fragment>
-                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext, this.handleBack, this.resetStep.bind(this))}
+                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext.bind(this), this.handleBack.bind(this), this.resetStep.bind(this))}
                         </React.Fragment>
                     </Paper>
                 </main>

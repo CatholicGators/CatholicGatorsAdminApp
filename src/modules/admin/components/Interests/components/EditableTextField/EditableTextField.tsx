@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { Delete, Edit, Save, Close } from '@material-ui/icons'
 
-const styles = (theme: Theme) =>
+export const styles = (theme: Theme) =>
     createStyles({
         row: {
             display: 'flex',
@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
         },
         actions: {
             display: 'none',
-            marginLeft: `${theme.spacing.unit}px`
+            marginLeft: `${theme.spacing(1)}px`
         },
         editActions: {
             display: 'flex',

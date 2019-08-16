@@ -1,13 +1,15 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
 
-import { Admin, menuLinks } from './Admin'
+import { Admin, menuLinks, styles  } from './Admin'
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('Admin', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             match: { 
                 url: 'test'
             },

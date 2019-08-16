@@ -1,18 +1,19 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { Interests, Props, defaultState } from './Interests'
+import { Interests, Props, defaultState, styles } from './Interests'
 import { CircularProgress } from '@material-ui/core'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
 import { Checkbox } from '@material-ui/core'
 import AddableTextField from './components/AddableTextField/AddableTextField'
+import mockStyles from '../../../../utils/mockStyles';
 
 describe('Interests', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: {},
+            classes: mockStyles(styles),
             interests: [
                 {
                     id: 'test',

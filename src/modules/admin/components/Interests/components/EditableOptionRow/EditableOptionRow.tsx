@@ -16,7 +16,8 @@ export const styles = (theme: Theme) =>
                 section: {
                     display: 'block'
                 }
-            }
+            },
+            height: '48px'
         }
     })
 

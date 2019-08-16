@@ -1,13 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import { UserTableToolbar } from './UserTableToolbar';
+import { UserTableToolbar, styles } from './UserTableToolbar';
 import { IconButton } from '@material-ui/core';
+import mockStyles from '../../../../../../utils/mockStyles';
 
 describe('UserTableToolbar', () => {
     let wrapper, props;
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             numSelected: 0,
             handleBatchApprove: jest.fn(),
             handleBatchAuthorize: jest.fn(),

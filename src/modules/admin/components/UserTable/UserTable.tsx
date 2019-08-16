@@ -22,7 +22,7 @@ import {
 import UserTableRow from './components/UserTableRow/UserTableRow'
 import UserTableToolbar from './components/UserTableToolbar/UserTableToolbar'
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
   tableCard: {
     width: '100%',
     overflowX: 'auto',
@@ -39,7 +39,7 @@ const styles = (theme: Theme) => createStyles({
     }
   },
   profilePicCol: {
-    paddingRight: theme.spacing.unit * 2,
+    paddingRight: theme.spacing(2),
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     }

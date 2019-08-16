@@ -3,13 +3,15 @@ import { shallow } from 'enzyme';
 import { NavLink } from "react-router-dom";
 
 import { menuLinks } from '../Header/Header'
-import { MobileDrawer } from './MobileDrawer';
+import { MobileDrawer, styles } from './MobileDrawer';
+import mockStyles from '../../../../utils/mockStyles';
 
 describe('MobileDrawer', () => {
     let props, wrapper;
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             user: {
                 isAdmin: true
             },

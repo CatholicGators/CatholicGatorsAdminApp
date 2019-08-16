@@ -5,13 +5,14 @@ import {
   Toolbar,
   Typography,
   Tooltip,
-  IconButton
+  IconButton,
+  Theme
 } from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done'
 import DeleteIcon from '@material-ui/icons/Delete';
 import VpnKey from '@material-ui/icons/VpnKey';
 
-const styles = createStyles({
+export const styles = (theme: Theme) => createStyles({
     toolbarTitle: {
         marginRight: 'auto'
     },  

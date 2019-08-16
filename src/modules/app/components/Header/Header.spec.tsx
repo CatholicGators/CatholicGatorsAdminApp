@@ -2,13 +2,15 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { NavLink } from "react-router-dom";
 
-import { Header, menuLinks } from './Header'
+import { Header, menuLinks, styles } from './Header'
+import mockStyles from '../../../../utils/mockStyles';
 
 describe('Header', () => {
     let wrapper, props
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             user: {
                 isAdmin: true,
                 isApproved: true

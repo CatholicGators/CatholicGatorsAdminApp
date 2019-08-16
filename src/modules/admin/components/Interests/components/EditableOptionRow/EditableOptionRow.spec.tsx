@@ -3,13 +3,14 @@ import { shallow } from 'enzyme'
 
 import { EditableOptionRow, Props, styles } from './EditableOptionRow'
 import EditableTextField from '../EditableTextField/EditableTextField'
+import mockStyles from '../../../../../../utils/mockStyles';
 
 describe('EditableOptionRow', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: styles(null),
+            classes: mockStyles(styles),
             option: {
                 id: '1',
                 text: 'option'
