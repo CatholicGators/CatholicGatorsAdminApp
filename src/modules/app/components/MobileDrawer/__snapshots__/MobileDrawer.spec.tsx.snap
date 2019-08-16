@@ -119,8 +119,6 @@ ShallowWrapper {
           <ForwardRef(WithStyles) />
           <ForwardRef(WithStyles)>
             <NavLink
-              activeClassName="active"
-              aria-current="page"
               className="test"
               exact={true}
               onClick={[Function]}
@@ -139,8 +137,6 @@ ShallowWrapper {
               </ForwardRef(WithStyles)>
             </NavLink>
             <NavLink
-              activeClassName="active"
-              aria-current="page"
               className="test"
               exact={true}
               onClick={[Function]}
@@ -159,8 +155,6 @@ ShallowWrapper {
               </ForwardRef(WithStyles)>
             </NavLink>
             <NavLink
-              activeClassName="active"
-              aria-current="page"
               className="test"
               exact={true}
               onClick={[Function]}
@@ -233,8 +227,6 @@ ShallowWrapper {
             <ForwardRef(WithStyles) />,
             <ForwardRef(WithStyles)>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -253,8 +245,6 @@ ShallowWrapper {
                 </ForwardRef(WithStyles)>
               </NavLink>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -273,8 +263,6 @@ ShallowWrapper {
                 </ForwardRef(WithStyles)>
               </NavLink>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -1603,8 +1591,6 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -1623,8 +1609,6 @@ ShallowWrapper {
                   </ForwardRef(WithStyles)>
                 </NavLink>,
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -1643,8 +1627,6 @@ ShallowWrapper {
                   </ForwardRef(WithStyles)>
                 </NavLink>,
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -1671,8 +1653,6 @@ ShallowWrapper {
                 "key": "Contact Form",
                 "nodeType": "function",
                 "props": Object {
-                  "activeClassName": "active",
-                  "aria-current": "page",
                   "children": <ForwardRef(WithStyles)
                     button={true}
                     selected={true}
@@ -2630,8 +2610,6 @@ ShallowWrapper {
                 "key": "My Contacts",
                 "nodeType": "function",
                 "props": Object {
-                  "activeClassName": "active",
-                  "aria-current": "page",
                   "children": <ForwardRef(WithStyles)
                     button={true}
                     selected={false}
@@ -3589,8 +3567,6 @@ ShallowWrapper {
                 "key": "Admin",
                 "nodeType": "function",
                 "props": Object {
-                  "activeClassName": "active",
-                  "aria-current": "page",
                   "children": <ForwardRef(WithStyles)
                     button={true}
                     selected={false}
@@ -6435,8 +6411,6 @@ ShallowWrapper {
             <ForwardRef(WithStyles) />
             <ForwardRef(WithStyles)>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -6455,8 +6429,6 @@ ShallowWrapper {
                 </ForwardRef(WithStyles)>
               </NavLink>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -6475,8 +6447,6 @@ ShallowWrapper {
                 </ForwardRef(WithStyles)>
               </NavLink>
               <NavLink
-                activeClassName="active"
-                aria-current="page"
                 className="test"
                 exact={true}
                 onClick={[Function]}
@@ -6549,8 +6519,6 @@ ShallowWrapper {
               <ForwardRef(WithStyles) />,
               <ForwardRef(WithStyles)>
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -6569,8 +6537,6 @@ ShallowWrapper {
                   </ForwardRef(WithStyles)>
                 </NavLink>
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -6589,8 +6555,6 @@ ShallowWrapper {
                   </ForwardRef(WithStyles)>
                 </NavLink>
                 <NavLink
-                  activeClassName="active"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   onClick={[Function]}
@@ -7919,8 +7883,6 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <NavLink
-                    activeClassName="active"
-                    aria-current="page"
                     className="test"
                     exact={true}
                     onClick={[Function]}
@@ -7939,8 +7901,6 @@ ShallowWrapper {
                     </ForwardRef(WithStyles)>
                   </NavLink>,
                   <NavLink
-                    activeClassName="active"
-                    aria-current="page"
                     className="test"
                     exact={true}
                     onClick={[Function]}
@@ -7959,8 +7919,6 @@ ShallowWrapper {
                     </ForwardRef(WithStyles)>
                   </NavLink>,
                   <NavLink
-                    activeClassName="active"
-                    aria-current="page"
                     className="test"
                     exact={true}
                     onClick={[Function]}
@@ -7987,8 +7945,6 @@ ShallowWrapper {
                   "key": "Contact Form",
                   "nodeType": "function",
                   "props": Object {
-                    "activeClassName": "active",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       button={true}
                       selected={true}
@@ -8946,8 +8902,6 @@ ShallowWrapper {
                   "key": "My Contacts",
                   "nodeType": "function",
                   "props": Object {
-                    "activeClassName": "active",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       button={true}
                       selected={false}
@@ -9905,8 +9859,6 @@ ShallowWrapper {
                   "key": "Admin",
                   "nodeType": "function",
                   "props": Object {
-                    "activeClassName": "active",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       button={true}
                       selected={false}

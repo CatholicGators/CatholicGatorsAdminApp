@@ -72,7 +72,6 @@ ShallowWrapper {
             >
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={true}
                 to="/"
@@ -85,7 +84,6 @@ ShallowWrapper {
               </NavLink>
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={false}
                 to="/my-contacts"
@@ -98,7 +96,6 @@ ShallowWrapper {
               </NavLink>
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={false}
                 to="/admin"
@@ -218,7 +215,6 @@ ShallowWrapper {
             >
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={true}
                 to="/"
@@ -231,7 +227,6 @@ ShallowWrapper {
               </NavLink>
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={false}
                 to="/my-contacts"
@@ -244,7 +239,6 @@ ShallowWrapper {
               </NavLink>
               <NavLink
                 activeClassName="test"
-                aria-current="page"
                 className="test"
                 exact={false}
                 to="/admin"
@@ -297,7 +291,6 @@ ShallowWrapper {
               >
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   to="/"
@@ -310,7 +303,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/my-contacts"
@@ -323,7 +315,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/admin"
@@ -993,7 +984,6 @@ ShallowWrapper {
                   Array [
                     <NavLink
                       activeClassName="test"
-                      aria-current="page"
                       className="test"
                       exact={true}
                       to="/"
@@ -1006,7 +996,6 @@ ShallowWrapper {
                     </NavLink>,
                     <NavLink
                       activeClassName="test"
-                      aria-current="page"
                       className="test"
                       exact={false}
                       to="/my-contacts"
@@ -1019,7 +1008,6 @@ ShallowWrapper {
                     </NavLink>,
                     <NavLink
                       activeClassName="test"
-                      aria-current="page"
                       className="test"
                       exact={false}
                       to="/admin"
@@ -1052,7 +1040,6 @@ ShallowWrapper {
                   "nodeType": "function",
                   "props": Object {
                     "activeClassName": "test",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       className="test"
                     >
@@ -1379,7 +1366,6 @@ ShallowWrapper {
                   "nodeType": "function",
                   "props": Object {
                     "activeClassName": "test",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       className="test"
                     >
@@ -1706,7 +1692,6 @@ ShallowWrapper {
                   "nodeType": "function",
                   "props": Object {
                     "activeClassName": "test",
-                    "aria-current": "page",
                     "children": <ForwardRef(WithStyles)
                       className="test"
                     >
@@ -3283,7 +3268,6 @@ ShallowWrapper {
               >
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   to="/"
@@ -3296,7 +3280,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/my-contacts"
@@ -3309,7 +3292,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/admin"
@@ -3429,7 +3411,6 @@ ShallowWrapper {
               >
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={true}
                   to="/"
@@ -3442,7 +3423,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/my-contacts"
@@ -3455,7 +3435,6 @@ ShallowWrapper {
                 </NavLink>
                 <NavLink
                   activeClassName="test"
-                  aria-current="page"
                   className="test"
                   exact={false}
                   to="/admin"
@@ -3508,7 +3487,6 @@ ShallowWrapper {
                 >
                   <NavLink
                     activeClassName="test"
-                    aria-current="page"
                     className="test"
                     exact={true}
                     to="/"
@@ -3521,7 +3499,6 @@ ShallowWrapper {
                   </NavLink>
                   <NavLink
                     activeClassName="test"
-                    aria-current="page"
                     className="test"
                     exact={false}
                     to="/my-contacts"
@@ -3534,7 +3511,6 @@ ShallowWrapper {
                   </NavLink>
                   <NavLink
                     activeClassName="test"
-                    aria-current="page"
                     className="test"
                     exact={false}
                     to="/admin"
@@ -4204,7 +4180,6 @@ ShallowWrapper {
                     Array [
                       <NavLink
                         activeClassName="test"
-                        aria-current="page"
                         className="test"
                         exact={true}
                         to="/"
@@ -4217,7 +4192,6 @@ ShallowWrapper {
                       </NavLink>,
                       <NavLink
                         activeClassName="test"
-                        aria-current="page"
                         className="test"
                         exact={false}
                         to="/my-contacts"
@@ -4230,7 +4204,6 @@ ShallowWrapper {
                       </NavLink>,
                       <NavLink
                         activeClassName="test"
-                        aria-current="page"
                         className="test"
                         exact={false}
                         to="/admin"
@@ -4263,7 +4236,6 @@ ShallowWrapper {
                     "nodeType": "function",
                     "props": Object {
                       "activeClassName": "test",
-                      "aria-current": "page",
                       "children": <ForwardRef(WithStyles)
                         className="test"
                       >
@@ -4590,7 +4562,6 @@ ShallowWrapper {
                     "nodeType": "function",
                     "props": Object {
                       "activeClassName": "test",
-                      "aria-current": "page",
                       "children": <ForwardRef(WithStyles)
                         className="test"
                       >
@@ -4917,7 +4888,6 @@ ShallowWrapper {
                     "nodeType": "function",
                     "props": Object {
                       "activeClassName": "test",
-                      "aria-current": "page",
                       "children": <ForwardRef(WithStyles)
                         className="test"
                       >
