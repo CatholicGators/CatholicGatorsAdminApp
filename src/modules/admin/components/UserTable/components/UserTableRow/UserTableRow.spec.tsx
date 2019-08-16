@@ -1,11 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme';
-import { UserTableRow, styles} from './UserTableRow';
-import { Checkbox, IconButton } from '@material-ui/core';
-import mockStyles from '../../../../../../utils/mockStyles';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+
+import { UserTableRow, styles } from './UserTableRow'
+import { Checkbox, IconButton } from '@material-ui/core'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('UserTableRow', () => {
-    let wrapper, props;
+    let wrapper, props
 
     beforeEach(() => {
         props = {
@@ -18,11 +20,11 @@ describe('UserTableRow', () => {
             handleSelect: jest.fn(),
             updateUser: jest.fn()
         }
-        wrapper = shallow(<UserTableRow {...props}/>)
+        wrapper = shallow(<UserTableRow {...props} />)
     })
 
     it('matches snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('calls handleSelect with user.id when the checkbox is clicked', () => {
@@ -39,7 +41,9 @@ describe('UserTableRow', () => {
 
     it('updates the user when the approve switched is toggled', () => {
         const checked = true
-        wrapper.find('#approve-switch').simulate('change', {target: {checked}}, checked)
+        wrapper
+            .find('#approve-switch')
+            .simulate('change', { target: { checked } }, checked)
 
         expect(props.updateUser).toHaveBeenCalledWith({
             ...props.user,
@@ -49,7 +53,9 @@ describe('UserTableRow', () => {
 
     it('updates the user when the authorize switch is toggled', () => {
         const checked = true
-        wrapper.find('#authorize-switch').simulate('change', {target: {checked}}, checked)
+        wrapper
+            .find('#authorize-switch')
+            .simulate('change', { target: { checked } }, checked)
 
         expect(props.updateUser).toHaveBeenCalledWith({
             ...props.user,

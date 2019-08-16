@@ -1,12 +1,13 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 import { Interests, Props, defaultState, styles } from './Interests'
 import { CircularProgress } from '@material-ui/core'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
 import { Checkbox } from '@material-ui/core'
 import AddableTextField from './components/AddableTextField/AddableTextField'
-import mockStyles from '../../../../utils/mockStyles';
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('Interests', () => {
     let props: Props, wrapper
@@ -36,7 +37,7 @@ describe('Interests', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('calls getInterests() on componentDidMount', () => {

@@ -1,7 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
-import { Admin, menuLinks, styles  } from './Admin'
+import { Admin, menuLinks, styles } from './Admin'
 import mockStyles from '../../../../utils/mockStyles'
 
 describe('Admin', () => {
@@ -10,7 +11,7 @@ describe('Admin', () => {
     beforeEach(() => {
         props = {
             classes: mockStyles(styles),
-            match: { 
+            match: {
                 url: 'test'
             },
             location: {
@@ -21,10 +22,14 @@ describe('Admin', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('should render all of the sub nav links', () => {
-        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${props.match.url}${link.href}']`)).toBe(true))
+        menuLinks.forEach(link =>
+            expect(
+                wrapper.exists(`NavLink[to='${props.match.url}${link.href}']`)
+            ).toBe(true)
+        )
     })
 })

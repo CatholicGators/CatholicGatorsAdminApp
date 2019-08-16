@@ -1,8 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 import { ToolbarAvatar, styles } from './ToolbarAvatar'
-import mockStyles from '../../../../utils/mockStyles';
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('ToolbarAvatar', () => {
     let props, wrapper
@@ -18,13 +19,13 @@ describe('ToolbarAvatar', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
-    
+
     describe('user is loading', () => {
         beforeEach(() => {
             wrapper.setProps({ user: undefined })
-        });
+        })
 
         it('should only show a spinner', () => {
             expect(wrapper.exists('#spinner')).toBe(true)
@@ -42,7 +43,7 @@ describe('ToolbarAvatar', () => {
             expect(wrapper.exists('#spinner')).toBe(false)
             expect(wrapper.exists('#login-btn')).toBe(true)
             expect(wrapper.exists('#avatar-btn')).toBe(false)
-        });
+        })
 
         it('calls googleSignIn()', () => {
             wrapper.find('#login-btn').simulate('click')
@@ -55,7 +56,9 @@ describe('ToolbarAvatar', () => {
         const testTarget = 'test'
 
         beforeEach(() => {
-            wrapper.find('#avatar-btn').simulate('click', { currentTarget: testTarget })
+            wrapper
+                .find('#avatar-btn')
+                .simulate('click', { currentTarget: testTarget })
         })
 
         it('should only show the avatar', () => {

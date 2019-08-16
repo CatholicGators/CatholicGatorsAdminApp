@@ -1,11 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme';
-import { UserTableToolbar, styles } from './UserTableToolbar';
-import { IconButton } from '@material-ui/core';
-import mockStyles from '../../../../../../utils/mockStyles';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+
+import { UserTableToolbar, styles } from './UserTableToolbar'
+import { IconButton } from '@material-ui/core'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('UserTableToolbar', () => {
-    let wrapper, props;
+    let wrapper, props
 
     beforeEach(() => {
         props = {
@@ -15,11 +17,11 @@ describe('UserTableToolbar', () => {
             handleBatchAuthorize: jest.fn(),
             handleBatchDelete: jest.fn()
         }
-        wrapper = shallow(<UserTableToolbar {...props}/>)
+        wrapper = shallow(<UserTableToolbar {...props} />)
     })
 
     it('matches snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('hides action buttons when nothing selected', () => {

@@ -1,9 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
+import toJson from 'enzyme-to-json'
 
 import { Header, menuLinks, styles } from './Header'
-import mockStyles from '../../../../utils/mockStyles';
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('Header', () => {
     let wrapper, props
@@ -25,7 +26,7 @@ describe('Header', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('should have the drawer not open by default', () => {
@@ -39,13 +40,19 @@ describe('Header', () => {
     })
 
     it('renders all links when user is an admin', () => {
-        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true))
+        menuLinks.forEach(link =>
+            expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true)
+        )
     })
 
     it('renders only unAuthorized links when user is not an admin', () => {
-        wrapper.setProps({ user: { ...props.user, isAdmin: false }})
+        wrapper.setProps({ user: { ...props.user, isAdmin: false } })
 
-        menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
+        menuLinks.forEach(link =>
+            expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(
+                !link.needsAuthorization
+            )
+        )
     })
 
     describe('toggleDrawer(isOpen)', () => {
