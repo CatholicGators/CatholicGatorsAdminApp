@@ -3,7 +3,12 @@ import { of, throwError } from 'rxjs';
 import { toArray, take } from 'rxjs/operators';
 
 import UserService from './userService';
-import { firestore, auth, authCallBacks, authErrCallBacks } from './testUtils/mockFirestore';
+import {
+    firestore,
+    auth,
+    authCallBacks,
+    authErrCallBacks
+} from './testUtils/mockFirestore';
 
 describe('UserService', () => {
     const USER_COLLECTION = 'users';

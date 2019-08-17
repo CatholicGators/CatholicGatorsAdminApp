@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditableOptionRow should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <EditableOptionRow
+    beginEditingOption={[MockFunction]}
+    cancelEditingOption={[MockFunction]}
+    classes={
+      Object {
+        "checkbox": Object {
+          "margin": 0,
+          "pointerEvents": "none",
+        },
+        "optionRow": Object {
+          "&:hover": Object {
+            "section": Object {
+              "display": "block",
+            },
+          },
+          "alignItems": "center",
+          "display": "flex",
+        },
+      }
+    }
+    deleteOption={[MockFunction]}
+    editingOptionId={null}
+    option={
+      Object {
+        "id": "1",
+        "text": "option",
+      }
+    }
+    saveOption={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <WithStyles(Checkbox)
+          className={
+            Object {
+              "margin": 0,
+              "pointerEvents": "none",
+            }
+          }
+          color="primary"
+        />,
+        <WithStyles(EditableTextField)
+          beginEditing={[MockFunction]}
+          cancelEditing={[MockFunction]}
+          deleteText={[MockFunction]}
+          id="1"
+          isEditing={false}
+          isHovered={false}
+          save={[MockFunction]}
+          text="option"
+        />,
+      ],
+      "className": Object {
+        "&:hover": Object {
+          "section": Object {
+            "display": "block",
+          },
+        },
+        "alignItems": "center",
+        "display": "flex",
+      },
+      "onMouseEnter": [Function],
+      "onMouseLeave": [Function],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "className": Object {
+            "margin": 0,
+            "pointerEvents": "none",
+          },
+          "color": "primary",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "beginEditing": [MockFunction],
+          "cancelEditing": [MockFunction],
+          "deleteText": [MockFunction],
+          "id": "1",
+          "isEditing": false,
+          "isHovered": false,
+          "save": [MockFunction],
+          "text": "option",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <WithStyles(Checkbox)
+            className={
+              Object {
+                "margin": 0,
+                "pointerEvents": "none",
+              }
+            }
+            color="primary"
+          />,
+          <WithStyles(EditableTextField)
+            beginEditing={[MockFunction]}
+            cancelEditing={[MockFunction]}
+            deleteText={[MockFunction]}
+            id="1"
+            isEditing={false}
+            isHovered={false}
+            save={[MockFunction]}
+            text="option"
+          />,
+        ],
+        "className": Object {
+          "&:hover": Object {
+            "section": Object {
+              "display": "block",
+            },
+          },
+          "alignItems": "center",
+          "display": "flex",
+        },
+        "onMouseEnter": [Function],
+        "onMouseLeave": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "className": Object {
+              "margin": 0,
+              "pointerEvents": "none",
+            },
+            "color": "primary",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "beginEditing": [MockFunction],
+            "cancelEditing": [MockFunction],
+            "deleteText": [MockFunction],
+            "id": "1",
+            "isEditing": false,
+            "isHovered": false,
+            "save": [MockFunction],
+            "text": "option",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
