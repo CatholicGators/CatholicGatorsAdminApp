@@ -1,16 +1,18 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 import { AddableTextField, Props, styles } from './AddableTextField'
 import { Add, Save, Close } from '@material-ui/icons'
-import { Input, createMuiTheme } from '@material-ui/core'
+import { Input } from '@material-ui/core'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('AddableTextField', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: styles(createMuiTheme()),
+            classes: mockStyles(styles),
             isAdding: false,
             beginAdding: jest.fn(),
             onAdd: jest.fn(),
@@ -20,7 +22,7 @@ describe('AddableTextField', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('should only display the add button when not adding', () => {

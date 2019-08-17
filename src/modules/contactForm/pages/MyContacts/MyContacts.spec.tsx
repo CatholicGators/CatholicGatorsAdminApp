@@ -1,12 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
-import {
-    CircularProgress,
-    Card,
-    CardActions,
-    Button
-} from '@material-ui/core';
+import { CircularProgress, Card, CardActions, Button } from '@material-ui/core'
 import { MyContacts } from './MyContacts'
 
 describe('MyContacts', () => {
@@ -15,7 +11,7 @@ describe('MyContacts', () => {
     beforeEach(() => {
         props = {
             user: {
-                isApproved: true,
+                isApproved: true
             },
             history: {
                 push: jest.fn()
@@ -28,7 +24,7 @@ describe('MyContacts', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     describe('user is not approved', () => {
@@ -61,37 +57,40 @@ describe('MyContacts', () => {
 
     describe('getClassFromStatus(status, classes)', () => {
         let classes = {
-                called: "called",
-                needToCall: "needToCall",
-                notCalled: "notCalled"
-            }
+            called: 'called',
+            needToCall: 'needToCall',
+            notCalled: 'notCalled'
+        }
 
         it('returns null if classes is null', () => {
-            const result = instance.getClassFromStatus("test", null)
-            
+            const result = instance.getClassFromStatus('test', null)
+
             expect(result).toBe(null)
         })
 
         it('returns null if classes is undefined', () => {
-            const result = instance.getClassFromStatus("test", undefined)
-            
+            const result = instance.getClassFromStatus('test', undefined)
+
             expect(result).toBe(null)
         })
 
         it('returns classes.notCalled by default', () => {
-            const result = instance.getClassFromStatus("test", classes)
+            const result = instance.getClassFromStatus('test', classes)
 
             expect(result).toBe(classes.notCalled)
         })
 
         it('returns classes.called when the status is Called', () => {
-            const result = instance.getClassFromStatus("Called", classes)
+            const result = instance.getClassFromStatus('Called', classes)
 
             expect(result).toBe(classes.called)
         })
 
         it('returns classes.needToCall when the status is "Need to call again"', () => {
-            const result = instance.getClassFromStatus("Need to call again", classes)
+            const result = instance.getClassFromStatus(
+                'Need to call again',
+                classes
+            )
 
             expect(result).toBe(classes.needToCall)
         })
@@ -100,11 +99,14 @@ describe('MyContacts', () => {
     describe('changeContactStatus(contact, status)', () => {
         it('calls updateContactStatus(contact, status)', () => {
             const contact = {}
-            const status = "test"
+            const status = 'test'
 
             instance.changeContactStatus(contact, status)
 
-            expect(props.updateContactStatus).toHaveBeenLastCalledWith(contact, status)
+            expect(props.updateContactStatus).toHaveBeenLastCalledWith(
+                contact,
+                status
+            )
         })
     })
 })

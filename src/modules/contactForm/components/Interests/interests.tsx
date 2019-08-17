@@ -11,7 +11,7 @@ import {
   Button
 } from '@material-ui/core';
 
-class Interests extends React.Component {
+class Interests extends React.Component<any, any> {
   constructor(public props: any) {
     super(props)
   }

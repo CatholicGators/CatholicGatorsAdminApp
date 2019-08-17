@@ -1,35 +1,34 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
-import { UserTable } from './UserTable'
-import {
-    TableHead,
-    Checkbox,
-    CircularProgress
-} from '@material-ui/core';
+import { UserTable, styles } from './UserTable'
+import { TableHead, Checkbox, CircularProgress } from '@material-ui/core'
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('UserTable', () => {
     let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             getUsers: jest.fn(),
             updateUser: jest.fn(),
             batchDeleteUsers: jest.fn(),
             users: [
                 {
-                    id: "1",
-                    name: "Joey",
+                    id: '1',
+                    name: 'Joey',
                     isAdmin: false
                 },
                 {
-                    id: "2",
-                    name: "Ryan",
+                    id: '2',
+                    name: 'Ryan',
                     isAdmin: false
                 },
                 {
-                    id: "3",
-                    name: "Espresso Shot Capuccino",
+                    id: '3',
+                    name: 'Espresso Shot Capuccino',
                     isAdmin: true
                 }
             ]
@@ -38,9 +37,9 @@ describe('UserTable', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
-    
+
     it('should call getUsers when mounted', () => {
         expect(props.getUsers).toHaveBeenCalled()
     })
@@ -54,12 +53,12 @@ describe('UserTable', () => {
         it('sets the selected array to contain all of the ids when the table head checkbox is clicked', () => {
             const header = wrapper.find(TableHead)
             const checkbox = header.find(Checkbox)
-    
+
             checkbox.simulate('change', { target: { checked: true } })
-    
+
             const selected = wrapper.state().selected
             expect(selected.length).toEqual(props.users.length)
-            for(var i = 0; i < props.users.length; i++) {
+            for (var i = 0; i < props.users.length; i++) {
                 expect(selected).toContain(props.users[i].id)
             }
         })
@@ -67,9 +66,9 @@ describe('UserTable', () => {
         it('resets the selected array when unchecked', () => {
             const header = wrapper.find(TableHead)
             const checkbox = header.find(Checkbox)
-    
+
             checkbox.simulate('change', { target: { checked: false } })
-    
+
             const selected = wrapper.state().selected
             expect(selected.length).toBe(0)
         })
@@ -88,32 +87,32 @@ describe('UserTable', () => {
             beforeEach(() => {
                 instance = wrapper.instance()
                 expectedArr = props.users.map(user => user.id)
-    
-                for(var i = 0; i < props.users.length; i++) {
+
+                for (var i = 0; i < props.users.length; i++) {
                     instance.handleSelect(props.users[i].id)
                 }
             })
-    
+
             it('removes the id from the selected field when id is at the end of the array', () => {
                 expectedArr.splice(-1, 1)
                 instance.handleSelect(props.users[props.users.length - 1].id)
-    
+
                 expect(wrapper.state().selected).toEqual(expectedArr)
             })
-    
+
             it('removes the id from the selected field when id is at the beginning of the array', () => {
                 expectedArr.splice(0, 1)
-    
+
                 instance.handleSelect(props.users[0].id)
-    
+
                 expect(wrapper.state().selected).toEqual(expectedArr)
             })
-        
+
             it('removes the id from the selected field when id is not at the beginning nor end of the array', () => {
                 expectedArr.splice(1, 1)
-    
+
                 instance.handleSelect(props.users[1].id)
-    
+
                 expect(wrapper.state().selected).toEqual(expectedArr)
             })
         })
@@ -126,7 +125,7 @@ describe('UserTable', () => {
             ammountToApprove = props.users.length - 1
             instance = wrapper.instance()
 
-            for(var i = 0; i < ammountToApprove; i++) {
+            for (var i = 0; i < ammountToApprove; i++) {
                 instance.handleSelect(props.users[i].id)
             }
         })
@@ -134,7 +133,7 @@ describe('UserTable', () => {
         it('approves all of the selected users', () => {
             instance.handleBatchApprove()
 
-            for(var i = 0; i < ammountToApprove; i++) {
+            for (var i = 0; i < ammountToApprove; i++) {
                 expect(props.updateUser).toHaveBeenCalledWith({
                     ...props.users[i],
                     isApproved: true
@@ -146,7 +145,7 @@ describe('UserTable', () => {
         it('clears the selected array', () => {
             let selected = wrapper.state().selected
             expect(selected.length).toBe(ammountToApprove)
-    
+
             instance.handleBatchApprove()
 
             selected = wrapper.state().selected
@@ -161,7 +160,7 @@ describe('UserTable', () => {
             ammountToAuthorize = props.users.length - 1
             instance = wrapper.instance()
 
-            for(var i = 0; i < ammountToAuthorize; i++) {
+            for (var i = 0; i < ammountToAuthorize; i++) {
                 instance.handleSelect(props.users[i].id)
             }
         })
@@ -169,7 +168,7 @@ describe('UserTable', () => {
         it('authorizes all of the selected users', () => {
             instance.handleBatchAuthorize()
 
-            for(var i = 0; i < ammountToAuthorize; i++) {
+            for (var i = 0; i < ammountToAuthorize; i++) {
                 expect(props.updateUser).toHaveBeenCalledWith({
                     ...props.users[i],
                     isApproved: true,
@@ -182,7 +181,7 @@ describe('UserTable', () => {
         it('clears the selected array', () => {
             let selected = wrapper.state().selected
             expect(selected.length).toBe(ammountToAuthorize)
-    
+
             instance.handleBatchApprove()
 
             selected = wrapper.state().selected
@@ -197,7 +196,7 @@ describe('UserTable', () => {
             ammountToDelete = props.users.length - 1
             instance = wrapper.instance()
 
-            for(var i = 0; i < ammountToDelete; i++) {
+            for (var i = 0; i < ammountToDelete; i++) {
                 instance.handleSelect(props.users[i].id)
             }
         })
@@ -214,7 +213,7 @@ describe('UserTable', () => {
         it('clears the selected array', () => {
             let selected = wrapper.state().selected
             expect(selected.length).toBe(ammountToDelete)
-    
+
             instance.handleBatchDelete()
 
             selected = wrapper.state().selected

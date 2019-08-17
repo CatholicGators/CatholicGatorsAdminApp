@@ -18,24 +18,27 @@ import { VpnKey, Group } from '@material-ui/icons'
 import UserTable from '../../components/UserTable/UserTable'
 import Interests from '../../components/Interests/Interests'
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
   pageWrapper: {
     display: 'flex',
     margin: '50px 0px',
-    padding: `0px ${theme.spacing.unit}px`,
+    padding: `0px ${theme.spacing(1)}px`,
     width: '100%'
   },
   pageNav: {
     width: 250,
     minWidth: 250,
     padding: 0,
-    marginRight: `${theme.spacing.unit}px`
+    marginRight: `${theme.spacing(1)}px`
   },
   navLink: {
     textDecoration: 'none',
     '&:visited': {
       color: 'inherit'
     }
+  },
+  colorInitial: {
+    color: 'initial'
   }
 })
 
@@ -68,8 +71,8 @@ export class Admin extends Component<Props> {
     const { classes, match, location } = this.props
 
     return (
-      <div className={classes ? classes.pageWrapper : null}>
-        <List className={classes ? classes.pageNav : null}>
+      <div className={classes.pageWrapper}>
+        <List className={classes.pageNav}>
           {
             menuLinks
               .map(link => 
@@ -77,16 +80,17 @@ export class Admin extends Component<Props> {
                   exact
                   key={link.text}
                   to={`${match.url}${link.href}`}
-                  className={classes ? classes.navLink : null}
+                  className={classes.navLink}
                 >
                   <ListItem
                     button
+                    className={classes.colorInitial}
                     selected={location.pathname === `${match.url}${link.href}`}
                   >
                     <ListItemIcon>
                       <link.icon/>
                     </ListItemIcon>
-                    <ListItemText primary={link.text} />
+                    <ListItemText primary={link.text}/>
                   </ListItem>
                 </NavLink>
               )

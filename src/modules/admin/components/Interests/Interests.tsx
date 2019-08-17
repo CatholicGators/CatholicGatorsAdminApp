@@ -23,14 +23,13 @@ import AddableTextField from './components/AddableTextField/AddableTextField'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
 import { Section } from '../../../../services/interestsService'
 
-const styles = (theme: Theme) =>
+export const styles = (theme: Theme) =>
     createStyles({
         formWrapper: {
             width: 600
         },
         form: {
-            margin: `0 ${theme.spacing.unit * 3}px ${theme.spacing.unit *
-                3}px ${theme.spacing.unit * 3}px`
+            margin: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`
         },
         formLoadingContainer: {
             display: 'flex',
@@ -46,7 +45,7 @@ const styles = (theme: Theme) =>
             alignItems: 'center'
         },
         addSectionWrapper: {
-            margin: `${theme.spacing.unit * 3}px`
+            margin: `${theme.spacing(3)}px`
         }
     })
 

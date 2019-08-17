@@ -1,15 +1,17 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 import { EditableOptionRow, Props, styles } from './EditableOptionRow'
 import EditableTextField from '../EditableTextField/EditableTextField'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('EditableOptionRow', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: styles(null),
+            classes: mockStyles(styles),
             option: {
                 id: '1',
                 text: 'option'
@@ -24,7 +26,7 @@ describe('EditableOptionRow', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('should set the state according to whether hovering or not and pass that down to the text field', () => {

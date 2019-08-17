@@ -1,6 +1,6 @@
 export var steps = ['Personal information', 'Parent\'s information', 'Your interests'];
 
-export var filterState = (state : any) => {
+export const filterState = (state : any) => {
   var contactForm = {
     firstName: state.firstName,
     lastName: state.lastName,

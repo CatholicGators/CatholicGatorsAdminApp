@@ -1,274 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ToolbarAvatar should match snapshot 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ToolbarAvatar
-    login={[MockFunction]}
-    logout={[MockFunction]}
-    user={Object {}}
-  />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": Array [
-        <WithStyles(IconButton)
-          aria-haspopup="true"
-          color="inherit"
-          id="avatar-btn"
-          onClick={[Function]}
-        >
-          <WithStyles(Avatar) />
-        </WithStyles(IconButton)>,
-        <WithStyles(Menu)
-          anchorEl={null}
-          anchorOrigin={
-            Object {
-              "horizontal": "right",
-              "vertical": "top",
-            }
-          }
-          id="menu"
-          onClose={[Function]}
-          open={false}
-          transformOrigin={
-            Object {
-              "horizontal": "right",
-              "vertical": "top",
-            }
-          }
-        >
-          <WithStyles(MenuItem)
-            id="logout"
-            onClick={[Function]}
-          >
-            Logout
-          </WithStyles(MenuItem)>
-        </WithStyles(Menu)>,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
+<div>
+  <WithStyles(ForwardRef(IconButton))
+    aria-haspopup="true"
+    color="inherit"
+    id="avatar-btn"
+    onClick={[Function]}
+  >
+    <WithStyles(ForwardRef(Avatar)) />
+  </WithStyles(ForwardRef(IconButton))>
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    anchorOrigin={
       Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "aria-haspopup": "true",
-          "aria-owns": undefined,
-          "children": <WithStyles(Avatar) />,
-          "color": "inherit",
-          "id": "avatar-btn",
-          "onClick": [Function],
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "src": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": [Function],
-      },
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+    id="menu"
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
       Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "anchorEl": null,
-          "anchorOrigin": Object {
-            "horizontal": "right",
-            "vertical": "top",
-          },
-          "children": <WithStyles(MenuItem)
-            id="logout"
-            onClick={[Function]}
-          >
-            Logout
-          </WithStyles(MenuItem)>,
-          "id": "menu",
-          "onClose": [Function],
-          "open": false,
-          "transformOrigin": Object {
-            "horizontal": "right",
-            "vertical": "top",
-          },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": "Logout",
-            "id": "logout",
-            "onClick": [Function],
-          },
-          "ref": null,
-          "rendered": "Logout",
-          "type": [Function],
-        },
-        "type": [Function],
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <WithStyles(IconButton)
-            aria-haspopup="true"
-            color="inherit"
-            id="avatar-btn"
-            onClick={[Function]}
-          >
-            <WithStyles(Avatar) />
-          </WithStyles(IconButton)>,
-          <WithStyles(Menu)
-            anchorEl={null}
-            anchorOrigin={
-              Object {
-                "horizontal": "right",
-                "vertical": "top",
-              }
-            }
-            id="menu"
-            onClose={[Function]}
-            open={false}
-            transformOrigin={
-              Object {
-                "horizontal": "right",
-                "vertical": "top",
-              }
-            }
-          >
-            <WithStyles(MenuItem)
-              id="logout"
-              onClick={[Function]}
-            >
-              Logout
-            </WithStyles(MenuItem)>
-          </WithStyles(Menu)>,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "aria-haspopup": "true",
-            "aria-owns": undefined,
-            "children": <WithStyles(Avatar) />,
-            "color": "inherit",
-            "id": "avatar-btn",
-            "onClick": [Function],
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "src": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "anchorEl": null,
-            "anchorOrigin": Object {
-              "horizontal": "right",
-              "vertical": "top",
-            },
-            "children": <WithStyles(MenuItem)
-              id="logout"
-              onClick={[Function]}
-            >
-              Logout
-            </WithStyles(MenuItem)>,
-            "id": "menu",
-            "onClose": [Function],
-            "open": false,
-            "transformOrigin": Object {
-              "horizontal": "right",
-              "vertical": "top",
-            },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Logout",
-              "id": "logout",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": "Logout",
-            "type": [Function],
-          },
-          "type": [Function],
-        },
-      ],
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-    Symbol(enzyme.__providerValues__): undefined,
-  },
-  Symbol(enzyme.__providerValues__): Map {},
-  Symbol(enzyme.__childContext__): null,
-}
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      id="logout"
+      onClick={[Function]}
+    >
+      Logout
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Menu))>
+</div>
 `;

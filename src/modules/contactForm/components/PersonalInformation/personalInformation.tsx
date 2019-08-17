@@ -50,7 +50,7 @@ const semester = [
   },
 ];
 
-class PersonalInformation extends React.Component {
+class PersonalInformation extends React.Component<any, any> {
 
   state = {
     yearWidth: 120,

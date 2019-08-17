@@ -1,15 +1,18 @@
 import React from 'react'
-import { shallow } from 'enzyme';
-import { NavLink } from "react-router-dom";
+import { shallow } from 'enzyme'
+import { NavLink } from 'react-router-dom'
+import toJson from 'enzyme-to-json'
 
 import { menuLinks } from '../Header/Header'
-import { MobileDrawer } from './MobileDrawer';
+import { MobileDrawer, styles } from './MobileDrawer'
+import mockStyles from '../../../../utils/mockStyles'
 
 describe('MobileDrawer', () => {
-    let props, wrapper;
+    let props, wrapper
 
     beforeEach(() => {
         props = {
+            classes: mockStyles(styles),
             user: {
                 isAdmin: true
             },
@@ -24,7 +27,7 @@ describe('MobileDrawer', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('closes the drawer when a NavLink is clicked on', () => {
@@ -46,9 +49,11 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#logout-btn')).toBe(false)
             expect(wrapper.exists('#avatar')).toBe(false)
         })
-        
+
         it('renders no links', () => {
-            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false))
+            menuLinks.forEach(link =>
+                expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false)
+            )
         })
     })
 
@@ -63,11 +68,13 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#logout-btn')).toBe(false)
             expect(wrapper.exists('#avatar')).toBe(false)
         })
-        
+
         it('renders no links', () => {
-            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false))
+            menuLinks.forEach(link =>
+                expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(false)
+            )
         })
-        
+
         describe('login', () => {
             it('closes the drawer', () => {
                 wrapper.find('#login-btn').simulate('click')
@@ -77,7 +84,7 @@ describe('MobileDrawer', () => {
 
             it('calls googleSignIn()', () => {
                 wrapper.find('#login-btn').simulate('click')
-    
+
                 expect(props.login).toHaveBeenCalled()
             })
         })
@@ -90,15 +97,21 @@ describe('MobileDrawer', () => {
             expect(wrapper.exists('#logout-btn')).toBe(true)
             expect(wrapper.exists('#avatar')).toBe(true)
         })
-        
+
         it('renders all links when user is an admin', () => {
-            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true))
+            menuLinks.forEach(link =>
+                expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(true)
+            )
         })
 
         it('renders only unAuthorized links when user is not an admin', () => {
-            wrapper.setProps({ user: { ...props.user, isAdmin: false }})
+            wrapper.setProps({ user: { ...props.user, isAdmin: false } })
 
-            menuLinks.forEach(link => expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(!link.needsAuthorization))
+            menuLinks.forEach(link =>
+                expect(wrapper.exists(`NavLink[to='${link.href}']`)).toBe(
+                    !link.needsAuthorization
+                )
+            )
         })
 
         describe('logout', () => {

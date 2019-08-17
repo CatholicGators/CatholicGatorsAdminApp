@@ -1,49 +1,50 @@
 {
-  "name": "catholic-gators-admin",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
-    "classnames": "^2.2.6",
-    "firebase": "5.8.2",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
-    "react-text-mask": "^5.4.3",
-    "redux": "^4.0.1",
-    "redux-mock-store": "^1.5.3",
-    "redux-observable": "^1.0.0",
-    "rxjs": "^6.4.0",
-    "serve": "^10.1.2"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.4",
-    "@types/node": "^11.9.3",
-    "@types/react": "^16.8.3",
-    "@types/react-dom": "^16.8.1",
-    "@types/react-redux": "^7.0.1",
-    "@types/react-text-mask": "^5.4.4",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "jest-when": "^2.6.0",
-    "typescript": "^3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "serve": "serve -s build -l 3000"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "catholic-gators-admin",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "^4.3.2",
+        "@material-ui/icons": "^4.2.1",
+        "classnames": "^2.2.6",
+        "firebase": "6.4.0",
+        "react": "^16.8.1",
+        "react-dom": "^16.8.1",
+        "react-redux": "^7.1.0",
+        "react-router-dom": "^5.0.1",
+        "react-scripts": "3.1.1",
+        "react-text-mask": "^5.4.3",
+        "redux": "^4.0.4",
+        "redux-mock-store": "^1.5.3",
+        "redux-observable": "^1.0.0",
+        "rxjs": "^6.4.0",
+        "serve": "^11.1.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.0.4",
+        "@types/node": "^12.7.2",
+        "@types/react": "^16.8.3",
+        "@types/react-dom": "^16.8.1",
+        "@types/react-redux": "^7.0.1",
+        "@types/react-text-mask": "^5.4.4",
+        "enzyme": "^3.8.0",
+        "enzyme-adapter-react-16": "^1.9.1",
+        "enzyme-to-json": "^3.4.0",
+        "jest-when": "^2.6.0",
+        "typescript": "^3.3.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "serve": "serve -s build -l 3000"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ]
 }

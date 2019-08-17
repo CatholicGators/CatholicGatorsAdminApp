@@ -12,7 +12,7 @@ import {
   Button
 } from "@material-ui/core";
 
-class ParentsInformation extends React.Component {
+class ParentsInformation extends React.Component<any, any> {
 
   constructor(public props: any) {
     super(props)

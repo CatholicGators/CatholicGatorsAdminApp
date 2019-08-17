@@ -1,25 +1,22 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
-import { EditableTextField, Props } from './EditableTextField'
-import {
-    Edit,
-    Delete,
-    Save,
-    Close
-} from '@material-ui/icons';
-import { Input } from '@material-ui/core';
+import { EditableTextField, Props, styles } from './EditableTextField'
+import { Edit, Delete, Save, Close } from '@material-ui/icons'
+import { Input } from '@material-ui/core'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('EditableTextField', () => {
     let props: Props, wrapper
 
     beforeEach(() => {
         props = {
-            classes: {},
+            classes: mockStyles(styles),
             isEditing: false,
             isHovered: false,
-            id: 1,
-            text: "totally testing",
+            id: '1',
+            text: 'totally testing',
             beginEditing: jest.fn(),
             cancelEditing: jest.fn(),
             deleteText: jest.fn(),
@@ -29,7 +26,7 @@ describe('EditableTextField', () => {
     })
 
     it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot()
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('defaults the editedText to the text of the option that is passed in', () => {
@@ -76,7 +73,7 @@ describe('EditableTextField', () => {
         it('save is called when save clicked', () => {
             const newText = 'test'
             const input = wrapper.find(Input)
-            input.simulate("change", { target: { value: newText } });
+            input.simulate('change', { target: { value: newText } })
             const save = wrapper.find('#save')
             save.simulate('click')
 

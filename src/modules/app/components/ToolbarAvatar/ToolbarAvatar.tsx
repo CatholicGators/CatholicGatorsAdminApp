@@ -8,7 +8,7 @@ import Menu from '@material-ui/core/Menu'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-const styles = (theme: Theme) => createStyles({
+export const styles = (theme: Theme) => createStyles({
     progress: {
         margin: 12,
         color: theme.palette.secondary.main
