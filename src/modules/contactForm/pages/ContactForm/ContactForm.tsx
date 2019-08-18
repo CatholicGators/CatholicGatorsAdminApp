@@ -52,10 +52,6 @@ export class ContactForm extends Component<any, any> {
     }
 
     handleChange(event: any, name: string) {
-        console.log("name")
-        console.log(name)
-        console.log("event")
-        console.log(event)
         if (event.target.type === "checkbox") {
             var index = this.state.interests.indexOf(name)
             if(index < 0) {
