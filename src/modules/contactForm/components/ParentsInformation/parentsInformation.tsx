@@ -35,7 +35,7 @@ class ParentsInformation extends React.Component<any, any> {
                 label="Permanent Address"
                 className={classes.fieldLarger}
                 value={this.props.data.permanentAddress}
-                onChange={handleChange('permanentAddress')}
+                onChange={(e) => handleChange(e, 'permanentAddress')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -45,7 +45,7 @@ class ParentsInformation extends React.Component<any, any> {
                 label="City"
                 className={classes.field}
                 value={this.props.data.city}
-                onChange={handleChange('city')}
+                onChange={(e) => handleChange(e, 'city')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -55,7 +55,7 @@ class ParentsInformation extends React.Component<any, any> {
                 label="State"
                 className={classes.fieldSmaller}
                 value={this.props.data.state}
-                onChange={handleChange('state')}
+                onChange={(e) => handleChange(e, 'state')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -73,7 +73,7 @@ class ParentsInformation extends React.Component<any, any> {
                 <OutlinedInput
                     id="zip-code"
                     value={this.props.data.zipCode}
-                    onChange={handleChange('zipCode')}
+                    onChange={(e) => handleChange(e, 'zipCode')}
                     inputComponent={ZipCodeTextMask as any}
                     labelWidth={this.state.zipCodeWidth}
                     required
@@ -84,7 +84,7 @@ class ParentsInformation extends React.Component<any, any> {
                 label="Parent's Name"
                 className={classes.field}
                 value={this.props.data.parentName}
-                onChange={handleChange('parentName')}
+                onChange={(e) => handleChange(e, 'parentName')}
                 margin="normal"
                 variant="outlined"
             ></TextField>
@@ -100,7 +100,7 @@ class ParentsInformation extends React.Component<any, any> {
                 <OutlinedInput
                     id="parent-phone-number"
                     value={this.props.data.parentPhone}
-                    onChange={handleChange('parentPhone')}
+                    onChange={(e) => handleChange(e, 'parentPhone')}
                     inputComponent={PhoneNumberTextMask as any}
                     labelWidth={this.state.phoneNumberWidth}
                 />
@@ -110,7 +110,7 @@ class ParentsInformation extends React.Component<any, any> {
                 label="Parent's Email"
                 className={classes.field}
                 value={this.props.data.parentEmail}
-                onChange={handleChange('parentEmail')}
+                onChange={(e) => handleChange(e, 'parentEmail')}
                 margin="normal"
                 variant="outlined"
             ></TextField>

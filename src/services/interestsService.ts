@@ -30,17 +30,16 @@ export default class InterestsService {
 
     constructor(private db: firebase.firestore.Firestore) {}
 
-    getInterests() : Promise<Section[]> {
-        return Promise.all([
+    async getInterests() : Promise<Section[]> {
+        const [sectionDocs, optionDocs] = await Promise.all([
             this.getAllAndFlatten<SectionDoc>(InterestsService.SECTIONS),
             this.getAllAndFlatten<Option>(InterestsService.OPTIONS)
-        ]).then(([sectionDocs, optionDocs]) => sectionDocs.map(section => ({
-                ...section,
-                options: section.options.map(optionId => 
-                    optionDocs.filter(option => option.id === optionId)[0]
-                ).filter(option => option !== undefined)
-            })
-        )).then(sections => sections.sort((a, b) => a.position - b.position))
+        ]);
+        const sections = sectionDocs.map(section => ({
+            ...section,
+            options: section.options.map(optionId => optionDocs.filter(option => option.id === optionId)[0]).filter(option => option !== undefined)
+        }));
+        return sections.sort((a, b) => a.position - b.position);
     }
 
     addOption(sectionId: string, optionReq: NewOptionReq) : Promise<Option> {
@@ -79,18 +78,19 @@ export default class InterestsService {
         })
     }
 
-    addSection(sectionReq: NewSectionReq) : Promise<Section> {
-        return this.db.collection(InterestsService.SECTIONS).add(sectionReq).then(sectionRef => ({
+    async addSection(sectionReq: NewSectionReq) : Promise<Section> {
+        const sectionRef = await this.db.collection(InterestsService.SECTIONS).add(sectionReq);
+        return ({
             id: sectionRef.id,
             ...sectionReq
-        }))
+        });
     }
 
-    private getAllAndFlatten<T extends Doc>(collection: string) : Promise<T[]> {
-        return this.db.collection(collection).get()
-            .then(snapshot => snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            } as T)))
+    private async getAllAndFlatten<T extends Doc>(collection: string) : Promise<T[]> {
+        const snapshot = await this.db.collection(collection).get();
+        return snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        } as T));
     }
 }
