@@ -7,6 +7,7 @@ import Interests from '../../components/Interests/interests'
 import { submitContactForm } from '../../../../redux/actions/contactForm/contactFormActions';
 import { styles } from '../../utils/ContactFormStyles'
 import { steps, filterState } from '../../utils/ContactFormUtils'
+import { getInterests } from '../../../../redux/actions/contactForm/interestActions'
 
 import {
     withStyles,
@@ -36,35 +37,34 @@ const initState = {
     parentName: '',
     parentPhone: '',
     parentEmail: '',
-    eventsGreekStudents: false,
-    eventsLatinoStudents: false,
-    eventsGraduateStudents: false,
-    receiveMonthlyNewsletter: false,
-    registerAsParishioner: false,
-    englishBibleStudy: false,
-    spanishBibleStudy: false,
-    freeFood: false,
-    guestSpeakers: false,
-    musicMinistry: false,
-    socials: false,
-    retreats: false,
-    intramuralSports: false,
-    proLifeClub: false,
-    RHC: false,
-    servingAtMass: false,
-    teachReligiousEd: false,
-    serviceProjects: false,
+    interests: [],
     activeStep: 0
 };
 
 export class ContactForm extends Component<any, any> {
-    state = initState
+    constructor(props){
+        super(props)
+        this.state = initState
+    }
 
-    handleChange = (name: string) => event => {
+    componentDidMount() {
+        this.props.getInterests()
+    }
+
+    handleChange(event: any, name: string) {
         if (event.target.type === "checkbox") {
-            this.setState({
-                [name]: event.target.checked
-            });
+            var index = this.state.interests.indexOf(name)
+            if(index < 0) {
+                this.setState((prevState) => {
+                    return {interests: prevState.interests.concat(name)}
+                })
+            } else {
+                var newCheckedObjectIds = this.state.interests
+                newCheckedObjectIds.splice(index)
+                this.setState(() => {
+                    return {interests: newCheckedObjectIds}
+                })
+            }
         } else {
             this.setState({
                 [name]: event.target.value
@@ -94,7 +94,7 @@ export class ContactForm extends Component<any, any> {
         this.setState({
             activeStep: 0
         });
-    }
+    };
 
     render() {
         const { classes } = this.props;
@@ -115,7 +115,14 @@ export class ContactForm extends Component<any, any> {
                             ))}
                         </Stepper>
                         <React.Fragment>
-                            {getStepContent(this.state, this.props, this.handleChange, this.handleNext.bind(this), this.handleBack.bind(this), this.resetStep.bind(this))}
+                            {getStepContent(
+                                this.state,
+                                this.props,
+                                this.handleChange.bind(this),
+                                this.handleNext.bind(this),
+                                this.handleBack.bind(this),
+                                this.resetStep.bind(this)
+                            )}
                         </React.Fragment>
                     </Paper>
                 </main>
@@ -162,7 +169,7 @@ function getStepContent(state, props, handleChange, handleNext, handleBack, rese
             case 1:
                 return <ParentsInformation data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             case 2:
-                return <Interests data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
+                return <Interests interests={props.interests} data={state} handleChange={handleChange} handleNext={handleNext} handleBack={handleBack} />;
             default:
                 resetStep();
         }
@@ -170,10 +177,12 @@ function getStepContent(state, props, handleChange, handleNext, handleBack, rese
 }
 
 const mapDispatchToProps = dispatch => ({
+    getInterests: () => dispatch(getInterests()),
     submitContactForm: form => dispatch(submitContactForm(form))
 });
 
 const mapStateToProps = state => ({
+    interests: state.contactForm.interests,
     loading: state.contactForm.loading,
     success: state.contactForm.success,
     errorMessage: state.contactForm.errorMessage

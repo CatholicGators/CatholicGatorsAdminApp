@@ -14,7 +14,8 @@ describe('ContactForm', () => {
         props = {
             classes: mockStyles(styles),
             listenForUser: jest.fn(),
-            submitContactForm: jest.fn()
+            submitContactForm: jest.fn(),
+            getInterests: jest.fn()
         }
         wrapper = shallow(<ContactForm {...props} />)
     })
@@ -58,6 +59,19 @@ describe('ContactForm', () => {
             wrapper.instance().resetStep()
 
             expect(wrapper.state('activeStep')).toBe(0)
+        })
+
+        it('should add option id to interests on checkbox toggle on', () => {
+            wrapper.instance().handleChange({target: {type: 'checkbox'}}, '123456789')
+
+            expect(wrapper.state('interests').length).toBe(1)
+        })
+
+        it('should remove option id from interests on checkbox toggle off', () => {
+            wrapper.setState({ interests: ['123456789'] })
+            wrapper.instance().handleChange({target: {type: 'checkbox'}}, '123456789')
+
+            expect(wrapper.state('interests').length).toBe(0)
         })
     })
 })

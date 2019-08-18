@@ -73,7 +73,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="First Name"
                 className={classes.field}
                 value={this.props.data.firstName}
-                onChange={handleChange('firstName')}
+                onChange={(e) => handleChange(e, 'firstName')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -83,7 +83,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="Last Name"
                 className={classes.field}
                 value={this.props.data.lastName}
-                onChange={handleChange('lastName')}
+                onChange={(e) => handleChange(e, 'lastName')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -94,7 +94,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="Gender"
                 className={classes.fieldSmaller}
                 value={this.props.data.gender}
-                onChange={handleChange('gender')}
+                onChange={(e) => handleChange(e, 'gender')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -111,7 +111,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="School"
                 className={classes.fieldSmaller}
                 value={this.props.data.school}
-                onChange={handleChange('school')}
+                onChange={(e) => handleChange(e, 'school')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -135,7 +135,7 @@ class PersonalInformation extends React.Component<any, any> {
                 <OutlinedInput
                     id="phone-number"
                     value={this.props.data.phoneNumber}
-                    onChange={handleChange('phoneNumber')}
+                    onChange={(e) => handleChange(e, 'phoneNumber')}
                     inputComponent={PhoneNumberTextMask as any}
                     labelWidth={this.state.phoneNumberWidth}
                     required
@@ -146,7 +146,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="Email"
                 className={classes.fieldLarger}
                 value={this.props.data.email}
-                onChange={handleChange('email')}
+                onChange={(e) => handleChange(e, 'email')}
                 margin="normal"
                 variant="outlined"
                 required
@@ -156,7 +156,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="Name of Dorm/Complex"
                 className={classes.fieldLarger}
                 value={this.props.data.housingComplex}
-                onChange={handleChange('housingComplex')}
+                onChange={(e) => handleChange(e, 'housingComplex')}
                 margin="normal"
                 variant="outlined"
             ></TextField>
@@ -173,7 +173,7 @@ class PersonalInformation extends React.Component<any, any> {
                 <OutlinedInput
                     id="graduationYear"
                     value={this.props.data.graduationYear}
-                    onChange={handleChange('graduationYear')}
+                    onChange={(e) => handleChange(e, 'graduationYear')}
                     inputComponent={YearTextMask as any}
                     labelWidth={this.state.yearWidth}
                     required
@@ -185,7 +185,7 @@ class PersonalInformation extends React.Component<any, any> {
                 label="Graduation Semester"
                 className={classes.field}
                 value={this.props.data.graduationSemester}
-                onChange={handleChange('graduationSemester')}
+                onChange={(e) => handleChange(e, 'graduationSemester')}
                 margin="normal"
                 variant="outlined"
                 required
