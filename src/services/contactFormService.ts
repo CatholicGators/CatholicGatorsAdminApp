@@ -62,10 +62,10 @@ export default class ContactFormService {
 
     async addContact(contact: NewContactReq) : Promise<Contact> {
         const contactFormRef = await this.db.collection(ContactFormService.CONTACTS_COLLECTION).add(contact)
-        return ({
+        return {
             id: contactFormRef.id,
             ...contact
-        })
+        }
     }
 
     async getAllContacts() : Promise<Contact[]> {
