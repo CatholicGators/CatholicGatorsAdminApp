@@ -7,7 +7,7 @@ script:
 - yarn build
 - yarn test
 deploy:
-  provider: firebase
+- provider: firebase
   before_deploy:
   - export REACT_APP_ENV=testing
   - yarn build
@@ -16,8 +16,7 @@ deploy:
   on:
     branch: FirebaseDeploy
   project: testing
-deploy:
-  provider: firebase
+- provider: firebase
   before_deploy:
   - export REACT_APP_ENV=production
   - yarn build
