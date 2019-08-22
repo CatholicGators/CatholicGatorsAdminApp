@@ -19,6 +19,7 @@ import {
     CircularProgress,
     Button
 } from '@material-ui/core';
+import { NewContactReq } from '../../../../services/contactFormService';
 
 const initState = {
     firstName: '',
@@ -52,7 +53,7 @@ export class ContactForm extends Component<any, any> {
     }
 
     handleChange(event: any, name: string) {
-        if (event.target.type === "checkbox") {
+        if (event.target.type === 'checkbox') {
             var index = this.state.interests.indexOf(name)
             if(index < 0) {
                 this.setState((prevState) => {
@@ -178,14 +179,14 @@ function getStepContent(state, props, handleChange, handleNext, handleBack, rese
 
 const mapDispatchToProps = dispatch => ({
     getInterests: () => dispatch(getInterests()),
-    submitContactForm: form => dispatch(submitContactForm(form))
+    submitContactForm: (contact: NewContactReq) => dispatch(submitContactForm(contact))
 });
 
 const mapStateToProps = state => ({
-    interests: state.contactForm.interests,
-    loading: state.contactForm.loading,
-    success: state.contactForm.success,
-    errorMessage: state.contactForm.errorMessage
+    interests: state.contact.interests,
+    loading: state.contact.loading,
+    success: state.contact.success,
+    errorMessage: state.contact.errorMessage
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactForm));

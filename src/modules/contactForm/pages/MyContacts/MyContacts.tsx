@@ -24,6 +24,7 @@ import {
   OutlinedInput
 } from '@material-ui/core'
 
+import { ContactStatus, Contact } from '../../../../services/contactFormService'
 import {
     getContacts,
     updateContactStatus
@@ -73,9 +74,9 @@ type Props = {
     history: any,
     user: any,
     classes: any,
-    contacts: any,
+    contacts: Contact[],
     getContacts: () => void,
-    updateContactStatus: (contact, status) => void
+    updateContactStatus: (contact : Contact, status : number) => void
 }
 
 export class MyContacts extends Component<Props> {
@@ -87,20 +88,25 @@ export class MyContacts extends Component<Props> {
         this.props.history.push('/')
     }
 
-    changeContactStatus(contact, status) {
-        this.props.updateContactStatus(contact, status)
+    changeContactStatus(contact : Contact, status : unknown) {
+        if(typeof status === 'number') {
+            this.props.updateContactStatus(contact, status)
+        } else {
+            this.props.updateContactStatus(contact, 0)
+        }
     }
 
-    getClassFromStatus(status, classes) {
+    getClassFromStatus(status : number, classes : any) : any {
         if(!classes) {
             return null
         }
 
         switch(status) {
-            case "Called":
+            case ContactStatus.CALLED:
                 return classes.called
-            case "Need to call again":
+            case ContactStatus.NEED_TO_CALL_AGAIN:
                 return classes.needToCall
+            case ContactStatus.NOT_CALLED:
             default:
                 return classes.notCalled
         }
@@ -108,7 +114,7 @@ export class MyContacts extends Component<Props> {
 
     render() {
         const { classes, contacts, user } =  this.props
-    
+
         return user && user.isApproved ? (
             <div className={classes ? classes.tableWrapper : null}>
                 <Paper className={classes ? classes.tableCard : null}>
@@ -139,7 +145,7 @@ export class MyContacts extends Component<Props> {
                                                 classes ? classes.select : null,
                                                 this.getClassFromStatus(contact.status, classes)
                                             )}
-                                            value={contact.status || "Not called"}
+                                            value={ contact.status }
                                             onChange={ev => this.changeContactStatus(contact, ev.target.value)}
                                             input={
                                                 <OutlinedInput
@@ -148,9 +154,9 @@ export class MyContacts extends Component<Props> {
                                                 />
                                             }
                                         >
-                                            <MenuItem value={"Not called"}>Not called</MenuItem>
-                                            <MenuItem value={"Need to call again"}>Need to call again</MenuItem>
-                                            <MenuItem value={"Called"}>Called</MenuItem>
+                                            <MenuItem value={ContactStatus.NOT_CALLED}>Not called</MenuItem>
+                                            <MenuItem value={ContactStatus.NEED_TO_CALL_AGAIN}>Need to call again</MenuItem>
+                                            <MenuItem value={ContactStatus.CALLED}>Called</MenuItem>
                                         </Select>
                                     </TableCell>
                                 </TableRow>
@@ -185,7 +191,7 @@ export class MyContacts extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-    contacts: state.contactForm.contacts,
+    contacts: state.contact.contacts,
     user: state.auth.user
 })
 

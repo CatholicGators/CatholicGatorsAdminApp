@@ -1,6 +1,7 @@
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { ofType, ActionsObservable } from 'redux-observable';
 import { combineEpics } from 'redux-observable';
+import { from } from 'rxjs/internal/observable/from';
 
 import {
     contactFormActions,
@@ -11,12 +12,14 @@ import {
     updateContactStatusErr,
     updateContactStatusSuccess
 } from '../../actions/contactForm/contactFormActions';
+import { Dependencies } from '../../store';
+import { Contact } from '../../../services/contactFormService';
 
-export const submitContactFormEpic = (action$, _, { firestore }) => {
+export const submitContactFormEpic = (action$, _, { contactFormService } : Dependencies) => {
     return action$.pipe(
         ofType(contactFormActions.SUBMIT_CONTACT_FORM),
         mergeMap((action: any) =>
-            firestore.addDoc('contactForms', action.form).pipe(
+            from(contactFormService.addContact(action.contact)).pipe(
                 map(() => submitContactFormSuccess()),
                 catchError(err => ActionsObservable.of(submitContactFormErr(err)))
             )
@@ -24,24 +27,24 @@ export const submitContactFormEpic = (action$, _, { firestore }) => {
     );
 };
 
-export const getContactsEpic = (action$, _, { firestore }) => {
+export const getAllContactsEpic = (action$, _, { contactFormService } : Dependencies) => {
     return action$.pipe(
         ofType(contactFormActions.GET_CONTACTS),
         mergeMap(() =>
-            firestore.getCollection('contactForms').pipe(
-                map(contacts => getContactsSuccess(contacts)),
+            from(contactFormService.getAllContacts()).pipe(
+                map((contacts : Contact[]) => getContactsSuccess(contacts)),
                 catchError(err => ActionsObservable.of(getContactsErr(err)))
             )
         )
     );
 }
 
-export const updateContactStatusEpic = (action$, _, { firestore }) => {
+export const updateContactStatusEpic = (action$, _,  { contactFormService } : Dependencies) => {
     return action$.pipe(
         ofType(contactFormActions.UPDATE_CONTACT_STATUS),
         mergeMap((action: any) =>
-            firestore.updateDoc('contactForms', action.contact.id, {...action.contact, status: action.status}).pipe(
-                map(() => updateContactStatusSuccess({...action.contact, status: action.status})),
+            from(contactFormService.updateContactStatus(action.contact.id, action.status)).pipe(
+                map((contact : Contact) => updateContactStatusSuccess(contact)),
                 catchError(err => ActionsObservable.of(updateContactStatusErr(err)))
             )
         )
@@ -50,6 +53,6 @@ export const updateContactStatusEpic = (action$, _, { firestore }) => {
 
 export default combineEpics(
     submitContactFormEpic,
-    getContactsEpic,
+    getAllContactsEpic,
     updateContactStatusEpic
 );
