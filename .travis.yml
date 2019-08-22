@@ -1,6 +1,3 @@
-env:
-  global:
-    - RESOURCE_DIR=functions
 cache:
   yarn: true
   directories:
@@ -12,7 +9,7 @@ script:
 before_deploy:
   - "[ $TRAVIS_TAG ] && REACT_APP_ENV=production || REACT_APP_ENV=testing"
   - yarn global add tslint@5.12.0
-  - yarn global add typescript@3.2.2
+  - yarn global add typescript@3.4
   - yarn build
 deploy:
 - provider: firebase
