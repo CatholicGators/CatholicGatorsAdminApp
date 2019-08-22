@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "catholic-gators-dev",
+    "testing": "catholic-gators-test",
+    "production": "catholic-gators"
+  }
+}

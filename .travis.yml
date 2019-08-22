@@ -1,24 +1,16 @@
-env:
-- DOCKER_COMPOSE_VERSION=3.7
+language: node_js
 cache:
     yarn: true
     directories:
-        - node_modules
-addons:
-    ssh_known_hosts: 157.230.182.92
+    - node_modules
 script:
-    - docker build -t test-cg-admin-app .
-    - docker run -e CI=true -d --name test test-cg-admin-app
-    - docker exec test yarn test
-before_deploy:
-    - openssl aes-256-cbc -K $encrypted_d82f9d7a2831_key -iv $encrypted_d82f9d7a2831_iv
-        -in travis_rsa.enc -out ~/.ssh/travis_rsa -d
-    - rvm install 2.2.2
-    - chmod 600 ~/.ssh/travis_rsa
-    - chmod +x ./productionConfig/deploy.sh
+    - export REACT_APP_ENV=production
+    - yarn build
+    - yarn test
 deploy:
-    skip_cleanup: true
-    provider: script
-    script: ./productionConfig/deploy.sh
+    provider: firebase
+    token:
+        secure: fmQh8sialox2fhFsTClukIwD9kVac5cv628KwgNWp3+1BlSlzFnTi0gi1odfFtFV89NSEtFc75yMu7pQw3hrFQVGSQxsXRwWhbslL8+j8OqOk7RGX2ILY5ue4AYtm7TQiE8LlRknyq8EhHpNzPvZTcfEoNhTMYUGE/glhi02dkbWclGQ+lx+SQlnQBzCbX7MYFEBthDQiEEZ0N4lLFU7Lr2x77ZExiflyRRgb593H/r8lsfGqQiLQtDzTOE4qSi5+PuYrZfaNdW+du9pzgmhGnBeM2ZoFWZX96ZUOs3UaKrTbkkRZtky9wB0PWubUW8cWk91Qnt24GYvS/isOV7/wK2/WA6Ig7eTZIRjTn7GuItA0AMeuYDBlnnCpA1TDaORt0uBA4s49yS/Z1vEEf/YAJQPf+hueglY+B72MmNq0DM3FlciMU3sJZxhRcdICSFa4psfCIb9qSlJIL9TE8MAsqSUBrASjdcUiN+TgjjFge8CxGTdI4nRwg4Hj6NemQkpKKiDXBTXfSR/1FaxSg75VF/rHZeu77w8dWBB5gBxfDwePSypyGjQP4E/Qyo+OTHETkKyns39sO3SH8FF0si22uud0ZmSTrnNwr38NhqZ24yXfsJgJdUImX0ze9GM6nAFmX3imsE6E9A+K32pAr7g1g4RApRnCXIGd2GfaVAX1u8=
     on:
-        branch: "master"
+        branch: FirebaseDeploy
+    project: production

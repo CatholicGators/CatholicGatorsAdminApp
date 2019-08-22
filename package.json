@@ -17,7 +17,8 @@
         "redux-mock-store": "^1.5.3",
         "redux-observable": "^1.0.0",
         "rxjs": "^6.4.0",
-        "serve": "^11.1.0"
+        "serve": "^11.1.0",
+        "tslint": "^5.19.0"
     },
     "devDependencies": {
         "@types/jest": "^24.0.4",
@@ -35,8 +36,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
-        "serve": "serve -s build -l 3000"
+        "test": "react-scripts test"
     },
     "eslintConfig": {
         "extends": "react-app"
