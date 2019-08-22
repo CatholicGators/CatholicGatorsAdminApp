@@ -11,6 +11,8 @@ script:
 - yarn test
 before_deploy:
   - "[ $TRAVIS_TAG ] && REACT_APP_ENV=production || REACT_APP_ENV=testing"
+  - yarn global add tslint@5.12.0
+  - yarn global add typescript@3.2.2
   - yarn build
 deploy:
 - provider: firebase
