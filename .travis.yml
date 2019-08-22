@@ -3,6 +3,7 @@ cache:
     directories:
     - node_modules
 script:
+    - yarn
     - export REACT_APP_ENV=production
     - yarn build
     - yarn test
