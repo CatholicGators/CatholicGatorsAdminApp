@@ -226,7 +226,7 @@ export class Interests extends Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-    interests: state.contactForm.interests
+    interests: state.contact.interests
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,7 @@
 import { mergeMap, map, catchError } from 'rxjs/operators'
 import { ofType, ActionsObservable } from 'redux-observable'
 import { combineEpics } from 'redux-observable'
-import { from } from 'rxjs/internal/observable/from';
+import { from } from 'rxjs/internal/observable/from'
 
 import {
     interestActions,
@@ -14,7 +14,7 @@ import {
     updateOptionTextSuccess,
     updateOptionTextErr
 } from '../../actions/contactForm/interestActions'
-import { Dependencies } from '../../store';
+import { Dependencies } from '../../store'
 
 export const getInterestsEpic = (action$, _, { interestsService } : Dependencies) => {
     return action$.pipe(
@@ -40,7 +40,7 @@ export const addOptionEpic = (action$, _, { interestsService } : Dependencies) =
 
 export const updateOptionTextEpic = (action$, _, { interestsService } : Dependencies) => action$.pipe(
     ofType(interestActions.UPDATE_OPTION_TEXT),
-    mergeMap((action: any) => 
+    mergeMap((action: any) =>
         from(interestsService.updateOptionText(action.optionId, action.newText)).pipe(
             map((option: any) => updateOptionTextSuccess(option)),
             catchError(err => ActionsObservable.of(updateOptionTextErr(err)))

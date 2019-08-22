@@ -10,6 +10,7 @@ import UserService from '../../services/userService';
 import devClientConfig from '../../config/clientConfig';
 import prodClientConfig from '../../config/prodClientConfig'
 import InterestsService from '../../services/interestsService';
+import ContactFormService from '../../services/contactFormService';
 
 const config = (JSON.stringify(process.env.NODE_ENV) === JSON.stringify("production")) ? prodClientConfig : devClientConfig
 
@@ -19,17 +20,20 @@ const db = app.firestore()
 const firestore = new Firestore(app, db)
 const userService = new UserService(firestore)
 const interestsService = new InterestsService(db)
+const contactFormService = new ContactFormService(db)
 
 export type Dependencies = {
   firestore: Firestore
   userService: UserService
-  interestsService: InterestsService
+  interestsService: InterestsService,
+  contactFormService: ContactFormService
 }
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
     firestore,
     userService,
-    interestsService
+    interestsService,
+    contactFormService
   }
 });
 

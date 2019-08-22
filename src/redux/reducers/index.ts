@@ -5,6 +5,6 @@ import contactFormReducer from './contactForm/contactFormReducer';
 
 export default combineReducers({
   auth: authReducer,
-  contactForm: contactFormReducer,
+  contact: contactFormReducer,
   admin: adminReducer
 });

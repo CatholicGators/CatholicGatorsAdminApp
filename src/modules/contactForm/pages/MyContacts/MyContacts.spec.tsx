@@ -4,6 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { CircularProgress, Card, CardActions, Button } from '@material-ui/core'
 import { MyContacts } from './MyContacts'
+import { ContactStatus } from '../../../../services/contactFormService'
 
 describe('MyContacts', () => {
     let props, wrapper, instance
@@ -63,34 +64,37 @@ describe('MyContacts', () => {
         }
 
         it('returns null if classes is null', () => {
-            const result = instance.getClassFromStatus('test', null)
+            const result = instance.getClassFromStatus(ContactStatus.CALLED, null)
 
             expect(result).toBe(null)
         })
 
         it('returns null if classes is undefined', () => {
-            const result = instance.getClassFromStatus('test', undefined)
+            const result = instance.getClassFromStatus(ContactStatus.CALLED, undefined)
 
             expect(result).toBe(null)
         })
 
         it('returns classes.notCalled by default', () => {
-            const result = instance.getClassFromStatus('test', classes)
+            const result = instance.getClassFromStatus(12345678, classes)
+
+            expect(result).toBe(classes.notCalled)
+        })
+
+        it('returns classes.notCalled when the status is not called', () => {
+            const result = instance.getClassFromStatus(ContactStatus.NOT_CALLED, classes)
 
             expect(result).toBe(classes.notCalled)
         })
 
         it('returns classes.called when the status is Called', () => {
-            const result = instance.getClassFromStatus('Called', classes)
+            const result = instance.getClassFromStatus(ContactStatus.CALLED, classes)
 
             expect(result).toBe(classes.called)
         })
 
         it('returns classes.needToCall when the status is "Need to call again"', () => {
-            const result = instance.getClassFromStatus(
-                'Need to call again',
-                classes
-            )
+            const result = instance.getClassFromStatus(ContactStatus.NEED_TO_CALL_AGAIN, classes)
 
             expect(result).toBe(classes.needToCall)
         })
@@ -99,7 +103,7 @@ describe('MyContacts', () => {
     describe('changeContactStatus(contact, status)', () => {
         it('calls updateContactStatus(contact, status)', () => {
             const contact = {}
-            const status = 'test'
+            const status = 0
 
             instance.changeContactStatus(contact, status)
 
