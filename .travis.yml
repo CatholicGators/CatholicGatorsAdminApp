@@ -8,6 +8,7 @@ script:
 - yarn test
 deploy:
 - provider: firebase
+  skip_cleanup: true
   before_deploy:
   - export REACT_APP_ENV=testing
   - yarn build
@@ -17,6 +18,7 @@ deploy:
     branch: FirebaseDeploy
   project: testing
 - provider: firebase
+  skip_cleanup: true
   before_deploy:
   - export REACT_APP_ENV=production
   - yarn build
