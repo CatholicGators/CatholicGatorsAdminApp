@@ -1,17 +1,15 @@
-env:
-    - RESOURCE_DIR=functions
 cache:
   yarn: true
   directories:
   - node_modules
 script:
 - yarn
-- yarn build
 - yarn test
 before_deploy:
-  - "[ $TRAVIS_TAG ] && REACT_APP_ENV=production || REACT_APP_ENV=testing"
-  - yarn run build:functions
-  - yarn build
+- "[ $TRAVIS_TAG ] && REACT_APP_ENV=production || REACT_APP_ENV=testing"
+- echo Travistag \'$TRAVIS_TAG\' ReactApp \'$REACT_APP_ENV\'
+- yarn run build:functions
+- yarn build
 deploy:
 - provider: firebase
   skip_cleanup: true
