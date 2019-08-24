@@ -13,8 +13,8 @@ import prodClientConfig from '../../config/prodClientConfig'
 import InterestsService from '../../services/interestsService';
 import ContactFormService from '../../services/contactFormService';
 
-const config = (JSON.stringify(process.env.REACT_APP_ENV) === JSON.stringify("production")) ? prodClientConfig :
-    (JSON.stringify(process.env.REACT_APP_ENV) === JSON.stringify("testing")) ? testClientConfig : devClientConfig
+export const config = (JSON.stringify(process.env.NODE_ENV) === JSON.stringify("production")) ? prodClientConfig :
+    (JSON.stringify(process.env.NODE_ENV) === JSON.stringify("test")) ? testClientConfig : devClientConfig
 
 const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
 const db = app.firestore()

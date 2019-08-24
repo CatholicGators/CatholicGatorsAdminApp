@@ -6,10 +6,8 @@ script:
 - yarn
 - yarn test
 before_deploy:
-- "[ $TRAVIS_TAG ] && REACT_APP_ENV=production || REACT_APP_ENV=testing"
-- echo Travistag \'$TRAVIS_TAG\' ReactApp \'$REACT_APP_ENV\'
+- "[ $TRAVIS_TAG ] && yarn build || yarn run build:test"
 - yarn run build:functions
-- yarn build
 deploy:
 - provider: firebase
   skip_cleanup: true
