@@ -5,11 +5,8 @@
   },
   "functions": {
     "predeploy": [
-      "cd functions",
-      "npm install",
-      "npm run lint",
-      "npm run build",
-      "cd .."
+      "npm --prefix \"$RESOURCE_DIR\" run lint",
+      "npm --prefix \"$RESOURCE_DIR\" run build"
     ],
     "source": "functions"
   },
