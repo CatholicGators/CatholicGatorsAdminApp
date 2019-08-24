@@ -6,7 +6,7 @@ script:
 - yarn
 - yarn test
 before_deploy:
-- "[ $TRAVIS_TAG ] && yarn build || yarn run build:test"
+- "[ $TRAVIS_TAG ] && yarn build:prod || yarn run build:test"
 - yarn run build:functions
 deploy:
 - provider: firebase
