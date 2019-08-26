@@ -4,39 +4,48 @@ import {
     submitContactFormErr,
     getContactsSuccess,
     updateContactStatusSuccess
-} from '../../actions/contactForm/contactFormActions'
-import contactFormReducer, { INITIAL_CONTACT_FORM_STATE } from './contactFormReducer'
-import { getInterestsSuccess, addOptionSuccess, addSectionSuccess } from '../../actions/contactForm/interestActions';
-import { Section, Option } from '../../../services/interestsService';
+} from '../actions/contactFormActions'
+import contactFormReducer, {
+    INITIAL_CONTACT_FORM_STATE
+} from './contactFormReducer'
+import {
+    getInterestsSuccess,
+    addOptionSuccess,
+    addSectionSuccess
+} from '../../../../redux/actions/contactForm/interestActions'
+import { Section, Option } from '../../../../services/interestsService'
 
 describe('contactFormReducer', () => {
-    let form, contacts, interests: Section[];
+    let form, contacts, interests: Section[]
 
     beforeAll(() => {
         contacts = [
             {
-                id: "1",
-                name: "Joey",
+                id: '1',
+                name: 'Joey'
             },
             {
-                id: "2",
-                name: "Ryan"
+                id: '2',
+                name: 'Ryan'
             }
         ]
 
         form = {}
 
-        interests = [{
-            id: "1",
-            position: 0,
-            text: "section1",
-            options: []
-        }, {
-            id: "2",
-            position: 1,
-            text: "section2",
-            options: []
-        }]
+        interests = [
+            {
+                id: '1',
+                position: 0,
+                text: 'section1',
+                options: []
+            },
+            {
+                id: '2',
+                position: 1,
+                text: 'section2',
+                options: []
+            }
+        ]
     })
 
     it('returns the state unmutated by default', () => {
@@ -50,7 +59,7 @@ describe('contactFormReducer', () => {
     })
 
     it('sets loading on SUBMIT_CONTACT_FORM', () => {
-        const action = submitContactForm(form);
+        const action = submitContactForm(form)
 
         expect(contactFormReducer(undefined, action)).toEqual({
             ...INITIAL_CONTACT_FORM_STATE,
@@ -61,7 +70,7 @@ describe('contactFormReducer', () => {
     })
 
     it('sets success on SUBMIT_CONTACT_FORM_SUCCESS', () => {
-        const action = submitContactFormSuccess();
+        const action = submitContactFormSuccess()
 
         expect(contactFormReducer(undefined, action)).toEqual({
             ...INITIAL_CONTACT_FORM_STATE,
@@ -71,7 +80,7 @@ describe('contactFormReducer', () => {
     })
 
     it('sets success on SUBMIT_CONTACT_FORM_ERR', () => {
-        const action = submitContactFormErr("test");
+        const action = submitContactFormErr('test')
 
         expect(contactFormReducer(undefined, action)).toEqual({
             ...INITIAL_CONTACT_FORM_STATE,
@@ -82,7 +91,7 @@ describe('contactFormReducer', () => {
     })
 
     it('applies the contacts list on GET_CONTACTS_SUCCESS', () => {
-        const action = getContactsSuccess(contacts);
+        const action = getContactsSuccess(contacts)
 
         expect(contactFormReducer(undefined, action)).toEqual({
             ...INITIAL_CONTACT_FORM_STATE,
@@ -93,7 +102,7 @@ describe('contactFormReducer', () => {
     it('updates the contact form on UPDATE_CONTACT_STATUS_SUCCESS', () => {
         const newContact = {
             ...contacts[0],
-            status: "Test"
+            status: 'Test'
         }
         const newContacts = [...contacts]
         newContacts[0] = newContact
@@ -120,8 +129,8 @@ describe('contactFormReducer', () => {
 
     it('updates the interests field with the new option on ADD_OPTION_SUCCESS', () => {
         const newOption: Option = {
-            id: "1",
-            text: "test"
+            id: '1',
+            text: 'test'
         }
         const action = addOptionSuccess(interests[0].id, newOption)
         const state = {
@@ -129,14 +138,16 @@ describe('contactFormReducer', () => {
             interests
         }
 
-        expect(contactFormReducer(state, action).interests[0].options[0]).toEqual(newOption)
+        expect(
+            contactFormReducer(state, action).interests[0].options[0]
+        ).toEqual(newOption)
     })
 
     it('updates the interests field with the new section on ADD_SECTION_SUCCESS', () => {
         const newSection: Section = {
-            id: "3",
+            id: '3',
             position: interests.length,
-            text: "section3",
+            text: 'section3',
             options: []
         }
         const action = addSectionSuccess(newSection)
@@ -145,6 +156,8 @@ describe('contactFormReducer', () => {
             interests
         }
 
-        expect(contactFormReducer(state, action).interests[newSection.position]).toBe(newSection)
+        expect(
+            contactFormReducer(state, action).interests[newSection.position]
+        ).toBe(newSection)
     })
 })

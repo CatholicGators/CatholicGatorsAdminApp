@@ -1,5 +1,5 @@
-import { of } from "rxjs"
-import { ActionsObservable } from "redux-observable"
+import { of } from 'rxjs'
+import { ActionsObservable } from 'redux-observable'
 
 import {
     submitContactFormEpic,
@@ -7,9 +7,7 @@ import {
     updateContactStatusEpic
 } from './contactFormEpics'
 
-import {
-    Contact
-} from '../../../services/contactFormService'
+import { Contact } from '../../services/contactFormService'
 
 import {
     submitContactForm,
@@ -21,7 +19,7 @@ import {
     updateContactStatus,
     updateContactStatusSuccess,
     updateContactStatusErr
-} from "../../actions/contactForm/contactFormActions"
+} from '../actions/contactFormActions'
 
 const testContact: Contact = {
     id: '123',
@@ -43,7 +41,7 @@ const testContact: Contact = {
     parentEmail: 'testing',
     interests: ['123', '456'],
     status: 2568,
-    createdAt: new Date
+    createdAt: new Date()
 }
 
 describe('contactFormEpics', () => {
@@ -62,12 +60,12 @@ describe('contactFormEpics', () => {
 
         contacts = [
             {
-                id: "1",
-                name: "Joey"
+                id: '1',
+                name: 'Joey'
             },
             {
-                id: "2",
-                name: "Ryan"
+                id: '2',
+                name: 'Ryan'
             }
         ]
 
@@ -86,23 +84,25 @@ describe('contactFormEpics', () => {
             contactFormService.addContact.mockResolvedValue(testContact)
             const expectedAction = submitContactFormSuccess()
 
-            submitContactFormEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            submitContactFormEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
 
         it('emits SUBMIT_CONTACT_FORM_ERR when addDoc() returns an error', done => {
-            const err = "test"
+            const err = 'test'
             contactFormService.addContact.mockRejectedValue(err)
             const expectedAction = submitContactFormErr(err)
 
-            submitContactFormEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            submitContactFormEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
     })
 
@@ -118,23 +118,25 @@ describe('contactFormEpics', () => {
             contactFormService.getAllContacts.mockResolvedValue(contacts)
             const expectedAction = getContactsSuccess(contacts)
 
-            getAllContactsEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            getAllContactsEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
 
         it('emits SUBMIT_CONTACT_FORM_ERR when firestore.addDoc() returns an error', done => {
-            const err = "test"
+            const err = 'test'
             contactFormService.getAllContacts.mockRejectedValue(err)
             const expectedAction = getContactsErr(err)
 
-            getAllContactsEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            getAllContactsEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
     })
 
@@ -143,31 +145,41 @@ describe('contactFormEpics', () => {
         let status = 2
 
         beforeAll(() => {
-            action$ = ActionsObservable.from([updateContactStatus(testContact, status)])
+            action$ = ActionsObservable.from([
+                updateContactStatus(testContact, status)
+            ])
             state$ = of()
         })
 
         it('emits GET_CONTACTS_SUCCESS action after successful get', done => {
-            contactFormService.updateContactStatus.mockResolvedValue({ ...testContact, status })
-            const expectedAction = updateContactStatusSuccess({ ...testContact, status })
+            contactFormService.updateContactStatus.mockResolvedValue({
+                ...testContact,
+                status
+            })
+            const expectedAction = updateContactStatusSuccess({
+                ...testContact,
+                status
+            })
 
-            updateContactStatusEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            updateContactStatusEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
 
         it('emits SUBMIT_CONTACT_FORM_ERR when firestore.addDoc() returns an error', done => {
-            const err = "test"
+            const err = 'test'
             contactFormService.updateContactStatus.mockRejectedValue(err)
             const expectedAction = updateContactStatusErr(err)
 
-            updateContactStatusEpic(action$, state$, dependencies)
-                .subscribe(result => {
+            updateContactStatusEpic(action$, state$, dependencies).subscribe(
+                result => {
                     expect(result).toEqual(expectedAction)
                     done()
-                })
+                }
+            )
         })
     })
 })
