@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Checkbox, withStyles, createStyles, Theme } from '@material-ui/core'
 import EditableTextField from '../EditableTextField/EditableTextField'
-import { Option } from '../../../../../../services/interestsService'
+import { Option } from '../../../../../../../../services/interestsService'
 
 export const styles = (theme: Theme) =>
     createStyles({

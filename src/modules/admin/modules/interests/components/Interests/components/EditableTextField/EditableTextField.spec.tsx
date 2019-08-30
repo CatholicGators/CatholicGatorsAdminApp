@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json'
 import { EditableTextField, Props, styles } from './EditableTextField'
 import { Edit, Delete, Save, Close } from '@material-ui/icons'
 import { Input } from '@material-ui/core'
-import mockStyles from '../../../../../../utils/mockStyles'
+import mockStyles from '../../../../../../../../utils/mockStyles'
 
 describe('EditableTextField', () => {
     let props: Props, wrapper

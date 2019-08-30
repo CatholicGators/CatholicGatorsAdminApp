@@ -1,12 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme';
+import { mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 
 import Admin, { styles } from './Admin'
-import UserTable from '../../components/UserTable/UserTable'
-import mockStyles from '../../../../utils/mockStyles';
+import mockStyles from '../../../../utils/mockStyles'
+import UserTable from '../../modules/users/components/UserTable/UserTable'
 
 describe('Admin Mount', () => {
     let props, wrapper, mockStore
@@ -19,7 +19,7 @@ describe('Admin Mount', () => {
         })
         props = {
             classes: mockStyles(styles),
-            match: { 
+            match: {
                 url: 'test'
             },
             location: {

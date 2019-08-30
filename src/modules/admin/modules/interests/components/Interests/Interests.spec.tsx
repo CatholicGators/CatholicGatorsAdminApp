@@ -7,7 +7,7 @@ import { CircularProgress } from '@material-ui/core'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
 import { Checkbox } from '@material-ui/core'
 import AddableTextField from './components/AddableTextField/AddableTextField'
-import mockStyles from '../../../../utils/mockStyles'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('Interests', () => {
     let props: Props, wrapper

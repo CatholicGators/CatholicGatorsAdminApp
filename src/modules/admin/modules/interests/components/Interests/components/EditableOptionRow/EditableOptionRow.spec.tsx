@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { EditableOptionRow, Props, styles } from './EditableOptionRow'
 import EditableTextField from '../EditableTextField/EditableTextField'
-import mockStyles from '../../../../../../utils/mockStyles'
+import mockStyles from '../../../../../../../../utils/mockStyles'
 
 describe('EditableOptionRow', () => {
     let props: Props, wrapper

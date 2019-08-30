@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { UserTable, styles } from './UserTable'
 import { TableHead, Checkbox, CircularProgress } from '@material-ui/core'
-import mockStyles from '../../../../utils/mockStyles'
+import mockStyles from '../../../../../../utils/mockStyles'
 
 describe('UserTable', () => {
     let props, wrapper

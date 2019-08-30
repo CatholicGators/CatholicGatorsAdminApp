@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { UserTableToolbar, styles } from './UserTableToolbar'
 import { IconButton } from '@material-ui/core'
-import mockStyles from '../../../../../../utils/mockStyles'
+import mockStyles from '../../../../../../../../utils/mockStyles'
 
 describe('UserTableToolbar', () => {
     let wrapper, props

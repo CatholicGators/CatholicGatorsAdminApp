@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { UserTableRow, styles } from './UserTableRow'
 import { Checkbox, IconButton } from '@material-ui/core'
-import mockStyles from '../../../../../../utils/mockStyles'
+import mockStyles from '../../../../../../../../utils/mockStyles'
 
 describe('UserTableRow', () => {
     let wrapper, props

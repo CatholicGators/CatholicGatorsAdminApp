@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json'
 import { AddableTextField, Props, styles } from './AddableTextField'
 import { Add, Save, Close } from '@material-ui/icons'
 import { Input } from '@material-ui/core'
-import mockStyles from '../../../../../../utils/mockStyles'
+import mockStyles from '../../../../../../../../utils/mockStyles'
 
 describe('AddableTextField', () => {
     let props: Props, wrapper

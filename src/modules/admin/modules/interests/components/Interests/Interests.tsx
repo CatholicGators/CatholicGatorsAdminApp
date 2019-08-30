@@ -18,10 +18,10 @@ import {
     NewOptionReq,
     NewSectionReq,
     updateOptionText
-} from '../../../../redux/actions/contactForm/interestActions'
+} from '../../../../../../redux/actions/contactForm/interestActions'
 import AddableTextField from './components/AddableTextField/AddableTextField'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
-import { Section } from '../../../../services/interestsService'
+import { Section } from '../../../../../../services/interestsService'
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -29,7 +29,9 @@ export const styles = (theme: Theme) =>
             width: 600
         },
         form: {
-            margin: `0 ${theme.spacing(3)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`
+            margin: `0 ${theme.spacing(3)}px ${theme.spacing(
+                3
+            )}px ${theme.spacing(3)}px`
         },
         formLoadingContainer: {
             display: 'flex',
