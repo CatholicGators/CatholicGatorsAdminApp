@@ -7,7 +7,7 @@ import Interests from '../../components/Interests/interests'
 import { submitContactForm } from '../../redux/actions/contactFormActions'
 import { styles } from '../../utils/ContactFormStyles'
 import { steps, filterState } from '../../utils/ContactFormUtils'
-import { getInterests } from '../../../../redux/actions/contactForm/interestActions'
+import { getContactFormInterests } from '../../redux/actions/contactFormActions'
 
 import {
     withStyles,
@@ -229,7 +229,7 @@ function getStepContent(
 }
 
 const mapDispatchToProps = dispatch => ({
-    getInterests: () => dispatch(getInterests()),
+    getInterests: () => dispatch(getContactFormInterests()),
     submitContactForm: (contact: NewContactReq) =>
         dispatch(submitContactForm(contact))
 })

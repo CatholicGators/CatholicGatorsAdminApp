@@ -1,5 +1,5 @@
 import 'firebase/firestore'
-import { NewOptionReq, NewSectionReq } from '../redux/actions/contactForm/interestActions';
+import { NewOptionReq, NewSectionReq } from '../redux/actions/interestActions';
 
 export type SectionDoc = {
     id: string

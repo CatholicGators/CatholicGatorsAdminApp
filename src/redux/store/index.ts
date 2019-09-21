@@ -10,7 +10,7 @@ import UserService from '../../services/userService';
 import devClientConfig from '../../config/clientConfig';
 import testClientConfig from '../../config/testClientConfig'
 import prodClientConfig from '../../config/prodClientConfig'
-import InterestsService from '../../services/interestsService';
+import InterestsService from '../../modules/admin/services/interestsService';
 import ContactFormService from '../../modules/contactForm/services/contactFormService';
 
 const config = (JSON.stringify(process.env.REACT_APP_ENV_NAME) === JSON.stringify("production")) ? prodClientConfig :

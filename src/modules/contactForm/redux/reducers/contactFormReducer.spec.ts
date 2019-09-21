@@ -12,8 +12,8 @@ import {
     getInterestsSuccess,
     addOptionSuccess,
     addSectionSuccess
-} from '../../../../redux/actions/contactForm/interestActions'
-import { Section, Option } from '../../../../services/interestsService'
+} from '../../../admin/redux/actions/interestActions'
+import { Section, Option } from '../../../admin/services/interestsService'
 
 describe('contactFormReducer', () => {
     let form, contacts, interests: Section[]

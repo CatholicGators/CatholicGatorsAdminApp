@@ -1,4 +1,5 @@
 import 'firebase/firestore'
+import InterestsService, { Section } from '../../admin/services/interestsService'
 
 export const ContactStatus = {
     NOT_CALLED: 0,
@@ -58,7 +59,11 @@ interface Doc {
 export default class ContactFormService {
     public static readonly CONTACTS_COLLECTION: string = 'contacts'
 
-    constructor(private db: firebase.firestore.Firestore) {}
+    private interestsService : InterestsService
+
+    constructor(private db: firebase.firestore.Firestore) {
+        this.interestsService = new InterestsService(this.db)
+    }
 
     async addContact(contact: NewContactReq) : Promise<Contact> {
         const contactFormRef = await this.db.collection(ContactFormService.CONTACTS_COLLECTION).add(contact)
@@ -66,6 +71,10 @@ export default class ContactFormService {
             id: contactFormRef.id,
             ...contact
         }
+    }
+
+    async getInterests() : Promise<Section[]> {
+        return await this.interestsService.getInterests()
     }
 
     async getAllContacts() : Promise<Contact[]> {

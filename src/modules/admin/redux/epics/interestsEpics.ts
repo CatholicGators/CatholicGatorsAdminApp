@@ -13,8 +13,8 @@ import {
     addSectionSuccess,
     updateOptionTextSuccess,
     updateOptionTextErr
-} from '../../actions/contactForm/interestActions'
-import { Dependencies } from '../../store'
+} from '../actions/interestActions'
+import { Dependencies } from '../../../../redux/store/index'
 
 export const getInterestsEpic = (action$, _, { interestsService } : Dependencies) => {
     return action$.pipe(

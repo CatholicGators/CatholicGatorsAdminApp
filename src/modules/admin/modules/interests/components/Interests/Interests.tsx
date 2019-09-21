@@ -18,10 +18,10 @@ import {
     NewOptionReq,
     NewSectionReq,
     updateOptionText
-} from '../../../../../../redux/actions/contactForm/interestActions'
+} from '../../../../redux/actions/interestActions'
 import AddableTextField from './components/AddableTextField/AddableTextField'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
-import { Section } from '../../../../../../services/interestsService'
+import { Section } from '../../../../services/interestsService'
 
 export const styles = (theme: Theme) =>
     createStyles({

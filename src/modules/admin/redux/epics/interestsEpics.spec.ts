@@ -19,10 +19,10 @@ import {
     addSection,
     addSectionSuccess,
     addSectionErr
-} from "../../actions/contactForm/interestActions";
+} from "../actions/interestActions";
 import {
     Section, Option
-} from "../../../services/interestsService";
+} from "../../services/interestsService";
 
 describe('interestEpics', () => {
     let dependencies,

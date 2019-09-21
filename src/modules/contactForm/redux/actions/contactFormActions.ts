@@ -1,9 +1,13 @@
 import { NewContactReq, Contact } from '../../services/contactFormService'
+import { Section } from '../../../admin/services/interestsService'
 
 export const contactFormActions = {
     SUBMIT_CONTACT_FORM: 'SUBMIT_CONTACT_FORM',
     SUBMIT_CONTACT_FORM_ERR: 'SUBMIT_CONTACT_FORM_ERR',
     SUBMIT_CONTACT_FORM_SUCCESS: 'SUBMIT_CONTACT_FORM_SUCCESS',
+    GET_CONTACT_FORM_INTERESTS: 'GET_CONTACT_FORM_INTERESTS',
+    GET_CONTACT_FORM_INTERESTS_SUCCESS: 'GET_CONTACT_FORM_INTERESTS_SUCCESS',
+    GET_CONTACT_FORM_INTERESTS_ERR: 'GET_CONTACT_FORM_INTERESTS_ERR',
     GET_CONTACTS: 'GET_CONTACTS',
     GET_CONTACTS_SUCCESS: 'GET_CONTACTS_SUCCESS',
     GET_CONTACTS_ERR: 'GET_CONTACTS_ERR',
@@ -22,6 +26,18 @@ export function submitContactFormErr(err: any) {
 
 export function submitContactFormSuccess() {
     return { type: contactFormActions.SUBMIT_CONTACT_FORM_SUCCESS }
+}
+
+export function getContactFormInterests() {
+    return { type: contactFormActions.GET_CONTACT_FORM_INTERESTS }
+}
+
+export function getInterestsSuccess(interests : Section[]) {
+    return { type: contactFormActions.GET_CONTACT_FORM_INTERESTS_SUCCESS, interests }
+}
+
+export function getInterestsErr(err : any) {
+    return { type: contactFormActions.GET_CONTACT_FORM_INTERESTS_ERR, err }
 }
 
 export function getContacts() {

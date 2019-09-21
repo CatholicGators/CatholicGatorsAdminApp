@@ -1,5 +1,4 @@
 import { contactFormActions } from '../actions/contactFormActions'
-import { interestActions } from '../../../../redux/actions/contactForm/interestActions'
 
 export const INITIAL_CONTACT_FORM_STATE = {
     errorMessage: null,
@@ -46,25 +45,6 @@ const setInterests = (state, action) => ({
     interests: action.interests
 })
 
-const addOption = (state, action) => ({
-    ...state,
-    interests: [
-        ...state.interests.map(section =>
-            section.id !== action.sectionId
-                ? section
-                : {
-                      ...section,
-                      options: [...section.options, action.option]
-                  }
-        )
-    ]
-})
-
-const addSection = (state, action) => ({
-    ...state,
-    interests: [...state.interests, action.section]
-})
-
 function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
     switch (action.type) {
         case contactFormActions.SUBMIT_CONTACT_FORM: {
@@ -82,14 +62,8 @@ function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
         case contactFormActions.UPDATE_CONTACT_STATUS_SUCCESS: {
             return updateContactStatus(state, action)
         }
-        case interestActions.GET_INTERESTS_SUCCESS: {
+        case contactFormActions.GET_CONTACT_FORM_INTERESTS: {
             return setInterests(state, action)
-        }
-        case interestActions.ADD_OPTION_SUCCESS: {
-            return addOption(state, action)
-        }
-        case interestActions.ADD_SECTION_SUCCESS: {
-            return addSection(state, action)
         }
         default:
             return state

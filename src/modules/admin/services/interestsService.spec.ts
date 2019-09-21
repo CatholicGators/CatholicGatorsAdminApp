@@ -1,7 +1,7 @@
 import { when } from 'jest-when'
 
 import InterestsService, { Section } from "./interestsService"
-import { NewSectionReq, NewOptionReq } from "../redux/actions/contactForm/interestActions";
+import { NewSectionReq, NewOptionReq } from "../redux/actions/interestActions";
 
 describe('InterestsService', () => {
     let service: InterestsService,

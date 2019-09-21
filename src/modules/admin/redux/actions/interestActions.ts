@@ -1,4 +1,4 @@
-import { Option, Section } from '../../../services/interestsService'
+import { Option, Section } from '../../services/interestsService'
 
 export const interestActions = {
     GET_INTERESTS: 'GET_INTERESTS',
@@ -19,11 +19,11 @@ export function getInterests() {
     return { type: interestActions.GET_INTERESTS }
 }
 
-export function getInterestsSuccess(interests) {
+export function getInterestsSuccess(interests: Section[]) {
     return { type: interestActions.GET_INTERESTS_SUCCESS, interests }
 }
 
-export function getInterestsErr(err) {
+export function getInterestsErr(err : any) {
     return { type: interestActions.GET_INTERESTS_ERR, err }
 }
 
@@ -38,7 +38,7 @@ export const addOption = (sectionId: string, option: NewOptionReq) => ({
 export const addOptionSuccess = (sectionId: string, option: Option) => ({
     type: interestActions.ADD_OPTION_SUCCESS,
     sectionId,
-    option 
+    option
 })
 export const addOptionErr = (err) => ({
     type: interestActions.ADD_OPTION_ERR,
@@ -56,7 +56,7 @@ export const addSection = (section: NewSectionReq) => ({
 })
 export const addSectionSuccess = (section: Section) => ({
     type: interestActions.ADD_SECTION_SUCCESS,
-    section 
+    section
 })
 export const addSectionErr = (err) => ({
     type: interestActions.ADD_SECTION_ERR,

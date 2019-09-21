@@ -10,10 +10,24 @@ import {
     getContactsSuccess,
     getContactsErr,
     updateContactStatusErr,
-    updateContactStatusSuccess
+    updateContactStatusSuccess,
+    getInterestsSuccess,
+    getInterestsErr
 } from '../actions/contactFormActions'
 import { Dependencies } from '../../../../redux/store'
 import { Contact } from '../../services/contactFormService'
+
+export const getInterestsEpic = (action$, _, { contactFormService } : Dependencies) => {
+    return action$.pipe(
+        ofType(contactFormActions.GET_CONTACT_FORM_INTERESTS),
+        mergeMap(() =>
+            from(contactFormService.getInterests()).pipe(
+                map(interests => getInterestsSuccess(interests)),
+                catchError(err => ActionsObservable.of(getInterestsErr(err)))
+            )
+        )
+    )
+}
 
 export const submitContactFormEpic = (
     action$,
