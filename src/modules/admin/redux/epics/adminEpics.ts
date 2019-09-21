@@ -9,7 +9,7 @@ import {
     getUsers,
     batchDeleteUsersErr,
     updateUserErr
-} from '../../actions/admin/adminActions';
+} from '../actions/adminActions';
 
 export const getUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
@@ -26,7 +26,7 @@ export const getUsersEpic = (action$, _, { userService }) => {
 export const updateUserEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(adminActions.UPDATE_USER),
-        mergeMap((action: any) => 
+        mergeMap((action: any) =>
             userService.updateUser(action.user.id, action.user).pipe(
                 map(() => getUsers()),
                 catchError(err => ActionsObservable.of(updateUserErr(err)))
@@ -38,7 +38,7 @@ export const updateUserEpic = (action$, _, { userService }) => {
 export const batchDeleteUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
         ofType(adminActions.BATCH_DELETE_USERS),
-        mergeMap((action: any) => 
+        mergeMap((action: any) =>
             userService.deleteUsers(action.ids).pipe(
                 map(() => getUsers()),
                 catchError(err => ActionsObservable.of(batchDeleteUsersErr(err)))

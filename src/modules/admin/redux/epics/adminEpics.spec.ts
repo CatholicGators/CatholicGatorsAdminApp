@@ -16,7 +16,7 @@ import {
     updateUserErr,
     batchDeleteUsers,
     batchDeleteUsersErr
-} from "../../actions/admin/adminActions"
+} from "../actions/adminActions"
 
 describe('adminEpics', () => {
     let dependencies, userService, users

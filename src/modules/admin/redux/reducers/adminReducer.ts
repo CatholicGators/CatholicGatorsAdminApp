@@ -1,4 +1,4 @@
-import { adminActions } from '../../actions/admin/adminActions'
+import { adminActions } from '../actions/adminActions'
 
 export const INITIAL_ADMIN_STATE = {
     users: undefined
@@ -12,9 +12,9 @@ const applyUsersList = (state, action) => ({
 const applyUpdatedUser = (state, action) => ({
     ...state,
     users: state.users.map(user => user.id === action.user.id ?
-        { ...action.user } : 
+        { ...action.user } :
         user
-    ) 
+    )
 })
 
 function adminReducer(state = INITIAL_ADMIN_STATE, action) {

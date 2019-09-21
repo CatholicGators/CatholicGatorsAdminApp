@@ -18,7 +18,7 @@ import {
     getUsers,
     updateUser,
     batchDeleteUsers
-} from '../../../../../../redux/actions/admin/adminActions'
+} from '../../../../redux/actions/adminActions'
 import UserTableRow from './components/UserTableRow/UserTableRow'
 import UserTableToolbar from './components/UserTableToolbar/UserTableToolbar'
 

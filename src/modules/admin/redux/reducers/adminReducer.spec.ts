@@ -1,7 +1,7 @@
 import {
     getUsersSuccess,
     updateUserSuccess
-} from '../../actions/admin/adminActions'
+} from '../actions/adminActions'
 import adminReducer, { INITIAL_ADMIN_STATE } from './adminReducer'
 
 describe('adminReducer', () => {
