@@ -4,7 +4,8 @@ import { ActionsObservable } from 'redux-observable'
 import {
     submitContactFormEpic,
     getAllContactsEpic,
-    updateContactStatusEpic
+    updateContactStatusEpic,
+    getContactFormInterestsEpic
 } from './contactFormEpics'
 
 import { Contact } from '../../services/contactFormService'
@@ -18,8 +19,12 @@ import {
     getContacts,
     updateContactStatus,
     updateContactStatusSuccess,
-    updateContactStatusErr
+    updateContactStatusErr,
+    getContactFormInterests,
+    getContactFormInterestsSuccess,
+    getContactFormInterestsErr
 } from '../actions/contactFormActions'
+import { Section } from '../../../admin/modules/interests/services/interestsService'
 
 const testContact: Contact = {
     id: '123',
@@ -45,13 +50,14 @@ const testContact: Contact = {
 }
 
 describe('contactFormEpics', () => {
-    let dependencies, contactFormService, contacts, form
+    let dependencies, contactFormService, contacts, form, interests: Section[]
 
     beforeEach(() => {
         contactFormService = {
             addContact: jest.fn(),
             getAllContacts: jest.fn(),
-            updateContactStatus: jest.fn()
+            updateContactStatus: jest.fn(),
+            getInterests: jest.fn()
         }
 
         dependencies = {
@@ -70,6 +76,21 @@ describe('contactFormEpics', () => {
         ]
 
         form = {}
+
+        interests = [
+            {
+                id: '1',
+                position: 0,
+                text: 'section1',
+                options: []
+            },
+            {
+                id: '2',
+                position: 1,
+                text: 'section2',
+                options: []
+            }
+        ]
     })
 
     describe('submitContactFormEpic', () => {
@@ -180,6 +201,44 @@ describe('contactFormEpics', () => {
                     done()
                 }
             )
+        })
+    })
+
+    describe('getContactFormInterestsEpic', () => {
+        let action$, state$
+
+        beforeAll(() => {
+            action$ = ActionsObservable.from([getContactFormInterests()])
+            state$ = of()
+        })
+
+        it('emits GET_CONTACT_FORM_INTERESTS_SUCCESS action after successful get', done => {
+            contactFormService.getInterests.mockResolvedValue(interests)
+            const expectedAction = getContactFormInterestsSuccess(interests)
+
+            getContactFormInterestsEpic(
+                action$,
+                state$,
+                dependencies
+            ).subscribe(result => {
+                expect(result).toEqual(expectedAction)
+                done()
+            })
+        })
+
+        it('emits GET_CONTACT_FORM_INTERESTS_ERR when interestsService returns an error', done => {
+            const err = 'test'
+            contactFormService.getInterests.mockRejectedValue(err)
+            const expectedAction = getContactFormInterestsErr(err)
+
+            getContactFormInterestsEpic(
+                action$,
+                state$,
+                dependencies
+            ).subscribe(result => {
+                expect(result).toEqual(expectedAction)
+                done()
+            })
         })
     })
 })

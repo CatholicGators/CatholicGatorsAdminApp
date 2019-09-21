@@ -23,7 +23,7 @@ export function getInterestsSuccess(interests: Section[]) {
     return { type: interestActions.GET_INTERESTS_SUCCESS, interests }
 }
 
-export function getInterestsErr(err : any) {
+export function getInterestsErr(err: any) {
     return { type: interestActions.GET_INTERESTS_ERR, err }
 }
 
@@ -40,7 +40,7 @@ export const addOptionSuccess = (sectionId: string, option: Option) => ({
     sectionId,
     option
 })
-export const addOptionErr = (err) => ({
+export const addOptionErr = err => ({
     type: interestActions.ADD_OPTION_ERR,
     err
 })
@@ -58,7 +58,7 @@ export const addSectionSuccess = (section: Section) => ({
     type: interestActions.ADD_SECTION_SUCCESS,
     section
 })
-export const addSectionErr = (err) => ({
+export const addSectionErr = err => ({
     type: interestActions.ADD_SECTION_ERR,
     err
 })
@@ -72,7 +72,7 @@ export const updateOptionTextSuccess = (option: Option) => ({
     type: interestActions.UPDATE_OPTION_TEXT_SUCCESS,
     option
 })
-export const updateOptionTextErr = (err) => ({
+export const updateOptionTextErr = err => ({
     type: interestActions.UPDATE_OPTION_TEXT_ERR,
     err
 })

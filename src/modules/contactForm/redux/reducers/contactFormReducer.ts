@@ -62,7 +62,7 @@ function contactFormReducer(state = INITIAL_CONTACT_FORM_STATE, action) {
         case contactFormActions.UPDATE_CONTACT_STATUS_SUCCESS: {
             return updateContactStatus(state, action)
         }
-        case contactFormActions.GET_CONTACT_FORM_INTERESTS: {
+        case contactFormActions.GET_CONTACT_FORM_INTERESTS_SUCCESS: {
             return setInterests(state, action)
         }
         default:

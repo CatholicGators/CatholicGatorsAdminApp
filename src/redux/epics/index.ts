@@ -2,7 +2,7 @@ import { combineEpics } from 'redux-observable'
 import contactFormEpics from '../../modules/contactForm/redux/epics/contactFormEpics'
 import authEpics from './auth/authEpics'
 import adminEpics from '../../modules/admin/redux/epics/adminEpics'
-import interestEpics from '../../modules/admin/redux/epics/interestsEpics'
+import interestEpics from '../../modules/admin/modules/interests/redux/epics/interestsEpics'
 
 export default combineEpics(
     authEpics,

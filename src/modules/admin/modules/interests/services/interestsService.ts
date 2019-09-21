@@ -1,5 +1,5 @@
 import 'firebase/firestore'
-import { NewOptionReq, NewSectionReq } from '../redux/actions/interestActions';
+import { NewOptionReq, NewSectionReq } from '../redux/actions/interestActions'
 
 export type SectionDoc = {
     id: string
@@ -30,22 +30,31 @@ export default class InterestsService {
 
     constructor(private db: firebase.firestore.Firestore) {}
 
-    async getInterests() : Promise<Section[]> {
+    async getInterests(): Promise<Section[]> {
         const [sectionDocs, optionDocs] = await Promise.all([
             this.getAllAndFlatten<SectionDoc>(InterestsService.SECTIONS),
             this.getAllAndFlatten<Option>(InterestsService.OPTIONS)
-        ]);
+        ])
         const sections = sectionDocs.map(section => ({
             ...section,
-            options: section.options.map(optionId => optionDocs.filter(option => option.id === optionId)[0]).filter(option => option !== undefined)
-        }));
-        return sections.sort((a, b) => a.position - b.position);
+            options: section.options
+                .map(
+                    optionId =>
+                        optionDocs.filter(option => option.id === optionId)[0]
+                )
+                .filter(option => option !== undefined)
+        }))
+        return sections.sort((a, b) => a.position - b.position)
     }
 
-    addOption(sectionId: string, optionReq: NewOptionReq) : Promise<Option> {
+    addOption(sectionId: string, optionReq: NewOptionReq): Promise<Option> {
         return this.db.runTransaction(async transaction => {
-            const optionDoc = await transaction.get(this.db.collection(InterestsService.OPTIONS).doc())
-            const sectionDoc = await transaction.get(this.db.collection(InterestsService.SECTIONS).doc(sectionId))
+            const optionDoc = await transaction.get(
+                this.db.collection(InterestsService.OPTIONS).doc()
+            )
+            const sectionDoc = await transaction.get(
+                this.db.collection(InterestsService.SECTIONS).doc(sectionId)
+            )
 
             const options = sectionDoc.data().options
             options.push(optionDoc.id)
@@ -61,9 +70,11 @@ export default class InterestsService {
         })
     }
 
-    updateOptionText(optionId: string, newText: string) : Promise<Option> {
+    updateOptionText(optionId: string, newText: string): Promise<Option> {
         return this.db.runTransaction(async transaction => {
-            const optionDoc = await transaction.get(this.db.collection(InterestsService.OPTIONS).doc(optionId))
+            const optionDoc = await transaction.get(
+                this.db.collection(InterestsService.OPTIONS).doc(optionId)
+            )
             const updatedOption = {
                 ...optionDoc.data(),
                 text: newText
@@ -73,24 +84,31 @@ export default class InterestsService {
 
             return {
                 id: optionId,
-                ...updatedOption,
+                ...updatedOption
             }
         })
     }
 
-    async addSection(sectionReq: NewSectionReq) : Promise<Section> {
-        const sectionRef = await this.db.collection(InterestsService.SECTIONS).add(sectionReq);
-        return ({
+    async addSection(sectionReq: NewSectionReq): Promise<Section> {
+        const sectionRef = await this.db
+            .collection(InterestsService.SECTIONS)
+            .add(sectionReq)
+        return {
             id: sectionRef.id,
             ...sectionReq
-        });
+        }
     }
 
-    private async getAllAndFlatten<T extends Doc>(collection: string) : Promise<T[]> {
-        const snapshot = await this.db.collection(collection).get();
-        return snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        } as T));
+    private async getAllAndFlatten<T extends Doc>(
+        collection: string
+    ): Promise<T[]> {
+        const snapshot = await this.db.collection(collection).get()
+        return snapshot.docs.map(
+            doc =>
+                ({
+                    id: doc.id,
+                    ...doc.data()
+                } as T)
+        )
     }
 }
