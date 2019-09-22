@@ -1,4 +1,4 @@
-import { NewContactReq, ContactStatus } from '../../../services/contactFormService'
+import { NewContactReq, ContactStatus } from '../services/contactFormService'
 
 export var steps = ['Personal information', 'Parent\'s information', 'Your interests'];
 

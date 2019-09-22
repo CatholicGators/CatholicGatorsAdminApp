@@ -24,11 +24,11 @@ import {
   OutlinedInput
 } from '@material-ui/core'
 
-import { ContactStatus, Contact } from '../../../../services/contactFormService'
+import { ContactStatus, Contact } from '../../services/contactFormService'
 import {
     getContacts,
     updateContactStatus
-} from '../../../../redux/actions/contactForm/contactFormActions'
+} from '../../redux/actions/contactFormActions'
 
 const styles = (theme: Theme) => createStyles({
     tableWrapper: {
