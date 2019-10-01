@@ -97,7 +97,6 @@ class PersonalInformation extends React.Component<any, any> {
                 onChange={(e) => handleChange(e, 'gender')}
                 margin="normal"
                 variant="outlined"
-                required
             >
                 {genders.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -114,7 +113,6 @@ class PersonalInformation extends React.Component<any, any> {
                 onChange={(e) => handleChange(e, 'school')}
                 margin="normal"
                 variant="outlined"
-                required
             >
                 {schools.map(option => (
                 <MenuItem key={option.value} value={option.value}>
