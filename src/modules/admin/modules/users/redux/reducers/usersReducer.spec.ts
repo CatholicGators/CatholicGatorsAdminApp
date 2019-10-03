@@ -1,22 +1,19 @@
-import {
-    getUsersSuccess,
-    updateUserSuccess
-} from '../actions/adminActions'
-import adminReducer, { INITIAL_ADMIN_STATE } from './adminReducer'
+import { getUsersSuccess, updateUserSuccess } from '../actions/usersActions'
+import usersReducer, { INITIAL_USERS_STATE } from './usersReducer'
 
-describe('adminReducer', () => {
+describe('usersReducer', () => {
     let users
 
     beforeAll(() => {
         users = [
             {
-                id: "1",
-                name: "Joey",
+                id: '1',
+                name: 'Joey',
                 isAdmin: false
             },
             {
-                id: "2",
-                name: "Ryan",
+                id: '2',
+                name: 'Ryan',
                 isAdmin: false
             }
         ]
@@ -25,18 +22,18 @@ describe('adminReducer', () => {
     it('returns the state unmutated by default', () => {
         const action = { type: 'foo' }
         const state = {
-            ...INITIAL_ADMIN_STATE,
+            ...INITIAL_USERS_STATE,
             user: 'bar'
         }
 
-        expect(adminReducer(state, action)).toEqual(state)
+        expect(usersReducer(state, action)).toEqual(state)
     })
 
     it('applies list of users on GET_USERS_SUCCESS', () => {
         const action = getUsersSuccess(users)
 
-        expect(adminReducer(undefined, action)).toEqual({
-            ...INITIAL_ADMIN_STATE,
+        expect(usersReducer(undefined, action)).toEqual({
+            ...INITIAL_USERS_STATE,
             users: action.users
         })
     })
@@ -50,11 +47,11 @@ describe('adminReducer', () => {
         newUsers[0] = newUser
         const action = updateUserSuccess(newUser)
         const state = {
-            ...INITIAL_ADMIN_STATE,
+            ...INITIAL_USERS_STATE,
             users
         }
 
-        expect(adminReducer(state, action)).toEqual({
+        expect(usersReducer(state, action)).toEqual({
             ...state,
             users: newUsers
         })

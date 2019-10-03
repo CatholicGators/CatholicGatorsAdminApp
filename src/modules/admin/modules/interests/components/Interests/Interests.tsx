@@ -228,7 +228,7 @@ export class Interests extends Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-    interests: state.interests.interests
+    interests: state.admin.interests.interests
 })
 
 const mapDispatchToProps = dispatch => ({

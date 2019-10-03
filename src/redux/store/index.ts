@@ -3,15 +3,15 @@ import { createEpicMiddleware } from 'redux-observable'
 
 import * as firebase from 'firebase/app'
 
-import rootReducer from './reducers'
-import rootEpic from './epics'
-import Firestore from '../database/firestore'
-import devClientConfig from '../config/clientConfig'
-import testClientConfig from '../config/testClientConfig'
-import prodClientConfig from '../config/prodClientConfig'
-import InterestsService from '../modules/admin/modules/interests/services/interestsService'
-import ContactFormService from '../modules/contactForm/services/contactFormService'
-import UserService from '../modules/app/modules/auth/services/userService'
+import rootReducer from '../reducers'
+import rootEpic from '../epics'
+import Firestore from '../../database/firestore'
+import devClientConfig from '../../config/clientConfig'
+import testClientConfig from '../../config/testClientConfig'
+import prodClientConfig from '../../config/prodClientConfig'
+import InterestsService from '../../modules/admin/modules/interests/services/interestsService'
+import ContactFormService from '../../modules/contactForm/services/contactFormService'
+import UserService from '../../modules/app/modules/auth/services/userService'
 
 const config =
     JSON.stringify(process.env.REACT_APP_ENV_NAME) ===

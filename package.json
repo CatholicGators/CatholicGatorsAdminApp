@@ -35,6 +35,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
+        "cov": "react-scripts test --coverage --collectCoverageFrom=src/**/* --collectCoverageFrom=!**/index.*",
         "build:functions": "yarn global add tslint@5.12.0 && yarn global add typescript@3.4 && cd functions && npm install",
         "build:dev": "yarn global add env-cmd && env-cmd -f ./src/config/.env.dev yarn build",
         "build:test": "yarn global add env-cmd && env-cmd -f ./src/config/.env.test yarn build",

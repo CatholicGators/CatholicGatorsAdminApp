@@ -1,19 +1,19 @@
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { ofType, ActionsObservable } from 'redux-observable';
-import { combineEpics } from 'redux-observable';
+import { mergeMap, map, catchError } from 'rxjs/operators'
+import { ofType, ActionsObservable } from 'redux-observable'
+import { combineEpics } from 'redux-observable'
 
 import {
-    adminActions,
+    usersActions,
     getUsersSuccess,
     getUsersErr,
     getUsers,
     batchDeleteUsersErr,
     updateUserErr
-} from '../actions/adminActions';
+} from '../actions/usersActions'
 
 export const getUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
-        ofType(adminActions.GET_USERS),
+        ofType(usersActions.GET_USERS),
         mergeMap(() =>
             userService.getAllUsers().pipe(
                 map(users => getUsersSuccess(users)),
@@ -25,7 +25,7 @@ export const getUsersEpic = (action$, _, { userService }) => {
 
 export const updateUserEpic = (action$, _, { userService }) => {
     return action$.pipe(
-        ofType(adminActions.UPDATE_USER),
+        ofType(usersActions.UPDATE_USER),
         mergeMap((action: any) =>
             userService.updateUser(action.user.id, action.user).pipe(
                 map(() => getUsers()),
@@ -37,18 +37,16 @@ export const updateUserEpic = (action$, _, { userService }) => {
 
 export const batchDeleteUsersEpic = (action$, _, { userService }) => {
     return action$.pipe(
-        ofType(adminActions.BATCH_DELETE_USERS),
+        ofType(usersActions.BATCH_DELETE_USERS),
         mergeMap((action: any) =>
             userService.deleteUsers(action.ids).pipe(
                 map(() => getUsers()),
-                catchError(err => ActionsObservable.of(batchDeleteUsersErr(err)))
+                catchError(err =>
+                    ActionsObservable.of(batchDeleteUsersErr(err))
+                )
             )
         )
     )
 }
 
-export default combineEpics(
-    getUsersEpic,
-    updateUserEpic,
-    batchDeleteUsersEpic
-);
+export default combineEpics(getUsersEpic, updateUserEpic, batchDeleteUsersEpic)
