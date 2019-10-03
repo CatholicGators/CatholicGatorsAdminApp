@@ -1,4 +1,4 @@
-import { setUser } from '../../actions/auth/authActions'
+import { setUser } from '../actions/authActions'
 import authReducer, { INITIAL_AUTH_STATE } from './authReducer'
 
 describe('authReducer', () => {
@@ -6,7 +6,7 @@ describe('authReducer', () => {
 
     beforeAll(() => {
         user = {
-            name: "Joey"
+            name: 'Joey'
         }
     })
 

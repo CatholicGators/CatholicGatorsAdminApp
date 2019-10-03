@@ -1,4 +1,4 @@
-import Document from './document';
+import Document from '../../../../../models/document';
 
 export default interface User extends Document {
     name: String;

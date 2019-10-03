@@ -12,7 +12,7 @@ import VpnKey from '@material-ui/icons/VpnKey'
 import FormatAlignLeft from '@material-ui/icons/FormatAlignLeft'
 import Inbox from '@material-ui/icons/Inbox'
 
-import { googleSignIn, signOut } from '../../../../redux/actions/auth/authActions'
+import { googleSignIn, signOut } from '../../modules/auth/redux/actions/authActions'
 import MobileDrawer from '../MobileDrawer/MobileDrawer'
 import ToolbarAvatar from '../ToolbarAvatar/ToolbarAvatar'
 
