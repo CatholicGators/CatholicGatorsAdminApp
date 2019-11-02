@@ -6,7 +6,6 @@ import { styles } from '../../utils/ContactFormStyles'
 import {
     withStyles,
     TextField,
-    MenuItem,
     FormControl,
     InputLabel,
     OutlinedInput,
@@ -30,6 +29,10 @@ const genders = [
 
 const schools = [
   {
+    value: '',
+    label: '',
+  },
+  {
     value: 'UF',
     label: 'UF',
   },
@@ -40,6 +43,10 @@ const schools = [
 ];
 
 const semester = [
+  {
+    value: '',
+    label: '',
+  },
   {
     value: 'Spring',
     label: 'Spring',
@@ -97,10 +104,7 @@ class PersonalInformation extends React.Component<any, any> {
                 select
                 required
                 SelectProps={{
-                  native: true,
-                  MenuProps: {
-                    className: classes.menu
-                  }
+                  native: true
                 }}
                 label="Gender"
                 className={classes.fieldSmaller}
@@ -111,9 +115,9 @@ class PersonalInformation extends React.Component<any, any> {
                 
             >
                 {genders.map(option => (
-                <MenuItem key={option.value} value={option.value}>
+                <option key={option.value} value={option.value}>
                     {option.label}
-                </MenuItem>
+                </option>
                 ))}
             </TextField>
             <TextField
@@ -121,10 +125,7 @@ class PersonalInformation extends React.Component<any, any> {
                 select
                 required
                 SelectProps={{ 
-                  native: true,
-                  MenuProps: {
-                    className: classes.menu
-                  }
+                  native: true
                 }}
                 label="School"
                 className={classes.fieldSmaller}
@@ -134,9 +135,9 @@ class PersonalInformation extends React.Component<any, any> {
                 variant="outlined"            
             >
                 {schools.map(option => (
-                <MenuItem key={option.value} value={option.value}>
+                <option key={option.value} value={option.value}>
                     {option.label}
-                </MenuItem>
+                </option>
                 ))}
             </TextField>
             <FormControl
@@ -199,24 +200,21 @@ class PersonalInformation extends React.Component<any, any> {
             <TextField
                 id="graduationSemester"
                 select
-                required
-                SelectProps={{
-                  native: true,
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
                 label="Graduation Semester"
                 className={classes.field}
                 value={this.props.data.graduationSemester}
                 onChange={(e) => handleChange(e, 'graduationSemester')}
+                required
+                SelectProps={{
+                  native: true
+                }}
                 margin="normal"
                 variant="outlined"
             >
                 {semester.map(option => (
-                <MenuItem key={option.value} value={option.value}>
+                <option key={option.value} value={option.value}>
                     {option.label}
-                </MenuItem>
+                </option>
                 ))}
             </TextField>
             <div className={classes.buttons}>
