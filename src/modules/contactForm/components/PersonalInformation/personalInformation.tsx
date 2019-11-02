@@ -15,6 +15,10 @@ import {
 
 const genders = [
   {
+    value: '',
+    label: '',
+  },
+  {
     value: 'Male',
     label: 'Male',
   },
@@ -91,13 +95,20 @@ class PersonalInformation extends React.Component<any, any> {
             <TextField
                 id="gender"
                 select
+                required
+                SelectProps={{
+                  native: true,
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
                 label="Gender"
                 className={classes.fieldSmaller}
                 value={this.props.data.gender}
                 onChange={(e) => handleChange(e, 'gender')}
                 margin="normal"
                 variant="outlined"
-                required
+                
             >
                 {genders.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -108,13 +119,19 @@ class PersonalInformation extends React.Component<any, any> {
             <TextField
                 id="school"
                 select
+                required
+                SelectProps={{ 
+                  native: true,
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
                 label="School"
                 className={classes.fieldSmaller}
                 value={this.props.data.school}
                 onChange={(e) => handleChange(e, 'school')}
                 margin="normal"
-                variant="outlined"
-                required
+                variant="outlined"            
             >
                 {schools.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -182,13 +199,19 @@ class PersonalInformation extends React.Component<any, any> {
             <TextField
                 id="graduationSemester"
                 select
+                required
+                SelectProps={{
+                  native: true,
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
                 label="Graduation Semester"
                 className={classes.field}
                 value={this.props.data.graduationSemester}
                 onChange={(e) => handleChange(e, 'graduationSemester')}
                 margin="normal"
                 variant="outlined"
-                required
             >
                 {semester.map(option => (
                 <MenuItem key={option.value} value={option.value}>
