@@ -14,7 +14,7 @@ import {
     updateOptionTextSuccess,
     updateOptionTextErr
 } from '../actions/interestActions'
-import { Dependencies } from '../../../../../../redux/store/index'
+import { Dependencies } from '../../../../../../redux/store'
 
 export const getInterestsEpic = (
     action$,

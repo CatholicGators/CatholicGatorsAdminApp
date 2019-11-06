@@ -1,4 +1,4 @@
-import { authActions } from '../../actions/auth/authActions';
+import { authActions } from '../actions/authActions'
 
 export const INITIAL_AUTH_STATE = {
     user: undefined,
@@ -11,11 +11,12 @@ const applySetUser = (state, action) => ({
 })
 
 function authReducer(state = INITIAL_AUTH_STATE, action) {
-    switch(action.type) {
-        case authActions.SET_USER : {
+    switch (action.type) {
+        case authActions.SET_USER: {
             return applySetUser(state, action)
         }
-        default : return state;
+        default:
+            return state
     }
 }
 

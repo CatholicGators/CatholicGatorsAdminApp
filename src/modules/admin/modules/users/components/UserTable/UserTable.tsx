@@ -18,7 +18,7 @@ import {
     getUsers,
     updateUser,
     batchDeleteUsers
-} from '../../../../redux/actions/adminActions'
+} from '../../redux/actions/usersActions'
 import UserTableRow from './components/UserTableRow/UserTableRow'
 import UserTableToolbar from './components/UserTableToolbar/UserTableToolbar'
 
@@ -213,7 +213,7 @@ export class UserTable extends Component<Props, State> {
 }
 
 const mapStateToProps = state => ({
-    users: state.admin.users
+    users: state.admin.users.users
 })
 
 const mapDispatchToProps = dispatch => ({

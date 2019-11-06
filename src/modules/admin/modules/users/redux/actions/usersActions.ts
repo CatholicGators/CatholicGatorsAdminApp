@@ -1,4 +1,4 @@
-export const adminActions = {
+export const usersActions = {
     GET_USERS: 'GET_USERS',
     GET_USERS_SUCCESS: 'GET_USERS_SUCCESS',
     GET_USERS_ERR: 'GET_USERS_ERR',
@@ -14,33 +14,33 @@ export const adminActions = {
 }
 
 export function getUsers() {
-    return { type: adminActions.GET_USERS }
+    return { type: usersActions.GET_USERS }
 }
 
 export function getUsersSuccess(users) {
-    return { type: adminActions.GET_USERS_SUCCESS, users }
+    return { type: usersActions.GET_USERS_SUCCESS, users }
 }
 
 export function getUsersErr(err) {
-    return { type: adminActions.GET_USERS_ERR, err }
+    return { type: usersActions.GET_USERS_ERR, err }
 }
 
 export function updateUser(user) {
-    return { type: adminActions.UPDATE_USER, user }
+    return { type: usersActions.UPDATE_USER, user }
 }
 
 export function updateUserErr(err) {
-    return { type: adminActions.UPDATE_USER_ERR, err }
+    return { type: usersActions.UPDATE_USER_ERR, err }
 }
 
 export function updateUserSuccess(user) {
-    return { type: adminActions.UPDATE_USER_SUCCESS, user }
+    return { type: usersActions.UPDATE_USER_SUCCESS, user }
 }
 
 export function batchDeleteUsers(ids: String[]) {
-    return { type: adminActions.BATCH_DELETE_USERS, ids }
+    return { type: usersActions.BATCH_DELETE_USERS, ids }
 }
 
 export function batchDeleteUsersErr(err) {
-    return { type: adminActions.BATCH_DELETE_USERS_ERR, err}
+    return { type: usersActions.BATCH_DELETE_USERS_ERR, err }
 }

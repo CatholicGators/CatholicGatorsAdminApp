@@ -12,7 +12,7 @@ import {
     IconButton
 } from '@material-ui/core'
 import CheckIcon from '@material-ui/icons/Check'
-import { updateUser } from '../../../../../../redux/actions/adminActions'
+import { updateUser } from '../../../../redux/actions/usersActions'
 
 export const styles = (theme: Theme) =>
     createStyles({

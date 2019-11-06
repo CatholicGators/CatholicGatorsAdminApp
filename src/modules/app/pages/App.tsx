@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
-import { listenForUser } from '../../../redux/actions/auth/authActions'
+import { listenForUser } from '../modules/auth/redux/actions/authActions'
 import Header from '../components/Header/Header'
 import Admin from '../../admin/pages/Admin/Admin'
 import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute'

@@ -3,12 +3,13 @@ import { of, throwError } from 'rxjs';
 import { toArray, take } from 'rxjs/operators';
 
 import UserService from './userService';
+// TODO: should hook into jest's automatic mocking with the __mocks__ folder
 import {
     firestore,
     auth,
     authCallBacks,
     authErrCallBacks
-} from './testUtils/mockFirestore';
+} from './__mocks__/mockFirestore';
 
 describe('UserService', () => {
     const USER_COLLECTION = 'users';
