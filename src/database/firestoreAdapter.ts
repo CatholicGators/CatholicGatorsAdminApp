@@ -25,7 +25,12 @@ export default class Firestore {
         }
     }
 
-    private flatten<T extends Doc>(doc: QueryDocumentSnapshot): T {
+    async getAll<T extends Doc>(collectionName: string): Promise<T[]> {
+        const snapshot = await this.db.collection(collectionName).get()
+        return snapshot.docs.map(doc => this.flatten<T>(doc))
+    }
+
+    public flatten<T extends Doc>(doc: QueryDocumentSnapshot): T {
         return {
             id: doc.id,
             ...doc.data()
