@@ -1,6 +1,6 @@
 import { when } from 'jest-when'
 
-import FirestoreAdapter from './FirestoreAdapter'
+import FirestoreAdapter from './firestoreAdapter'
 import DocumentNotFoundError from './documentNotFoundError'
 
 describe('firestoreAdapter', () => {
