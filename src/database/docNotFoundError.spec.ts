@@ -1,11 +1,11 @@
-import DocumentNotFoundError from './documentNotFoundError'
+import DocNotFoundError from './docNotFoundError'
 
 describe('DocumentNotFoundError', () => {
     it('gives a custom message when a collection name and document id is passed', () => {
         const collectionName = 'testCollectionName'
         const docId = 'testId'
 
-        const err = new DocumentNotFoundError(collectionName, docId)
+        const err = new DocNotFoundError(collectionName, docId)
 
         expect(err.message).toEqual(`Document id ${docId} does not exist in collection ${collectionName}`)
     })

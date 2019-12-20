@@ -1,4 +1,4 @@
-export default class DocumentNotFoundError extends Error {
+export default class DocNotFoundError extends Error {
     constructor(collectionName: string, docId: string) {
         super()
         this.name = "DocumentNotFoundError"

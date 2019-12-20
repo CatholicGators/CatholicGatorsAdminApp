@@ -1,7 +1,13 @@
 import { when } from 'jest-when'
 
 import FirestoreAdapter from './firestoreAdapter'
-import DocumentNotFoundError from './documentNotFoundError'
+import DocNotFoundError from './docNotFoundError'
+import Doc from './doc'
+
+interface TestInterface extends Doc {
+    id: string,
+    foo: String
+}
 
 describe('firestoreAdapter', () => {
     let adapter: FirestoreAdapter, db, collectionName = 'testCollectionName', collection, docs
@@ -64,7 +70,7 @@ describe('firestoreAdapter', () => {
         })
 
         it('successfully gets a document and flattens it', async () => {
-            const data = await adapter.get(collectionName, docRef.id)
+            const data = await adapter.get<TestInterface>(collectionName, docRef.id)
 
             expect(data).toEqual({
                 id: docRef.id,
@@ -81,19 +87,19 @@ describe('firestoreAdapter', () => {
             }))
 
             try {
-                await adapter.get(collectionName, docRef.id)
+                await adapter.get<TestInterface>(collectionName, docRef.id)
                 fail('expected DocumentNotFoundError')
             } catch (e) {
-                expect(e instanceof DocumentNotFoundError).toBeTruthy()
+                expect(e instanceof DocNotFoundError).toBeTruthy()
             }
         })
     })
 
     describe('getAll()', () => {
         it('when given a collection name with docs, returns all of the docs flattened', async () => {
-            const data = await adapter.getAll(collectionName)
+            const data = await adapter.getAll<TestInterface>(collectionName)
 
-            expect(data).toEqual(docs.map(doc => adapter.flatten(doc)))
+            expect(data).toEqual(docs.map(doc => adapter.flattenSnapshot(doc)))
         })
 
         it('when given a collection name without docs, returns empty array', async () => {
@@ -103,9 +109,31 @@ describe('firestoreAdapter', () => {
                     docs: []
                 }))
 
-            const data = await adapter.getAll(collectionName)
+            const data = await adapter.getAll<TestInterface>(collectionName)
 
             expect(data).toEqual([])
+        })
+    })
+
+    describe('add()', () => {
+        it('when given a collection name and a doc, it adds the doc', async () => {
+            const newDoc = {
+                foo: 'bazz'
+            }
+            const testId = 'testId'
+            const docRef = {
+                id: testId
+            }
+            when(collection.add)
+                .calledWith(newDoc)
+                .mockReturnValue(docRef)
+
+            const data = await adapter.add<TestInterface>(collectionName, newDoc)
+
+            expect(data).toEqual({
+                ...newDoc,
+                id: testId
+            })
         })
     })
 })

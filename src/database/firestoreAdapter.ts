@@ -1,15 +1,12 @@
 import "firebase/firestore"
 import "firebase/auth"
 
-import DocumentNotFoundError from "./documentNotFoundError"
+import DocNotFoundError from "./docNotFoundError"
+import Doc from './doc'
 
 type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot
 
-export default interface Doc {
-    id: string
-}
-
-export default class Firestore {
+export default class FirestoreAdapter {
     constructor(private db: firebase.firestore.Firestore) { }
 
     async get<T extends Doc>(collectionName: string, id: string): Promise<T> {
@@ -19,32 +16,34 @@ export default class Firestore {
             .get()
 
         if (docSnapshot.exists) {
-            return this.flatten<T>(docSnapshot)
+            return this.flattenSnapshot<T>(docSnapshot)
         } else {
-            throw new DocumentNotFoundError(collectionName, id)
+            throw new DocNotFoundError(collectionName, id)
         }
     }
 
     async getAll<T extends Doc>(collectionName: string): Promise<T[]> {
         const snapshot = await this.db.collection(collectionName).get()
-        return snapshot.docs.map(doc => this.flatten<T>(doc))
+        return snapshot.docs.map(doc => this.flattenSnapshot<T>(doc))
     }
 
-    public flatten<T extends Doc>(doc: QueryDocumentSnapshot): T {
+    async add<T extends Doc>(collection: string, doc: any): Promise<T> {
+        const docRef = await this.db.collection(collection).add(doc)
         return {
-            id: doc.id,
-            ...doc.data()
+            ...doc,
+            id: docRef.id
+        } as T
+    }
+
+    flattenSnapshot<T extends Doc>(doc: QueryDocumentSnapshot): T {
+        return {
+            ...doc.data(),
+            id: doc.id
         } as T
     }
 
     // getAuth(): auth.Auth {
     //     return this.app.auth();
-    // }
-
-    // addDoc(collection: string, entity: any): Promise<DocumentReference> {
-    //     if(entity.id || entity.uid)
-    //         entity = this.removeId(entity);
-    //     return from(this.db.collection(collection).add(entity));
     // }
 
     // upsertDocById(collection: string, docId: string, entity: any): Observable<firebase.firestore.DocumentReference>{
