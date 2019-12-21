@@ -1,7 +1,7 @@
 export default class DocumentNotFoundError extends Error {
-    constructor(document: string) {
-        super();
-        this.name = "DocumentNotFoundError";
-        this.message = `Document ${document} does not exist in database`;
+    constructor(docId: string) {
+        super()
+        this.name = "DocumentNotFoundError"
+        this.message = `Document ${docId} does not exist in database`
     }
 }
