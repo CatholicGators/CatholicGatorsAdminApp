@@ -11,8 +11,7 @@ export default class FirestoreAdapter {
     constructor(private db: firebase.firestore.Firestore) { }
 
     async get<T extends Doc>(collectionName: string, id: string): Promise<T> {
-        let docSnapshot = await this.getDocReference(collectionName, id)
-            .get()
+        let docSnapshot = await this.getDocReference(collectionName, id).get()
 
         if (docSnapshot.exists) {
             return this.flattenSnapshot<T>(docSnapshot)
@@ -26,12 +25,21 @@ export default class FirestoreAdapter {
         return snapshot.docs.map(doc => this.flattenSnapshot<T>(doc))
     }
 
-    async add<T extends Doc>(collection: string, doc: any): Promise<T> {
-        const docRef = await this.db.collection(collection).add(doc)
+    async add<T extends Doc>(collectionName: string, doc: any): Promise<T> {
+        const docRef = await this.db.collection(collectionName).add(doc)
         return {
             ...doc,
             id: docRef.id
         } as T
+    }
+
+    async update<T extends Doc>(collectionName: string, id: string, fields: object): Promise<T> {
+        const doc = await this.get<T>(collectionName, id)
+        await this.getDocReference(collectionName, id).update(fields)
+        return {
+            ...doc,
+            ...fields
+        }
     }
 
     async delete(collectionName: string, id: string): Promise<void> {

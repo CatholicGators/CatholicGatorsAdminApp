@@ -90,6 +90,34 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
+    describe('update', () => {
+        it('when given a collection name and an id that exists in that collection, updates that doc', async () => {
+            const doc = {
+                foo: 'test'
+            }
+            const data = await adapter.add<TestInterface>(collectionName, doc)
+            const updatedFields = {
+                foo: `not ${doc.foo}`
+            }
+
+            const updatedData = await adapter.update<TestInterface>(collectionName, data.id, updatedFields)
+
+            expect(updatedData).toEqual({
+                ...data,
+                ...updatedFields
+            })
+        })
+
+        it('when given a collection name and an id that doesnt exist in that collection, throws DocNotFoundError', async () => {
+            try {
+                await adapter.update<TestInterface>(collectionName, 'garbage', {})
+                fail('expected DocNotFoundError')
+            } catch (e) {
+                expect(e instanceof DocNotFoundError).toBeTruthy()
+            }
+        })
+    })
+
     describe('delete', () => {
         it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
             const docToDelete = 0
