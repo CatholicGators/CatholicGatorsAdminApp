@@ -20,14 +20,18 @@ describe('firestoreAdapter', () => {
         return {
             id: id,
             exists: true,
-            data: jest.fn(() => doc)
+            data: jest.fn(() => doc),
+            ref: {
+                delete: jest.fn()
+            }
         }
     }
 
     let createDocRef = id => {
         return {
             id,
-            get: jest.fn(() => Promise.resolve(createDocSnapshot(id)))
+            get: jest.fn(() => Promise.resolve(createDocSnapshot(id))),
+            delete: jest.fn()
         }
     }
 
@@ -58,11 +62,10 @@ describe('firestoreAdapter', () => {
     })
 
     describe('get()', () => {
-        let testId, docRef
+        let docRef
 
         beforeEach(() => {
-            testId = 'test'
-            docRef = createDocRef(testId)
+            docRef = createDocRef('testId')
 
             when(collection.doc)
                 .calledWith(docRef.id)
@@ -134,6 +137,39 @@ describe('firestoreAdapter', () => {
                 ...newDoc,
                 id: testId
             })
+        })
+    })
+
+    describe('deleteAll()', () => {
+        it('when given a collection name with docs, deletes all docs', async () => {
+            await adapter.deleteAll(collectionName)
+
+            for (let i = 0; i < docs.length; i++) {
+                expect(docs[i].ref.delete).toHaveBeenCalled()
+            }
+        })
+
+        it('when given a collection name without docs, does nothing', async () => {
+            when(collection.get)
+                .calledWith()
+                .mockReturnValue(Promise.resolve({
+                    docs: []
+                }))
+
+            await adapter.deleteAll(collectionName)
+        })
+    })
+
+    describe('delete()', () => {
+        it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
+            let docRef = createDocRef('testId')
+            when(collection.doc)
+                .calledWith(docRef.id)
+                .mockReturnValue(docRef)
+
+            await adapter.delete(collectionName, docRef.id)
+
+            expect(docRef.delete).toHaveBeenCalled()
         })
     })
 })

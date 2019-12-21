@@ -35,16 +35,21 @@ export default class FirestoreAdapter {
         } as T
     }
 
+    async delete(collectionName: string, id: string): Promise<void> {
+        await this.db.collection(collectionName).doc(id).delete()
+    }
+
+    async deleteAll(collectionName: string): Promise<void> {
+        const snapshot = await this.db.collection(collectionName).get()
+        snapshot.docs.forEach(doc => doc.ref.delete())
+    }
+
     flattenSnapshot<T extends Doc>(doc: QueryDocumentSnapshot): T {
         return {
             ...doc.data(),
             id: doc.id
         } as T
     }
-
-    // getAuth(): auth.Auth {
-    //     return this.app.auth();
-    // }
 
     // upsertDocById(collection: string, docId: string, entity: any): Observable<firebase.firestore.DocumentReference>{
     //     if(entity.id || entity.uid)
@@ -79,24 +84,6 @@ export default class FirestoreAdapter {
     //     return from(batch.commit())
     //         .pipe(
     //             map(_ => docRefs)
-    //         );
-    // }
-
-    // getCollection(collection: string): Observable<Document[]> {
-    //     return from(this.db.collection(collection).get())
-    //         .pipe(
-    //             map(querySnapshot => {
-    //                 const docs = [];
-    //                 const queryDocumentSnapshots = querySnapshot.docs;
-    //                 for(let i = 0; i < queryDocumentSnapshots.length; i++) {
-    //                     const doc = queryDocumentSnapshots[i];
-    //                     docs.push({
-    //                         id: doc.id,
-    //                         ...doc.data()
-    //                     });
-    //                 }
-    //                 return docs;
-    //             })
     //         );
     // }
 
@@ -145,10 +132,6 @@ export default class FirestoreAdapter {
     //     });
     // }
 
-    // deleteDoc(collection: string, docId: string): Observable<void> {
-    //     return from(this.db.collection(collection).doc(docId).delete());
-    // }
-
     // deleteDocs(collection: string, docIds: string[]): Observable<void> {
     //     const batch = this.db.batch();
 
@@ -158,10 +141,6 @@ export default class FirestoreAdapter {
     //     });
 
     //     return from(batch.commit());
-    // }
-
-    // closeConnection() {
-    //     return from(this.app.delete());
     // }
 
     // private removeId(obj: any) {

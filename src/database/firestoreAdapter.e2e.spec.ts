@@ -11,12 +11,32 @@ interface TestInterface extends Doc {
 
 describe('firestoreAdapter e2e', () => {
     const collectionName = 'e2eTestCollection'
-    let adapter: FirestoreAdapter, app: firebase.app.App, db: firebase.firestore.Firestore
+    let adapter: FirestoreAdapter, app: firebase.app.App, db: firebase.firestore.Firestore, docsToAdd, docsInDbSortedOnId
 
-    beforeEach(() => {
+    const uploadDocs = async () => {
+        docsToAdd = [
+            {
+                foo: 'bar'
+            },
+            {
+                foo: 'bazz'
+            }
+        ]
+        docsInDbSortedOnId = []
+
+        for (let i = 0; i < docsToAdd.length; i++) {
+            const addedDoc = await adapter.add<TestInterface>(collectionName, docsToAdd[i])
+            docsInDbSortedOnId.push(addedDoc)
+        }
+
+        docsInDbSortedOnId.sort((a, b) => a.id > b.id ? 1 : -1)
+    }
+
+    beforeEach(async () => {
         app = firebase.initializeApp(clientConfig)
         db = app.firestore()
         adapter = new FirestoreAdapter(db)
+        await uploadDocs()
     })
 
     describe('get()', () => {
@@ -32,10 +52,8 @@ describe('firestoreAdapter e2e', () => {
         })
 
         it('when given an id of a doc that doesnt exist, throws DocumentNotFoundError', async () => {
-            const testId = 'garbage'
-
             try {
-                await adapter.get<TestInterface>(collectionName, testId)
+                await adapter.get<TestInterface>(collectionName, 'garbage')
                 fail('expected DocNotFoundError')
             } catch (e) {
                 expect(e instanceof DocNotFoundError).toBeTruthy()
@@ -45,27 +63,14 @@ describe('firestoreAdapter e2e', () => {
 
     describe('getAll()', () => {
         it('when given a collection name that has docs in it, returns all of the docs', async () => {
-            const docsToAdd = [
-                {
-                    foo: 'bar'
-                },
-                {
-                    foo: 'bazz'
-                }
-            ]
-            const docsAdded = []
-
-            for (let i = 0; i < docsToAdd.length; i++) {
-                const addedDoc = await adapter.add<TestInterface>(collectionName, docsToAdd[i])
-                docsAdded.push(addedDoc)
-            }
             const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
 
-            expect(dataFromGet).toEqual(docsAdded)
+            dataFromGet.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(dataFromGet).toEqual(docsInDbSortedOnId)
         })
 
         it('when given a collection name that has no docs in it, returns empty list', async () => {
-            const data = await adapter.getAll<TestInterface>('garbage')
+            const data = await adapter.getAll<TestInterface>(`not ${collectionName}`)
 
             expect(data).toEqual([])
         })
@@ -84,7 +89,49 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    afterEach(() => {
+    describe('delete()', () => {
+        it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
+            const docToDelete = 0
+
+            await adapter.delete(collectionName, docsInDbSortedOnId[docToDelete].id)
+
+            const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
+            dataFromGet.sort((a, b) => a.id > b.id ? 1 : -1)
+            docsInDbSortedOnId.splice(docToDelete, 1)
+            expect(dataFromGet).toEqual(docsInDbSortedOnId)
+        })
+
+        it('when given a collection name and an id that doesnt exist in that collection, it does nothing', async () => {
+            await adapter.delete(collectionName, 'garbage')
+
+            const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
+            dataFromGet.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(dataFromGet).toEqual(docsInDbSortedOnId)
+        })
+    })
+
+    describe('deleteAll()', () => {
+        it('when given a collection name that has docs in it, deletes all the docs', async () => {
+            await adapter.deleteAll(collectionName)
+
+            const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
+            expect(dataFromGet).toEqual([])
+        })
+
+        it('when given a collection name that has no docs in it, does nothing', async () => {
+            const emptyCollection = `not ${collectionName}`
+            let dataFromGet = await adapter.getAll<TestInterface>(emptyCollection)
+            expect(dataFromGet).toEqual([])
+
+            await adapter.deleteAll(emptyCollection)
+
+            dataFromGet = await adapter.getAll<TestInterface>(emptyCollection)
+            expect(dataFromGet).toEqual([])
+        })
+    })
+
+    afterEach(async () => {
+        await adapter.deleteAll(collectionName)
         app.delete()
     })
 })
