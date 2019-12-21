@@ -12,24 +12,26 @@ import prodClientConfig from '../../config/prodClientConfig'
 import InterestsService from '../../modules/admin/modules/interests/services/interestsService'
 import ContactFormService from '../../modules/contactForm/services/contactFormService'
 import UserService from '../../modules/app/modules/auth/services/userService'
+import FirestoreAdapter from '../../database/firestoreAdapter'
 
 const config =
     JSON.stringify(process.env.REACT_APP_ENV_NAME) ===
-    JSON.stringify('production')
+        JSON.stringify('production')
         ? prodClientConfig
         : JSON.stringify(process.env.REACT_APP_ENV_NAME) ===
-          JSON.stringify('test')
-        ? testClientConfig
-        : devClientConfig
+            JSON.stringify('test')
+            ? testClientConfig
+            : devClientConfig
 
 const app = !firebase.apps.length
     ? firebase.initializeApp(config)
     : firebase.app()
 const db = app.firestore()
 
+const firestoreAdapter = new FirestoreAdapter(db)
 const firestore = new Firestore(app, db)
 const userService = new UserService(firestore)
-const interestsService = new InterestsService(db)
+const interestsService = new InterestsService(firestoreAdapter)
 const contactFormService = new ContactFormService(db, interestsService)
 
 export type Dependencies = {

@@ -40,7 +40,7 @@ describe('firestoreAdapter e2e', () => {
         await uploadDocs(collectionName)
     })
 
-    describe('get()', () => {
+    describe('get', () => {
         it('when given an id of a doc that exists, returns that doc', async () => {
             const doc = {
                 foo: ''
@@ -62,7 +62,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getAll()', () => {
+    describe('getAll', () => {
         it('when given a collection name that has docs in it, returns all of the docs', async () => {
             const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
 
@@ -77,7 +77,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('add()', () => {
+    describe('add', () => {
         it('successfully adds a document and assigns an id', async () => {
             const doc = {
                 foo: ''
@@ -90,7 +90,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('delete()', () => {
+    describe('delete', () => {
         it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
             const docToDelete = 0
 
@@ -111,7 +111,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('deleteAll()', () => {
+    describe('deleteAll', () => {
         it('when given a collection name that has docs in it, deletes all the docs', async () => {
             await adapter.deleteAll(collectionName)
 
@@ -131,7 +131,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getDocReference()', () => {
+    describe('getDocReference', () => {
         it('when given a collection name and an id of a doc that exists in the collection, returns a reference to that doc', async () => {
             const docInDb = docsInDbSortedOnId[0]
 
@@ -142,7 +142,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getNewDocReference()', () => {
+    describe('getNewDocReference', () => {
         it('when given a collection name, returns a new reference', async () => {
             const ref = adapter.getNewDocReference(collectionName)
 
@@ -153,7 +153,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('runTransaction()', () => {
+    describe('runTransaction', () => {
         let sourceCollectionName, destinationCollectionName
 
         beforeEach(async () => {

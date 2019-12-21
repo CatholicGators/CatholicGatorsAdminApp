@@ -1,7 +1,8 @@
 import 'firebase/firestore'
 import { NewOptionReq, NewSectionReq } from '../redux/actions/interestActions'
+import FirestoreAdapter from '../../../../../database/firestoreAdapter'
 
-export type SectionDoc = {
+type SectionDoc = {
     id: string
     text: string
     position: number
@@ -20,21 +21,15 @@ export type Option = {
     text: string
 }
 
-interface Doc {
-    id: string
-}
-
 export default class InterestsService {
     public static readonly OPTIONS: string = 'options'
     public static readonly SECTIONS: string = 'sections'
 
-    constructor(private db: firebase.firestore.Firestore) {}
+    constructor(private adapter: FirestoreAdapter) { }
 
     async getInterests(): Promise<Section[]> {
-        const [sectionDocs, optionDocs] = await Promise.all([
-            this.getAllAndFlatten<SectionDoc>(InterestsService.SECTIONS),
-            this.getAllAndFlatten<Option>(InterestsService.OPTIONS)
-        ])
+        const sectionDocs = await this.adapter.getAll<SectionDoc>(InterestsService.SECTIONS)
+        const optionDocs = await this.adapter.getAll<Option>(InterestsService.OPTIONS)
         const sections = sectionDocs.map(section => ({
             ...section,
             options: section.options
@@ -48,12 +43,12 @@ export default class InterestsService {
     }
 
     addOption(sectionId: string, optionReq: NewOptionReq): Promise<Option> {
-        return this.db.runTransaction(async transaction => {
+        return this.adapter.runTransaction(async transaction => {
             const optionDoc = await transaction.get(
-                this.db.collection(InterestsService.OPTIONS).doc()
+                this.adapter.getNewDocReference(InterestsService.OPTIONS)
             )
             const sectionDoc = await transaction.get(
-                this.db.collection(InterestsService.SECTIONS).doc(sectionId)
+                this.adapter.getDocReference(InterestsService.SECTIONS, sectionId)
             )
 
             const options = sectionDoc.data().options
@@ -71,9 +66,9 @@ export default class InterestsService {
     }
 
     updateOptionText(optionId: string, newText: string): Promise<Option> {
-        return this.db.runTransaction(async transaction => {
+        return this.adapter.runTransaction(async transaction => {
             const optionDoc = await transaction.get(
-                this.db.collection(InterestsService.OPTIONS).doc(optionId)
+                this.adapter.getDocReference(InterestsService.OPTIONS, optionId)
             )
             const updatedOption = {
                 ...optionDoc.data(),
@@ -89,26 +84,7 @@ export default class InterestsService {
         })
     }
 
-    async addSection(sectionReq: NewSectionReq): Promise<Section> {
-        const sectionRef = await this.db
-            .collection(InterestsService.SECTIONS)
-            .add(sectionReq)
-        return {
-            id: sectionRef.id,
-            ...sectionReq
-        }
-    }
-
-    private async getAllAndFlatten<T extends Doc>(
-        collection: string
-    ): Promise<T[]> {
-        const snapshot = await this.db.collection(collection).get()
-        return snapshot.docs.map(
-            doc =>
-                ({
-                    id: doc.id,
-                    ...doc.data()
-                } as T)
-        )
+    addSection(sectionReq: NewSectionReq): Promise<Section> {
+        return this.adapter.add<Section>(InterestsService.SECTIONS, sectionReq)
     }
 }

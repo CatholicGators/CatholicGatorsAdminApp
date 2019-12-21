@@ -63,7 +63,7 @@ describe('firestoreAdapter', () => {
         adapter = new FirestoreAdapter(db)
     })
 
-    describe('get()', () => {
+    describe('get', () => {
         let docRef
 
         beforeEach(() => {
@@ -100,7 +100,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getAll()', () => {
+    describe('getAll', () => {
         it('when given a collection name with docs, returns all of the docs flattened', async () => {
             const data = await adapter.getAll<TestInterface>(collectionName)
 
@@ -120,7 +120,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('add()', () => {
+    describe('add', () => {
         it('when given a collection name and a doc, it adds the doc', async () => {
             const newDoc = {
                 foo: 'bazz'
@@ -142,7 +142,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('deleteAll()', () => {
+    describe('deleteAll', () => {
         it('when given a collection name with docs, deletes all docs', async () => {
             await adapter.deleteAll(collectionName)
 
@@ -162,7 +162,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('delete()', () => {
+    describe('delete', () => {
         it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
@@ -175,7 +175,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('runTransaction()', () => {
+    describe('runTransaction', () => {
         it('passes the update function to db.runTransaction()', async () => {
             const updateFn = jest.fn()
 
@@ -185,7 +185,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getDocReference()', () => {
+    describe('getDocReference', () => {
         it('gets reference with collection name and id', () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
@@ -198,7 +198,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getNewDocReference()', () => {
+    describe('getNewDocReference', () => {
         it('gets reference to a new doc with just a collection name and no id', () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
