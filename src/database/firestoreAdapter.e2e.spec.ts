@@ -43,6 +43,34 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
+    describe('getAll()', () => {
+        it('when given a collection name that has docs in it, returns all of the docs', async () => {
+            const docsToAdd = [
+                {
+                    foo: 'bar'
+                },
+                {
+                    foo: 'bazz'
+                }
+            ]
+            const docsAdded = []
+
+            for (let i = 0; i < docsToAdd.length; i++) {
+                const addedDoc = await adapter.add<TestInterface>(collectionName, docsToAdd[i])
+                docsAdded.push(addedDoc)
+            }
+            const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
+
+            expect(dataFromGet).toEqual(docsAdded)
+        })
+
+        it('when given a collection name that has no docs in it, returns empty list', async () => {
+            const data = await adapter.getAll<TestInterface>('garbage')
+
+            expect(data).toEqual([])
+        })
+    })
+
     describe('add()', () => {
         it('successfully adds a document and assigns an id', async () => {
             const doc = {
