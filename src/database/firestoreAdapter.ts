@@ -11,9 +11,7 @@ export default class FirestoreAdapter {
     constructor(private db: firebase.firestore.Firestore) { }
 
     async get<T extends Doc>(collectionName: string, id: string): Promise<T> {
-        let docSnapshot = await this.db
-            .collection(collectionName)
-            .doc(id)
+        let docSnapshot = await this.getDocReference(collectionName, id)
             .get()
 
         if (docSnapshot.exists) {
@@ -37,7 +35,7 @@ export default class FirestoreAdapter {
     }
 
     async delete(collectionName: string, id: string): Promise<void> {
-        await this.db.collection(collectionName).doc(id).delete()
+        await this.getDocReference(collectionName, id).delete()
     }
 
     async deleteAll(collectionName: string): Promise<void> {
