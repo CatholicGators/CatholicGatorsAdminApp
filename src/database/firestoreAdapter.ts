@@ -41,7 +41,7 @@ export default class FirestoreAdapter {
 
     async deleteAll(collectionName: string): Promise<void> {
         const snapshot = await this.db.collection(collectionName).get()
-        snapshot.docs.forEach(doc => doc.ref.delete())
+        await Promise.all(snapshot.docs.map(doc => doc.ref.delete()))
     }
 
     flattenSnapshot<T extends Doc>(doc: QueryDocumentSnapshot): T {
