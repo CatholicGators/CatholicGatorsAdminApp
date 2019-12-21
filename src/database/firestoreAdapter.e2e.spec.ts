@@ -13,7 +13,7 @@ describe('firestoreAdapter e2e', () => {
     const collectionName = 'e2eTestCollection'
     let adapter: FirestoreAdapter, app: firebase.app.App, db: firebase.firestore.Firestore, docsToAdd, docsInDbSortedOnId
 
-    const uploadDocs = async () => {
+    const uploadDocs = async (collectionName: string) => {
         docsToAdd = [
             {
                 foo: 'bar'
@@ -36,7 +36,8 @@ describe('firestoreAdapter e2e', () => {
         app = firebase.initializeApp(clientConfig)
         db = app.firestore()
         adapter = new FirestoreAdapter(db)
-        await uploadDocs()
+        await adapter.deleteAll(collectionName)
+        await uploadDocs(collectionName)
     })
 
     describe('get()', () => {
@@ -127,6 +128,104 @@ describe('firestoreAdapter e2e', () => {
 
             dataFromGet = await adapter.getAll<TestInterface>(emptyCollection)
             expect(dataFromGet).toEqual([])
+        })
+    })
+
+    describe('getDocReference()', () => {
+        it('when given a collection name and an id of a doc that exists in the collection, returns a reference to that doc', async () => {
+            const docInDb = docsInDbSortedOnId[0]
+
+            const ref = adapter.getDocReference(collectionName, docInDb.id)
+
+            const data = await adapter.get<TestInterface>(collectionName, ref.id)
+            expect(docInDb).toEqual(data)
+        })
+    })
+
+    describe('getNewDocReference()', () => {
+        it('when given a collection name, returns a new reference', async () => {
+            const ref = adapter.getNewDocReference(collectionName)
+
+            try {
+                await adapter.get<TestInterface>(collectionName, ref.id)
+                fail('expected the ref to be new')
+            } catch { }
+        })
+    })
+
+    describe('runTransaction()', () => {
+        let sourceCollectionName, destinationCollectionName
+
+        beforeEach(async () => {
+            sourceCollectionName = 'e2eSourceCollectionName'
+            destinationCollectionName = 'e2eDestinationCollectionName'
+            await adapter.deleteAll(sourceCollectionName)
+            await adapter.deleteAll(destinationCollectionName)
+            await uploadDocs(sourceCollectionName)
+        })
+
+        it('when transaction throws no errors, commits transaction and returns result of transaction', async () => {
+            let sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+            expect(sourceDocs.length).toEqual(docsInDbSortedOnId.length)
+            let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
+            expect(destinationDocs.length).toEqual(0)
+
+            const returnVal = 'done migrating docs from source to destination!'
+            const result = await adapter.runTransaction(async transaction => {
+                const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+
+                await Promise.all(sourceDocs.map(async sourceDoc => {
+                    const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
+                    const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
+
+                    transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
+                    transaction.delete(sourceSnapshot.ref)
+                }))
+
+                return returnVal
+            })
+
+            expect(result).toBe(returnVal)
+            sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+            expect(sourceDocs.length).toEqual(0)
+            destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
+            expect(destinationDocs.length).toEqual(docsInDbSortedOnId.length)
+        })
+
+        it('when transaction throws an error, does not commit transaction and throws', async () => {
+            let sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+            expect(sourceDocs.length).toEqual(docsInDbSortedOnId.length)
+            let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
+            expect(destinationDocs.length).toEqual(0)
+
+            const exception = 'cant commit transaction!'
+            try {
+                await adapter.runTransaction(async transaction => {
+                    const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+
+                    await Promise.all(sourceDocs.map(async sourceDoc => {
+                        const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
+                        const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
+
+                        transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
+                        transaction.delete(sourceSnapshot.ref)
+                    }))
+
+                    throw exception
+                })
+                fail('we were supposed to throw an exception on a failed transaction')
+            } catch (e) {
+                expect(e).toBe(exception)
+                sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+                expect(sourceDocs.length).toEqual(docsInDbSortedOnId.length)
+                destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
+                expect(destinationDocs.length).toEqual(0)
+            }
+        })
+
+        afterEach(async () => {
+            await adapter.deleteAll(sourceCollectionName)
+            await adapter.deleteAll(destinationCollectionName)
         })
     })
 

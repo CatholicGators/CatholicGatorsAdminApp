@@ -10,7 +10,7 @@ interface TestInterface extends Doc {
 }
 
 describe('firestoreAdapter', () => {
-    let adapter: FirestoreAdapter, db, collectionName = 'testCollectionName', collection, docs
+    let adapter: FirestoreAdapter, db, collectionName, collection, docs
 
     let createDocSnapshot = id => {
         const doc = {
@@ -36,6 +36,7 @@ describe('firestoreAdapter', () => {
     }
 
     beforeEach(() => {
+        collectionName = 'testCollectionName'
         docs = [
             createDocSnapshot('1'),
             createDocSnapshot('2'),
@@ -52,7 +53,8 @@ describe('firestoreAdapter', () => {
                 docs
             }))
         db = {
-            collection: jest.fn()
+            collection: jest.fn(),
+            runTransaction: jest.fn()
         }
         when(db.collection)
             .calledWith(collectionName)
@@ -170,6 +172,42 @@ describe('firestoreAdapter', () => {
             await adapter.delete(collectionName, docRef.id)
 
             expect(docRef.delete).toHaveBeenCalled()
+        })
+    })
+
+    describe('runTransaction()', () => {
+        it('passes the update function to db.runTransaction()', async () => {
+            const updateFn = jest.fn()
+
+            await adapter.runTransaction(updateFn)
+
+            expect(db.runTransaction).toHaveBeenCalledWith(updateFn)
+        })
+    })
+
+    describe('getDocReference()', () => {
+        it('gets reference with collection name and id', () => {
+            let docRef = createDocRef('testId')
+            when(collection.doc)
+                .calledWith(docRef.id)
+                .mockReturnValue(docRef)
+
+            const ref = adapter.getDocReference(collectionName, docRef.id)
+
+            expect(ref).toBe(docRef)
+        })
+    })
+
+    describe('getNewDocReference()', () => {
+        it('gets reference to a new doc with just a collection name and no id', () => {
+            let docRef = createDocRef('testId')
+            when(collection.doc)
+                .calledWith()
+                .mockReturnValue(docRef)
+
+            const ref = adapter.getNewDocReference(collectionName)
+
+            expect(ref).toBe(docRef)
         })
     })
 })
