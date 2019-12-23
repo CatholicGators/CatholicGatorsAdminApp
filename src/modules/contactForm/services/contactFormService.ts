@@ -2,6 +2,7 @@ import 'firebase/firestore'
 import InterestsService, {
     Section
 } from '../../admin/modules/interests/services/interestsService'
+import FirestoreAdapter from '../../../database/firestoreAdapter'
 
 export const ContactStatus = {
     NOT_CALLED: 0,
@@ -54,67 +55,29 @@ export type Contact = {
     createdAt: Date
 }
 
-interface Doc {
-    id: string
-}
-
 export default class ContactFormService {
     public static readonly CONTACTS_COLLECTION: string = 'contacts'
 
     constructor(
-        private db: firebase.firestore.Firestore,
+        private adapter: FirestoreAdapter,
         private interestsService: InterestsService
-    ) {}
+    ) { }
 
-    async addContact(contact: NewContactReq): Promise<Contact> {
-        const contactFormRef = await this.db
-            .collection(ContactFormService.CONTACTS_COLLECTION)
-            .add(contact)
-        return {
-            id: contactFormRef.id,
-            ...contact
-        }
+    addContact(contact: NewContactReq): Promise<Contact> {
+        return this.adapter.add<Contact>(ContactFormService.CONTACTS_COLLECTION, contact)
     }
 
-    async getInterests(): Promise<Section[]> {
-        return await this.interestsService.getInterests()
+    getInterests(): Promise<Section[]> {
+        return this.interestsService.getInterests()
     }
 
-    async getAllContacts(): Promise<Contact[]> {
-        return await this.getAllAndFlatten<Contact>(
-            ContactFormService.CONTACTS_COLLECTION
-        )
+    getAllContacts(): Promise<Contact[]> {
+        return this.adapter.getAll<Contact>(ContactFormService.CONTACTS_COLLECTION)
     }
 
     updateContactStatus(contactId: string, status: number): Promise<Contact> {
-        return this.db.runTransaction(async transaction => {
-            const contactDoc = await transaction.get(
-                this.db
-                    .collection(ContactFormService.CONTACTS_COLLECTION)
-                    .doc(contactId)
-            )
-            const updatedOption = {
-                ...contactDoc.data(),
-                id: contactDoc.id,
-                status: status
-            } as Contact
-
-            transaction.set(contactDoc.ref, updatedOption)
-
-            return updatedOption
+        return this.adapter.update<Contact>(ContactFormService.CONTACTS_COLLECTION, contactId, {
+            status
         })
-    }
-
-    private async getAllAndFlatten<T extends Doc>(
-        collection: string
-    ): Promise<T[]> {
-        const snapshot = await this.db.collection(collection).get()
-        return snapshot.docs.map(
-            doc =>
-                ({
-                    id: doc.id,
-                    ...doc.data()
-                } as T)
-        )
     }
 }

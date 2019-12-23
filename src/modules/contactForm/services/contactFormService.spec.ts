@@ -2,163 +2,112 @@ import { when } from 'jest-when'
 
 import ContactFormService, { NewContactReq, Contact } from "./contactFormService"
 
-const testContactReq: NewContactReq = {
-    firstName: 'testing',
-    lastName: 'testing',
-    gender: 'testing',
-    email: 'testing',
-    phoneNumber: 'testing',
-    graduationSemester: 'testing',
-    graduationYear: 'testing',
-    school: 'testing',
-    permanentAddress: 'testing',
-    city: 'testing',
-    state: 'testing',
-    zipCode: 'testing',
-    housingComplex: 'testing',
-    parentName: 'testing',
-    parentPhone: 'testing',
-    parentEmail: 'testing',
-    interests: ['123', '456'],
-    status: 2568,
-    createdAt: new Date
-}
-
 describe('ContactFormService', () => {
     let service: ContactFormService,
-        db,
-        contactsCollection,
-        transaction,
-        contactDoc
+        testContactReq: NewContactReq,
+        adapter,
+        interestsService
 
     beforeEach(() => {
-        contactsCollection = {
+        testContactReq = {
+            firstName: 'testing',
+            lastName: 'testing',
+            gender: 'testing',
+            email: 'testing',
+            phoneNumber: 'testing',
+            graduationSemester: 'testing',
+            graduationYear: 'testing',
+            school: 'testing',
+            permanentAddress: 'testing',
+            city: 'testing',
+            state: 'testing',
+            zipCode: 'testing',
+            housingComplex: 'testing',
+            parentName: 'testing',
+            parentPhone: 'testing',
+            parentEmail: 'testing',
+            interests: ['123', '456'],
+            status: 2568,
+            createdAt: new Date
+        }
+        adapter = {
+            getAll: jest.fn(),
             add: jest.fn(),
-            doc: jest.fn(),
-            get: jest.fn()
-        }
-        contactDoc = {
-            id: 'contactDocId',
-            data: jest.fn(),
-            ref: {
-                id: 'contactDocId'
-            }
-        }
-        transaction = {
-            get: jest.fn(),
-            set: jest.fn(),
             update: jest.fn()
         }
-        db = {
-            collection: jest.fn(),
-            runTransaction: jest.fn(cb => cb(transaction))
+        interestsService = {
+            getInterests: jest.fn()
         }
-        when(db.collection).calledWith(ContactFormService.CONTACTS_COLLECTION).mockReturnValue(contactsCollection)
 
-        service = new ContactFormService(db)
+        service = new ContactFormService(adapter, interestsService)
     })
 
     describe('updateDocumentStatus', () => {
-        it('gets the document reference, then updates the status in one transaction', async () => {
+        it('updates the doc using the firestore adapter', async () => {
             const id = 'contactDocId'
             const newStatus = 2
             const contactInDb = {
                 id: id,
                 status: 0
             }
-
-            when(contactsCollection.doc).calledWith(id).mockReturnValue(contactDoc.ref)
-            when(transaction.get).calledWith(contactDoc.ref).mockResolvedValue(contactDoc)
-            when(contactDoc.data).calledWith().mockReturnValue(contactInDb)
+            const updatedContact = {
+                ...contactInDb,
+                status: newStatus
+            }
+            when(adapter.update)
+                .calledWith(ContactFormService.CONTACTS_COLLECTION, id, { status: newStatus })
+                .mockReturnValue(updatedContact)
 
             const result = await service.updateContactStatus(id, newStatus)
 
-            expect(result).toEqual({
-                id: id,
-                status: newStatus
-            })
-            expect(transaction.set).toHaveBeenCalledWith(contactDoc.ref, {
-                id: id,
-                status: newStatus
-            })
+            expect(result).toBe(updatedContact)
         })
     })
 
     describe('addContact', () => {
-        it('adds the contact to its collection', async () => {
-            const newContactDoc = {
+        it('adds the contact to its collection via the firestore adapter', async () => {
+            const addedContact = {
                 id: 'newId',
-                data: jest.fn(),
-                ref: {
-                    id: 'newId'
-                }
+                ...testContactReq
             }
 
-            when(contactsCollection.add).calledWith(testContactReq).mockResolvedValue(newContactDoc)
+            when(adapter.add)
+                .calledWith(ContactFormService.CONTACTS_COLLECTION, testContactReq)
+                .mockResolvedValue(addedContact)
 
             const result = await service.addContact(testContactReq)
 
-            expect(result).toEqual({
-                id: newContactDoc.id,
-                ...testContactReq
-            })
+            expect(result).toBe(addedContact)
         })
     })
 
     describe('getAllContacts', () => {
-        const contactsSnapshot = {
-            docs: [
+        it('gets all of the contacts via the firestore adapter', async () => {
+            const contacts: Contact[] = [
                 {
                     id: '1',
-                    data: () => ({
-                        ...testContactReq
-                    })
+                    ...testContactReq
                 },
                 {
                     id: '2',
-                    data: () => ({
-                        ...testContactReq
-                    })
+                    ...testContactReq
                 },
                 {
                     id: '3',
-                    data: () => ({
-                        ...testContactReq
-                    })
+                    ...testContactReq
                 },
                 {
                     id: '4',
-                    data: () => ({
-                        ...testContactReq
-                    })
-                },
+                    ...testContactReq
+                }
             ]
-        }
-        const expectedContacts: Contact[] = [
-            {
-                id: '1',
-                ...testContactReq
-            },
-            {
-                id: '2',
-                ...testContactReq
-            },
-            {
-                id: '3',
-                ...testContactReq
-            },
-            {
-                id: '4',
-                ...testContactReq
-            }
-        ]
-
-        it('gets all of the contacts', async () => {
-            when(contactsCollection.get).calledWith().mockResolvedValue(contactsSnapshot)
+            when(adapter.getAll)
+                .calledWith(ContactFormService.CONTACTS_COLLECTION)
+                .mockResolvedValue(contacts)
 
             const result = await service.getAllContacts()
 
-            expect(result).toEqual(expectedContacts)
+            expect(result).toBe(contacts)
         })
     })
 })

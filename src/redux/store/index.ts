@@ -32,7 +32,7 @@ const firestoreAdapter = new FirestoreAdapter(db)
 const firestore = new Firestore(app, db)
 const userService = new UserService(firestore)
 const interestsService = new InterestsService(firestoreAdapter)
-const contactFormService = new ContactFormService(db, interestsService)
+const contactFormService = new ContactFormService(firestoreAdapter, interestsService)
 
 export type Dependencies = {
     firestore: Firestore
