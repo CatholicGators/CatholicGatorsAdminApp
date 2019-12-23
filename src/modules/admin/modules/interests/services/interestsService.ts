@@ -65,22 +65,9 @@ export default class InterestsService {
         })
     }
 
-    updateOptionText(optionId: string, newText: string): Promise<Option> {
-        return this.adapter.runTransaction(async transaction => {
-            const optionDoc = await transaction.get(
-                this.adapter.getDocReference(InterestsService.OPTIONS, optionId)
-            )
-            const updatedOption = {
-                ...optionDoc.data(),
-                text: newText
-            }
-
-            transaction.set(optionDoc.ref, updatedOption)
-
-            return {
-                id: optionId,
-                ...updatedOption
-            }
+    updateOptionText(optionId: string, text: string): Promise<Option> {
+        return this.adapter.update<Option>(InterestsService.OPTIONS, optionId, {
+            text
         })
     }
 

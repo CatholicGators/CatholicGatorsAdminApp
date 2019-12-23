@@ -29,6 +29,7 @@ describe('InterestsService', () => {
         adapter = {
             getAll: jest.fn(),
             add: jest.fn(),
+            update: jest.fn(),
             getNewDocReference: jest.fn(),
             getDocReference: jest.fn(),
             runTransaction: jest.fn(cb => cb(transaction))
@@ -63,28 +64,19 @@ describe('InterestsService', () => {
             const optionInDb = {
                 text: 'testing'
             }
-            const newText = 'newText'
-            when(adapter.getDocReference)
-                .calledWith(InterestsService.OPTIONS, optionDoc.id)
-                .mockReturnValue(optionDoc.ref)
-            when(transaction.get)
-                .calledWith(optionDoc.ref)
-                .mockResolvedValue(optionDoc)
-            when(optionDoc.data)
-                .calledWith()
-                .mockReturnValue(optionInDb)
-
-            const result = await service.updateOptionText(optionDoc.id, newText)
-
-            expect(result).toEqual({
+            const newText = `not ${optionInDb.text}`
+            const updatedOption = {
                 id: optionDoc.id,
                 ...optionInDb,
                 text: newText
-            })
-            expect(transaction.set).toHaveBeenCalledWith(optionDoc.ref, {
-                ...optionInDb,
-                text: newText
-            })
+            }
+            when(adapter.update)
+                .calledWith(InterestsService.OPTIONS, optionDoc.id, { text: newText })
+                .mockReturnValue(updatedOption)
+
+            const result = await service.updateOptionText(optionDoc.id, newText)
+
+            expect(result).toBe(updatedOption)
         })
     })
 
