@@ -182,7 +182,10 @@ describe('firestoreAdapter e2e', () => {
     })
 
     describe('runTransaction', () => {
-        let sourceCollectionName, destinationCollectionName
+        let sourceCollectionName,
+            destinationCollectionName,
+            migrateDocsFromSourceToDestinationCollectionTransaction,
+            getTransactionRetVal
 
         beforeEach(async () => {
             sourceCollectionName = 'e2eSourceCollectionName'
@@ -190,6 +193,24 @@ describe('firestoreAdapter e2e', () => {
             await adapter.deleteAll(sourceCollectionName)
             await adapter.deleteAll(destinationCollectionName)
             await uploadDocs(sourceCollectionName)
+
+            getTransactionRetVal = jest.fn()
+            migrateDocsFromSourceToDestinationCollectionTransaction = async transaction => {
+                const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+
+                const sourceDestinationPairs = await Promise.all(sourceDocs.map(async sourceDoc => {
+                    const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
+                    const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
+                    return [sourceSnapshot, destinationSnapshot]
+                }))
+
+                await Promise.all(sourceDestinationPairs.map(async ([sourceSnapshot, destinationSnapshot]) => {
+                    transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
+                    transaction.delete(sourceSnapshot.ref)
+                }))
+
+                return getTransactionRetVal()
+            }
         })
 
         it('when transaction throws no errors, commits transaction and returns result of transaction', async () => {
@@ -197,23 +218,12 @@ describe('firestoreAdapter e2e', () => {
             expect(sourceDocs.length).toEqual(docsInDbSortedOnId.length)
             let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
             expect(destinationDocs.length).toEqual(0)
+            const retVal = 'done migrating docs from source to destination!'
+            getTransactionRetVal.mockReturnValue(retVal)
 
-            const returnVal = 'done migrating docs from source to destination!'
-            const result = await adapter.runTransaction(async transaction => {
-                const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+            const result = await adapter.runTransaction(migrateDocsFromSourceToDestinationCollectionTransaction)
 
-                await Promise.all(sourceDocs.map(async sourceDoc => {
-                    const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
-                    const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
-
-                    transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
-                    transaction.delete(sourceSnapshot.ref)
-                }))
-
-                return returnVal
-            })
-
-            expect(result).toBe(returnVal)
+            expect(result).toBe(retVal)
             sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
             expect(sourceDocs.length).toEqual(0)
             destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
@@ -226,21 +236,12 @@ describe('firestoreAdapter e2e', () => {
             let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
             expect(destinationDocs.length).toEqual(0)
 
-            const exception = 'cant commit transaction!'
+            const exception = 'simulating failed transaction'
             try {
-                await adapter.runTransaction(async transaction => {
-                    const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
-
-                    await Promise.all(sourceDocs.map(async sourceDoc => {
-                        const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
-                        const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
-
-                        transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
-                        transaction.delete(sourceSnapshot.ref)
-                    }))
-
+                getTransactionRetVal.mockImplementation(() => {
                     throw exception
                 })
+                await adapter.runTransaction(migrateDocsFromSourceToDestinationCollectionTransaction)
                 fail('we were supposed to throw an exception on a failed transaction')
             } catch (e) {
                 expect(e).toBe(exception)
