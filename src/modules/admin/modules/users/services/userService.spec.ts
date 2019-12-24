@@ -1,49 +1,35 @@
 import { when } from 'jest-when'
 
-import UserService from './userService'
+import UserService, { User } from './userService'
 
 describe('UserService', () => {
-    let service: UserService, db, usersCollection, user, userSnapshot, userRef
+    let service: UserService, adapter, user: User
 
     beforeEach(() => {
-        usersCollection = {
-            add: jest.fn(),
-            doc: jest.fn(),
+        adapter = {
             get: jest.fn()
         }
-        db = {
-            collection: jest.fn()
-        }
-        when(db.collection)
-            .calledWith(UserService.USERS)
-            .mockReturnValue(usersCollection)
-
         user = {
-            foo: 'bar'
-        }
-        userSnapshot = {
-            data: jest.fn(() => user)
-        }
-        userRef = {
-            id: 'userDocId',
-            get: jest.fn(() => userSnapshot)
+            id: 'userId',
+            email: 'email',
+            isAdmin: true,
+            isApproved: true,
+            name: 'test',
+            photoURL: 'url'
         }
 
-        service = new UserService(db)
+        service = new UserService(adapter)
     })
 
     describe('getUser', () => {
         it('gets the user', async () => {
-            when(usersCollection.doc)
-                .calledWith(userRef.id)
-                .mockReturnValue(userRef)
+            when(adapter.get)
+                .calledWith(UserService.USERS, user.id)
+                .mockReturnValue(user)
 
-            const user = await service.getUser(userRef.id)
+            const result = await service.getUser(user.id)
 
-            expect(user).toEqual({
-                id: userRef.id,
-                ...user
-            })
+            expect(result).toBe(user)
         })
     })
 })

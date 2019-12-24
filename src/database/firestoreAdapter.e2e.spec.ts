@@ -1,11 +1,8 @@
-import FirestoreAdapter from './firestoreAdapter'
-import Doc from './doc'
-import DocNotFoundError from './docNotFoundError'
+import FirestoreAdapter, { Doc, DocNotFoundError } from './firestoreAdapter'
 import * as firebase from 'firebase/app'
 import clientConfig from '../config/testClientConfig'
 
 interface TestInterface extends Doc {
-    id: string,
     foo: String
 }
 

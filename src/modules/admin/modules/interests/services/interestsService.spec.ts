@@ -1,7 +1,6 @@
 import { when } from 'jest-when'
 
-import InterestsService, { Section } from './interestsService'
-import { NewSectionReq, NewOptionReq } from '../redux/actions/interestActions'
+import InterestsService, { Section, NewOptionReq, NewSectionReq } from './interestsService'
 
 describe('InterestsService', () => {
     let service: InterestsService,
@@ -39,18 +38,21 @@ describe('InterestsService', () => {
     })
 
     describe('addSection', () => {
-        it('adds a section to the section collection and returns new section', async () => {
+        it('adds a section to the section collection and returns new section initialized with no options', async () => {
             const newSectionReq: NewSectionReq = {
                 position: 0,
-                text: 'test',
-                options: []
+                text: 'test'
             }
             const expectedSection: Section = {
                 ...newSectionReq,
-                id: 'id'
+                id: 'id',
+                options: []
             }
             when(adapter.add)
-                .calledWith(InterestsService.SECTIONS, newSectionReq)
+                .calledWith(InterestsService.SECTIONS, {
+                    ...newSectionReq,
+                    options: []
+                })
                 .mockResolvedValue(expectedSection)
 
             const result = await service.addSection(newSectionReq)

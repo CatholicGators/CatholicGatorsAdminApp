@@ -1,11 +1,8 @@
 import { when } from 'jest-when'
 
-import FirestoreAdapter from './firestoreAdapter'
-import DocNotFoundError from './docNotFoundError'
-import Doc from './doc'
+import FirestoreAdapter, { Doc, DocNotFoundError } from './firestoreAdapter'
 
 interface TestInterface extends Doc {
-    id: string,
     foo: String
 }
 

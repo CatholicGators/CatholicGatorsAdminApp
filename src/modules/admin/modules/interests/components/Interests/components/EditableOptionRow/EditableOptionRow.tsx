@@ -24,11 +24,11 @@ export const styles = (theme: Theme) =>
 export type Props = {
     classes: any
     option: Option
-    editingOptionId: number
-    beginEditingOption: (optionId: any) => void
+    editingOptionId: string
+    beginEditingOption: (optionId: string) => void
     cancelEditingOption: () => void
-    deleteOption: (optionId: any) => void
-    saveOption: (optionId: any, newText: string) => void
+    deleteOption: (optionId: string) => void
+    saveOption: (optionId: string, newText: string) => void
 }
 
 export type State = {

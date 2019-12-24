@@ -1,11 +1,20 @@
 import "firebase/firestore"
 
-import DocNotFoundError from "./docNotFoundError"
-import Doc from './doc'
-
 type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot
 type Transaction = firebase.firestore.Transaction
 type DocumentReference = firebase.firestore.DocumentReference
+
+export class DocNotFoundError extends Error {
+    constructor(collectionName: string, docId: string) {
+        super()
+        this.name = "DocumentNotFoundError"
+        this.message = `Document id ${docId} does not exist in collection ${collectionName}`
+    }
+}
+
+export interface Doc {
+    id: string
+}
 
 export default class FirestoreAdapter {
     constructor(private db: firebase.firestore.Firestore) { }

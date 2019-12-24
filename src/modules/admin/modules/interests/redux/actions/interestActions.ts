@@ -1,4 +1,4 @@
-import { Option, Section } from '../../services/interestsService'
+import { Option, Section, NewOptionReq, NewSectionReq } from '../../services/interestsService'
 
 export const interestActions = {
     GET_INTERESTS: 'GET_INTERESTS',
@@ -27,9 +27,6 @@ export function getInterestsErr(err: any) {
     return { type: interestActions.GET_INTERESTS_ERR, err }
 }
 
-export type NewOptionReq = {
-    text: string
-}
 export const addOption = (sectionId: string, option: NewOptionReq) => ({
     type: interestActions.ADD_OPTION,
     sectionId,
@@ -45,11 +42,6 @@ export const addOptionErr = err => ({
     err
 })
 
-export type NewSectionReq = {
-    text: string
-    position: number
-    options: Option[]
-}
 export const addSection = (section: NewSectionReq) => ({
     type: interestActions.ADD_SECTION,
     section

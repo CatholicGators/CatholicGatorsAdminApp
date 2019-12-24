@@ -1,8 +1,7 @@
-import 'firebase/firestore'
 import InterestsService, {
     Section
 } from '../../admin/modules/interests/services/interestsService'
-import FirestoreAdapter from '../../../database/firestoreAdapter'
+import FirestoreAdapter, { Doc } from '../../../database/firestoreAdapter'
 
 export const ContactStatus = {
     NOT_CALLED: 0,
@@ -10,7 +9,7 @@ export const ContactStatus = {
     CALLED: 4
 }
 
-export type NewContactReq = {
+interface ContactData {
     firstName: string
     lastName: string
     gender: string
@@ -31,29 +30,8 @@ export type NewContactReq = {
     status: number
     createdAt: Date
 }
-
-export type Contact = {
-    id: string
-    firstName: string
-    lastName: string
-    gender: string
-    email: string
-    phoneNumber: string
-    graduationSemester: string
-    graduationYear: string
-    school: string
-    permanentAddress: string
-    city: string
-    state: string
-    zipCode: string
-    housingComplex: string
-    parentName: string
-    parentPhone: string
-    parentEmail: string
-    interests: string[]
-    status: number
-    createdAt: Date
-}
+export interface NewContactReq extends ContactData { }
+export interface Contact extends Doc, ContactData { }
 
 export default class ContactFormService {
     public static readonly CONTACTS_COLLECTION: string = 'contacts'

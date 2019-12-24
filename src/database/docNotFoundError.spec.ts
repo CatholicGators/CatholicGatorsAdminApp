@@ -1,4 +1,4 @@
-import DocNotFoundError from './docNotFoundError'
+import { DocNotFoundError } from './firestoreAdapter'
 
 describe('DocumentNotFoundError', () => {
     it('gives a custom message when a collection name and document id is passed', () => {

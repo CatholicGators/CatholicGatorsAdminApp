@@ -1,15 +1,17 @@
-import 'firebase/firestore'
+import FirestoreAdapter, { Doc } from '../../../../../database/firestoreAdapter'
 
-import User from './user'
-
-interface Doc {
-    id: string
+export interface User extends Doc {
+    name: String
+    email: String
+    photoURL: String
+    isApproved: boolean
+    isAdmin: boolean
 }
 
 export default class UserService {
     public static readonly USERS: string = 'users'
 
-    constructor(private db: firebase.firestore.Firestore) {}
+    constructor(private adapter: FirestoreAdapter) { }
 
     // addUser(user: User): Observable<User> {
     //     return this.docRefObservableToUserObservable(
@@ -24,7 +26,7 @@ export default class UserService {
     // }
 
     async getUser(id: string): Promise<User> {
-        return this.getAndFlatten(UserService.USERS, id)
+        return this.adapter.get<User>(UserService.USERS, id)
     }
 
     // getAllUsers(): Observable<User[]> {
@@ -94,19 +96,4 @@ export default class UserService {
     // deleteUsers(ids: string[]): Observable<void> {
     //     return this.db.deleteDocs(USER_COLLECTION, ids)
     // }
-
-    private async getAndFlatten<T extends Doc>(
-        collection: string,
-        id: string
-    ): Promise<T> {
-        const doc = await this.db
-            .collection(collection)
-            .doc(id)
-            .get()
-
-        return {
-            id: doc.id,
-            ...doc.data()
-        } as T
-    }
 }
