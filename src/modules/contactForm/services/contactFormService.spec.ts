@@ -44,21 +44,22 @@ describe('ContactFormService', () => {
 
     describe('updateDocumentStatus', () => {
         it('updates the doc using the firestore adapter', async () => {
-            const id = 'contactDocId'
             const newStatus = 2
-            const contactInDb = {
-                id: id,
-                status: 0
-            }
-            const updatedContact = {
-                ...contactInDb,
+            const updatedContact: Contact = {
+                id: 'contactDocId',
+                ...testContactReq,
                 status: newStatus
             }
             when(adapter.update)
-                .calledWith(ContactFormService.CONTACTS_COLLECTION, id, { status: newStatus })
+                .calledWith(ContactFormService.CONTACTS_COLLECTION, {
+                    id: updatedContact.id,
+                    changes: {
+                        status: newStatus
+                    }
+                })
                 .mockReturnValue(updatedContact)
 
-            const result = await service.updateContactStatus(id, newStatus)
+            const result = await service.updateContactStatus(updatedContact.id, newStatus)
 
             expect(result).toBe(updatedContact)
         })
@@ -66,7 +67,7 @@ describe('ContactFormService', () => {
 
     describe('addContact', () => {
         it('adds the contact to its collection via the firestore adapter', async () => {
-            const addedContact = {
+            const addedContact: Contact = {
                 id: 'newId',
                 ...testContactReq
             }

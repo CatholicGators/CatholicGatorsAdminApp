@@ -1,71 +1,33 @@
 import FirestoreAdapter, { Doc } from '../../../../../database/firestoreAdapter'
 
-export interface User extends Doc {
+export interface UserData {
     name: String
     email: String
     photoURL: String
     isApproved: boolean
     isAdmin: boolean
 }
+export interface User extends Doc, UserData { }
 
 export default class UserService {
     public static readonly USERS: string = 'users'
 
     constructor(private adapter: FirestoreAdapter) { }
 
-    // addUser(user: User): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.addDoc(USER_COLLECTION, user)
-    //     )
-    // }
-
-    // addUsers(users: User[]): Observable<User[]> {
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.upsertDocs(USER_COLLECTION, users)
-    //     )
-    // }
-
-    async getUser(id: string): Promise<User> {
+    getUser(id: string): Promise<User> {
         return this.adapter.get<User>(UserService.USERS, id)
     }
 
-    // getAllUsers(): Observable<User[]> {
-    //     return this.db.getCollection(USER_COLLECTION) as Observable<User[]>
-    // }
+    getAllUsers(): Promise<User[]> {
+        return this.adapter.getAll<User>(UserService.USERS)
+    }
 
-    // updateUser(id: string, update: Object): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, update)
-    //     )
-    // }
-
-    // updateUsers(users: User[]): Observable<User[]> {
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, users)
-    //     )
-    // }
-
-    // updateUserApproval(id: string, isApproved: boolean): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, {
-    //             isApproved
-    //         })
-    //     )
-    // }
-
-    // updateUsersApproval(
-    //     ids: string[],
-    //     isApproved: boolean
-    // ): Observable<User[]> {
-    //     const updates = ids.map(id => ({
-    //         id,
-    //         isApproved
-    //     }))
-
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, updates)
-    //     )
-    // }
+    updateApproval(id: string, isApproved: boolean): Promise<User> {
+        return this.adapter.update<User>(UserService.USERS, {
+            id,
+            changes: { isApproved }
+        })
+    }
 
     // updateUserAdminStatus(id: string, isAdmin: boolean): Observable<User> {
     //     return this.docRefObservableToUserObservable(

@@ -1,6 +1,6 @@
 import { when } from 'jest-when'
 
-import FirestoreAdapter, { Doc, DocNotFoundError } from './firestoreAdapter'
+import FirestoreAdapter, { Doc, DocNotFoundError, Update } from './firestoreAdapter'
 
 interface TestInterface extends Doc {
     foo: String
@@ -152,18 +152,22 @@ describe('firestoreAdapter', () => {
         })
 
         it('when given an id for a doc that exists, successfully updates that document and flattens it', async () => {
-            const updatedDoc: TestInterface = {
-                ...(await docRef.get()).data(),
+            const doc = (await docRef.get()).data()
+            const changes = {
                 foo: 'something new'
             }
+            const update: Update = {
+                id: docRef.id,
+                changes
+            }
 
-            const data = await adapter.update<TestInterface>(collectionName, docRef.id, updatedDoc)
+            const data = await adapter.update<TestInterface>(collectionName, update)
 
-            expect(docRef.update).toHaveBeenCalledWith(updatedDoc)
+            expect(docRef.update).toHaveBeenCalledWith(update.changes)
             expect(data).toEqual({
                 id: docRef.id,
-                ...(await docRef.get()).data(),
-                ...updatedDoc
+                ...doc,
+                ...changes
             })
         })
 
@@ -176,7 +180,12 @@ describe('firestoreAdapter', () => {
             }))
 
             try {
-                await adapter.update<TestInterface>(collectionName, docRef.id, { doesnt: 'matter' })
+                await adapter.update<TestInterface>(collectionName, {
+                    id: docRef.id,
+                    changes: {
+                        doesnt: 'matter'
+                    }
+                })
                 fail('expected DocumentNotFoundError')
             } catch (e) {
                 expect(docRef.update).not.toHaveBeenCalled()

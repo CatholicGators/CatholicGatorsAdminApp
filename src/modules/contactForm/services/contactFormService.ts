@@ -54,8 +54,11 @@ export default class ContactFormService {
     }
 
     updateContactStatus(contactId: string, status: number): Promise<Contact> {
-        return this.adapter.update<Contact>(ContactFormService.CONTACTS_COLLECTION, contactId, {
-            status
+        return this.adapter.update<Contact>(ContactFormService.CONTACTS_COLLECTION, {
+            id: contactId,
+            changes: {
+                status
+            }
         })
     }
 }

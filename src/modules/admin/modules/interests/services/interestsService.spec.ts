@@ -1,6 +1,7 @@
 import { when } from 'jest-when'
 
-import InterestsService, { Section, NewOptionReq, NewSectionReq } from './interestsService'
+import InterestsService, { Section, NewOptionReq, NewSectionReq, OptionData, Option, SectionDbData, SectionDoc } from './interestsService'
+import { Update } from '../../../../../database/firestoreAdapter'
 
 describe('InterestsService', () => {
     let service: InterestsService,
@@ -63,17 +64,22 @@ describe('InterestsService', () => {
 
     describe('updateOptionText', () => {
         it('gets the document reference, then updates the text in one transaction', async () => {
-            const optionInDb = {
+            const optionInDb: OptionData = {
                 text: 'testing'
             }
             const newText = `not ${optionInDb.text}`
-            const updatedOption = {
+            const updatedOption: Option = {
                 id: optionDoc.id,
                 ...optionInDb,
                 text: newText
             }
             when(adapter.update)
-                .calledWith(InterestsService.OPTIONS, optionDoc.id, { text: newText })
+                .calledWith(InterestsService.OPTIONS, {
+                    id: optionDoc.id,
+                    changes: {
+                        text: newText
+                    }
+                } as Update)
                 .mockReturnValue(updatedOption)
 
             const result = await service.updateOptionText(optionDoc.id, newText)
@@ -95,7 +101,7 @@ describe('InterestsService', () => {
                     id: 'newId'
                 }
             }
-            const sectionInDb = {
+            const sectionInDb: SectionDbData = {
                 position: 0,
                 text: 'testSection',
                 options: []
@@ -133,7 +139,7 @@ describe('InterestsService', () => {
     })
 
     describe('getInterests', () => {
-        const options = [
+        const options: Option[] = [
             {
                 id: '1',
                 text: '1'
@@ -151,7 +157,7 @@ describe('InterestsService', () => {
                 text: '4'
             }
         ]
-        const sections = [
+        const sections: SectionDoc[] = [
             {
                 id: '5',
                 position: 1,

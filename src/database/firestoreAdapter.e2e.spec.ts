@@ -93,21 +93,29 @@ describe('firestoreAdapter e2e', () => {
                 foo: 'test'
             }
             const data = await adapter.add<TestInterface>(collectionName, doc)
-            const updatedFields = {
+            const changes = {
                 foo: `not ${doc.foo}`
             }
 
-            const updatedData = await adapter.update<TestInterface>(collectionName, data.id, updatedFields)
+            const updatedData = await adapter.update<TestInterface>(collectionName, {
+                id: data.id,
+                changes
+            })
 
             expect(updatedData).toEqual({
                 ...data,
-                ...updatedFields
+                ...changes
             })
         })
 
         it('when given a collection name and an id that doesnt exist in that collection, throws DocNotFoundError', async () => {
             try {
-                await adapter.update<TestInterface>(collectionName, 'garbage', {})
+                await adapter.update<TestInterface>(collectionName, {
+                    id: 'garbage',
+                    changes: {
+                        doesnt: 'matter'
+                    }
+                })
                 fail('expected DocNotFoundError')
             } catch (e) {
                 expect(e instanceof DocNotFoundError).toBeTruthy()

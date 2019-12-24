@@ -1,18 +1,19 @@
 import FirestoreAdapter, { Doc } from '../../../../../database/firestoreAdapter'
 
-interface SectionData {
+export interface SectionData {
     text: string
     position: number
 }
-interface SectionDoc extends Doc, SectionData {
+export interface SectionDbData extends SectionData {
     options: string[]
 }
+export interface SectionDoc extends Doc, SectionDbData { }
 export interface NewSectionReq extends SectionData { }
 export interface Section extends Doc, SectionData {
     options: Option[]
 }
 
-interface OptionData {
+export interface OptionData {
     text: string
 }
 export interface NewOptionReq extends OptionData { }
@@ -63,8 +64,11 @@ export default class InterestsService {
     }
 
     updateOptionText(optionId: string, text: string): Promise<Option> {
-        return this.adapter.update<Option>(InterestsService.OPTIONS, optionId, {
-            text
+        return this.adapter.update<Option>(InterestsService.OPTIONS, {
+            id: optionId,
+            changes: {
+                text
+            }
         })
     }
 

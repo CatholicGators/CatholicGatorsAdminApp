@@ -16,6 +16,11 @@ export interface Doc {
     id: string
 }
 
+export interface Update {
+    id: string,
+    changes: object
+}
+
 export default class FirestoreAdapter {
     constructor(private db: firebase.firestore.Firestore) { }
 
@@ -42,12 +47,12 @@ export default class FirestoreAdapter {
         } as T
     }
 
-    async update<T extends Doc>(collectionName: string, id: string, fields: object): Promise<T> {
-        const doc = await this.get<T>(collectionName, id)
-        await this.getDocReference(collectionName, id).update(fields)
+    async update<T extends Doc>(collectionName: string, update: Update): Promise<T> {
+        const doc = await this.get<T>(collectionName, update.id)
+        await this.getDocReference(collectionName, update.id).update(update.changes)
         return {
             ...doc,
-            ...fields
+            ...update.changes
         }
     }
 
