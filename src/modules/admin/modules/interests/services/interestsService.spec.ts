@@ -5,55 +5,37 @@ import { NewSectionReq, NewOptionReq } from '../redux/actions/interestActions'
 
 describe('InterestsService', () => {
     let service: InterestsService,
-        db,
-        optionsCollection,
-        sectionsCollection,
+        adapter,
         transaction,
         optionDoc,
         sectionDoc
 
     beforeEach(() => {
-        optionsCollection = {
-            add: jest.fn(),
-            doc: jest.fn(),
-            get: jest.fn()
-        }
-        sectionsCollection = {
-            add: jest.fn(),
-            doc: jest.fn(),
-            get: jest.fn()
-        }
         optionDoc = {
             id: 'optionDocId',
             data: jest.fn(),
-            ref: {
-                id: 'optionDocId'
-            }
+            ref: {}
         }
         sectionDoc = {
             id: 'sectionDocId',
             data: jest.fn(),
-            ref: {
-                id: 'sectionDocId'
-            }
+            ref: {}
         }
         transaction = {
             get: jest.fn(),
             set: jest.fn(),
             update: jest.fn()
         }
-        db = {
-            collection: jest.fn(),
+        adapter = {
+            getAll: jest.fn(),
+            add: jest.fn(),
+            update: jest.fn(),
+            getNewDocReference: jest.fn(),
+            getDocReference: jest.fn(),
             runTransaction: jest.fn(cb => cb(transaction))
         }
-        when(db.collection)
-            .calledWith(InterestsService.OPTIONS)
-            .mockReturnValue(optionsCollection)
-        when(db.collection)
-            .calledWith(InterestsService.SECTIONS)
-            .mockReturnValue(sectionsCollection)
 
-        service = new InterestsService(db)
+        service = new InterestsService(adapter)
     })
 
     describe('addSection', () => {
@@ -63,47 +45,38 @@ describe('InterestsService', () => {
                 text: 'test',
                 options: []
             }
-            when(sectionsCollection.add)
-                .calledWith(newSectionReq)
-                .mockResolvedValue(sectionDoc.ref)
+            const expectedSection: Section = {
+                ...newSectionReq,
+                id: 'id'
+            }
+            when(adapter.add)
+                .calledWith(InterestsService.SECTIONS, newSectionReq)
+                .mockResolvedValue(expectedSection)
 
             const result = await service.addSection(newSectionReq)
 
-            expect(result).toEqual({
-                id: sectionDoc.ref.id,
-                ...newSectionReq
-            })
+            expect(result).toEqual(expectedSection)
         })
     })
 
     describe('updateOptionText', () => {
         it('gets the document reference, then updates the text in one transaction', async () => {
-            const id = 'test'
             const optionInDb = {
                 text: 'testing'
             }
-            const newText = 'newText'
-            when(optionsCollection.doc)
-                .calledWith(id)
-                .mockReturnValue(optionDoc.ref)
-            when(transaction.get)
-                .calledWith(optionDoc.ref)
-                .mockResolvedValue(optionDoc)
-            when(optionDoc.data)
-                .calledWith()
-                .mockReturnValue(optionInDb)
-
-            const result = await service.updateOptionText(id, newText)
-
-            expect(result).toEqual({
-                id,
+            const newText = `not ${optionInDb.text}`
+            const updatedOption = {
+                id: optionDoc.id,
                 ...optionInDb,
                 text: newText
-            })
-            expect(transaction.set).toHaveBeenCalledWith(optionDoc.ref, {
-                ...optionInDb,
-                text: newText
-            })
+            }
+            when(adapter.update)
+                .calledWith(InterestsService.OPTIONS, optionDoc.id, { text: newText })
+                .mockReturnValue(updatedOption)
+
+            const result = await service.updateOptionText(optionDoc.id, newText)
+
+            expect(result).toBe(updatedOption)
         })
     })
 
@@ -125,14 +98,14 @@ describe('InterestsService', () => {
                 text: 'testSection',
                 options: []
             }
-            when(optionsCollection.doc)
-                .calledWith()
+            when(adapter.getNewDocReference)
+                .calledWith(InterestsService.OPTIONS)
                 .mockReturnValue(newOptionDoc.ref)
             when(transaction.get)
                 .calledWith(newOptionDoc.ref)
                 .mockResolvedValue(newOptionDoc)
-            when(sectionsCollection.doc)
-                .calledWith(sectionId)
+            when(adapter.getDocReference)
+                .calledWith(InterestsService.SECTIONS)
                 .mockReturnValue(sectionDoc.ref)
             when(transaction.get)
                 .calledWith(sectionDoc.ref)
@@ -158,54 +131,38 @@ describe('InterestsService', () => {
     })
 
     describe('getInterests', () => {
-        const optionsSnapshot = {
-            docs: [
-                {
-                    id: '1',
-                    data: () => ({
-                        text: '1'
-                    })
-                },
-                {
-                    id: '2',
-                    data: () => ({
-                        text: '2'
-                    })
-                },
-                {
-                    id: '3',
-                    data: () => ({
-                        text: '3'
-                    })
-                },
-                {
-                    id: '4',
-                    data: () => ({
-                        text: '4'
-                    })
-                }
-            ]
-        }
-        const sectionsSnapshot = {
-            docs: [
-                {
-                    id: '5',
-                    data: () => ({
-                        position: 1,
-                        text: '5',
-                        options: ['4', '3']
-                    })
-                },
-                {
-                    id: '6',
-                    data: () => ({
-                        position: 0,
-                        text: '6',
-                        options: ['2', '1']
-                    })
-                }
-            ]
-        }
+        const options = [
+            {
+                id: '1',
+                text: '1'
+            },
+            {
+                id: '2',
+                text: '2'
+            },
+            {
+                id: '3',
+                text: '3'
+            },
+            {
+                id: '4',
+                text: '4'
+            }
+        ]
+        const sections = [
+            {
+                id: '5',
+                position: 1,
+                text: '5',
+                options: ['4', '3']
+            },
+            {
+                id: '6',
+                position: 0,
+                text: '6',
+                options: ['2', '1']
+            }
+        ]
         const expectedInterests: Section[] = [
             {
                 id: '6',
@@ -240,12 +197,12 @@ describe('InterestsService', () => {
         ]
 
         it('gets all of the sections and options and merges them properly', async () => {
-            when(optionsCollection.get)
-                .calledWith()
-                .mockResolvedValue(optionsSnapshot)
-            when(sectionsCollection.get)
-                .calledWith()
-                .mockResolvedValue(sectionsSnapshot)
+            when(adapter.getAll)
+                .calledWith(InterestsService.OPTIONS)
+                .mockResolvedValue(options)
+            when(adapter.getAll)
+                .calledWith(InterestsService.SECTIONS)
+                .mockResolvedValue(sections)
 
             const result = await service.getInterests()
 

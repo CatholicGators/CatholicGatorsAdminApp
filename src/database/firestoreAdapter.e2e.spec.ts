@@ -40,7 +40,7 @@ describe('firestoreAdapter e2e', () => {
         await uploadDocs(collectionName)
     })
 
-    describe('get()', () => {
+    describe('get', () => {
         it('when given an id of a doc that exists, returns that doc', async () => {
             const doc = {
                 foo: ''
@@ -62,7 +62,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getAll()', () => {
+    describe('getAll', () => {
         it('when given a collection name that has docs in it, returns all of the docs', async () => {
             const dataFromGet = await adapter.getAll<TestInterface>(collectionName)
 
@@ -77,7 +77,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('add()', () => {
+    describe('add', () => {
         it('successfully adds a document and assigns an id', async () => {
             const doc = {
                 foo: ''
@@ -90,7 +90,35 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('delete()', () => {
+    describe('update', () => {
+        it('when given a collection name and an id that exists in that collection, updates that doc', async () => {
+            const doc = {
+                foo: 'test'
+            }
+            const data = await adapter.add<TestInterface>(collectionName, doc)
+            const updatedFields = {
+                foo: `not ${doc.foo}`
+            }
+
+            const updatedData = await adapter.update<TestInterface>(collectionName, data.id, updatedFields)
+
+            expect(updatedData).toEqual({
+                ...data,
+                ...updatedFields
+            })
+        })
+
+        it('when given a collection name and an id that doesnt exist in that collection, throws DocNotFoundError', async () => {
+            try {
+                await adapter.update<TestInterface>(collectionName, 'garbage', {})
+                fail('expected DocNotFoundError')
+            } catch (e) {
+                expect(e instanceof DocNotFoundError).toBeTruthy()
+            }
+        })
+    })
+
+    describe('delete', () => {
         it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
             const docToDelete = 0
 
@@ -111,7 +139,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('deleteAll()', () => {
+    describe('deleteAll', () => {
         it('when given a collection name that has docs in it, deletes all the docs', async () => {
             await adapter.deleteAll(collectionName)
 
@@ -131,7 +159,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getDocReference()', () => {
+    describe('getDocReference', () => {
         it('when given a collection name and an id of a doc that exists in the collection, returns a reference to that doc', async () => {
             const docInDb = docsInDbSortedOnId[0]
 
@@ -142,7 +170,7 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('getNewDocReference()', () => {
+    describe('getNewDocReference', () => {
         it('when given a collection name, returns a new reference', async () => {
             const ref = adapter.getNewDocReference(collectionName)
 
@@ -153,8 +181,11 @@ describe('firestoreAdapter e2e', () => {
         })
     })
 
-    describe('runTransaction()', () => {
-        let sourceCollectionName, destinationCollectionName
+    describe('runTransaction', () => {
+        let sourceCollectionName,
+            destinationCollectionName,
+            migrateDocsFromSourceToDestinationCollectionTransaction,
+            getTransactionRetVal
 
         beforeEach(async () => {
             sourceCollectionName = 'e2eSourceCollectionName'
@@ -162,6 +193,24 @@ describe('firestoreAdapter e2e', () => {
             await adapter.deleteAll(sourceCollectionName)
             await adapter.deleteAll(destinationCollectionName)
             await uploadDocs(sourceCollectionName)
+
+            getTransactionRetVal = jest.fn()
+            migrateDocsFromSourceToDestinationCollectionTransaction = async transaction => {
+                const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+
+                const sourceDestinationPairs = await Promise.all(sourceDocs.map(async sourceDoc => {
+                    const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
+                    const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
+                    return [sourceSnapshot, destinationSnapshot]
+                }))
+
+                await Promise.all(sourceDestinationPairs.map(async ([sourceSnapshot, destinationSnapshot]) => {
+                    transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
+                    transaction.delete(sourceSnapshot.ref)
+                }))
+
+                return getTransactionRetVal()
+            }
         })
 
         it('when transaction throws no errors, commits transaction and returns result of transaction', async () => {
@@ -169,23 +218,12 @@ describe('firestoreAdapter e2e', () => {
             expect(sourceDocs.length).toEqual(docsInDbSortedOnId.length)
             let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
             expect(destinationDocs.length).toEqual(0)
+            const retVal = 'done migrating docs from source to destination!'
+            getTransactionRetVal.mockReturnValue(retVal)
 
-            const returnVal = 'done migrating docs from source to destination!'
-            const result = await adapter.runTransaction(async transaction => {
-                const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
+            const result = await adapter.runTransaction(migrateDocsFromSourceToDestinationCollectionTransaction)
 
-                await Promise.all(sourceDocs.map(async sourceDoc => {
-                    const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
-                    const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
-
-                    transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
-                    transaction.delete(sourceSnapshot.ref)
-                }))
-
-                return returnVal
-            })
-
-            expect(result).toBe(returnVal)
+            expect(result).toBe(retVal)
             sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
             expect(sourceDocs.length).toEqual(0)
             destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
@@ -198,21 +236,12 @@ describe('firestoreAdapter e2e', () => {
             let destinationDocs = await adapter.getAll<TestInterface>(destinationCollectionName)
             expect(destinationDocs.length).toEqual(0)
 
-            const exception = 'cant commit transaction!'
+            const exception = 'simulating failed transaction'
             try {
-                await adapter.runTransaction(async transaction => {
-                    const sourceDocs = await adapter.getAll<TestInterface>(sourceCollectionName)
-
-                    await Promise.all(sourceDocs.map(async sourceDoc => {
-                        const sourceSnapshot = await transaction.get(adapter.getDocReference(sourceCollectionName, sourceDoc.id))
-                        const destinationSnapshot = await transaction.get(adapter.getNewDocReference(destinationCollectionName))
-
-                        transaction.set(destinationSnapshot.ref, sourceSnapshot.data())
-                        transaction.delete(sourceSnapshot.ref)
-                    }))
-
+                getTransactionRetVal.mockImplementation(() => {
                     throw exception
                 })
+                await adapter.runTransaction(migrateDocsFromSourceToDestinationCollectionTransaction)
                 fail('we were supposed to throw an exception on a failed transaction')
             } catch (e) {
                 expect(e).toBe(exception)

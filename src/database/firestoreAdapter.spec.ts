@@ -31,7 +31,8 @@ describe('firestoreAdapter', () => {
         return {
             id,
             get: jest.fn(() => Promise.resolve(createDocSnapshot(id))),
-            delete: jest.fn()
+            delete: jest.fn(),
+            update: jest.fn()
         }
     }
 
@@ -63,7 +64,7 @@ describe('firestoreAdapter', () => {
         adapter = new FirestoreAdapter(db)
     })
 
-    describe('get()', () => {
+    describe('get', () => {
         let docRef
 
         beforeEach(() => {
@@ -74,7 +75,7 @@ describe('firestoreAdapter', () => {
                 .mockReturnValue(docRef)
         })
 
-        it('successfully gets a document and flattens it', async () => {
+        it('when given an id for a doc that exists, successfully gets that document and flattens it', async () => {
             const data = await adapter.get<TestInterface>(collectionName, docRef.id)
 
             expect(data).toEqual({
@@ -83,7 +84,7 @@ describe('firestoreAdapter', () => {
             })
         })
 
-        it('throws a DocumentNotFoundException', async () => {
+        it('when given an id for a doc that doesnt exist, throws a DocNotFoundException', async () => {
             const docSnapshot = docRef.get()
             docRef.get = jest.fn(() => ({
                 ...docSnapshot,
@@ -100,7 +101,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getAll()', () => {
+    describe('getAll', () => {
         it('when given a collection name with docs, returns all of the docs flattened', async () => {
             const data = await adapter.getAll<TestInterface>(collectionName)
 
@@ -120,7 +121,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('add()', () => {
+    describe('add', () => {
         it('when given a collection name and a doc, it adds the doc', async () => {
             const newDoc = {
                 foo: 'bazz'
@@ -142,7 +143,52 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('deleteAll()', () => {
+    describe('update', () => {
+        let docRef
+
+        beforeEach(() => {
+            docRef = createDocRef('testId')
+
+            when(collection.doc)
+                .calledWith(docRef.id)
+                .mockReturnValue(docRef)
+        })
+
+        it('when given an id for a doc that exists, successfully updates that document and flattens it', async () => {
+            const updatedDoc: TestInterface = {
+                ...(await docRef.get()).data(),
+                foo: 'something new'
+            }
+
+            const data = await adapter.update<TestInterface>(collectionName, docRef.id, updatedDoc)
+
+            expect(docRef.update).toHaveBeenCalledWith(updatedDoc)
+            expect(data).toEqual({
+                id: docRef.id,
+                ...(await docRef.get()).data(),
+                ...updatedDoc
+            })
+        })
+
+        it('when given an id for a doc that doesnt exist, throws a DocNotFoundException', async () => {
+            const docSnapshot = docRef.get()
+            docRef.get = jest.fn(() => ({
+                ...docSnapshot,
+                exists: false,
+                data: jest.fn(() => null)
+            }))
+
+            try {
+                await adapter.update<TestInterface>(collectionName, docRef.id, { doesnt: 'matter' })
+                fail('expected DocumentNotFoundError')
+            } catch (e) {
+                expect(docRef.update).not.toHaveBeenCalled()
+                expect(e instanceof DocNotFoundError).toBeTruthy()
+            }
+        })
+    })
+
+    describe('deleteAll', () => {
         it('when given a collection name with docs, deletes all docs', async () => {
             await adapter.deleteAll(collectionName)
 
@@ -162,7 +208,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('delete()', () => {
+    describe('delete', () => {
         it('when given a collection name and an id that exists in that collection, it deletes the doc', async () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
@@ -175,7 +221,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('runTransaction()', () => {
+    describe('runTransaction', () => {
         it('passes the update function to db.runTransaction()', async () => {
             const updateFn = jest.fn()
 
@@ -185,7 +231,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getDocReference()', () => {
+    describe('getDocReference', () => {
         it('gets reference with collection name and id', () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
@@ -198,7 +244,7 @@ describe('firestoreAdapter', () => {
         })
     })
 
-    describe('getNewDocReference()', () => {
+    describe('getNewDocReference', () => {
         it('gets reference to a new doc with just a collection name and no id', () => {
             let docRef = createDocRef('testId')
             when(collection.doc)
