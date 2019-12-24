@@ -1,25 +1,22 @@
-import 'firebase/firestore'
-import { NewOptionReq, NewSectionReq } from '../redux/actions/interestActions'
-import FirestoreAdapter from '../../../../../database/firestoreAdapter'
+import FirestoreAdapter, { Doc } from '../../../../../database/firestoreAdapter'
 
-type SectionDoc = {
-    id: string
+interface SectionData {
     text: string
     position: number
+}
+interface SectionDoc extends Doc, SectionData {
     options: string[]
 }
-
-export type Section = {
-    id: string
-    text: string
-    position: number
+export interface NewSectionReq extends SectionData { }
+export interface Section extends Doc, SectionData {
     options: Option[]
 }
 
-export type Option = {
-    id: any
+interface OptionData {
     text: string
 }
+export interface NewOptionReq extends OptionData { }
+export interface Option extends Doc, OptionData { }
 
 export default class InterestsService {
     public static readonly OPTIONS: string = 'options'
@@ -72,6 +69,9 @@ export default class InterestsService {
     }
 
     addSection(sectionReq: NewSectionReq): Promise<Section> {
-        return this.adapter.add<Section>(InterestsService.SECTIONS, sectionReq)
+        return this.adapter.add<Section>(InterestsService.SECTIONS, {
+            ...sectionReq,
+            options: []
+        })
     }
 }

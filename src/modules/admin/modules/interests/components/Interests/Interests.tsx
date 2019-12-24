@@ -15,13 +15,11 @@ import {
     getInterests,
     addOption,
     addSection,
-    NewOptionReq,
-    NewSectionReq,
     updateOptionText
 } from '../../redux/actions/interestActions'
 import AddableTextField from './components/AddableTextField/AddableTextField'
 import EditableOptionRow from './components/EditableOptionRow/EditableOptionRow'
-import { Section } from '../../services/interestsService'
+import { Section, NewSectionReq, NewOptionReq } from '../../services/interestsService'
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -61,7 +59,7 @@ export type Props = {
 }
 
 type State = {
-    editingOptionId: any
+    editingOptionId: string
     addingSectionId: string
     isAddingSection: boolean
 }
@@ -89,13 +87,12 @@ export class Interests extends Component<Props, State> {
     addSection(text: string) {
         this.props.addSection({
             text,
-            position: this.props.interests.length,
-            options: []
+            position: this.props.interests.length
         })
         this.setState({ isAddingSection: false })
     }
 
-    beginEditingOption(optionId: any) {
+    beginEditingOption(optionId: string) {
         this.setState({
             ...defaultState,
             editingOptionId: optionId
@@ -106,7 +103,7 @@ export class Interests extends Component<Props, State> {
         this.setState(defaultState)
     }
 
-    deleteOption(sectionId: string, optionId: any) {
+    deleteOption(sectionId: string, optionId: string) {
         this.setState(defaultState)
     }
 
@@ -205,10 +202,10 @@ export class Interests extends Component<Props, State> {
                         ))}
                     </div>
                 ) : (
-                    <div className={classes.formLoadingContainer}>
-                        <CircularProgress size="60px" />
-                    </div>
-                )}
+                        <div className={classes.formLoadingContainer}>
+                            <CircularProgress size="60px" />
+                        </div>
+                    )}
                 {isAddingSection ? (
                     <div
                         id="add-section-input"
@@ -216,8 +213,8 @@ export class Interests extends Component<Props, State> {
                     >
                         <AddableTextField
                             isAdding={true}
-                            beginAdding={() => {}}
-                            cancelAdding={() => {}}
+                            beginAdding={() => { }}
+                            cancelAdding={() => { }}
                             onAdd={text => this.addSection(text)}
                         />
                     </div>
