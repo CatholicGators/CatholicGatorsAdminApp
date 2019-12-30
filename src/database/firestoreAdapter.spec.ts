@@ -1,15 +1,18 @@
 import { when } from 'jest-when'
+import * as firebase from 'firebase/app'
 
 import FirestoreAdapter, { Doc, DocNotFoundError, Update } from './firestoreAdapter'
+
+const FieldPath = firebase.firestore.FieldPath
 
 interface TestInterface extends Doc {
     foo: String
 }
 
 describe('firestoreAdapter', () => {
-    let adapter: FirestoreAdapter, db, collectionName, collection, docs
+    let adapter: FirestoreAdapter, db, batch, collectionName, collection, docRefs, docSnapshots
 
-    let createDocSnapshot = id => {
+    let createDocSnapshot = (id, ref) => {
         const doc = {
             foo: 'bar'
         }
@@ -18,45 +21,54 @@ describe('firestoreAdapter', () => {
             id: id,
             exists: true,
             data: jest.fn(() => doc),
-            ref: {
-                delete: jest.fn()
-            }
+            ref
         }
     }
 
     let createDocRef = id => {
-        return {
+        let ref = {
             id,
-            get: jest.fn(() => Promise.resolve(createDocSnapshot(id))),
+            get: jest.fn(),
             delete: jest.fn(),
             update: jest.fn()
         }
+        ref.get = jest.fn(() => Promise.resolve(createDocSnapshot(id, ref)))
+        return ref
     }
 
-    beforeEach(() => {
+    beforeEach(async () => {
         collectionName = 'testCollectionName'
-        docs = [
-            createDocSnapshot('1'),
-            createDocSnapshot('2'),
-            createDocSnapshot('3')
+        docRefs = [
+            createDocRef('1'),
+            createDocRef('2'),
+            createDocRef('3')
         ]
+        docSnapshots = await Promise.all(docRefs.map(doc => doc.get()))
         collection = {
             add: jest.fn(),
             doc: jest.fn(),
-            get: jest.fn()
+            get: jest.fn(() => Promise.resolve({
+                docs: docSnapshots
+            })),
+            where: jest.fn()
         }
-        when(collection.get)
-            .calledWith()
-            .mockReturnValue(Promise.resolve({
-                docs
-            }))
+        batch = {
+            update: jest.fn(),
+            commit: jest.fn()
+        }
         db = {
             collection: jest.fn(),
-            runTransaction: jest.fn()
+            runTransaction: jest.fn(),
+            batch: jest.fn(() => batch)
         }
         when(db.collection)
             .calledWith(collectionName)
             .mockReturnValue(collection)
+        docRefs.forEach(ref => {
+            when(collection.doc)
+                .calledWith(ref.id)
+                .mockReturnValue(ref)
+        })
 
         adapter = new FirestoreAdapter(db)
     })
@@ -65,11 +77,7 @@ describe('firestoreAdapter', () => {
         let docRef
 
         beforeEach(() => {
-            docRef = createDocRef('testId')
-
-            when(collection.doc)
-                .calledWith(docRef.id)
-                .mockReturnValue(docRef)
+            docRef = docRefs[0]
         })
 
         it('when given an id for a doc that exists, successfully gets that document and flattens it', async () => {
@@ -102,7 +110,7 @@ describe('firestoreAdapter', () => {
         it('when given a collection name with docs, returns all of the docs flattened', async () => {
             const data = await adapter.getAll<TestInterface>(collectionName)
 
-            expect(data).toEqual(docs.map(doc => adapter.flattenSnapshot(doc)))
+            expect(data).toEqual(docSnapshots.map(doc => adapter.flattenSnapshot(doc)))
         })
 
         it('when given a collection name without docs, returns empty array', async () => {
@@ -144,11 +152,7 @@ describe('firestoreAdapter', () => {
         let docRef
 
         beforeEach(() => {
-            docRef = createDocRef('testId')
-
-            when(collection.doc)
-                .calledWith(docRef.id)
-                .mockReturnValue(docRef)
+            docRef = docRefs[0]
         })
 
         it('when given an id for a doc that exists, successfully updates that document and flattens it', async () => {
@@ -194,12 +198,64 @@ describe('firestoreAdapter', () => {
         })
     })
 
+    describe('batchUpdate', () => {
+        it('when given a collection name and empty updates array, updates nothing', async () => {
+            const updates = []
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            expect(updatedData).toEqual([])
+            expect(batch.commit).not.toHaveBeenCalled()
+        })
+
+        it('when given a collection name and a falsy array, updates nothing', async () => {
+            const updates = null
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            expect(updatedData).toEqual([])
+            expect(batch.commit).not.toHaveBeenCalled()
+        })
+
+        it('when given a collection name and a non empty array of updates, updates each one, commits, then gets the updated docs from the collection', async () => {
+            const changes = {
+                buzz: 'bazz'
+            }
+            const updates = docRefs.map(ref => ({
+                id: ref.id,
+                changes
+            }))
+            const updatedDocs: any = await Promise.all(docRefs.map(async ref => ({
+                id: ref.id,
+                data: jest.fn(async () => ({
+                    ...(await ref.get()).data(),
+                    ...changes
+                }))
+            })))
+            when(collection.where)
+                .calledWith(FieldPath.documentId(), 'in', updates.map(update => update.id))
+                .mockReturnValue({
+                    get: jest.fn(() => Promise.resolve({
+                        docs: updatedDocs
+                    }))
+                })
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            expect(updatedData).toEqual(updatedDocs.map(doc => adapter.flattenSnapshot(doc)))
+            docRefs.forEach(ref => {
+                expect(batch.update).toHaveBeenCalledWith(ref, changes)
+            })
+            expect(batch.commit).toHaveBeenCalled()
+        })
+    })
+
     describe('deleteAll', () => {
         it('when given a collection name with docs, deletes all docs', async () => {
             await adapter.deleteAll(collectionName)
 
-            for (let i = 0; i < docs.length; i++) {
-                expect(docs[i].ref.delete).toHaveBeenCalled()
+            for (let i = 0; i < docRefs.length; i++) {
+                expect(docRefs[0].delete).toHaveBeenCalled()
             }
         })
 

@@ -1,5 +1,7 @@
-import "firebase/firestore"
+import 'firebase/firestore'
+import * as firebase from 'firebase/app'
 
+const FieldPath = firebase.firestore.FieldPath
 type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot
 type Transaction = firebase.firestore.Transaction
 type DocumentReference = firebase.firestore.DocumentReference
@@ -7,7 +9,7 @@ type DocumentReference = firebase.firestore.DocumentReference
 export class DocNotFoundError extends Error {
     constructor(collectionName: string, docId: string) {
         super()
-        this.name = "DocumentNotFoundError"
+        this.name = 'DocumentNotFoundError'
         this.message = `Document id ${docId} does not exist in collection ${collectionName}`
     }
 }
@@ -54,6 +56,24 @@ export default class FirestoreAdapter {
             ...doc,
             ...update.changes
         }
+    }
+
+    async batchUpdate<T extends Doc>(collectionName: string, updates: Update[]): Promise<T[]> {
+        if (!updates || updates.length === 0) {
+            return []
+        }
+
+        const batch = this.db.batch()
+        updates.forEach(update => {
+            const ref = this.getDocReference(collectionName, update.id)
+            batch.update(ref, update.changes)
+        })
+        await batch.commit()
+
+        const updatedSnapshots = await this.db.collection(collectionName)
+            .where(FieldPath.documentId(), 'in', updates.map(update => update.id))
+            .get()
+        return updatedSnapshots.docs.map(doc => this.flattenSnapshot<T>(doc))
     }
 
     async delete(collectionName: string, id: string): Promise<void> {

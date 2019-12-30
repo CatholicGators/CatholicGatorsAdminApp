@@ -17,6 +17,9 @@ describe('firestoreAdapter e2e', () => {
             },
             {
                 foo: 'bazz'
+            },
+            {
+                foo: 'bizz'
             }
         ]
         docsInDbSortedOnId = []
@@ -29,10 +32,14 @@ describe('firestoreAdapter e2e', () => {
         docsInDbSortedOnId.sort((a, b) => a.id > b.id ? 1 : -1)
     }
 
-    beforeEach(async () => {
+    beforeAll(async () => {
+        jest.setTimeout(10 * 1000) // double the timeout to deal with slow network problems
         app = firebase.initializeApp(clientConfig)
         db = app.firestore()
         adapter = new FirestoreAdapter(db)
+    })
+
+    beforeEach(async () => {
         await adapter.deleteAll(collectionName)
         await uploadDocs(collectionName)
     })
@@ -119,6 +126,110 @@ describe('firestoreAdapter e2e', () => {
                 fail('expected DocNotFoundError')
             } catch (e) {
                 expect(e instanceof DocNotFoundError).toBeTruthy()
+            }
+        })
+    })
+
+    describe('batchUpdate', () => {
+        it('when given a collection name and empty updates array, updates nothing', async () => {
+            const updates = []
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            expect(updatedData).toEqual([])
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb).toEqual(docsInDbSortedOnId)
+        })
+
+        it('when given a collection name and ids in the collection, updates all of the corresponding docs', async () => {
+            const changes = {
+                foo: 'batchUpdate'
+            }
+            const updates = docsInDbSortedOnId.map(doc => ({
+                id: doc.id,
+                changes
+            }))
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            updatedData.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(updatedData).toEqual(docsInDbSortedOnId.map(doc => ({
+                ...doc,
+                ...changes
+            })))
+        })
+
+        it('when given a collection name one id in the collection, updates that one doc', async () => {
+            const docToUpdate = docsInDbSortedOnId[0]
+            const changes = {
+                foo: 'batchUpdate'
+            }
+            const updates = [
+                {
+                    id: docToUpdate.id,
+                    changes
+                }
+            ]
+
+            const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
+
+            expect(updatedData).toEqual([{
+                ...docToUpdate,
+                ...changes
+            }])
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb.filter(doc => doc.id != docToUpdate.id))
+                .toEqual(docsInDbSortedOnId.filter(doc => doc.id != docToUpdate.id))
+        })
+
+        it('when given a collection name and a mix of valid and invalid ids, throws and updates nothing', async () => {
+            const changes = {
+                foo: 'batchUpdate'
+            }
+            const updates = docsInDbSortedOnId.map(doc => ({
+                id: doc.id,
+                changes
+            }))
+
+            updates[0] = {
+                id: 'garbage',
+                changes
+            }
+
+            try {
+                await adapter.batchUpdate<TestInterface>(collectionName, updates)
+                fail('expected an exception')
+            } catch {
+                const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+                docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+                expect(docsInDb).toEqual(docsInDbSortedOnId)
+            }
+        })
+
+        it('when given a collection name and only invalid ids, throws and updates nothing', async () => {
+            const changes = {
+                foo: 'batchUpdate'
+            }
+            const updates = [
+                {
+                    id: 'garbage1',
+                    changes
+                },
+                {
+                    id: 'garbage2',
+                    changes
+                }
+            ]
+
+            try {
+                await adapter.batchUpdate<TestInterface>(collectionName, updates)
+                fail('expected an exception')
+            } catch {
+                const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+                docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+                expect(docsInDb).toEqual(docsInDbSortedOnId)
             }
         })
     })
@@ -265,6 +376,10 @@ describe('firestoreAdapter e2e', () => {
 
     afterEach(async () => {
         await adapter.deleteAll(collectionName)
+    })
+
+    afterAll(async () => {
         app.delete()
+        jest.setTimeout(5 * 1000) // reset timeout
     })
 })
