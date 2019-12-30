@@ -29,33 +29,36 @@ export default class UserService {
         })
     }
 
-    // updateUserAdminStatus(id: string, isAdmin: boolean): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, {
-    //             isAdmin
-    //         })
-    //     )
-    // }
+    updateAdminStatus(id: string, isAdmin: boolean): Promise<User> {
+        return this.adapter.update<User>(UserService.USERS, {
+            id,
+            changes: { isAdmin }
+        })
+    }
 
-    // updateUsersAdminStatus(
-    //     ids: string[],
-    //     isAdmin: boolean
-    // ): Observable<User[]> {
-    //     const updates = ids.map(id => ({
-    //         id,
-    //         isAdmin
-    //     }))
+    deleteUser(id: string): Promise<void> {
+        return this.adapter.delete(UserService.USERS, id)
+    }
 
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, updates)
-    //     )
-    // }
+    batchUpdateApproval(ids: string[], isApproved: boolean): Promise<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            changes: { isApproved }
+        }))
 
-    // deleteUser(id: string): Observable<void> {
-    //     return this.db.deleteDoc(USER_COLLECTION, id)
-    // }
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates)
+    }
 
-    // deleteUsers(ids: string[]): Observable<void> {
-    //     return this.db.deleteDocs(USER_COLLECTION, ids)
-    // }
+    batchUpdateAdminStatus(ids: string[], isAdmin: boolean): Promise<User[]> {
+        const updates = ids.map(id => ({
+            id,
+            changes: { isAdmin }
+        }))
+
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates)
+    }
+
+    batchDeleteUsers(ids: string[]): Promise<void> {
+        return this.adapter.batchDelete(UserService.USERS, ids)
+    }
 }

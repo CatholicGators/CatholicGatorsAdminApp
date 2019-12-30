@@ -76,6 +76,19 @@ export default class FirestoreAdapter {
         return updatedSnapshots.docs.map(doc => this.flattenSnapshot<T>(doc))
     }
 
+    async batchDelete(collectionName: string, ids: string[]): Promise<void> {
+        if (!ids || ids.length === 0) {
+            return
+        }
+
+        const batch = this.db.batch()
+        ids.forEach(id => {
+            const ref = this.getDocReference(collectionName, id)
+            batch.delete(ref)
+        })
+        await batch.commit()
+    }
+
     async delete(collectionName: string, id: string): Promise<void> {
         await this.getDocReference(collectionName, id).delete()
     }

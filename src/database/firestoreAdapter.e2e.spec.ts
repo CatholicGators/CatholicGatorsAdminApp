@@ -1,4 +1,4 @@
-import FirestoreAdapter, { Doc, DocNotFoundError } from './firestoreAdapter'
+import FirestoreAdapter, { Doc, DocNotFoundError, Update } from './firestoreAdapter'
 import * as firebase from 'firebase/app'
 import clientConfig from '../config/testClientConfig'
 
@@ -132,7 +132,7 @@ describe('firestoreAdapter e2e', () => {
 
     describe('batchUpdate', () => {
         it('when given a collection name and empty updates array, updates nothing', async () => {
-            const updates = []
+            const updates: Update[] = []
 
             const updatedData = await adapter.batchUpdate<TestInterface>(collectionName, updates)
 
@@ -146,7 +146,7 @@ describe('firestoreAdapter e2e', () => {
             const changes = {
                 foo: 'batchUpdate'
             }
-            const updates = docsInDbSortedOnId.map(doc => ({
+            const updates: Update[] = docsInDbSortedOnId.map(doc => ({
                 id: doc.id,
                 changes
             }))
@@ -165,7 +165,7 @@ describe('firestoreAdapter e2e', () => {
             const changes = {
                 foo: 'batchUpdate'
             }
-            const updates = [
+            const updates: Update[] = [
                 {
                     id: docToUpdate.id,
                     changes
@@ -188,7 +188,7 @@ describe('firestoreAdapter e2e', () => {
             const changes = {
                 foo: 'batchUpdate'
             }
-            const updates = docsInDbSortedOnId.map(doc => ({
+            const updates: Update[] = docsInDbSortedOnId.map(doc => ({
                 id: doc.id,
                 changes
             }))
@@ -212,7 +212,7 @@ describe('firestoreAdapter e2e', () => {
             const changes = {
                 foo: 'batchUpdate'
             }
-            const updates = [
+            const updates: Update[] = [
                 {
                     id: 'garbage1',
                     changes
@@ -231,6 +231,66 @@ describe('firestoreAdapter e2e', () => {
                 docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
                 expect(docsInDb).toEqual(docsInDbSortedOnId)
             }
+        })
+    })
+
+    describe('batchDelete', () => {
+        it('when given a collection name and empty ids array, deletes nothing', async () => {
+            const ids = []
+
+            await adapter.batchDelete(collectionName, ids)
+
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb).toEqual(docsInDbSortedOnId)
+        })
+
+        it('when given a collection name and ids in the collection, deletes all of the corresponding docs', async () => {
+            const ids = docsInDbSortedOnId.map(doc => doc.id)
+
+            await adapter.batchDelete(collectionName, ids)
+
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            expect(docsInDb).toEqual([])
+        })
+
+        it('when given a collection name one id in the collection, deletes that one doc', async () => {
+            const docToDelete = docsInDbSortedOnId[0]
+
+            const deletes = [
+                docToDelete.id
+            ]
+
+            await adapter.batchDelete(collectionName, deletes)
+
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb)
+                .toEqual(docsInDbSortedOnId.filter(doc => doc.id != docToDelete.id))
+        })
+
+        it('when given a collection name and a mix of valid and invalid ids, deletes only the valid ids', async () => {
+            const deletes = docsInDbSortedOnId.map(doc => doc.id)
+            deletes[0] = 'garbage'
+
+            await adapter.batchDelete(collectionName, deletes)
+
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb).toEqual(docsInDbSortedOnId.filter(doc => !deletes.includes(doc.id)))
+        })
+
+        it('when given a collection name and only invalid ids, deletes nothing', async () => {
+            const deletes = [
+                'garbage1',
+                'garbage2'
+            ]
+
+            await adapter.batchDelete(collectionName, deletes)
+
+            const docsInDb = await adapter.getAll<TestInterface>(collectionName)
+            docsInDb.sort((a, b) => a.id > b.id ? 1 : -1)
+            expect(docsInDb).toEqual(docsInDbSortedOnId)
         })
     })
 
