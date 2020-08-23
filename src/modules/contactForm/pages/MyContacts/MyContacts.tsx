@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import classNames from "classnames";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import classNames from "classnames"
 import {
     Theme,
     createStyles,
@@ -22,13 +22,13 @@ import {
     Select,
     MenuItem,
     OutlinedInput,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
-import { ContactStatus, Contact } from "../../services/contactFormService";
+import { ContactStatus, Contact } from "../../services/contactFormService"
 import {
     getContacts,
     updateContactStatus,
-} from "../../redux/actions/contactFormActions";
+} from "../../redux/actions/contactFormActions"
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -69,52 +69,52 @@ const styles = (theme: Theme) =>
         called: {
             background: "rgb(182, 215, 168, 0.5)",
         },
-    });
+    })
 
 type Props = {
-    history: any;
-    user: any;
-    classes: any;
-    contacts: Contact[];
-    getContacts: () => void;
-    updateContactStatus: (contact: Contact, status: number) => void;
-};
+    history: any
+    user: any
+    classes: any
+    contacts: Contact[]
+    getContacts: () => void
+    updateContactStatus: (contact: Contact, status: number) => void
+}
 
 export class MyContacts extends Component<Props> {
     componentDidMount() {
-        this.props.getContacts();
+        this.props.getContacts()
     }
 
     goToHome() {
-        this.props.history.push("/");
+        this.props.history.push("/")
     }
 
     changeContactStatus(contact: Contact, status: unknown) {
         if (typeof status === "number") {
-            this.props.updateContactStatus(contact, status);
+            this.props.updateContactStatus(contact, status)
         } else {
-            this.props.updateContactStatus(contact, 0);
+            this.props.updateContactStatus(contact, 0)
         }
     }
 
     getClassFromStatus(status: number, classes: any): any {
         if (!classes) {
-            return null;
+            return null
         }
 
         switch (status) {
             case ContactStatus.CALLED:
-                return classes.called;
+                return classes.called
             case ContactStatus.NEED_TO_CALL_AGAIN:
-                return classes.needToCall;
+                return classes.needToCall
             case ContactStatus.NOT_CALLED:
             default:
-                return classes.notCalled;
+                return classes.notCalled
         }
     }
 
     render() {
-        const { classes, contacts, user } = this.props;
+        const { classes, contacts, user } = this.props
 
         return user && user.isApproved ? (
             <div className={classes ? classes.tableWrapper : null}>
@@ -195,50 +195,50 @@ export class MyContacts extends Component<Props> {
                             </TableBody>
                         </Table>
                     ) : (
-                        <div
-                            id="loading-spinner"
-                            className={
-                                classes ? classes.tableLoadingContainer : null
-                            }
-                        >
-                            <CircularProgress size="60px" />
-                        </div>
-                    )}
+                            <div
+                                id="loading-spinner"
+                                className={
+                                    classes ? classes.tableLoadingContainer : null
+                                }
+                            >
+                                <CircularProgress size="60px" />
+                            </div>
+                        )}
                 </Paper>
             </div>
         ) : (
-            <div className={classes ? classes.cardWrapper : null}>
-                <Card id="redirect-card">
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            You are not approved
+                <div className={classes ? classes.cardWrapper : null}>
+                    <Card id="redirect-card">
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                You are not approved
                         </Typography>
-                        <Typography component="p">
-                            Please seek approval from an admin
+                            <Typography component="p">
+                                Please seek approval from an admin
                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button color="primary" onClick={() => this.goToHome()}>
-                            Ok
+                        </CardContent>
+                        <CardActions>
+                            <Button color="primary" onClick={() => this.goToHome()}>
+                                Ok
                         </Button>
-                    </CardActions>
-                </Card>
-            </div>
-        );
+                        </CardActions>
+                    </Card>
+                </div>
+            )
     }
 }
 
 const mapStateToProps = (state) => ({
     contacts: state.contact.contacts,
     user: state.auth.user,
-});
+})
 
 const mapDispatchToProps = (dispatch) => ({
     getContacts: () => dispatch(getContacts()),
     updateContactStatus: (contact, status) =>
         dispatch(updateContactStatus(contact, status)),
-});
+})
 
 export default withRouter(
     connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MyContacts))
-);
+)

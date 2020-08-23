@@ -1,7 +1,7 @@
-import { mergeMap, map, catchError } from "rxjs/operators";
-import { ofType, ActionsObservable } from "redux-observable";
-import { combineEpics } from "redux-observable";
-import { from } from "rxjs/internal/observable/from";
+import { mergeMap, map, catchError } from "rxjs/operators"
+import { ofType, ActionsObservable } from "redux-observable"
+import { combineEpics } from "redux-observable"
+import { from } from "rxjs/internal/observable/from"
 
 import {
     contactFormActions,
@@ -13,9 +13,9 @@ import {
     updateContactStatusSuccess,
     getContactFormInterestsSuccess,
     getContactFormInterestsErr,
-} from "../actions/contactFormActions";
-import { Dependencies } from "redux/store";
-import { Contact } from "../../services/contactFormService";
+} from "../actions/contactFormActions"
+import { Dependencies } from "redux/store"
+import { Contact } from "../../services/contactFormService"
 
 export const getContactFormInterestsEpic = (
     action$,
@@ -32,8 +32,8 @@ export const getContactFormInterestsEpic = (
                 )
             )
         )
-    );
-};
+    )
+}
 
 export const submitContactFormEpic = (
     action$,
@@ -50,8 +50,8 @@ export const submitContactFormEpic = (
                 )
             )
         )
-    );
-};
+    )
+}
 
 export const getAllContactsEpic = (
     action$,
@@ -66,8 +66,8 @@ export const getAllContactsEpic = (
                 catchError((err) => ActionsObservable.of(getContactsErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const updateContactStatusEpic = (
     action$,
@@ -89,12 +89,12 @@ export const updateContactStatusEpic = (
                 )
             )
         )
-    );
-};
+    )
+}
 
 export default combineEpics(
     submitContactFormEpic,
     getAllContactsEpic,
     updateContactStatusEpic,
     getContactFormInterestsEpic
-);
+)

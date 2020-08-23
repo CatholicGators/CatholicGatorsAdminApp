@@ -1,24 +1,24 @@
-import React from "react";
-import { styles } from "../../utils/ContactFormStyles";
+import React from "react"
+import { styles } from "../../utils/ContactFormStyles"
 import {
     withStyles,
     Checkbox,
     FormControlLabel,
     Button,
     Typography,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
 class Interests extends React.Component<any, any> {
     constructor(public props: any) {
-        super(props);
+        super(props)
     }
 
     isChecked(objectId: string): boolean {
-        return this.props.data.interests.includes(objectId);
+        return this.props.data.interests.includes(objectId)
     }
 
     render() {
-        const { classes, interests, handleChange } = this.props;
+        const { classes, interests, handleChange } = this.props
         return (
             <React.Fragment>
                 <form onSubmit={this.props.handleNext}>
@@ -77,8 +77,8 @@ class Interests extends React.Component<any, any> {
                     </div>
                 </form>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default withStyles(styles)(Interests);
+export default withStyles(styles)(Interests)

@@ -1,23 +1,23 @@
-import React from "react";
-import { connect } from "react-redux";
-import { withRouter, NavLink } from "react-router-dom";
+import React from "react"
+import { connect } from "react-redux"
+import { withRouter, NavLink } from "react-router-dom"
 
-import { createStyles, withStyles, Theme } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import VpnKey from "@material-ui/icons/VpnKey";
-import FormatAlignLeft from "@material-ui/icons/FormatAlignLeft";
-import Inbox from "@material-ui/icons/Inbox";
+import { createStyles, withStyles, Theme } from "@material-ui/core"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import VpnKey from "@material-ui/icons/VpnKey"
+import FormatAlignLeft from "@material-ui/icons/FormatAlignLeft"
+import Inbox from "@material-ui/icons/Inbox"
 
 import {
     googleSignIn,
     signOut,
-} from "../../modules/auth/redux/actions/authActions";
-import MobileDrawer from "../MobileDrawer/MobileDrawer";
-import ToolbarAvatar from "../ToolbarAvatar/ToolbarAvatar";
+} from "../../modules/auth/redux/actions/authActions"
+import MobileDrawer from "../MobileDrawer/MobileDrawer"
+import ToolbarAvatar from "../ToolbarAvatar/ToolbarAvatar"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -66,26 +66,26 @@ export const styles = (theme: Theme) =>
         desktopSelected: {
             color: theme.palette.secondary.main,
         },
-    });
+    })
 
 type Props = {
-    location: any;
-    classes: any;
-    user: any;
-    signOut: () => any;
-    googleSignIn: () => any;
-};
+    location: any
+    classes: any
+    user: any
+    signOut: () => any
+    googleSignIn: () => any
+}
 
 type State = {
-    drawerOpen: boolean;
-};
+    drawerOpen: boolean
+}
 
 export type MenuLink = {
-    text: string;
-    href: string;
-    icon: any;
-    needsAuthorization: boolean;
-};
+    text: string
+    href: string
+    icon: any
+    needsAuthorization: boolean
+}
 export const menuLinks: Array<MenuLink> = [
     {
         text: "Contact Form",
@@ -105,7 +105,7 @@ export const menuLinks: Array<MenuLink> = [
         icon: VpnKey,
         needsAuthorization: true,
     },
-];
+]
 
 export class Header extends React.Component<Props, State> {
     state = {
@@ -115,11 +115,11 @@ export class Header extends React.Component<Props, State> {
     toggleDrawer(isOpen: boolean) {
         this.setState({
             drawerOpen: isOpen,
-        });
+        })
     }
 
     render() {
-        const { classes, user } = this.props;
+        const { classes, user } = this.props
 
         return (
             <div className={classes ? classes.root : null}>
@@ -148,38 +148,38 @@ export class Header extends React.Component<Props, State> {
                         >
                             {user
                                 ? menuLinks
-                                      .filter(
-                                          (link) =>
-                                              !link.needsAuthorization ||
-                                              (user.isAdmin && user.isApproved)
-                                      )
-                                      .map((link) => (
-                                          <NavLink
-                                              exact={link.href === "/"}
-                                              key={link.text}
-                                              to={link.href}
-                                              className={
-                                                  classes
-                                                      ? classes.navLinkDesktop
-                                                      : null
-                                              }
-                                              activeClassName={
-                                                  classes
-                                                      ? classes.desktopSelected
-                                                      : null
-                                              }
-                                          >
-                                              <Typography
-                                                  className={
-                                                      classes
-                                                          ? classes.navLinkTextDesktop
-                                                          : null
-                                                  }
-                                              >
-                                                  {link.text}
-                                              </Typography>
-                                          </NavLink>
-                                      ))
+                                    .filter(
+                                        (link) =>
+                                            !link.needsAuthorization ||
+                                            (user.isAdmin && user.isApproved)
+                                    )
+                                    .map((link) => (
+                                        <NavLink
+                                            exact={link.href === "/"}
+                                            key={link.text}
+                                            to={link.href}
+                                            className={
+                                                classes
+                                                    ? classes.navLinkDesktop
+                                                    : null
+                                            }
+                                            activeClassName={
+                                                classes
+                                                    ? classes.desktopSelected
+                                                    : null
+                                            }
+                                        >
+                                            <Typography
+                                                className={
+                                                    classes
+                                                        ? classes.navLinkTextDesktop
+                                                        : null
+                                                }
+                                            >
+                                                {link.text}
+                                            </Typography>
+                                        </NavLink>
+                                    ))
                                 : null}
                             <ToolbarAvatar
                                 user={user}
@@ -199,19 +199,19 @@ export class Header extends React.Component<Props, State> {
                     selectedPath={this.props.location.pathname}
                 />
             </div>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => ({
     user: state.auth.user,
-});
+})
 
 const mapDispatchToProps = (dispatch) => ({
     googleSignIn: () => dispatch(googleSignIn()),
     signOut: () => dispatch(signOut()),
-});
+})
 
 export default withRouter(
     connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header))
-);
+)

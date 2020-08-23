@@ -5,4 +5,4 @@ export default {
     projectId: "catholic-gators-test",
     storageBucket: "catholic-gators-test.appspot.com",
     messagingSenderId: "172895088246",
-};
+}

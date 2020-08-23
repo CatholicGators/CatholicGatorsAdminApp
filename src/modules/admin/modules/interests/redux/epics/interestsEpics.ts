@@ -1,7 +1,7 @@
-import { mergeMap, map, catchError } from "rxjs/operators";
-import { ofType, ActionsObservable } from "redux-observable";
-import { combineEpics } from "redux-observable";
-import { from } from "rxjs/internal/observable/from";
+import { mergeMap, map, catchError } from "rxjs/operators"
+import { ofType, ActionsObservable } from "redux-observable"
+import { combineEpics } from "redux-observable"
+import { from } from "rxjs/internal/observable/from"
 
 import {
     interestActions,
@@ -13,8 +13,8 @@ import {
     addSectionSuccess,
     updateOptionTextSuccess,
     updateOptionTextErr,
-} from "../actions/interestActions";
-import { Dependencies } from "redux/store";
+} from "../actions/interestActions"
+import { Dependencies } from "redux/store"
 
 export const getInterestsEpic = (
     action$,
@@ -29,8 +29,8 @@ export const getInterestsEpic = (
                 catchError((err) => ActionsObservable.of(getInterestsErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const addOptionEpic = (action$, _, { interestsService }: Dependencies) =>
     action$.pipe(
@@ -45,7 +45,7 @@ export const addOptionEpic = (action$, _, { interestsService }: Dependencies) =>
                 catchError((err) => ActionsObservable.of(addOptionErr(err)))
             )
         )
-    );
+    )
 
 export const updateOptionTextEpic = (
     action$,
@@ -67,7 +67,7 @@ export const updateOptionTextEpic = (
                 )
             )
         )
-    );
+    )
 
 export const addSectionEpic = (
     action$,
@@ -82,11 +82,11 @@ export const addSectionEpic = (
                 catchError((err) => ActionsObservable.of(addSectionErr(err)))
             )
         )
-    );
+    )
 
 export default combineEpics(
     getInterestsEpic,
     addOptionEpic,
     updateOptionTextEpic,
     addSectionEpic
-);
+)

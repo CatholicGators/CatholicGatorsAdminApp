@@ -1,6 +1,6 @@
-import { mergeMap, map, catchError } from "rxjs/operators";
-import { ofType, ActionsObservable } from "redux-observable";
-import { combineEpics } from "redux-observable";
+import { mergeMap, map, catchError } from "rxjs/operators"
+import { ofType, ActionsObservable } from "redux-observable"
+import { combineEpics } from "redux-observable"
 
 import {
     authActions,
@@ -10,9 +10,9 @@ import {
     listenForUserErr,
     googleSignInErr,
     signOutErr,
-} from "../actions/authActions";
-import { Dependencies } from "redux/store";
-import { from } from "rxjs";
+} from "../actions/authActions"
+import { Dependencies } from "redux/store"
+import { from } from "rxjs"
 
 export const listenForUserEpic = (
     action$,
@@ -27,8 +27,8 @@ export const listenForUserEpic = (
                 catchError((err) => ActionsObservable.of(listenForUserErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const googleSignInEpic = (action$, _, { authService }: Dependencies) => {
     return action$.pipe(
@@ -39,8 +39,8 @@ export const googleSignInEpic = (action$, _, { authService }: Dependencies) => {
                 catchError((err) => ActionsObservable.of(googleSignInErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const signOutEpic = (action$, _, { authService }: Dependencies) => {
     return action$.pipe(
@@ -51,7 +51,7 @@ export const signOutEpic = (action$, _, { authService }: Dependencies) => {
                 catchError((err) => ActionsObservable.of(signOutErr(err)))
             )
         )
-    );
-};
+    )
+}
 
-export default combineEpics(listenForUserEpic, googleSignInEpic, signOutEpic);
+export default combineEpics(listenForUserEpic, googleSignInEpic, signOutEpic)
