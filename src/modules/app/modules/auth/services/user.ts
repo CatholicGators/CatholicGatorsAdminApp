@@ -1,9 +1,9 @@
-import Document from '../../../../../models/document';
+import Document from "../../../../../models/document";
 
 export default interface User extends Document {
     name: String;
     email: String;
-    photoURL: String;
+    photoUrl: String;
     isApproved: boolean;
     isAdmin: boolean;
 }

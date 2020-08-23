@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 import {
     TableRow,
     TableCell,
@@ -9,59 +9,59 @@ import {
     Theme,
     createStyles,
     withStyles,
-    IconButton
-} from '@material-ui/core'
-import CheckIcon from '@material-ui/icons/Check'
-import { updateUser } from '../../../../redux/actions/usersActions'
+    IconButton,
+} from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
+import { updateUser } from "../../../../redux/actions/usersActions";
 
 export const styles = (theme: Theme) =>
     createStyles({
         hiddenxs: {
-            [theme.breakpoints.down('xs')]: {
-                display: 'none'
-            }
+            [theme.breakpoints.down("xs")]: {
+                display: "none",
+            },
         },
         hiddensm: {
-            [theme.breakpoints.down('sm')]: {
-                display: 'none'
-            }
+            [theme.breakpoints.down("sm")]: {
+                display: "none",
+            },
         },
         avatarIconBtn: {
             padding: 0,
-            [theme.breakpoints.up('sm')]: {
-                display: 'none'
-            }
+            [theme.breakpoints.up("sm")]: {
+                display: "none",
+            },
         },
         profilePicCol: {
-            paddingRight: theme.spacing(2)
-        }
-    })
+            paddingRight: theme.spacing(2),
+        },
+    });
 
 type Props = {
-    user: any
-    classes: any
-    isSelected: boolean
-    handleSelect: (id) => any
-    updateUser: (user) => void
-}
+    user: any;
+    classes: any;
+    isSelected: boolean;
+    handleSelect: (id) => any;
+    updateUser: (user) => void;
+};
 
 export class UserTableRow extends React.Component<Props> {
     handleApproveToggle(user, checked) {
         this.props.updateUser({
             ...user,
-            isApproved: checked
-        })
+            isApproved: checked,
+        });
     }
 
     handleAuthorizeToggle(user, checked) {
         this.props.updateUser({
             ...user,
-            isAdmin: checked
-        })
+            isAdmin: checked,
+        });
     }
 
     render() {
-        const { user, classes, isSelected, handleSelect } = this.props
+        const { user, classes, isSelected, handleSelect } = this.props;
 
         return (
             <TableRow
@@ -83,13 +83,13 @@ export class UserTableRow extends React.Component<Props> {
                 <TableCell className={classes ? classes.profilePicCol : null}>
                     <Avatar
                         className={classes ? classes.hiddenxs : null}
-                        src={user.photoURL}
+                        src={user.photoUrl}
                     />
                     <IconButton
                         className={classes ? classes.avatarIconBtn : null}
                         onClick={() => handleSelect(user.id)}
                     >
-                        <Avatar src={isSelected ? null : user.photoURL}>
+                        <Avatar src={isSelected ? null : user.photoUrl}>
                             {isSelected ? <CheckIcon /> : null}
                         </Avatar>
                     </IconButton>
@@ -118,15 +118,15 @@ export class UserTableRow extends React.Component<Props> {
                     />
                 </TableCell>
             </TableRow>
-        )
+        );
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    updateUser: user => dispatch(updateUser(user))
-})
+const mapDispatchToProps = (dispatch) => ({
+    updateUser: (user) => dispatch(updateUser(user)),
+});
 
 export default connect(
     null,
     mapDispatchToProps
-)(withStyles(styles)(UserTableRow))
+)(withStyles(styles)(UserTableRow));
