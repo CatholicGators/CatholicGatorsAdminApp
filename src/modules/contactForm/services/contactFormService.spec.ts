@@ -1,15 +1,15 @@
-import { when } from "jest-when";
+import { when } from "jest-when"
 
 import ContactFormService, {
     NewContactReq,
     Contact,
-} from "./contactFormService";
+} from "./contactFormService"
 
 describe("ContactFormService", () => {
     let service: ContactFormService,
         testContactReq: NewContactReq,
         adapter,
-        interestsService;
+        interestsService
 
     beforeEach(() => {
         testContactReq = {
@@ -32,27 +32,27 @@ describe("ContactFormService", () => {
             interests: ["123", "456"],
             status: 2568,
             createdAt: new Date(),
-        };
+        }
         adapter = {
             getAll: jest.fn(),
             add: jest.fn(),
             update: jest.fn(),
-        };
+        }
         interestsService = {
             getInterests: jest.fn(),
-        };
+        }
 
-        service = new ContactFormService(adapter, interestsService);
-    });
+        service = new ContactFormService(adapter, interestsService)
+    })
 
     describe("updateDocumentStatus", () => {
         it("updates the doc using the firestore adapter", async () => {
-            const newStatus = 2;
+            const newStatus = 2
             const updatedContact: Contact = {
                 id: "contactDocId",
                 ...testContactReq,
                 status: newStatus,
-            };
+            }
             when(adapter.update)
                 .calledWith(ContactFormService.CONTACTS_COLLECTION, {
                     id: updatedContact.id,
@@ -60,36 +60,36 @@ describe("ContactFormService", () => {
                         status: newStatus,
                     },
                 })
-                .mockReturnValue(updatedContact);
+                .mockReturnValue(updatedContact)
 
             const result = await service.updateContactStatus(
                 updatedContact.id,
                 newStatus
-            );
+            )
 
-            expect(result).toBe(updatedContact);
-        });
-    });
+            expect(result).toBe(updatedContact)
+        })
+    })
 
     describe("addContact", () => {
         it("adds the contact to its collection via the firestore adapter", async () => {
             const addedContact: Contact = {
                 id: "newId",
                 ...testContactReq,
-            };
+            }
 
             when(adapter.add)
                 .calledWith(
                     ContactFormService.CONTACTS_COLLECTION,
                     testContactReq
                 )
-                .mockResolvedValue(addedContact);
+                .mockResolvedValue(addedContact)
 
-            const result = await service.addContact(testContactReq);
+            const result = await service.addContact(testContactReq)
 
-            expect(result).toBe(addedContact);
-        });
-    });
+            expect(result).toBe(addedContact)
+        })
+    })
 
     describe("getAllContacts", () => {
         it("gets all of the contacts via the firestore adapter", async () => {
@@ -110,14 +110,14 @@ describe("ContactFormService", () => {
                     id: "4",
                     ...testContactReq,
                 },
-            ];
+            ]
             when(adapter.getAll)
                 .calledWith(ContactFormService.CONTACTS_COLLECTION)
-                .mockResolvedValue(contacts);
+                .mockResolvedValue(contacts)
 
-            const result = await service.getAllContacts();
+            const result = await service.getAllContacts()
 
-            expect(result).toBe(contacts);
-        });
-    });
-});
+            expect(result).toBe(contacts)
+        })
+    })
+})

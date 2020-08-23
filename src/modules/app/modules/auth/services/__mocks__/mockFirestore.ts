@@ -2,19 +2,19 @@ let firestore,
     auth,
     authCallBacks,
     authErrCallBacks,
-    reference;
+    reference
 
-authCallBacks = [];
-authErrCallBacks = [];
+authCallBacks = []
+authErrCallBacks = []
 
 auth = {
     onAuthStateChanged: jest.fn((cb, errcb) => {
-        authCallBacks.push(cb);
-        authErrCallBacks.push(errcb);
+        authCallBacks.push(cb)
+        authErrCallBacks.push(errcb)
     }),
     signInWithRedirect: jest.fn(),
     signOut: jest.fn()
-};
+}
 
 firestore = {
     getAuth: jest.fn(() => auth),
@@ -30,4 +30,4 @@ firestore = {
     deleteDocs: jest.fn()
 }
 
-export { firestore, auth, authCallBacks, authErrCallBacks, reference };
+export { firestore, auth, authCallBacks, authErrCallBacks, reference }

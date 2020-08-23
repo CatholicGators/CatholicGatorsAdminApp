@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
     Theme,
     createStyles,
     withStyles,
     IconButton,
     Input,
-} from "@material-ui/core";
-import { Save, Close, Add } from "@material-ui/icons";
+} from "@material-ui/core"
+import { Save, Close, Add } from "@material-ui/icons"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -35,19 +35,19 @@ export const styles = (theme: Theme) =>
             display: "flex",
             alignItems: "center",
         },
-    });
+    })
 
 export type Props = {
-    isAdding: boolean;
-    classes: any;
-    beginAdding: () => void;
-    onAdd: (text: string) => void;
-    cancelAdding: () => void;
-};
+    isAdding: boolean
+    classes: any
+    beginAdding: () => void
+    onAdd: (text: string) => void
+    cancelAdding: () => void
+}
 
 type State = {
-    text: string;
-};
+    text: string
+}
 
 export class AddableTextField extends Component<Props, State> {
     state = {
@@ -55,21 +55,21 @@ export class AddableTextField extends Component<Props, State> {
     };
 
     onChange(text: string) {
-        this.setState({ text });
+        this.setState({ text })
     }
 
     add() {
-        const { text } = this.state;
+        const { text } = this.state
         if (text) {
-            this.props.onAdd(text);
-            this.setState({ text: "" });
+            this.props.onAdd(text)
+            this.setState({ text: "" })
         }
     }
 
     render() {
-        const { isAdding, classes, beginAdding, cancelAdding } = this.props;
+        const { isAdding, classes, beginAdding, cancelAdding } = this.props
 
-        const { text } = this.state;
+        const { text } = this.state
 
         return isAdding ? (
             <div className={classes.row}>
@@ -93,11 +93,11 @@ export class AddableTextField extends Component<Props, State> {
                 </div>
             </div>
         ) : (
-            <IconButton onClick={beginAdding}>
-                <Add />
-            </IconButton>
-        );
+                <IconButton onClick={beginAdding}>
+                    <Add />
+                </IconButton>
+            )
     }
 }
 
-export default withStyles(styles)(AddableTextField);
+export default withStyles(styles)(AddableTextField)

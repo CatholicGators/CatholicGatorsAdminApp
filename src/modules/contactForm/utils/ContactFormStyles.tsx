@@ -1,4 +1,4 @@
-import { Theme, createStyles } from "@material-ui/core";
+import { Theme, createStyles } from "@material-ui/core"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -84,4 +84,4 @@ export const styles = (theme: Theme) =>
             marginLeft: 10,
             marginRight: 10,
         },
-    });
+    })

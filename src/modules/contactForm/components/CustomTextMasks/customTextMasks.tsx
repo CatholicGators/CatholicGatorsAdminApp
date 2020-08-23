@@ -1,3 +1,3 @@
 export interface TextMaskCustomProps {
-    inputRef: (ref: HTMLInputElement | null) => void;
+    inputRef: (ref: HTMLInputElement | null) => void
 }

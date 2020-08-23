@@ -1,7 +1,7 @@
-import React from "react";
-import { PhoneNumberTextMask } from "../CustomTextMasks/phoneNumberTextMask";
-import { ZipCodeTextMask } from "../CustomTextMasks/zipCodeTextMask";
-import { styles } from "../../utils/ContactFormStyles";
+import React from "react"
+import { PhoneNumberTextMask } from "../CustomTextMasks/phoneNumberTextMask"
+import { ZipCodeTextMask } from "../CustomTextMasks/zipCodeTextMask"
+import { styles } from "../../utils/ContactFormStyles"
 
 import {
     withStyles,
@@ -10,11 +10,11 @@ import {
     InputLabel,
     OutlinedInput,
     Button,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
 class ParentsInformation extends React.Component<any, any> {
     constructor(public props: any) {
-        super(props);
+        super(props)
     }
 
     state = {
@@ -23,8 +23,8 @@ class ParentsInformation extends React.Component<any, any> {
     };
 
     render() {
-        const { classes } = this.props;
-        const handleChange = this.props.handleChange;
+        const { classes } = this.props
+        const handleChange = this.props.handleChange
 
         return (
             <React.Fragment>
@@ -131,8 +131,8 @@ class ParentsInformation extends React.Component<any, any> {
                     </div>
                 </form>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default withStyles(styles)(ParentsInformation);
+export default withStyles(styles)(ParentsInformation)

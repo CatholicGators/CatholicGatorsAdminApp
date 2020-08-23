@@ -1,6 +1,6 @@
-import { mergeMap, map, catchError } from "rxjs/operators";
-import { ofType, ActionsObservable } from "redux-observable";
-import { combineEpics } from "redux-observable";
+import { mergeMap, map, catchError } from "rxjs/operators"
+import { ofType, ActionsObservable } from "redux-observable"
+import { combineEpics } from "redux-observable"
 
 import {
     usersActions,
@@ -9,9 +9,9 @@ import {
     getUsers,
     batchDeleteUsersErr,
     updateUserErr,
-} from "../actions/usersActions";
-import { Dependencies } from "redux/store";
-import { from } from "rxjs";
+} from "../actions/usersActions"
+import { Dependencies } from "redux/store"
+import { from } from "rxjs"
 
 export const getUsersEpic = (action$, _, { userService }: Dependencies) => {
     return action$.pipe(
@@ -22,8 +22,8 @@ export const getUsersEpic = (action$, _, { userService }: Dependencies) => {
                 catchError((err) => ActionsObservable.of(getUsersErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const updateUserEpic = (action$, _, { userService }: Dependencies) => {
     return action$.pipe(
@@ -34,8 +34,8 @@ export const updateUserEpic = (action$, _, { userService }: Dependencies) => {
                 catchError((err) => ActionsObservable.of(updateUserErr(err)))
             )
         )
-    );
-};
+    )
+}
 
 export const batchDeleteUsersEpic = (
     action$,
@@ -52,7 +52,7 @@ export const batchDeleteUsersEpic = (
                 )
             )
         )
-    );
-};
+    )
+}
 
-export default combineEpics(getUsersEpic, updateUserEpic, batchDeleteUsersEpic);
+export default combineEpics(getUsersEpic, updateUserEpic, batchDeleteUsersEpic)

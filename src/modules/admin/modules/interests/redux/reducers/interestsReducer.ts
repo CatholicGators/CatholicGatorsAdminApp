@@ -16,9 +16,9 @@ const addOption = (state, action) => ({
             section.id !== action.sectionId
                 ? section
                 : {
-                      ...section,
-                      options: [...section.options, action.option]
-                  }
+                    ...section,
+                    options: [...section.options, action.option]
+                }
         )
     ]
 })

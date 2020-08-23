@@ -1,19 +1,19 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { NavLink } from "react-router-dom"
 
-import { createStyles, withStyles, Theme } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
-import ExitToApp from "@material-ui/icons/ExitToApp";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { MenuLink } from "../Header/Header";
+import { createStyles, withStyles, Theme } from "@material-ui/core"
+import Divider from "@material-ui/core/Divider"
+import Typography from "@material-ui/core/Typography"
+import Avatar from "@material-ui/core/Avatar"
+import Drawer from "@material-ui/core/Drawer"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew"
+import ExitToApp from "@material-ui/icons/ExitToApp"
+import CircularProgress from "@material-ui/core/CircularProgress"
+import { MenuLink } from "../Header/Header"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -52,22 +52,22 @@ export const styles = (theme: Theme) =>
         progress: {
             color: theme.palette.secondary.main,
         },
-    });
+    })
 
 type Props = {
-    classes: any;
-    user: any;
-    menuLinks: Array<MenuLink>;
-    isOpen: boolean;
-    selectedPath: string;
-    closeDrawer: () => any;
-    logout: () => any;
-    login: () => any;
-};
+    classes: any
+    user: any
+    menuLinks: Array<MenuLink>
+    isOpen: boolean
+    selectedPath: string
+    closeDrawer: () => any
+    logout: () => any
+    login: () => any
+}
 
 export class MobileDrawer extends React.Component<Props> {
     render() {
-        const { classes } = this.props;
+        const { classes } = this.props
         return (
             <Drawer
                 open={this.props.isOpen}
@@ -88,8 +88,8 @@ export class MobileDrawer extends React.Component<Props> {
                             button
                             key="logout"
                             onClick={() => {
-                                this.props.closeDrawer();
-                                this.props.logout();
+                                this.props.closeDrawer()
+                                this.props.logout()
                             }}
                         >
                             <ListItemIcon>
@@ -100,11 +100,11 @@ export class MobileDrawer extends React.Component<Props> {
                     </div>
                 ) : null}
             </Drawer>
-        );
+        )
     }
 
     getProfile() {
-        const { classes, user } = this.props;
+        const { classes, user } = this.props
 
         switch (this.props.user) {
             case undefined:
@@ -113,9 +113,9 @@ export class MobileDrawer extends React.Component<Props> {
                         id="spinner"
                         className={classes ? classes.progress : null}
                     />
-                );
+                )
             case null:
-                return null;
+                return null
             default:
                 return (
                     <div className={classes ? classes.profileWrapper : null}>
@@ -139,15 +139,15 @@ export class MobileDrawer extends React.Component<Props> {
                             </Typography>
                         </div>
                     </div>
-                );
+                )
         }
     }
 
     getMenuLinks() {
-        const { classes, user, menuLinks } = this.props;
+        const { classes, user, menuLinks } = this.props
         switch (user) {
             case undefined:
-                return null;
+                return null
             case null:
                 return (
                     <ListItem
@@ -155,8 +155,8 @@ export class MobileDrawer extends React.Component<Props> {
                         button
                         key="login"
                         onClick={() => {
-                            this.props.closeDrawer();
-                            this.props.login();
+                            this.props.closeDrawer()
+                            this.props.login()
                         }}
                     >
                         <ListItemIcon>
@@ -164,7 +164,7 @@ export class MobileDrawer extends React.Component<Props> {
                         </ListItemIcon>
                         <ListItemText primary="Login" />
                     </ListItem>
-                );
+                )
             default:
                 return menuLinks
                     .filter((link) => !link.needsAuthorization || user.isAdmin)
@@ -187,9 +187,9 @@ export class MobileDrawer extends React.Component<Props> {
                                 <ListItemText primary={link.text} />
                             </ListItem>
                         </NavLink>
-                    ));
+                    ))
         }
     }
 }
 
-export default withStyles(styles)(MobileDrawer);
+export default withStyles(styles)(MobileDrawer)

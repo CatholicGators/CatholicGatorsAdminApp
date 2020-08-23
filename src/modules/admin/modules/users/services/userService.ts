@@ -1,18 +1,18 @@
 import FirestoreAdapter, {
     Doc,
     DocNotFoundError,
-} from "database/firestoreAdapter";
+} from "database/firestoreAdapter"
 
-type FirebaseUser = firebase.User;
+type FirebaseUser = firebase.User
 
 export interface UserData {
-    email: string;
-    name: string;
-    photoUrl: string;
-    isApproved: boolean;
-    isAdmin: boolean;
+    email: string
+    name: string
+    photoUrl: string
+    isApproved: boolean
+    isAdmin: boolean
 }
-export interface User extends Doc, UserData {}
+export interface User extends Doc, UserData { }
 
 export default class UserService {
     public static readonly USERS: string = "users";
@@ -21,14 +21,14 @@ export default class UserService {
         isAdmin: false,
     };
 
-    constructor(private adapter: FirestoreAdapter) {}
+    constructor(private adapter: FirestoreAdapter) { }
 
     getUser(id: string): Promise<User> {
-        return this.adapter.get<User>(UserService.USERS, id);
+        return this.adapter.get<User>(UserService.USERS, id)
     }
 
     getAllUsers(): Promise<User[]> {
-        return this.adapter.getAll<User>(UserService.USERS);
+        return this.adapter.getAll<User>(UserService.USERS)
     }
 
     getOrInitUser(user: FirebaseUser): Promise<User> {
@@ -45,57 +45,57 @@ export default class UserService {
                             photoUrl: user.photoURL,
                             ...UserService.INITIAL_PERMISSIONS,
                         }
-                    );
+                    )
                 } else {
-                    throw e;
+                    throw e
                 }
-            });
+            })
     }
 
     updateUser(id: string, user: User): Promise<User> {
         return this.adapter.update(UserService.USERS, {
             id,
             changes: user,
-        });
+        })
     }
 
     updateApproval(id: string, isApproved: boolean): Promise<User> {
         return this.adapter.update<User>(UserService.USERS, {
             id,
             changes: { isApproved },
-        });
+        })
     }
 
     updateAdminStatus(id: string, isAdmin: boolean): Promise<User> {
         return this.adapter.update<User>(UserService.USERS, {
             id,
             changes: { isAdmin },
-        });
+        })
     }
 
     deleteUser(id: string): Promise<void> {
-        return this.adapter.delete(UserService.USERS, id);
+        return this.adapter.delete(UserService.USERS, id)
     }
 
     batchUpdateApproval(ids: string[], isApproved: boolean): Promise<User[]> {
         const updates = ids.map((id) => ({
             id,
             changes: { isApproved },
-        }));
+        }))
 
-        return this.adapter.batchUpdate<User>(UserService.USERS, updates);
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates)
     }
 
     batchUpdateAdminStatus(ids: string[], isAdmin: boolean): Promise<User[]> {
         const updates = ids.map((id) => ({
             id,
             changes: { isAdmin },
-        }));
+        }))
 
-        return this.adapter.batchUpdate<User>(UserService.USERS, updates);
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates)
     }
 
     batchDeleteUsers(ids: string[]): Promise<void> {
-        return this.adapter.batchDelete(UserService.USERS, ids);
+        return this.adapter.batchDelete(UserService.USERS, ids)
     }
 }

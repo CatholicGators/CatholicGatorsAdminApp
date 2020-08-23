@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route, Redirect, NavLink } from "react-router-dom";
+import React, { Component } from "react"
+import { Route, Redirect, NavLink } from "react-router-dom"
 import {
     Theme,
     createStyles,
@@ -8,10 +8,10 @@ import {
     ListItemText,
     List,
     ListItemIcon,
-} from "@material-ui/core";
-import { VpnKey, Group } from "@material-ui/icons";
-import UserTable from "../../modules/users/components/UserTable/UserTable";
-import Interests from "../../modules/interests/components/Interests/Interests";
+} from "@material-ui/core"
+import { VpnKey, Group } from "@material-ui/icons"
+import UserTable from "../../modules/users/components/UserTable/UserTable"
+import Interests from "../../modules/interests/components/Interests/Interests"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -36,19 +36,19 @@ export const styles = (theme: Theme) =>
         colorInitial: {
             color: "initial",
         },
-    });
+    })
 
 type Props = {
-    classes: any;
-    match: any;
-    location: any;
-};
+    classes: any
+    match: any
+    location: any
+}
 
 export type MenuLink = {
-    text: string;
-    href: string;
-    icon: any;
-};
+    text: string
+    href: string
+    icon: any
+}
 export const menuLinks: Array<MenuLink> = [
     {
         text: "Users",
@@ -60,11 +60,11 @@ export const menuLinks: Array<MenuLink> = [
         href: "/interests",
         icon: VpnKey,
     },
-];
+]
 
 export class Admin extends Component<Props> {
     render() {
-        const { classes, match, location } = this.props;
+        const { classes, match, location } = this.props
 
         return (
             <div className={classes.pageWrapper}>
@@ -100,8 +100,8 @@ export class Admin extends Component<Props> {
                 <Route path={`${match.url}/users`} component={UserTable} />
                 <Route path={`${match.url}/interests`} component={Interests} />
             </div>
-        );
+        )
     }
 }
 
-export default withStyles(styles)(Admin);
+export default withStyles(styles)(Admin)

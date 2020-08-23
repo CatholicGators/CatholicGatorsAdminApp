@@ -1,7 +1,7 @@
-import React from "react";
-import { PhoneNumberTextMask } from "../CustomTextMasks/phoneNumberTextMask";
-import { YearTextMask } from "../CustomTextMasks/yearTextMask";
-import { styles } from "../../utils/ContactFormStyles";
+import React from "react"
+import { PhoneNumberTextMask } from "../CustomTextMasks/phoneNumberTextMask"
+import { YearTextMask } from "../CustomTextMasks/yearTextMask"
+import { styles } from "../../utils/ContactFormStyles"
 
 import {
     withStyles,
@@ -10,7 +10,7 @@ import {
     InputLabel,
     OutlinedInput,
     Button,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
 const genders = [
     {
@@ -25,7 +25,7 @@ const genders = [
         value: "Female",
         label: "Female",
     },
-];
+]
 
 const schools = [
     {
@@ -40,7 +40,7 @@ const schools = [
         value: "SFC",
         label: "SFC",
     },
-];
+]
 
 const semester = [
     {
@@ -59,7 +59,7 @@ const semester = [
         value: "Fall",
         label: "Fall",
     },
-];
+]
 
 class PersonalInformation extends React.Component<any, any> {
     state = {
@@ -68,12 +68,12 @@ class PersonalInformation extends React.Component<any, any> {
     };
 
     constructor(public props: any) {
-        super(props);
+        super(props)
     }
 
     render() {
-        const { classes } = this.props;
-        const handleChange = this.props.handleChange;
+        const { classes } = this.props
+        const handleChange = this.props.handleChange
 
         return (
             <React.Fragment>
@@ -228,8 +228,8 @@ class PersonalInformation extends React.Component<any, any> {
                     </div>
                 </form>
             </React.Fragment>
-        );
+        )
     }
 }
 
-export default withStyles(styles)(PersonalInformation);
+export default withStyles(styles)(PersonalInformation)

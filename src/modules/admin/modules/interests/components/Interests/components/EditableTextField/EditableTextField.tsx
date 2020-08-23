@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import classnames from "classnames";
+import React, { Component } from "react"
+import classnames from "classnames"
 import {
     Theme,
     createStyles,
@@ -7,8 +7,8 @@ import {
     IconButton,
     Input,
     Typography,
-} from "@material-ui/core";
-import { Delete, Edit, Save, Close } from "@material-ui/icons";
+} from "@material-ui/core"
+import { Delete, Edit, Save, Close } from "@material-ui/icons"
 
 export const styles = (theme: Theme) =>
     createStyles({
@@ -31,23 +31,23 @@ export const styles = (theme: Theme) =>
         show: {
             display: "block",
         },
-    });
+    })
 
 export type Props = {
-    classes: any;
-    isEditing: boolean;
-    isHovered: boolean;
-    id: string;
-    text: string;
-    beginEditing: (id: string) => void;
-    cancelEditing: () => void;
-    deleteText: (id: string) => void;
-    save: (id: string, newText: string) => void;
-};
+    classes: any
+    isEditing: boolean
+    isHovered: boolean
+    id: string
+    text: string
+    beginEditing: (id: string) => void
+    cancelEditing: () => void
+    deleteText: (id: string) => void
+    save: (id: string, newText: string) => void
+}
 
 type State = {
-    editedText: string;
-};
+    editedText: string
+}
 
 export class EditableTextField extends Component<Props, State> {
     state = {
@@ -55,7 +55,7 @@ export class EditableTextField extends Component<Props, State> {
     };
 
     onEditChange(newText: string) {
-        this.setState({ editedText: newText });
+        this.setState({ editedText: newText })
     }
 
     render() {
@@ -69,9 +69,9 @@ export class EditableTextField extends Component<Props, State> {
             deleteText,
             save,
             cancelEditing,
-        } = this.props;
+        } = this.props
 
-        const { editedText } = this.state;
+        const { editedText } = this.state
 
         return isEditing ? (
             <div className={classes.row}>
@@ -91,24 +91,24 @@ export class EditableTextField extends Component<Props, State> {
                 </div>
             </div>
         ) : (
-            <div className={classes.row}>
-                <Typography>{text}</Typography>
-                <div
-                    className={classnames({
-                        [classes.actions]: true,
-                        [classes.show]: isHovered,
-                    })}
-                >
-                    <IconButton id="edit" onClick={() => beginEditing(id)}>
-                        <Edit />
-                    </IconButton>
-                    <IconButton id="delete" onClick={() => deleteText(id)}>
-                        <Delete />
-                    </IconButton>
+                <div className={classes.row}>
+                    <Typography>{text}</Typography>
+                    <div
+                        className={classnames({
+                            [classes.actions]: true,
+                            [classes.show]: isHovered,
+                        })}
+                    >
+                        <IconButton id="edit" onClick={() => beginEditing(id)}>
+                            <Edit />
+                        </IconButton>
+                        <IconButton id="delete" onClick={() => deleteText(id)}>
+                            <Delete />
+                        </IconButton>
+                    </div>
                 </div>
-            </div>
-        );
+            )
     }
 }
 
-export default withStyles(styles)(EditableTextField);
+export default withStyles(styles)(EditableTextField)
