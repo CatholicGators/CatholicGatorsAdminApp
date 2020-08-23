@@ -1,25 +1,23 @@
 cache:
-  yarn: true
-  directories:
-  - node_modules
+    yarn: true
 script:
-- yarn
-- yarn test
+    - yarn install
+    - yarn test
 before_deploy:
-- "[ $TRAVIS_TAG ] && yarn build:prod || yarn run build:test"
-- yarn run build:functions
+    - "[ $TRAVIS_TAG ] && yarn build:prod || yarn run build:test"
+    - yarn run build:functions
 deploy:
-- provider: firebase
-  skip_cleanup: true
-  token:
-    secure: TwJPMp7MHudvWC0yU2q1tat7mqSn8Tm0p5dc/T/Z0+VzIHkQZyaLMd8UUfPiryovwNZ5hQlxhSR6nXcn260oPJpCuT5eiBVT1PCgJ3aAxioMjgcsJ3vfQ4QL5G4DIjuS10usZPUWHsPOJolsiX/IM1JsBOZA1ic2/pLTfnV3UL+nClPqnqy6ZdXViB4j28H4vMoU+cfaXU6HgbwzGiEOzGHeh3MLuzm0hNTta1Qc58JfelkFrTOWcDiV74ndzQDiPruuaapA2Dc/7AnFEF2LCKcPRNczwigev8Z5gYbjRLGGpbxuHWADs7VQohTTvGnffVwdfn5MenukzZgSCLwt9oEZcnvvlpyFlb1aoycFmAxQsEFSiGyn39kMgGbD7wT0XAOuBhbp3xlDnZ4rq+3w6m1H4Sxe6OjhyEtLHeV96eis784RScFWR3o4piyx7Buo1p/rJQB/qOgSeETk9HrGpyA3xZKyNMz99aR+qWP5qOvuSi3YOYLcQkOFhDPMY6NvEoLTfNy3Dhd1EmGCX72EFWftzsuKFxA4CAqbsmmDdAvCZXl8oMBimA9BBioSKi1YgFnzhjvSFseAN764W94fzW7s6w3HacoweA/dM/W7d8og9j983m6+f4c1yF2N9ZQT7oO0TIZimzraJQwmRcmgLqsh7Y2psj09B4V2eD1KPCI=
-  on:
-    branch: master
-  project: testing
-- provider: firebase
-  skip_cleanup: true
-  token:
-    secure: TwJPMp7MHudvWC0yU2q1tat7mqSn8Tm0p5dc/T/Z0+VzIHkQZyaLMd8UUfPiryovwNZ5hQlxhSR6nXcn260oPJpCuT5eiBVT1PCgJ3aAxioMjgcsJ3vfQ4QL5G4DIjuS10usZPUWHsPOJolsiX/IM1JsBOZA1ic2/pLTfnV3UL+nClPqnqy6ZdXViB4j28H4vMoU+cfaXU6HgbwzGiEOzGHeh3MLuzm0hNTta1Qc58JfelkFrTOWcDiV74ndzQDiPruuaapA2Dc/7AnFEF2LCKcPRNczwigev8Z5gYbjRLGGpbxuHWADs7VQohTTvGnffVwdfn5MenukzZgSCLwt9oEZcnvvlpyFlb1aoycFmAxQsEFSiGyn39kMgGbD7wT0XAOuBhbp3xlDnZ4rq+3w6m1H4Sxe6OjhyEtLHeV96eis784RScFWR3o4piyx7Buo1p/rJQB/qOgSeETk9HrGpyA3xZKyNMz99aR+qWP5qOvuSi3YOYLcQkOFhDPMY6NvEoLTfNy3Dhd1EmGCX72EFWftzsuKFxA4CAqbsmmDdAvCZXl8oMBimA9BBioSKi1YgFnzhjvSFseAN764W94fzW7s6w3HacoweA/dM/W7d8og9j983m6+f4c1yF2N9ZQT7oO0TIZimzraJQwmRcmgLqsh7Y2psj09B4V2eD1KPCI=
-  on:
-    tags: true
-  project: production
+    - provider: firebase
+      skip_cleanup: true
+      token:
+          secure: TwJPMp7MHudvWC0yU2q1tat7mqSn8Tm0p5dc/T/Z0+VzIHkQZyaLMd8UUfPiryovwNZ5hQlxhSR6nXcn260oPJpCuT5eiBVT1PCgJ3aAxioMjgcsJ3vfQ4QL5G4DIjuS10usZPUWHsPOJolsiX/IM1JsBOZA1ic2/pLTfnV3UL+nClPqnqy6ZdXViB4j28H4vMoU+cfaXU6HgbwzGiEOzGHeh3MLuzm0hNTta1Qc58JfelkFrTOWcDiV74ndzQDiPruuaapA2Dc/7AnFEF2LCKcPRNczwigev8Z5gYbjRLGGpbxuHWADs7VQohTTvGnffVwdfn5MenukzZgSCLwt9oEZcnvvlpyFlb1aoycFmAxQsEFSiGyn39kMgGbD7wT0XAOuBhbp3xlDnZ4rq+3w6m1H4Sxe6OjhyEtLHeV96eis784RScFWR3o4piyx7Buo1p/rJQB/qOgSeETk9HrGpyA3xZKyNMz99aR+qWP5qOvuSi3YOYLcQkOFhDPMY6NvEoLTfNy3Dhd1EmGCX72EFWftzsuKFxA4CAqbsmmDdAvCZXl8oMBimA9BBioSKi1YgFnzhjvSFseAN764W94fzW7s6w3HacoweA/dM/W7d8og9j983m6+f4c1yF2N9ZQT7oO0TIZimzraJQwmRcmgLqsh7Y2psj09B4V2eD1KPCI=
+      on:
+          branch: master
+      project: testing
+    - provider: firebase
+      skip_cleanup: true
+      token:
+          secure: TwJPMp7MHudvWC0yU2q1tat7mqSn8Tm0p5dc/T/Z0+VzIHkQZyaLMd8UUfPiryovwNZ5hQlxhSR6nXcn260oPJpCuT5eiBVT1PCgJ3aAxioMjgcsJ3vfQ4QL5G4DIjuS10usZPUWHsPOJolsiX/IM1JsBOZA1ic2/pLTfnV3UL+nClPqnqy6ZdXViB4j28H4vMoU+cfaXU6HgbwzGiEOzGHeh3MLuzm0hNTta1Qc58JfelkFrTOWcDiV74ndzQDiPruuaapA2Dc/7AnFEF2LCKcPRNczwigev8Z5gYbjRLGGpbxuHWADs7VQohTTvGnffVwdfn5MenukzZgSCLwt9oEZcnvvlpyFlb1aoycFmAxQsEFSiGyn39kMgGbD7wT0XAOuBhbp3xlDnZ4rq+3w6m1H4Sxe6OjhyEtLHeV96eis784RScFWR3o4piyx7Buo1p/rJQB/qOgSeETk9HrGpyA3xZKyNMz99aR+qWP5qOvuSi3YOYLcQkOFhDPMY6NvEoLTfNy3Dhd1EmGCX72EFWftzsuKFxA4CAqbsmmDdAvCZXl8oMBimA9BBioSKi1YgFnzhjvSFseAN764W94fzW7s6w3HacoweA/dM/W7d8og9j983m6+f4c1yF2N9ZQT7oO0TIZimzraJQwmRcmgLqsh7Y2psj09B4V2eD1KPCI=
+      on:
+          tags: true
+      project: production
