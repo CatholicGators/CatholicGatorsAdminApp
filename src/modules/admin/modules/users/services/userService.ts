@@ -15,7 +15,7 @@ export interface UserData {
 export interface User extends Doc, UserData {}
 
 export default class UserService {
-    public static readonly USERS: string = "users2";
+    public static readonly USERS: string = "users";
     public static readonly INITIAL_PERMISSIONS = {
         isApproved: false,
         isAdmin: false,
