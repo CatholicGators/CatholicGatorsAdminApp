@@ -17,10 +17,10 @@ import {
 } from "../actions/authActions";
 
 describe("authEpics", () => {
-    let dependencies, userService, user;
+    let dependencies, authService, user;
 
     beforeEach(() => {
-        userService = {
+        authService = {
             listenForUser: jest.fn(),
             googleSignIn: jest.fn(),
             signOut: jest.fn(),
@@ -28,7 +28,7 @@ describe("authEpics", () => {
         };
 
         dependencies = {
-            userService,
+            authService,
         };
 
         user = {
@@ -46,7 +46,7 @@ describe("authEpics", () => {
 
         it("emits SET_USER action for every user emitted", () => {
             const expectedAction = setUser(user);
-            userService.listenForUser.mockReturnValue(of(expectedAction.user));
+            authService.listenForUser.mockReturnValue(of(expectedAction.user));
 
             return listenForUserEpic(action$, state$, dependencies)
                 .pipe(toArray())
@@ -56,9 +56,9 @@ describe("authEpics", () => {
                 });
         });
 
-        it("emits LISTEN_FOR_USER_ERR when userService.listenForUser() returns an error", () => {
+        it("emits LISTEN_FOR_USER_ERR when authService.listenForUser() returns an error", () => {
             const expectedAction = listenForUserErr("test");
-            userService.listenForUser.mockReturnValue(
+            authService.listenForUser.mockReturnValue(
                 throwError(expectedAction.err)
             );
 
@@ -80,7 +80,7 @@ describe("authEpics", () => {
         });
 
         it("emits GOOGLE_SIGNED_IN action after sign in", () => {
-            userService.googleSignIn.mockReturnValue(of(undefined));
+            authService.googleSignIn.mockReturnValue(of(undefined));
             const expectedAction = googleSignedIn();
 
             return googleSignInEpic(action$, state$, dependencies)
@@ -91,9 +91,9 @@ describe("authEpics", () => {
                 });
         });
 
-        it("emits GOOGLE_SIGN_IN_ERR when userService.googleSignIn() returns an error", () => {
+        it("emits GOOGLE_SIGN_IN_ERR when authService.googleSignIn() returns an error", () => {
             const expectedAction = googleSignInErr("test");
-            userService.googleSignIn.mockReturnValue(
+            authService.googleSignIn.mockReturnValue(
                 throwError(expectedAction.err)
             );
 
@@ -115,7 +115,7 @@ describe("authEpics", () => {
         });
 
         it("emits SIGNED_OUT action after sign in", () => {
-            userService.signOut.mockReturnValue(of(undefined));
+            authService.signOut.mockReturnValue(of(undefined));
             const expectedAction = signedOut();
 
             return signOutEpic(action$, state$, dependencies)
@@ -126,9 +126,9 @@ describe("authEpics", () => {
                 });
         });
 
-        it("emits SIGN_OUT_ERR when userService.signout() returns an error", () => {
+        it("emits SIGN_OUT_ERR when authService.signout() returns an error", () => {
             const expectedAction = signOutErr("test");
-            userService.signOut.mockReturnValue(throwError(expectedAction.err));
+            authService.signOut.mockReturnValue(throwError(expectedAction.err));
 
             return signOutEpic(action$, state$, dependencies)
                 .pipe(toArray())

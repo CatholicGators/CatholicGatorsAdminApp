@@ -25,7 +25,7 @@ describe("usersEpics", () => {
         userService = {
             getAllUsers: jest.fn(),
             updateUser: jest.fn(),
-            deleteUsers: jest.fn(),
+            batchDeleteUsers: jest.fn(),
         };
 
         dependencies = {
@@ -125,7 +125,7 @@ describe("usersEpics", () => {
         });
 
         it("emits GET_USERS action after successful batch delete", () => {
-            userService.deleteUsers.mockReturnValue(of(undefined));
+            userService.batchDeleteUsers.mockReturnValue(of(undefined));
             const expectedAction = getUsers();
 
             return batchDeleteUsersEpic(action$, state$, dependencies)
@@ -136,9 +136,9 @@ describe("usersEpics", () => {
                 });
         });
 
-        it("emits BATCH_DELETE_USERS_ERR when userService.deleteUsers() returns an error", () => {
+        it("emits BATCH_DELETE_USERS_ERR when userService.batchDeleteUsers() returns an error", () => {
             const expectedAction = batchDeleteUsersErr("test");
-            userService.deleteUsers.mockReturnValue(
+            userService.batchDeleteUsers.mockReturnValue(
                 throwError(expectedAction.err)
             );
 
