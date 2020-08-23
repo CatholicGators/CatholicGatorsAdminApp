@@ -1,12 +1,12 @@
-import AuthService from './authService'
+import AuthService from "./authService";
 
-describe('AuthService', () => {
-    let service: AuthService, auth, usersService
+describe("AuthService", () => {
+    let service: AuthService, auth, usersService;
 
     beforeEach(() => {
-        auth = {}
-        usersService = {}
+        auth = {};
+        usersService = {};
 
-        service = new AuthService(auth)
-    })
-})
+        service = new AuthService(auth);
+    });
+});

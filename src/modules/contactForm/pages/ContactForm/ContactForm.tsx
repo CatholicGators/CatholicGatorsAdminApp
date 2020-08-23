@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import PersonalInformation from '../../components/PersonalInformation/personalInformation'
-import ParentsInformation from '../../components/ParentsInformation/parentsInformation'
-import Interests from '../../components/Interests/interests'
-import { submitContactForm } from '../../redux/actions/contactFormActions'
-import { styles } from '../../utils/ContactFormStyles'
-import { steps, filterState } from '../../utils/ContactFormUtils'
-import { getContactFormInterests } from '../../redux/actions/contactFormActions'
+import PersonalInformation from "../../components/PersonalInformation/personalInformation";
+import ParentsInformation from "../../components/ParentsInformation/parentsInformation";
+import Interests from "../../components/Interests/interests";
+import { submitContactForm } from "../../redux/actions/contactFormActions";
+import { styles } from "../../utils/ContactFormStyles";
+import { steps, filterState } from "../../utils/ContactFormUtils";
+import { getContactFormInterests } from "../../redux/actions/contactFormActions";
 
 import {
     withStyles,
@@ -17,89 +17,89 @@ import {
     Step,
     StepLabel,
     CircularProgress,
-    Button
-} from '@material-ui/core'
-import { NewContactReq } from '../../services/contactFormService'
+    Button,
+} from "@material-ui/core";
+import { NewContactReq } from "../../services/contactFormService";
 
 const initState = {
-    firstName: '',
-    lastName: '',
-    gender: '',
-    email: '',
-    phoneNumber: '',
-    graduationSemester: '',
-    graduationYear: '',
-    school: '',
-    permanentAddress: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    housingComplex: '',
-    parentName: '',
-    parentPhone: '',
-    parentEmail: '',
+    firstName: "",
+    lastName: "",
+    gender: "",
+    email: "",
+    phoneNumber: "",
+    graduationSemester: "",
+    graduationYear: "",
+    school: "",
+    permanentAddress: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    housingComplex: "",
+    parentName: "",
+    parentPhone: "",
+    parentEmail: "",
     interests: [],
-    activeStep: 0
-}
+    activeStep: 0,
+};
 
 export class ContactForm extends Component<any, any> {
     constructor(props) {
-        super(props)
-        this.state = initState
+        super(props);
+        this.state = initState;
     }
 
     componentDidMount() {
-        this.props.getInterests()
+        this.props.getInterests();
     }
 
     handleChange(event: any, name: string) {
-        if (event.target.type === 'checkbox') {
-            var index = this.state.interests.indexOf(name)
+        if (event.target.type === "checkbox") {
+            var index = this.state.interests.indexOf(name);
             if (index < 0) {
-                this.setState(prevState => {
-                    return { interests: prevState.interests.concat(name) }
-                })
+                this.setState((prevState) => {
+                    return { interests: prevState.interests.concat(name) };
+                });
             } else {
-                var newCheckedObjectIds = this.state.interests
-                newCheckedObjectIds.splice(index)
+                var newCheckedObjectIds = this.state.interests;
+                newCheckedObjectIds.splice(index);
                 this.setState(() => {
-                    return { interests: newCheckedObjectIds }
-                })
+                    return { interests: newCheckedObjectIds };
+                });
             }
         } else {
             this.setState({
-                [name]: event.target.value
-            })
+                [name]: event.target.value,
+            });
         }
     }
 
     handleNext() {
         if (this.state.activeStep === steps.length - 1) {
-            this.props.submitContactForm(filterState(this.state))
+            this.props.submitContactForm(filterState(this.state));
         } else {
             this.setState((prevState: any) => ({
-                activeStep: prevState.activeStep + 1
-            }))
+                activeStep: prevState.activeStep + 1,
+            }));
         }
     }
 
     handleBack() {
         if (this.state.activeStep > 0) {
             this.setState((prevState: any) => ({
-                activeStep: prevState.activeStep - 1
-            }))
+                activeStep: prevState.activeStep - 1,
+            }));
         }
     }
 
     resetStep() {
         this.setState({
-            activeStep: 0
-        })
+            activeStep: 0,
+        });
     }
 
     render() {
-        const { classes } = this.props
-        const { activeStep } = this.state
+        const { classes } = this.props;
+        const { activeStep } = this.state;
 
         return (
             <React.Fragment>
@@ -112,7 +112,7 @@ export class ContactForm extends Component<any, any> {
                             activeStep={activeStep}
                             className={classes.stepper}
                         >
-                            {steps.map(label => (
+                            {steps.map((label) => (
                                 <Step key={label}>
                                     <StepLabel
                                         classes={{ label: classes.stepLabel }}
@@ -135,7 +135,7 @@ export class ContactForm extends Component<any, any> {
                     </Paper>
                 </main>
             </React.Fragment>
-        )
+        );
     }
 }
 
@@ -150,7 +150,7 @@ function getStepContent(
     if (props.loading) {
         return (
             <CircularProgress id="spinner" className={props.classes.spinner} />
-        )
+        );
     } else if (props.success === true) {
         return (
             <React.Fragment>
@@ -167,11 +167,11 @@ function getStepContent(
                     href="/"
                     className={props.classes.button}
                 >
-                    {' '}
-                    Back to form{' '}
+                    {" "}
+                    Back to form{" "}
                 </Button>
             </React.Fragment>
-        )
+        );
     } else if (props.success === false) {
         return (
             <React.Fragment>
@@ -188,11 +188,11 @@ function getStepContent(
                     href="/"
                     className={props.classes.button}
                 >
-                    {' '}
-                    Back to form{' '}
+                    {" "}
+                    Back to form{" "}
                 </Button>
             </React.Fragment>
-        )
+        );
     } else {
         switch (state.activeStep) {
             case 0:
@@ -202,7 +202,7 @@ function getStepContent(
                         handleChange={handleChange}
                         handleNext={handleNext}
                     />
-                )
+                );
             case 1:
                 return (
                     <ParentsInformation
@@ -211,7 +211,7 @@ function getStepContent(
                         handleNext={handleNext}
                         handleBack={handleBack}
                     />
-                )
+                );
             case 2:
                 return (
                     <Interests
@@ -221,27 +221,27 @@ function getStepContent(
                         handleNext={handleNext}
                         handleBack={handleBack}
                     />
-                )
+                );
             default:
-                resetStep()
+                resetStep();
         }
     }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     getInterests: () => dispatch(getContactFormInterests()),
     submitContactForm: (contact: NewContactReq) =>
-        dispatch(submitContactForm(contact))
-})
+        dispatch(submitContactForm(contact)),
+});
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     interests: state.contact.interests,
     loading: state.contact.loading,
     success: state.contact.success,
-    errorMessage: state.contact.errorMessage
-})
+    errorMessage: state.contact.errorMessage,
+});
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(ContactForm))
+)(withStyles(styles)(ContactForm));

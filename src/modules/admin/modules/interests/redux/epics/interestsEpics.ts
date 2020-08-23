@@ -1,7 +1,7 @@
-import { mergeMap, map, catchError } from 'rxjs/operators'
-import { ofType, ActionsObservable } from 'redux-observable'
-import { combineEpics } from 'redux-observable'
-import { from } from 'rxjs/internal/observable/from'
+import { mergeMap, map, catchError } from "rxjs/operators";
+import { ofType, ActionsObservable } from "redux-observable";
+import { combineEpics } from "redux-observable";
+import { from } from "rxjs/internal/observable/from";
 
 import {
     interestActions,
@@ -12,9 +12,9 @@ import {
     addSectionErr,
     addSectionSuccess,
     updateOptionTextSuccess,
-    updateOptionTextErr
-} from '../actions/interestActions'
-import { Dependencies } from '../../../../../../redux/store'
+    updateOptionTextErr,
+} from "../actions/interestActions";
+import { Dependencies } from "redux/store";
 
 export const getInterestsEpic = (
     action$,
@@ -25,12 +25,12 @@ export const getInterestsEpic = (
         ofType(interestActions.GET_INTERESTS),
         mergeMap(() =>
             from(interestsService.getInterests()).pipe(
-                map(interests => getInterestsSuccess(interests)),
-                catchError(err => ActionsObservable.of(getInterestsErr(err)))
+                map((interests) => getInterestsSuccess(interests)),
+                catchError((err) => ActionsObservable.of(getInterestsErr(err)))
             )
         )
-    )
-}
+    );
+};
 
 export const addOptionEpic = (action$, _, { interestsService }: Dependencies) =>
     action$.pipe(
@@ -42,10 +42,10 @@ export const addOptionEpic = (action$, _, { interestsService }: Dependencies) =>
                 map((option: any) =>
                     addOptionSuccess(action.sectionId, option)
                 ),
-                catchError(err => ActionsObservable.of(addOptionErr(err)))
+                catchError((err) => ActionsObservable.of(addOptionErr(err)))
             )
         )
-    )
+    );
 
 export const updateOptionTextEpic = (
     action$,
@@ -62,12 +62,12 @@ export const updateOptionTextEpic = (
                 )
             ).pipe(
                 map((option: any) => updateOptionTextSuccess(option)),
-                catchError(err =>
+                catchError((err) =>
                     ActionsObservable.of(updateOptionTextErr(err))
                 )
             )
         )
-    )
+    );
 
 export const addSectionEpic = (
     action$,
@@ -79,14 +79,14 @@ export const addSectionEpic = (
         mergeMap((action: any) =>
             from(interestsService.addSection(action.section)).pipe(
                 map((section: any) => addSectionSuccess(section)),
-                catchError(err => ActionsObservable.of(addSectionErr(err)))
+                catchError((err) => ActionsObservable.of(addSectionErr(err)))
             )
         )
-    )
+    );
 
 export default combineEpics(
     getInterestsEpic,
     addOptionEpic,
     updateOptionTextEpic,
     addSectionEpic
-)
+);

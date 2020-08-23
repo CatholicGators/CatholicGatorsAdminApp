@@ -11,7 +11,7 @@ import {
     googleSignInErr,
     signOutErr,
 } from "../actions/authActions";
-import { Dependencies } from "../../../../../../redux/store";
+import { Dependencies } from "redux/store";
 import { from } from "rxjs";
 
 export const listenForUserEpic = (

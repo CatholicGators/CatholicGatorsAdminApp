@@ -1,7 +1,7 @@
-import { mergeMap, map, catchError } from 'rxjs/operators'
-import { ofType, ActionsObservable } from 'redux-observable'
-import { combineEpics } from 'redux-observable'
-import { from } from 'rxjs/internal/observable/from'
+import { mergeMap, map, catchError } from "rxjs/operators";
+import { ofType, ActionsObservable } from "redux-observable";
+import { combineEpics } from "redux-observable";
+import { from } from "rxjs/internal/observable/from";
 
 import {
     contactFormActions,
@@ -12,10 +12,10 @@ import {
     updateContactStatusErr,
     updateContactStatusSuccess,
     getContactFormInterestsSuccess,
-    getContactFormInterestsErr
-} from '../actions/contactFormActions'
-import { Dependencies } from '../../../../redux/store'
-import { Contact } from '../../services/contactFormService'
+    getContactFormInterestsErr,
+} from "../actions/contactFormActions";
+import { Dependencies } from "redux/store";
+import { Contact } from "../../services/contactFormService";
 
 export const getContactFormInterestsEpic = (
     action$,
@@ -26,14 +26,14 @@ export const getContactFormInterestsEpic = (
         ofType(contactFormActions.GET_CONTACT_FORM_INTERESTS),
         mergeMap(() =>
             from(contactFormService.getInterests()).pipe(
-                map(interests => getContactFormInterestsSuccess(interests)),
-                catchError(err =>
+                map((interests) => getContactFormInterestsSuccess(interests)),
+                catchError((err) =>
                     ActionsObservable.of(getContactFormInterestsErr(err))
                 )
             )
         )
-    )
-}
+    );
+};
 
 export const submitContactFormEpic = (
     action$,
@@ -45,13 +45,13 @@ export const submitContactFormEpic = (
         mergeMap((action: any) =>
             from(contactFormService.addContact(action.contact)).pipe(
                 map(() => submitContactFormSuccess()),
-                catchError(err =>
+                catchError((err) =>
                     ActionsObservable.of(submitContactFormErr(err))
                 )
             )
         )
-    )
-}
+    );
+};
 
 export const getAllContactsEpic = (
     action$,
@@ -63,11 +63,11 @@ export const getAllContactsEpic = (
         mergeMap(() =>
             from(contactFormService.getAllContacts()).pipe(
                 map((contacts: Contact[]) => getContactsSuccess(contacts)),
-                catchError(err => ActionsObservable.of(getContactsErr(err)))
+                catchError((err) => ActionsObservable.of(getContactsErr(err)))
             )
         )
-    )
-}
+    );
+};
 
 export const updateContactStatusEpic = (
     action$,
@@ -84,17 +84,17 @@ export const updateContactStatusEpic = (
                 )
             ).pipe(
                 map((contact: Contact) => updateContactStatusSuccess(contact)),
-                catchError(err =>
+                catchError((err) =>
                     ActionsObservable.of(updateContactStatusErr(err))
                 )
             )
         )
-    )
-}
+    );
+};
 
 export default combineEpics(
     submitContactFormEpic,
     getAllContactsEpic,
     updateContactStatusEpic,
     getContactFormInterestsEpic
-)
+);

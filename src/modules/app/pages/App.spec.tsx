@@ -1,24 +1,24 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
+import React from "react";
+import { shallow } from "enzyme";
+import toJson from "enzyme-to-json";
 
-import { App } from './App'
+import { App } from "./App";
 
-describe('App', () => {
-    let props, wrapper
+describe("App", () => {
+    let props, wrapper;
 
     beforeEach(() => {
         props = {
-            listenForUser: jest.fn()
-        }
-        wrapper = shallow(<App {...props} />)
-    })
+            listenForUser: jest.fn(),
+        };
+        wrapper = shallow(<App {...props} />);
+    });
 
-    it('should match snapshot', () => {
-        expect(toJson(wrapper)).toMatchSnapshot()
-    })
+    it("should match snapshot", () => {
+        expect(toJson(wrapper)).toMatchSnapshot();
+    });
 
-    it('should call listenForUser when mounted', () => {
-        expect(props.listenForUser).toHaveBeenCalled()
-    })
-})
+    it("should call listenForUser when mounted", () => {
+        expect(props.listenForUser).toHaveBeenCalled();
+    });
+});

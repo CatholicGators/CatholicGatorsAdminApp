@@ -10,7 +10,7 @@ import {
     batchDeleteUsersErr,
     updateUserErr,
 } from "../actions/usersActions";
-import { Dependencies } from "../../../../../../redux/store";
+import { Dependencies } from "redux/store";
 import { from } from "rxjs";
 
 export const getUsersEpic = (action$, _, { userService }: Dependencies) => {

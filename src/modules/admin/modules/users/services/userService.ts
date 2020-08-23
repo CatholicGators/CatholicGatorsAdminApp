@@ -1,7 +1,7 @@
 import FirestoreAdapter, {
     Doc,
     DocNotFoundError,
-} from "../../../../../database/firestoreAdapter";
+} from "database/firestoreAdapter";
 
 type FirebaseUser = firebase.User;
 

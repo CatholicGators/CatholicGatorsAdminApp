@@ -1,7 +1,7 @@
 import { when } from "jest-when";
 
 import UserService, { User, UserData } from "./userService";
-import { Update } from "../../../../../database/firestoreAdapter";
+import { Update } from "database/firestoreAdapter";
 
 describe("UserService", () => {
     let service: UserService, adapter, users: User[], userData: UserData;
