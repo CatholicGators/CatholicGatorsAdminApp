@@ -1,61 +1,61 @@
-import React, { Component } from 'react'
-import classnames from 'classnames'
+import React, { Component } from "react";
+import classnames from "classnames";
 import {
     Theme,
     createStyles,
     withStyles,
     IconButton,
     Input,
-    Typography
-} from '@material-ui/core'
-import { Delete, Edit, Save, Close } from '@material-ui/icons'
+    Typography,
+} from "@material-ui/core";
+import { Delete, Edit, Save, Close } from "@material-ui/icons";
 
 export const styles = (theme: Theme) =>
     createStyles({
         row: {
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%'
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
         },
         input: {
-            margin: 0
+            margin: 0,
         },
         actions: {
-            display: 'none',
-            marginLeft: `${theme.spacing(1)}px`
+            display: "none",
+            marginLeft: `${theme.spacing(1)}px`,
         },
         editActions: {
-            display: 'flex',
-            alignItems: 'center'
+            display: "flex",
+            alignItems: "center",
         },
         show: {
-            display: 'block'
-        }
-    })
+            display: "block",
+        },
+    });
 
 export type Props = {
-    classes: any
-    isEditing: boolean
-    isHovered: boolean
-    id: string
-    text: string
-    beginEditing: (id: string) => void
-    cancelEditing: () => void
-    deleteText: (id: string) => void
-    save: (id: string, newText: string) => void
-}
+    classes: any;
+    isEditing: boolean;
+    isHovered: boolean;
+    id: string;
+    text: string;
+    beginEditing: (id: string) => void;
+    cancelEditing: () => void;
+    deleteText: (id: string) => void;
+    save: (id: string, newText: string) => void;
+};
 
 type State = {
-    editedText: string
-}
+    editedText: string;
+};
 
 export class EditableTextField extends Component<Props, State> {
     state = {
-        editedText: this.props.text
-    }
+        editedText: this.props.text,
+    };
 
     onEditChange(newText: string) {
-        this.setState({ editedText: newText })
+        this.setState({ editedText: newText });
     }
 
     render() {
@@ -68,10 +68,10 @@ export class EditableTextField extends Component<Props, State> {
             beginEditing,
             deleteText,
             save,
-            cancelEditing
-        } = this.props
+            cancelEditing,
+        } = this.props;
 
-        const { editedText } = this.state
+        const { editedText } = this.state;
 
         return isEditing ? (
             <div className={classes.row}>
@@ -79,7 +79,7 @@ export class EditableTextField extends Component<Props, State> {
                     fullWidth
                     className={classes.input}
                     value={this.state.editedText}
-                    onChange={ev => this.onEditChange(ev.target.value)}
+                    onChange={(ev) => this.onEditChange(ev.target.value)}
                 />
                 <div className={classes.editActions}>
                     <IconButton id="save" onClick={() => save(id, editedText)}>
@@ -96,7 +96,7 @@ export class EditableTextField extends Component<Props, State> {
                 <div
                     className={classnames({
                         [classes.actions]: true,
-                        [classes.show]: isHovered
+                        [classes.show]: isHovered,
                     })}
                 >
                     <IconButton id="edit" onClick={() => beginEditing(id)}>
@@ -107,8 +107,8 @@ export class EditableTextField extends Component<Props, State> {
                     </IconButton>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default withStyles(styles)(EditableTextField)
+export default withStyles(styles)(EditableTextField);

@@ -1,99 +1,101 @@
-import FirestoreAdapter, { Doc } from '../../../../../database/firestoreAdapter'
+import FirestoreAdapter, {
+    Doc,
+    DocNotFoundError,
+} from "database/firestoreAdapter";
 
-export interface User extends Doc {
-    name: String
-    email: String
-    photoURL: String
-    isApproved: boolean
-    isAdmin: boolean
+type FirebaseUser = firebase.User;
+
+export interface UserData {
+    email: string;
+    name: string;
+    photoUrl: string;
+    isApproved: boolean;
+    isAdmin: boolean;
 }
+export interface User extends Doc, UserData {}
 
 export default class UserService {
-    public static readonly USERS: string = 'users'
+    public static readonly USERS: string = "users2";
+    public static readonly INITIAL_PERMISSIONS = {
+        isApproved: false,
+        isAdmin: false,
+    };
 
-    constructor(private adapter: FirestoreAdapter) { }
+    constructor(private adapter: FirestoreAdapter) {}
 
-    // addUser(user: User): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.addDoc(USER_COLLECTION, user)
-    //     )
-    // }
-
-    // addUsers(users: User[]): Observable<User[]> {
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.upsertDocs(USER_COLLECTION, users)
-    //     )
-    // }
-
-    async getUser(id: string): Promise<User> {
-        return this.adapter.get<User>(UserService.USERS, id)
+    getUser(id: string): Promise<User> {
+        return this.adapter.get<User>(UserService.USERS, id);
     }
 
-    // getAllUsers(): Observable<User[]> {
-    //     return this.db.getCollection(USER_COLLECTION) as Observable<User[]>
-    // }
+    getAllUsers(): Promise<User[]> {
+        return this.adapter.getAll<User>(UserService.USERS);
+    }
 
-    // updateUser(id: string, update: Object): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, update)
-    //     )
-    // }
+    getOrInitUser(user: FirebaseUser): Promise<User> {
+        return this.adapter
+            .get<User>(UserService.USERS, user.uid)
+            .catch((e) => {
+                if (e instanceof DocNotFoundError) {
+                    return this.adapter.addWithId<User>(
+                        UserService.USERS,
+                        user.uid,
+                        {
+                            email: user.email,
+                            name: user.displayName,
+                            photoUrl: user.photoURL,
+                            ...UserService.INITIAL_PERMISSIONS,
+                        }
+                    );
+                } else {
+                    throw e;
+                }
+            });
+    }
 
-    // updateUsers(users: User[]): Observable<User[]> {
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, users)
-    //     )
-    // }
+    updateUser(id: string, user: User): Promise<User> {
+        return this.adapter.update(UserService.USERS, {
+            id,
+            changes: user,
+        });
+    }
 
-    // updateUserApproval(id: string, isApproved: boolean): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, {
-    //             isApproved
-    //         })
-    //     )
-    // }
+    updateApproval(id: string, isApproved: boolean): Promise<User> {
+        return this.adapter.update<User>(UserService.USERS, {
+            id,
+            changes: { isApproved },
+        });
+    }
 
-    // updateUsersApproval(
-    //     ids: string[],
-    //     isApproved: boolean
-    // ): Observable<User[]> {
-    //     const updates = ids.map(id => ({
-    //         id,
-    //         isApproved
-    //     }))
+    updateAdminStatus(id: string, isAdmin: boolean): Promise<User> {
+        return this.adapter.update<User>(UserService.USERS, {
+            id,
+            changes: { isAdmin },
+        });
+    }
 
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, updates)
-    //     )
-    // }
+    deleteUser(id: string): Promise<void> {
+        return this.adapter.delete(UserService.USERS, id);
+    }
 
-    // updateUserAdminStatus(id: string, isAdmin: boolean): Observable<User> {
-    //     return this.docRefObservableToUserObservable(
-    //         this.db.updateDoc(USER_COLLECTION, id, {
-    //             isAdmin
-    //         })
-    //     )
-    // }
+    batchUpdateApproval(ids: string[], isApproved: boolean): Promise<User[]> {
+        const updates = ids.map((id) => ({
+            id,
+            changes: { isApproved },
+        }));
 
-    // updateUsersAdminStatus(
-    //     ids: string[],
-    //     isAdmin: boolean
-    // ): Observable<User[]> {
-    //     const updates = ids.map(id => ({
-    //         id,
-    //         isAdmin
-    //     }))
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates);
+    }
 
-    //     return this.docRefsObservableToUsersObservable(
-    //         this.db.updateDocs(USER_COLLECTION, updates)
-    //     )
-    // }
+    batchUpdateAdminStatus(ids: string[], isAdmin: boolean): Promise<User[]> {
+        const updates = ids.map((id) => ({
+            id,
+            changes: { isAdmin },
+        }));
 
-    // deleteUser(id: string): Observable<void> {
-    //     return this.db.deleteDoc(USER_COLLECTION, id)
-    // }
+        return this.adapter.batchUpdate<User>(UserService.USERS, updates);
+    }
 
-    // deleteUsers(ids: string[]): Observable<void> {
-    //     return this.db.deleteDocs(USER_COLLECTION, ids)
-    // }
+    batchDeleteUsers(ids: string[]): Promise<void> {
+        return this.adapter.batchDelete(UserService.USERS, ids);
+    }
 }

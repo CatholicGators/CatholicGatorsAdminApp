@@ -1,32 +1,32 @@
-import { usersActions } from '../actions/usersActions'
+import { usersActions } from "../actions/usersActions";
 
 export const INITIAL_USERS_STATE = {
-    users: undefined
-}
+    users: undefined,
+};
 
 const applyUsersList = (state, action) => ({
     ...state,
-    users: action.users
-})
+    users: action.users,
+});
 
 const applyUpdatedUser = (state, action) => ({
     ...state,
-    users: state.users.map(user =>
+    users: state.users.map((user) =>
         user.id === action.user.id ? { ...action.user } : user
-    )
-})
+    ),
+});
 
 function usersReducer(state = INITIAL_USERS_STATE, action) {
     switch (action.type) {
         case usersActions.GET_USERS_SUCCESS: {
-            return applyUsersList(state, action)
+            return applyUsersList(state, action);
         }
         case usersActions.UPDATE_USER_SUCCESS: {
-            return applyUpdatedUser(state, action)
+            return applyUpdatedUser(state, action);
         }
         default:
-            return state
+            return state;
     }
 }
 
-export default usersReducer
+export default usersReducer;

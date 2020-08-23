@@ -1,57 +1,67 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 
-import { listenForUser } from '../modules/auth/redux/actions/authActions'
-import Header from '../components/Header/Header'
-import Admin from '../../admin/pages/Admin/Admin'
-import AuthorizedRoute from '../components/AuthorizedRoute/AuthorizedRoute'
-import ContactForm from '../../contactForm/pages/ContactForm/ContactForm'
-import MyContacts from '../../contactForm/pages/MyContacts/MyContacts'
+import { listenForUser } from "../modules/auth/redux/actions/authActions";
+import Header from "../components/Header/Header";
+import Admin from "../../admin/pages/Admin/Admin";
+import AuthorizedRoute from "../components/AuthorizedRoute/AuthorizedRoute";
+import ContactForm from "../../contactForm/pages/ContactForm/ContactForm";
+import MyContacts from "../../contactForm/pages/MyContacts/MyContacts";
 
 type Props = {
-  user: any
-  listenForUser: () => any
-}
+    user: any;
+    listenForUser: () => any;
+};
 
 export class App extends Component<Props> {
-  componentDidMount() {
-    this.props.listenForUser()
-  }
+    componentDidMount() {
+        this.props.listenForUser();
+    }
 
-  render() {
-    return (
-      <Router>
-        <div>
-          <Header></Header>
-          <Switch>
-            <Route exact path='/' component={ContactForm}/>
-            <AuthorizedRoute
-              path="/admin/"
-              component={Admin}
-              isAuthorized={this.props.user ? this.props.user.isAdmin && this.props.user.isApproved : false}
-              redirectPathname="/"
-            />
-            <AuthorizedRoute
-              path="/my-contacts/"
-              component={MyContacts}
-              isAuthorized={this.props.user !== undefined}
-              redirectPathname="/"
-            />
-            <Route render={() => <Redirect to="/" />} />
-          </Switch>
-        </div>
-      </Router>
-    )
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Header></Header>
+                    <Switch>
+                        <Route exact path="/" component={ContactForm} />
+                        <AuthorizedRoute
+                            path="/admin/"
+                            component={Admin}
+                            isAuthorized={
+                                this.props.user
+                                    ? this.props.user.isAdmin &&
+                                      this.props.user.isApproved
+                                    : false
+                            }
+                            redirectPathname="/"
+                        />
+                        <AuthorizedRoute
+                            path="/my-contacts/"
+                            component={MyContacts}
+                            isAuthorized={this.props.user !== undefined}
+                            redirectPathname="/"
+                        />
+                        <Route render={() => <Redirect to="/" />} />
+                    </Switch>
+                </div>
+            </Router>
+        );
+    }
 }
 
-const mapStateToProps = state => ({
-  user: state.auth.user
-})
+const mapStateToProps = (state) => ({
+    user: state.auth.user,
+});
 
-const mapDispatchToProps = dispatch => ({
-  listenForUser: () => dispatch(listenForUser())
-})
+const mapDispatchToProps = (dispatch) => ({
+    listenForUser: () => dispatch(listenForUser()),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

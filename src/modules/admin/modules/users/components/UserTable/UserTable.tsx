@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
     Theme,
     createStyles,
@@ -11,129 +11,129 @@ import {
     TableCell,
     TableBody,
     CircularProgress,
-    Checkbox
-} from '@material-ui/core'
+    Checkbox,
+} from "@material-ui/core";
 
 import {
     getUsers,
     updateUser,
-    batchDeleteUsers
-} from '../../redux/actions/usersActions'
-import UserTableRow from './components/UserTableRow/UserTableRow'
-import UserTableToolbar from './components/UserTableToolbar/UserTableToolbar'
+    batchDeleteUsers,
+} from "../../redux/actions/usersActions";
+import UserTableRow from "./components/UserTableRow/UserTableRow";
+import UserTableToolbar from "./components/UserTableToolbar/UserTableToolbar";
 
 export const styles = (theme: Theme) =>
     createStyles({
         tableCard: {
-            width: '100%',
-            overflowX: 'auto'
+            width: "100%",
+            overflowX: "auto",
         },
         tableLoadingContainer: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '300px'
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "300px",
         },
         hiddensm: {
-            [theme.breakpoints.down('sm')]: {
-                display: 'none'
-            }
+            [theme.breakpoints.down("sm")]: {
+                display: "none",
+            },
         },
         profilePicCol: {
             paddingRight: theme.spacing(2),
-            [theme.breakpoints.down('xs')]: {
-                display: 'none'
-            }
-        }
-    })
+            [theme.breakpoints.down("xs")]: {
+                display: "none",
+            },
+        },
+    });
 
 type Props = {
-    classes: any
-    users: any
-    getUsers: () => void
-    updateUser: (user) => void
-    batchDeleteUsers: (ids) => void
-}
+    classes: any;
+    users: any;
+    getUsers: () => void;
+    updateUser: (user) => void;
+    batchDeleteUsers: (ids) => void;
+};
 
 type State = {
-    selected: Array<any>
-}
+    selected: Array<any>;
+};
 
 export class UserTable extends Component<Props, State> {
     state = {
-        selected: []
-    }
+        selected: [],
+    };
 
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers();
     }
 
     handleSelectAllClick(event) {
         if (event.target.checked) {
-            this.setState({ selected: this.props.users.map(n => n.id) })
-            return
+            this.setState({ selected: this.props.users.map((n) => n.id) });
+            return;
         }
-        this.setState({ selected: [] })
+        this.setState({ selected: [] });
     }
 
     handleSelect(id) {
-        const { selected } = this.state
-        const selectedIndex = selected.indexOf(id)
-        let newSelected = []
+        const { selected } = this.state;
+        const selectedIndex = selected.indexOf(id);
+        let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id)
+            newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1))
+            newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1))
+            newSelected = newSelected.concat(selected.slice(0, -1));
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
                 selected.slice(selectedIndex + 1)
-            )
+            );
         }
 
-        this.setState({ selected: newSelected })
+        this.setState({ selected: newSelected });
     }
 
     isSelected(id) {
-        return this.state.selected.indexOf(id) !== -1
+        return this.state.selected.indexOf(id) !== -1;
     }
 
     handleBatchApprove() {
         this.props.users
-            .filter(user => this.isSelected(user.id))
-            .map(user =>
+            .filter((user) => this.isSelected(user.id))
+            .map((user) =>
                 this.props.updateUser({
                     ...user,
-                    isApproved: true
+                    isApproved: true,
                 })
-            )
-        this.setState({ selected: [] })
+            );
+        this.setState({ selected: [] });
     }
 
     handleBatchAuthorize() {
         this.props.users
-            .filter(user => this.isSelected(user.id))
-            .map(user =>
+            .filter((user) => this.isSelected(user.id))
+            .map((user) =>
                 this.props.updateUser({
                     ...user,
                     isApproved: true,
-                    isAdmin: true
+                    isAdmin: true,
                 })
-            )
-        this.setState({ selected: [] })
+            );
+        this.setState({ selected: [] });
     }
 
     handleBatchDelete() {
-        this.props.batchDeleteUsers([...this.state.selected])
-        this.setState({ selected: [] })
+        this.props.batchDeleteUsers([...this.state.selected]);
+        this.setState({ selected: [] });
     }
 
     render() {
-        const { classes, users } = this.props
-        const { selected } = this.state
+        const { classes, users } = this.props;
+        const { selected } = this.state;
 
         return (
             <Paper className={classes ? classes.tableCard : null}>
@@ -157,7 +157,7 @@ export class UserTable extends Component<Props, State> {
                                             selected.length === users.length &&
                                             users.length !== 0
                                         }
-                                        onChange={event =>
+                                        onChange={(event) =>
                                             this.handleSelectAllClick(event)
                                         }
                                     />
@@ -182,8 +182,8 @@ export class UserTable extends Component<Props, State> {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {users.map(user => {
-                                const isSelected = this.isSelected(user.id)
+                            {users.map((user) => {
+                                const isSelected = this.isSelected(user.id);
                                 return (
                                     <UserTableRow
                                         key={user.id}
@@ -193,7 +193,7 @@ export class UserTable extends Component<Props, State> {
                                             this
                                         )}
                                     />
-                                )
+                                );
                             })}
                         </TableBody>
                     </Table>
@@ -208,21 +208,21 @@ export class UserTable extends Component<Props, State> {
                     </div>
                 )}
             </Paper>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => ({
-    users: state.admin.users.users
-})
+const mapStateToProps = (state) => ({
+    users: state.admin.users.users,
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     getUsers: () => dispatch(getUsers()),
-    updateUser: user => dispatch(updateUser(user)),
-    batchDeleteUsers: ids => dispatch(batchDeleteUsers(ids))
-})
+    updateUser: (user) => dispatch(updateUser(user)),
+    batchDeleteUsers: (ids) => dispatch(batchDeleteUsers(ids)),
+});
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(UserTable))
+)(withStyles(styles)(UserTable));

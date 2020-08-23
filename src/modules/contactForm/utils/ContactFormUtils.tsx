@@ -1,8 +1,12 @@
-import { NewContactReq, ContactStatus } from '../services/contactFormService'
+import { NewContactReq, ContactStatus } from "../services/contactFormService";
 
-export var steps = ['Personal information', 'Parent\'s information', 'Your interests'];
+export var steps = [
+    "Personal information",
+    "Parent's information",
+    "Your interests",
+];
 
-export function filterState(state : any): NewContactReq {
+export function filterState(state: any): NewContactReq {
     var newContactReq = {
         firstName: state.firstName,
         lastName: state.lastName,
@@ -22,8 +26,8 @@ export function filterState(state : any): NewContactReq {
         parentEmail: state.parentEmail,
         interests: state.interests,
         status: ContactStatus.NOT_CALLED,
-        createdAt: new Date()
-    }
+        createdAt: new Date(),
+    };
 
     return newContactReq;
 }

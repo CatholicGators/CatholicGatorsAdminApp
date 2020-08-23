@@ -4,5 +4,5 @@ export default {
     databaseURL: "https://catholic-gators.firebaseio.com",
     projectId: "catholic-gators",
     storageBucket: "catholic-gators.appspot.com",
-    messagingSenderId: "749371573275"
+    messagingSenderId: "749371573275",
 };

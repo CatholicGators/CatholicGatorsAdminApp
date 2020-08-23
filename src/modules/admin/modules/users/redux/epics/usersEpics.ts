@@ -1,6 +1,6 @@
-import { mergeMap, map, catchError } from 'rxjs/operators'
-import { ofType, ActionsObservable } from 'redux-observable'
-import { combineEpics } from 'redux-observable'
+import { mergeMap, map, catchError } from "rxjs/operators";
+import { ofType, ActionsObservable } from "redux-observable";
+import { combineEpics } from "redux-observable";
 
 import {
     usersActions,
@@ -8,45 +8,51 @@ import {
     getUsersErr,
     getUsers,
     batchDeleteUsersErr,
-    updateUserErr
-} from '../actions/usersActions'
+    updateUserErr,
+} from "../actions/usersActions";
+import { Dependencies } from "redux/store";
+import { from } from "rxjs";
 
-export const getUsersEpic = (action$, _, { userService }) => {
+export const getUsersEpic = (action$, _, { userService }: Dependencies) => {
     return action$.pipe(
         ofType(usersActions.GET_USERS),
         mergeMap(() =>
-            userService.getAllUsers().pipe(
-                map(users => getUsersSuccess(users)),
-                catchError(err => ActionsObservable.of(getUsersErr(err)))
+            from(userService.getAllUsers()).pipe(
+                map((users) => getUsersSuccess(users)),
+                catchError((err) => ActionsObservable.of(getUsersErr(err)))
             )
         )
-    )
-}
+    );
+};
 
-export const updateUserEpic = (action$, _, { userService }) => {
+export const updateUserEpic = (action$, _, { userService }: Dependencies) => {
     return action$.pipe(
         ofType(usersActions.UPDATE_USER),
         mergeMap((action: any) =>
-            userService.updateUser(action.user.id, action.user).pipe(
+            from(userService.updateUser(action.user.id, action.user)).pipe(
                 map(() => getUsers()),
-                catchError(err => ActionsObservable.of(updateUserErr(err)))
+                catchError((err) => ActionsObservable.of(updateUserErr(err)))
             )
         )
-    )
-}
+    );
+};
 
-export const batchDeleteUsersEpic = (action$, _, { userService }) => {
+export const batchDeleteUsersEpic = (
+    action$,
+    _,
+    { userService }: Dependencies
+) => {
     return action$.pipe(
         ofType(usersActions.BATCH_DELETE_USERS),
         mergeMap((action: any) =>
-            userService.deleteUsers(action.ids).pipe(
+            from(userService.batchDeleteUsers(action.ids)).pipe(
                 map(() => getUsers()),
-                catchError(err =>
+                catchError((err) =>
                     ActionsObservable.of(batchDeleteUsersErr(err))
                 )
             )
         )
-    )
-}
+    );
+};
 
-export default combineEpics(getUsersEpic, updateUserEpic, batchDeleteUsersEpic)
+export default combineEpics(getUsersEpic, updateUserEpic, batchDeleteUsersEpic);

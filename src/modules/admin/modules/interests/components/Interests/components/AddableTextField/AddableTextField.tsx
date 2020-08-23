@@ -1,75 +1,75 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
     Theme,
     createStyles,
     withStyles,
     IconButton,
-    Input
-} from '@material-ui/core'
-import { Save, Close, Add } from '@material-ui/icons'
+    Input,
+} from "@material-ui/core";
+import { Save, Close, Add } from "@material-ui/icons";
 
 export const styles = (theme: Theme) =>
     createStyles({
         checkbox: {
             margin: 0,
-            pointerEvents: 'none'
+            pointerEvents: "none",
         },
         input: {
-            margin: 0
+            margin: 0,
         },
         row: {
-            display: 'flex',
-            alignItems: 'center',
-            '&:hover': {
-                '& section': {
-                    display: 'block'
-                }
+            display: "flex",
+            alignItems: "center",
+            "&:hover": {
+                "& section": {
+                    display: "block",
+                },
             },
-            width: '100%'
+            width: "100%",
         },
         actions: {
-            display: 'none',
-            marginLeft: `${theme.spacing(1)}px`
+            display: "none",
+            marginLeft: `${theme.spacing(1)}px`,
         },
         editActions: {
-            display: 'flex',
-            alignItems: 'center'
-        }
-    })
+            display: "flex",
+            alignItems: "center",
+        },
+    });
 
 export type Props = {
-    isAdding: boolean
-    classes: any
-    beginAdding: () => void
-    onAdd: (text: string) => void
-    cancelAdding: () => void
-}
+    isAdding: boolean;
+    classes: any;
+    beginAdding: () => void;
+    onAdd: (text: string) => void;
+    cancelAdding: () => void;
+};
 
 type State = {
-    text: string
-}
+    text: string;
+};
 
 export class AddableTextField extends Component<Props, State> {
     state = {
-        text: ''
-    }
+        text: "",
+    };
 
     onChange(text: string) {
-        this.setState({ text })
+        this.setState({ text });
     }
 
     add() {
-        const { text } = this.state
+        const { text } = this.state;
         if (text) {
-            this.props.onAdd(text)
-            this.setState({ text: '' })
+            this.props.onAdd(text);
+            this.setState({ text: "" });
         }
     }
 
     render() {
-        const { isAdding, classes, beginAdding, cancelAdding } = this.props
+        const { isAdding, classes, beginAdding, cancelAdding } = this.props;
 
-        const { text } = this.state
+        const { text } = this.state;
 
         return isAdding ? (
             <div className={classes.row}>
@@ -77,7 +77,7 @@ export class AddableTextField extends Component<Props, State> {
                     fullWidth
                     className={classes.input}
                     value={text}
-                    onChange={ev => this.onChange(ev.target.value)}
+                    onChange={(ev) => this.onChange(ev.target.value)}
                 />
                 <div className={classes.editActions}>
                     <IconButton
@@ -96,8 +96,8 @@ export class AddableTextField extends Component<Props, State> {
             <IconButton onClick={beginAdding}>
                 <Add />
             </IconButton>
-        )
+        );
     }
 }
 
-export default withStyles(styles)(AddableTextField)
+export default withStyles(styles)(AddableTextField);

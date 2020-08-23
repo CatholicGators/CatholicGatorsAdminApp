@@ -1,13 +1,13 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
+import React from "react";
+import { shallow } from "enzyme";
+import toJson from "enzyme-to-json";
 
-import { UserTableToolbar, styles } from './UserTableToolbar'
-import { IconButton } from '@material-ui/core'
-import mockStyles from '../../../../../../../../utils/mockStyles'
+import { UserTableToolbar, styles } from "./UserTableToolbar";
+import { IconButton } from "@material-ui/core";
+import mockStyles from "utils/mockStyles";
 
-describe('UserTableToolbar', () => {
-    let wrapper, props
+describe("UserTableToolbar", () => {
+    let wrapper, props;
 
     beforeEach(() => {
         props = {
@@ -15,55 +15,55 @@ describe('UserTableToolbar', () => {
             numSelected: 0,
             handleBatchApprove: jest.fn(),
             handleBatchAuthorize: jest.fn(),
-            handleBatchDelete: jest.fn()
-        }
-        wrapper = shallow(<UserTableToolbar {...props} />)
-    })
+            handleBatchDelete: jest.fn(),
+        };
+        wrapper = shallow(<UserTableToolbar {...props} />);
+    });
 
-    it('matches snapshot', () => {
-        expect(toJson(wrapper)).toMatchSnapshot()
-    })
+    it("matches snapshot", () => {
+        expect(toJson(wrapper)).toMatchSnapshot();
+    });
 
-    it('hides action buttons when nothing selected', () => {
-        expect(wrapper.exists(IconButton)).toBe(false)
-    })
+    it("hides action buttons when nothing selected", () => {
+        expect(wrapper.exists(IconButton)).toBe(false);
+    });
 
-    it('shows the title when nothing selected', () => {
-        expect(wrapper.find('#title').exists()).toBe(true)
-        expect(wrapper.find('#num-selected').exists()).toBe(false)
-    })
+    it("shows the title when nothing selected", () => {
+        expect(wrapper.find("#title").exists()).toBe(true);
+        expect(wrapper.find("#num-selected").exists()).toBe(false);
+    });
 
-    it('shows the action buttons when something is selected', () => {
-        wrapper.setProps({ numSelected: 1 })
+    it("shows the action buttons when something is selected", () => {
+        wrapper.setProps({ numSelected: 1 });
 
-        expect(wrapper.exists(IconButton)).toBe(true)
-    })
+        expect(wrapper.exists(IconButton)).toBe(true);
+    });
 
-    it('shows the numSelected when > 0', () => {
-        wrapper.setProps({ numSelected: 1 })
+    it("shows the numSelected when > 0", () => {
+        wrapper.setProps({ numSelected: 1 });
 
-        expect(wrapper.find('#title').exists()).toBe(false)
-        expect(wrapper.find('#num-selected').exists()).toBe(true)
-    })
+        expect(wrapper.find("#title").exists()).toBe(false);
+        expect(wrapper.find("#num-selected").exists()).toBe(true);
+    });
 
-    it('calls handleBatchApprove() when the approve IconButton is clicked', () => {
-        wrapper.setProps({ numSelected: 1 })
-        wrapper.find('#approve-icon-btn').simulate('click')
+    it("calls handleBatchApprove() when the approve IconButton is clicked", () => {
+        wrapper.setProps({ numSelected: 1 });
+        wrapper.find("#approve-icon-btn").simulate("click");
 
-        expect(props.handleBatchApprove).toHaveBeenCalled()
-    })
+        expect(props.handleBatchApprove).toHaveBeenCalled();
+    });
 
-    it('calls handleBatchAuthorize() when the authorize IconButton is clicked', () => {
-        wrapper.setProps({ numSelected: 1 })
-        wrapper.find('#authorize-icon-btn').simulate('click')
+    it("calls handleBatchAuthorize() when the authorize IconButton is clicked", () => {
+        wrapper.setProps({ numSelected: 1 });
+        wrapper.find("#authorize-icon-btn").simulate("click");
 
-        expect(props.handleBatchAuthorize).toHaveBeenCalled()
-    })
+        expect(props.handleBatchAuthorize).toHaveBeenCalled();
+    });
 
-    it('calls handleBatchDelete() when the delete IconButton is clicked', () => {
-        wrapper.setProps({ numSelected: 1 })
-        wrapper.find('#delete-icon-btn').simulate('click')
+    it("calls handleBatchDelete() when the delete IconButton is clicked", () => {
+        wrapper.setProps({ numSelected: 1 });
+        wrapper.find("#delete-icon-btn").simulate("click");
 
-        expect(props.handleBatchDelete).toHaveBeenCalledWith()
-    })
-})
+        expect(props.handleBatchDelete).toHaveBeenCalledWith();
+    });
+});

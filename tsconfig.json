@@ -16,7 +16,8 @@
         "jsx": "preserve",
         "noImplicitAny": false,
         "noUnusedLocals": true,
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        "baseUrl": "src"
     },
     "include": ["src"]
 }

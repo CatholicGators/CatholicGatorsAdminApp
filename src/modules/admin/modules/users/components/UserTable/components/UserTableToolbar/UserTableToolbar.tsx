@@ -1,30 +1,31 @@
-import React from "react"
+import React from "react";
 import {
-  createStyles,
-  withStyles,
-  Toolbar,
-  Typography,
-  Tooltip,
-  IconButton,
-  Theme
+    createStyles,
+    withStyles,
+    Toolbar,
+    Typography,
+    Tooltip,
+    IconButton,
+    Theme,
 } from "@material-ui/core";
-import DoneIcon from '@material-ui/icons/Done'
-import DeleteIcon from '@material-ui/icons/Delete';
-import VpnKey from '@material-ui/icons/VpnKey';
+import DoneIcon from "@material-ui/icons/Done";
+import DeleteIcon from "@material-ui/icons/Delete";
+import VpnKey from "@material-ui/icons/VpnKey";
 
-export const styles = (theme: Theme) => createStyles({
-    toolbarTitle: {
-        marginRight: 'auto'
-    },  
-})
+export const styles = (theme: Theme) =>
+    createStyles({
+        toolbarTitle: {
+            marginRight: "auto",
+        },
+    });
 
 type Props = {
-    classes: any,
-    numSelected: number,
-    handleBatchApprove: () => any,
-    handleBatchAuthorize: () => any,
-    handleBatchDelete: () => any
-}
+    classes: any;
+    numSelected: number;
+    handleBatchApprove: () => any;
+    handleBatchAuthorize: () => any;
+    handleBatchDelete: () => any;
+};
 
 export const UserTableToolbar = (props: Props) => {
     const {
@@ -32,17 +33,21 @@ export const UserTableToolbar = (props: Props) => {
         numSelected,
         handleBatchApprove,
         handleBatchAuthorize,
-        handleBatchDelete
-    } = props
+        handleBatchDelete,
+    } = props;
 
     return (
         <Toolbar>
             <div className={classes ? classes.toolbarTitle : null}>
                 {numSelected > 0 ? (
-                    <Typography id="num-selected" color="inherit" variant="subtitle1">
+                    <Typography
+                        id="num-selected"
+                        color="inherit"
+                        variant="subtitle1"
+                    >
                         {numSelected} selected
                     </Typography>
-                    ) : (
+                ) : (
                     <Typography id="title" variant="h6">
                         Users
                     </Typography>
@@ -81,6 +86,6 @@ export const UserTableToolbar = (props: Props) => {
             ) : null}
         </Toolbar>
     );
-}
+};
 
-export default withStyles(styles)(UserTableToolbar)
+export default withStyles(styles)(UserTableToolbar);
