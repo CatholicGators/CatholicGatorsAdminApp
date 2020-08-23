@@ -1,7 +1,55 @@
+rules_version = '2';
 service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
+    match /databases/{database}/documents {
+        function isAdmin() {
+            return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+        }
+
+        function isAssigned() {
+            return //This returns true if the user is assigned this person
+        }
+
+        match /contacts/{contact} {
+            // Allow anyone to sign up
+            allow create: if true;
+            // Only allow updates if they are admins or if the user is assigned to this person
+            allow update: if isAdmin() || (resource.data.status != request.resource.status && isAssigned());
+            // Only allow deletes if they are admins
+            allow delete: if isAdmin();
+            // Allow reading if they are an admin or are in their permission group
+            allow read: if isAdmin() || isAssigned();
+        }
+
+        match /interests/{interest} {
+            // Allow anyone to read the avaiable intersets
+            allow read: if true;
+            // Only allow any changes by admins
+            allow write: if isAdmin();
+        }
+
+        match /sections/{interest} {
+            // Allow anyone to read the avaiable interset's sections
+            allow read: if true;
+            // Only allow any changes by admins
+            allow write: if isAdmin();
+        }
+
+        match /options/{interest} {
+            // Allow anyone to read the avaiable interset's options
+            allow read: if true;
+            // Only allow any changes by admins
+            allow write: if isAdmin();
+        }
+
+        match /users/{interest} {
+            // Allow anyone to read the users?
+            allow read: if true;
+            // Only allow any changes by admins
+            allow write: if isAdmin();
+        }
+
+        //By default, admins can only read and no one can write
+        allow read: if isAdmin();
+        allow write: if false
     }
-  }
 }
