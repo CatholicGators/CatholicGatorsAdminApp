@@ -31,7 +31,7 @@ export default class UserService {
         return this.adapter.getAll<User>(UserService.USERS);
     }
 
-    async getOrInitUser(user: FirebaseUser): Promise<User> {
+    getOrInitUser(user: FirebaseUser): Promise<User> {
         return this.adapter
             .get<User>(UserService.USERS, user.uid)
             .catch((e) => {
@@ -50,6 +50,13 @@ export default class UserService {
                     throw e;
                 }
             });
+    }
+
+    updateUser(id: string, user: User): Promise<User> {
+        return this.adapter.update(UserService.USERS, {
+            id,
+            changes: user,
+        });
     }
 
     updateApproval(id: string, isApproved: boolean): Promise<User> {
